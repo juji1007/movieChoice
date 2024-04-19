@@ -180,7 +180,7 @@ img.icon {
 <hr class="gray">
 <c:forEach var="vo" items="${list2 }">
 <a href="movieDetail.jsp?mvNo=${vo.mvNo }">
-<table>
+	<table>
 			<tr>
 			<td>
 			<img src="img/${vo.mvPoster }" alt="제품이미지" width="200">

@@ -41,7 +41,8 @@
         }
     </style>
 <script type="text/javascript">
-	function openReviewPopup() {
+/*
+		function openReviewPopup() {
 	    var popup = window.open("", "ReviewPopup", "width=400,height=400"); 
 	    popup.document.write("<!DOCTYPE html>");
 	    popup.document.write("<html>");
@@ -70,7 +71,7 @@
 	    popup.document.write("</body>");
 	    popup.document.write("</html>");
 	}
-	
+*/	
 	function submitReview() {
 	<%
 		String rvTitle = request.getParameter("rvTitle");
@@ -126,7 +127,7 @@
     <div>
         <img src="poster/${vo.mvPoster }" alt="Kungfu Panda4 Poster">
     </div>
-    <button onclick="openReviewPopup()">리뷰 작성</button>
+    <button onclick="location.href='writeReview.jsp'">리뷰 작성</button>
 	<div>	
 			<h2>${vo.mvTitle }</h2>
 			 <p><strong>감독:</strong> ${vo.mvDirect }</p>
