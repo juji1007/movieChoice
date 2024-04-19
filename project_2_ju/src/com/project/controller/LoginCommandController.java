@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.project.command.Command;
 import com.project.command.FindIdCommand;
@@ -19,6 +21,8 @@ import com.project.command.FindPasswordOkCommand;
 import com.project.command.LoginCommand;
 import com.project.command.MemberJoinCommand;
 import com.project.command.MemberJoinOkCommand;
+import com.project.dao.AccountDAO;
+import com.project.vo.AccountVO;
 
 @WebServlet("/loginController")
 public class LoginCommandController extends HttpServlet {
@@ -37,19 +41,53 @@ public class LoginCommandController extends HttpServlet {
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String type = req.getParameter("type");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
+		request.setCharacterEncoding("UTF-8");
+		
+		if ("login".equals(type)) {
+
+				//아이디, 비번 받기
+				String id = request.getParameter("id");
+				String pwd = request.getParameter("pwd");
+//			 	System.out.println("id : " + id);
+				
+				//아이디, 비번 DB에서 조회
+				AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
+				System.out.println("avo : " + avo);
+				
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("avo", avo);
+				
+		}
+		
+		if ("findIdOk".equals(type)) {
+			request.setCharacterEncoding("UTF-8");
+
+			 // 이메일 주소 받기
+		    String email = request.getParameter("email");
+		    System.out.println("emailjsp : " + email);
+		    // 아이디 DB에서 조회
+		    String id = AccountDAO.getAccountSearchId(email);
+		    
+		    request.setAttribute("id", id);
+			
+		}
+		
+		
 		
 		Command command = null;
 		command = commands.get(type);
-		String path = command.exec(req, resp);
-		req.getRequestDispatcher(path).forward(req, resp);
+		System.out.println("이동 type : " + command);
+		String path = command.exec(request, response);
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 }
 

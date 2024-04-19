@@ -4,11 +4,7 @@
 <% 
     request.setCharacterEncoding("UTF-8");
 
-    // 이메일 주소 받기
-    String email = request.getParameter("email");
-    System.out.println("emailjsp : " + email);
-    // 아이디 DB에서 조회
-    String id = AccountDAO.getAccountSearchId(email);
+    String id = (String) request.getAttribute("id");
     System.out.println("id : " + id);
     if (id == null) {
 %>
