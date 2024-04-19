@@ -1,3 +1,5 @@
+<%@page import="com.mystudy.model.dao.reviewDAO"%>
+<%@page import="com.mystudy.model.vo.listMvRv"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
 <%@page import="com.mystudy.model.vo.movieVO"%>
@@ -27,13 +29,12 @@
 	}
 	System.out.println("movieVo : " + movieVo);
 	
-	
 	session.setAttribute("movieVO", movieVo);
 	
 	
-	/* List<ListMvRv> listView = null;
+	/* List<listMvRv> listView = null;
 	try (SqlSession ss = DBService.getFactory().openSession()) {
-		listView = ReviewDAO.selectList(mvNo);
+		listView = reviewDAO.selectList(mvNo);
 	} catch (Exception e) {
 		e.printStackTrace();
 	} */
@@ -69,6 +70,7 @@
 	<hr>
 	
 	<c:forEach var="vo" items="${list }">
+	<a href="rvDetail.jsp?rvNo=${vo.rvNo }">
 	<table>
 		<tr>
 			<td rowspan="3"><img src="image/poster1.jpg" alt="포스터" width="150px"></td>
@@ -89,6 +91,7 @@
 			<td></td>
 		</tr>
 	</table>
+	</a>
 	</c:forEach>
 	
 </body>
