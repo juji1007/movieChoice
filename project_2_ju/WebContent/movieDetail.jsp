@@ -41,51 +41,51 @@
         }
     </style>
 <script type="text/javascript">
-	function openReviewPopup() {
-	    var popup = window.open("", "ReviewPopup", "width=400,height=400"); 
-	    popup.document.write("<!DOCTYPE html>");
-	    popup.document.write("<html>");
-	    popup.document.write("<head>");
-	    popup.document.write("<title>영화 리뷰 작성</title>");
-	    popup.document.write("</head>");
-	    popup.document.write("<body>");
-	    popup.document.write("<h2>영화 리뷰 작성</h2>");
+// 	function openReviewPopup() {
+// 	    var popup = window.open("", "ReviewPopup", "width=400,height=400"); 
+// 	    popup.document.write("<!DOCTYPE html>");
+// 	    popup.document.write("<html>");
+// 	    popup.document.write("<head>");
+// 	    popup.document.write("<title>영화 리뷰 작성</title>");
+// 	    popup.document.write("</head>");
+// 	    popup.document.write("<body>");
+// 	    popup.document.write("<h2>영화 리뷰 작성</h2>");
 	    
-	    popup.document.write("<label for='mvRate'>평점:</label><br>");
-	    popup.document.write("<select id='mvRate' name='mvRate'>");
-	    popup.document.write("<option value='1'>1</option>");
-	    popup.document.write("<option value='2'>2</option>");
-	    popup.document.write("<option value='3'>3</option>");
-	    popup.document.write("<option value='4'>4</option>");
-	    popup.document.write("<option value='5'>5</option>");
-	    popup.document.write("</select><br><br>");
+// 	    popup.document.write("<label for='mvRate'>평점:</label><br>");
+// 	    popup.document.write("<select id='mvRate' name='mvRate'>");
+// 	    popup.document.write("<option value='1'>1</option>");
+// 	    popup.document.write("<option value='2'>2</option>");
+// 	    popup.document.write("<option value='3'>3</option>");
+// 	    popup.document.write("<option value='4'>4</option>");
+// 	    popup.document.write("<option value='5'>5</option>");
+// 	    popup.document.write("</select><br><br>");
 		
-	    popup.document.write("<label for='rvTitle'>제목:</label><br>");
-	    popup.document.write("<input type='text' id='rvTitle' name='rvTitle' required><br><br>");
+// 	    popup.document.write("<label for='rvTitle'>제목:</label><br>");
+// 	    popup.document.write("<input type='text' id='rvTitle' name='rvTitle' required><br><br>");
 	
-	    popup.document.write("<label for='rvContent'>내용:</label><br>");
-	    popup.document.write("<textarea id='rvContent' name='rvContent' rows='4' cols='50' required></textarea><br><br>");
+// 	    popup.document.write("<label for='rvContent'>내용:</label><br>");
+// 	    popup.document.write("<textarea id='rvContent' name='rvContent' rows='4' cols='50' required></textarea><br><br>");
 		
-	    popup.document.write("<input type='button' value='등록하기' onclick='submitReview()'>");
-	    popup.document.write("</body>");
-	    popup.document.write("</html>");
-	}
+// 	    popup.document.write("<input type='button' value='등록하기' onclick='submitReview()'>");
+// 	    popup.document.write("</body>");
+// 	    popup.document.write("</html>");
+// 	}
 	
-	function submitReview() {
-	<%
-		String rvTitle = request.getParameter("rvTitle");
-		String rvContent = request.getParameter("rvContent");
+// 	function submitReview() {
+<%-- 	<% --%>
+// 		String rvTitle = request.getParameter("rvTitle");
+// 		String rvContent = request.getParameter("rvContent");
 		
-		System.out.println("rvTitle : " + rvTitle);
-		System.out.println("rvContent : " + rvContent);
-	%>
+// 		System.out.println("rvTitle : " + rvTitle);
+// 		System.out.println("rvContent : " + rvContent);
+<%-- 	%> --%>
 		
-	    console.log("rvTitle: " + rvTitle);
-	    console.log("rvContent: " + rvContent);
-	    console.log("mvRate: " + mvRate);
+// 	    console.log("rvTitle: " + rvTitle);
+// 	    console.log("rvContent: " + rvContent);
+// 	    console.log("mvRate: " + mvRate);
 	
-	    window.close();
-	}
+// 	    window.close();
+// 	}
 </script>
 <!--  <style>
 	img {
@@ -126,7 +126,7 @@
     <div>
         <img src="poster/${vo.mvPoster }" alt="Kungfu Panda4 Poster">
     </div>
-    <button onclick="openReviewPopup()">리뷰 작성</button>
+    <button onclick="location.href='writeReview.jsp'">리뷰 작성</button>
 	<div>	
 			<h2>${vo.mvTitle }</h2>
 			 <p><strong>감독:</strong> ${vo.mvDirect }</p>
