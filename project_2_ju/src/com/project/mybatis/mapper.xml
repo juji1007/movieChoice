@@ -2,51 +2,38 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="project2">
+<mapper namespace="PROJECT2">
 	
-	<select id="login" parameterType="map" resultType="accountVO">
-		SELECT * FROM ACCOUNT 
-		WHERE 
-    	ID = #{id} AND PWD = #{pwd}
+	<select id="mvTitle" resultType="com.mystudy.model.vo.movieVO">
+		SELECT *
+		FROM MOVIE
+		ORDER BY MV_RATE DESC
+	</select>
+	
+	<!-- 영화제목으로 검색 -->
+	<select id="mvTitleList"  parameterType="string" resultType="com.mystudy.model.vo.movieVO">
+		SELECT *
+		FROM MOVIE
+		WHERE MV_TITLE = #{mvTitle}
+	</select>
+	
+	<!-- 동적 검색 -->
+	<select id="movie" parameterType="map" resultType="com.mystudy.model.vo.movieVO">
+		SELECT *
+		FROM MOVIE
+		<choose>
+			<when test="idx == 1">
+				 ORDER BY MV_DATE DESC
+			</when>
+			<when test="idx == 2">
+				ORDER BY MV_RATE DESC
+			</when>
+			<otherwise>
+				ORDER BY MV_DATE DESC
+			</otherwise>
+		</choose>
 		
 	</select>
-	
-	<select id="all" resultType="accountVO">
-		SELECT * FROM ACCOUNT ORDER BY NO
-	</select>
-	
-	<!-- 아이디중복체크 -->
-	<select id="id" parameterType="string" resultType="string">
-		SELECT ID FROM ACCOUNT 
-		WHERE ID = #{id}
-		ORDER BY NAME
-	</select>
-	
-	<!-- 회원가입 -->
-	<insert id="insertMember" parameterType="accountVO">
-		INSERT INTO ACCOUNT
-			(NO, NAME, ID, PWD, NICK, CRITIC_CHECK, EMAIL)
-		VALUES (#{no}, #{name}, #{id}, #{pwd}, #{nick}, #{critic_check}, #{email})
-		
-	
-	</insert>
-	
-	<select id="searchIdByEmail" parameterType="string" resultType="string">
-		SELECT ID FROM ACCOUNT 
-		WHERE EMAIL = #{email}
-		ORDER BY NAME
-	</select>
-	
-	<select id="searchPwdById" parameterType="string" resultType="accountVO">
-		
-	</select>
-	
-	<!-- 비밀번호찾기 후 비밀번호 업데이트  -->
-	<update id="updatePwdById" parameterType="map">
-		UPDATE ACCOUNT
-		SET PWD = #{pwd}
-		WHERE ID = #{id}
-	</update>
 	
 </mapper>
 

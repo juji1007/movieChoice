@@ -27,6 +27,9 @@
   
   <mappers>
     <mapper resource="com/project/mybatis/mapper.xml" />
+    <mapper resource="com/project/mybatis/loginMapper.xml" />
+    <mapper resource="com/project/mybatis/movieMapper.xml" />
+    <mapper resource="com/project/mybatis/reviewMapper.xml" />
   </mappers>
   
 </configuration>
