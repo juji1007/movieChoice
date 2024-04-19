@@ -19,7 +19,7 @@ public class mvTitleListCommand implements Command{
 		System.out.println("mvTitle : " + mvTitle);
 
 		//2. DB에서 성명(fullname)에 있는 직원 조회(DAO 사용)
-		List<movieVO> list = movieDAO.getmvTitleList(mvTitle);
+		movieVO list = movieDAO.getmvTitleList(mvTitle);
 		
 		//3. 조회된 데이터를 응답페이지(deptList.jsp)에서 사용토록 저장한다
 		request.setAttribute("list", list);
