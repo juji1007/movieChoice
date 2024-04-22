@@ -25,71 +25,12 @@ session.setAttribute("attr_list", list);
 <head>
 <meta charset="UTF-8">
 <title>main</title>
+<!-- style 태그 -->
+<link rel="stylesheet" href="css/header.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<style>
 
-img.icon {
-	position: absolute;
-	left: 200px;
-	top: 60px;
-	}
-	li {
- 	 float: left;
-   	 display: block;
-	  padding: 10px 26px;
-	 font-size: 18px;
-	}
-
-	a {
-		text-decoration: none;
-		color: black;
-	}
-	ul.menu {
-		position: absolute;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		top: 60px;
-		left: 530px;
-	}
-	li a:hover {
-	 	color: #56BEC0;
-	 	font-weight: bold;
-	}
-	hr.mint {
-		background-color: #56BEC0;
-		height: 3px;
-		margin-top: 120px;
-	}
-	ul.login {
-		position: absolute;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		top: 60px;
-		right: 200px;
-	}
-	ul.login li {
-		 padding: 12px 5px;
-		 font-size: 14px;
-	}
-	hr.gray {
-		background-color: D9D9D9;
-		height: 1px;
-	}
-	#banner {width: 5000px;}
-	 #frame {
-        width: 1130px;
-        position: relative;
-        overflow: hidden;
-    }
-    table {
-    	float: left;
-    	margin: 10px;
-    }
-</style>
 <script>
 	$(document).ready(function(){
     let $list = $("#banner");
@@ -112,25 +53,9 @@ img.icon {
 	});
 </script>
 <body>
-<div class="header">
-<img class= "icon" src="img/moviechoice.png">
+	<!-- header.jspf -->
+	<%@ include file="include/header.jspf" %>
 
-<ul class="menu">
-  <li><a href="main.jsp">영화목록</a></li>
-  <li><a href="reviewMain.jsp">리뷰모음</a></li>
-  <li><a href="free.jsp">자유게시판</a></li>
-  <li><a href="about.asp">Q & A</a></li>
-  <li><a href="about.asp">Review Of The Month</a></li>
-  <li><a href="about.asp">평론가</a></li>
-  <li><a href="about.asp">마이페이지</a></li>
-</ul>
-<ul class="login">
- <li><a href="login_page.jsp">로그인</a></li>
- <li>/</li>
-  <li><a href="memberJoin.jsp">회원가입</a></li>
-  </ul>
-<hr class="mint">
-</div>
 <%--영화검색 --%>
 <form action="controller?type=mvTitleList" method="post">
 <input type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
