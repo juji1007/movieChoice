@@ -13,7 +13,14 @@ public class movieVO {
 	private String mvGrade;
 	private Date mvDate;
 	private String mvPoster;
+	private int warn;
 	
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
+	}
 	public int getMvNo() {
 		return mvNo;
 	}

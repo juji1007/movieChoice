@@ -9,7 +9,7 @@ public class AccountVO {
 	private String nick;
 	private int critic_check;
 	private String email;
-	
+	private int warn;
 	
 	public AccountVO() {
 	}
@@ -22,6 +22,14 @@ public class AccountVO {
 		this.nick = nick;
 		this.critic_check = critic_check;
 		this.email = email;
+	}
+
+	public int getWarn() {
+		return warn;
+	}
+
+	public void setWarn(int warn) {
+		this.warn = warn;
 	}
 
 	public int getNo() {

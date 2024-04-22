@@ -15,9 +15,9 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 	e.printStackTrace();
 } 
 
-System.out.println("list : " + list);
-System.out.println("list.size : " + list.size());
-session.setAttribute("attr_list", list);
+// System.out.println("list : " + list);
+// System.out.println("list.size : " + list.size());
+// session.setAttribute("attr_list", list);
 
 
 %>  
@@ -129,9 +129,9 @@ img.icon {
 <% 
 	request.setCharacterEncoding("UTF-8");
 
-	AccountVO avo = (AccountVO) session.getAttribute("avo");
-	System.out.println("로그인id : " + avo.getId());
-	if (avo.getId() == null) {
+	String id = (String) session.getAttribute("id");
+// 	System.out.println("로그인id : " + avo.getId());
+	if (id == null) {
 %>
  <li><a href="login_page.jsp">로그인</a></li>
 <%

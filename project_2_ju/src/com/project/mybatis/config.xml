@@ -10,7 +10,10 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias alias="reviewVO" type="com.mystudy.model.vo.reviewVO"/>
+		<typeAlias alias="movieVO" type="com.mystudy.model.vo.movieVO"/>
 		<typeAlias alias="accountVO" type="com.project.vo.AccountVO"/>
+		<typeAlias alias="criticVO" type="com.project.vo.CriticVO"/>
 	</typeAliases>
 
   <environments default="development">
@@ -30,6 +33,7 @@
     <mapper resource="com/project/mybatis/loginMapper.xml" />
     <mapper resource="com/project/mybatis/movieMapper.xml" />
     <mapper resource="com/project/mybatis/reviewMapper.xml" />
+    <mapper resource="com/project/mybatis/adminMapper.xml" />
   </mappers>
   
 </configuration>
