@@ -1,3 +1,4 @@
+<%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
@@ -125,10 +126,25 @@ img.icon {
   <li><a href="about.asp">마이페이지</a></li>
 </ul>
 <ul class="login">
+<% 
+	request.setCharacterEncoding("UTF-8");
+
+	AccountVO avo = (AccountVO) session.getAttribute("avo");
+	System.out.println("로그인id : " + avo.getId());
+	if (avo.getId() == null) {
+%>
  <li><a href="login_page.jsp">로그인</a></li>
+<%
+	} else {
+%>
+ <li><a href="logout.jsp">로그아웃</a></li>
+<%
+	}
+%>
  <li>/</li>
+ 
   <li><a href="memberJoin.jsp">회원가입</a></li>
-  </ul>
+</ul>
 <hr class="mint">
 </div>
 <%--영화검색 --%>
