@@ -15,9 +15,9 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 	e.printStackTrace();
 } 
 
-// System.out.println("list : " + list);
-// System.out.println("list.size : " + list.size());
-// session.setAttribute("attr_list", list);
+System.out.println("list : " + list);
+System.out.println("list.size : " + list.size());
+session.setAttribute("attr_list", list);
 
 
 %>  
@@ -119,7 +119,7 @@ img.icon {
 <ul class="menu">
   <li><a href="main.jsp">영화목록</a></li>
   <li><a href="reviewMain.jsp">리뷰모음</a></li>
-  <li><a href="free.jsp">자유게시판</a></li>
+  <li><a href="freePost.jsp">자유게시판</a></li>
   <li><a href="about.asp">Q & A</a></li>
   <li><a href="about.asp">Review Of The Month</a></li>
   <li><a href="about.asp">평론가</a></li>

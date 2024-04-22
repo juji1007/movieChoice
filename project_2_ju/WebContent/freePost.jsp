@@ -16,13 +16,7 @@
 		e.printStackTrace();
 	}
 	System.out.println("plist???? : " + listp);
-	List<reviewVO> list = null;
-	try (SqlSession ss = DBService.getFactory().openSession()) {
-		list = ss.selectList("review.all");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	System.out.println("list???? : " + list);
+	request.setAttribute("listp", listp);
 	
 %>
 <!DOCTYPE html>
@@ -66,28 +60,6 @@
 <%-- 					<td>${vo.psDate }</td> --%>
 <!-- 				</tr> -->
 			</table>
-	</c:forEach>
-	<c:forEach var="vo" items="${list }">
-	<table>
-		<tr>
-			<td rowspan="3"><img src="image/poster1.jpg" alt="포스터" width="150px"></td>
-			<td>${vo.mvNo }</td>
-			<td>
-				<a>${vo.rvTitle }</a>
-			</td>
-		</tr>
-		<tr>
-			<td>${vo.rvNick }</td>
-			<td>${vo.rvDate }</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="button" value="추천 " onclick="recommand_push()">
-				${vo.rvRec }
-			</td>
-			<td></td>
-		</tr>
-	</table>
 	</c:forEach>
 </body>
 </html>

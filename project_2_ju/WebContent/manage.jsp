@@ -118,9 +118,84 @@ img.icon {
 	
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function selectCategory(frm) {
+		var checkCategory = frm.keyword.value;
+		if (checkCategory.trim().length == 0) {
+			alert("아이디를 입력해주세요!");
+			return false;
+		}
 		
+		var idx = frm.idx.value; // idx 값 가져오기
+	    var keyword = frm.keyword.value; // keyword 값 가져오기
+	    
+		$.ajax ({
+			type: "POST",
+			url: "ajaxManageController",
+			data: {
+				action: "manageCategory",
+				idx: idx,
+				keyword: keyword
+				
+			},
+			dataType: "json",
+			success : function(respData){
+				alert("Ajax 처리 성공 - 응답받은데이터 : " + respData);
+// 				JSON.stringify(obj)
+				console.log(respData); //JSON 객체 1개
+				console.log(respData.list); //배열데이터
+				
+				//Json데이터처리
+				let htmltag = "";
+				
+				for (member of respData.list) {
+					htmltag += "<div id=" + member.table + ">";
+					if ("review".equals(member.table)) {
+						htmltag += "<tr>";
+						htmltag += "<td>" + member.rvNo + "</td>";
+						htmltag += "<td>" + member.mvNo + "</td>";
+						htmltag += "<td>" + member.no + "</td>";
+						htmltag += "<td>" + member.rvNick + "</td>";
+						htmltag += "<td>" + member.rvTitle + "</td>";
+						htmltag += "<td>" + member.rvContent + "</td>";
+						htmltag += "<td>" + member.rvDate + "</td>";
+						htmltag += "<td>" + member.rvRec + "</td>";
+					}
+					
+					if ("movie".equals(member.table)) {
+						htmltag += "<tr>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+					}
+					
+					if ("movie".equals(member.table)) {
+						htmltag += "<tr>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+						htmltag += "<td>" + member.table + "</td>";
+					}
+				}
+			},
+			error : function(jqXHR, textStatus, errorThrown){
+				alert("Ajax 처리 실패 : \n"
+						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+						+ "textStatus : " + textStatus + "\n"
+						+ "errorThrown : " + errorThrown);
+				return false;
+			}
+		});
 	}
 </script>
 <body>
@@ -141,7 +216,7 @@ img.icon {
         <hr class="mint">
     </div>
     <div class="body">
-        <form action="ajaxController?manageCategory" method="post">
+        <form method="post">
             <table>
                 <caption><h2>관리자 검색</h2></caption>
                 <thead> 
@@ -159,7 +234,7 @@ img.icon {
                         <td><input type="submit" value="검색" onclick="selectCategory(this.form)"/></td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="jsonData">
                 	<tr>
                 		<td>검색 결과가 없습니다</td>
                 	</tr>

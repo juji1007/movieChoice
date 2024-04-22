@@ -33,6 +33,7 @@
     <mapper resource="com/project/mybatis/loginMapper.xml" />
     <mapper resource="com/project/mybatis/movieMapper.xml" />
     <mapper resource="com/project/mybatis/reviewMapper.xml" />
+    <mapper resource="com/project/mybatis/postMapper.xml" />
 <!--     <mapper resource="com/project/mybatis/adminMapper.xml" /> -->
   </mappers>
   
