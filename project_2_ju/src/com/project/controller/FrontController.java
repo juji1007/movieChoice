@@ -78,39 +78,39 @@ public class FrontController extends HttpServlet {
 		
 		
 		
-		// 게시판
-		String search = request.getParameter("search");
-		System.out.println("search : " + search);
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		if ("freeList".equals(search)) {
-			System.out.println(">> freeList 요청 처리~~");
-			
-			String idx = request.getParameter("idx");
-			String keyword = request.getParameter("keyword");
-			System.out.println("idx, keyword : " + idx + ", " + keyword);
-			
-			if (keyword == null || keyword.trim().length() == 0) {
-				request.getRequestDispatcher("free.jsp").forward(request, response);
-				return;
-			}
-			
-			List<postVO> listOne = postDAO.freeList(idx, keyword);
-			System.out.println("listOne : " + listOne);
-			
-			String sort = "";
-			switch(idx) {
-			case "0" : sort="제목"; break;
-			case "1" : sort="작성일"; break;
-			}
-			
-			request.setAttribute("listOne", listOne);
-			request.setAttribute("sort", sort);
-			
-			request.getRequestDispatcher("freeList.jsp").forward(request, response);
-		
-		}
+//		// 게시판
+//		String search = request.getParameter("search");
+//		System.out.println("search : " + search);
+//		
+//		request.setCharacterEncoding("UTF-8");
+//		
+//		if ("freeList".equals(search)) {
+//			System.out.println(">> freeList 요청 처리~~");
+//			
+//			String idx = request.getParameter("idx");
+//			String keyword = request.getParameter("keyword");
+//			System.out.println("idx, keyword : " + idx + ", " + keyword);
+//			
+//			if (keyword == null || keyword.trim().length() == 0) {
+//				request.getRequestDispatcher("free.jsp").forward(request, response);
+//				return;
+//			}
+//			
+//			List<postVO> listOne = postDAO.freeList(idx, keyword);
+//			System.out.println("listOne : " + listOne);
+//			
+//			String sort = "";
+//			switch(idx) {
+//			case "0" : sort="제목"; break;
+//			case "1" : sort="작성일"; break;
+//			}
+//			
+//			request.setAttribute("listOne", listOne);
+//			request.setAttribute("sort", sort);
+//			
+//			request.getRequestDispatcher("freeList.jsp").forward(request, response);
+//		
+//		}
 	}
 	
 	@Override

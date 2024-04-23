@@ -153,7 +153,7 @@ img.icon {
 <a href="postWrite.jsp"><input type="button" value="작성하기"></a>
 
 
-<form action="controller?search=freeList" method="get">
+<form action="postController?search=freeList" method="get">
 	<select name="idx">
 		<option selected disabled>::선택</option>
 		<option value="0">제목</option>
