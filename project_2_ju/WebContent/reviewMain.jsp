@@ -29,6 +29,7 @@
 	$(document).ready(function(){
 		console.log(">> reviewMain.jsp 접속 성공!!");
 		
+		
 		$.ajax({
 			type : "POST",
 			url : "ajaxReviewController",
