@@ -21,7 +21,7 @@
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1522:xe"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
         <property name="username" value="PROJECT2"/>
         <property name="password" value="project22"/>
       </dataSource>
@@ -33,9 +33,6 @@
     <mapper resource="com/project/mybatis/loginMapper.xml" />
     <mapper resource="com/project/mybatis/movieMapper.xml" />
     <mapper resource="com/project/mybatis/reviewMapper.xml" />
-
-    <mapper resource="com/project/mybatis/postMapper.xml" />
-
     <mapper resource="com/project/mybatis/criticMapper.xml" />
     <mapper resource="com/project/mybatis/postMapper.xml" />
     <mapper resource="com/project/mybatis/adminMapper.xml" />
