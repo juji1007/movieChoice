@@ -81,7 +81,7 @@ public class AjaxManageController extends HttpServlet {
 		    List<?> value = entry.getValue(); // 현재 항목의 값(리스트) 가져오기
 		    
 		    System.out.println("Key: " + key);
-		    System.out.println("Value: " + value);
+//		    System.out.println("Value: " + value);
 		    // 리스트의 각 요소 Json넣기
 		    for (Object item : value) {
 		    	if ("review".equals(key)) {
