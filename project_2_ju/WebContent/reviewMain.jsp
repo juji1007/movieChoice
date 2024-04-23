@@ -18,11 +18,54 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/rvMain.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 <script>
 	function recommand_push() {
 		location.href = "rvRecommand.jsp";
 		submit();
+		
 	}
+	
+	//AJAX controller 연결 - review 전체 조회
+	$(document).ready(function(){
+		console.log(">> reviewMain.jsp 접속 성공!!");
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "ajaxReviewController",
+			data : {
+				action: "reviewMain"
+			},
+			dataType: "json",
+			//dataType : "html",
+			success : function(respData){
+			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+			    //Json데이터 처리
+			    let str = null;
+			    for (let member of respData.listRv) {
+			        console.log("실행시;ㄹ행")
+			        str += "<h2>" + member.rvNo + "</h2>"
+			        str += "<h2>" + member.rvTitle + "</h2>"
+			        str += "<h2>" + member.rvRec + "</h2>"
+			    }
+			    $("#reviewDiv").html(str);
+			},
+
+			error : function(jqXHR, textStatus, errorThrown){
+				alert("Ajax 처리 실패 : \n"
+						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+						+ "textStatus : " + textStatus + "\n"
+						+ "errorThrown : " + errorThrown);
+			},
+			complete : function(){
+				alert(":: complete 실행");
+			}
+		});
+		
+	}); 
+	
+	
 </script>
 </head>
 <body>
@@ -44,8 +87,18 @@
 	
 	<h2>리뷰모음</h2>
 	<hr>
+
+	<h3>리뷰 목록</h3>
+	<div id="reviewDiv">
+		<h4>영화제목</h4>
+		<h4>영화포스터</h4>
+		<h4>리뷰번호</h4>
+		<h4>리뷰제목</h4>
+		<h4>리뷰추천수</h4>
+	</div>
+
 	
-	<c:forEach var="vo" items="${listMv }">
+<%-- 	<c:forEach var="vo" items="${listMv }">
 		<!-- <a href="reviewController?type=rvDetail"> -->
 		<table id="reviewOne">
 			<tbody>
@@ -62,15 +115,18 @@
 				</tr>
 			</tbody>
 			
-			<tfoot>
-				<td class="recNo" colspan="3">
-					<input type="button" value="추천수 " onclick="reviewController?type=rvRecommand&rvNo=${vo.rvNo}&rvRec=${vo.rvRec}">
-					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">
-					${vo.rvRec }
-				</td>
+			<tfoot id="tfoot">
+				<tr>
+					<td class="recNo" colspan="3">
+						<input type="button" value="추천수 " onclick="reviewController?type=rvRecommand&rvNo=${vo.rvNo}&rvRec=${vo.rvRec}">
+						<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">
+						${vo.rvRec }
+					</td>
+				</tr>
 			</tfoot>
 		</table>
-	</c:forEach>
+	</c:forEach> 
+--%>
 	
 </body>
 </html>
