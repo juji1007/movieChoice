@@ -1,0 +1,16 @@
+@charset "UTF-8";
+	#reviewOne.tr {
+		width : 100px;
+	}
+	
+	.recNo { padding-top : 0; }
+	
+	#rvDetail:hover {
+	 	background-color: yellow;
+	 	color:  #56BEC0;
+	 	font-weight: bold;
+	}
+	
+	#iconRec {
+		padding: 0;
+	}

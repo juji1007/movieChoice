@@ -1,7 +1,7 @@
 package com.project.vo;
 
 public class AccountVO {
-
+ 
 	private int no;
 	private String name;
 	private String id;

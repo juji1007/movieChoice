@@ -6,16 +6,15 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.mystudy.model.vo.listMvRv;
+import com.mystudy.model.vo.listMvRvVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
 
 public class reviewDAO {
 
-/*
 	//리뷰 전체 목록 조회
-	public static List<ReviewVO> getList() {
+	public static List<reviewVO> getList() {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			return ss.selectList("review.all");
 		} catch (Exception e) {
@@ -23,7 +22,7 @@ public class reviewDAO {
 		}
 		return null;
 	}
-*/
+
 	//카테고리별(영화명,작성자,작성일) 목록 조회
 	public static List<reviewVO> selectOne(String idx, String keyword) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
@@ -36,11 +35,20 @@ public class reviewDAO {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}	
 	
-	public static List<listMvRv> selectList(int mvNo) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {			
-			return ss.selectList("review.mvNoSearch", mvNo);
+	//영화번호로 리뷰vo 조회
+	public static reviewVO mvNoRv(int mvNo, int rvNo) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			Map<String, String> map = new HashMap<String, String>();
+			String mNO = String.valueOf(mvNo);
+			String rNO = String.valueOf(rvNo);
+			
+			map.put("mvNO", mNO);
+			map.put("rvNo", rNO);
+			System.out.println("map : " + map);
+			
+			return ss.selectOne("review.mvNoReview", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

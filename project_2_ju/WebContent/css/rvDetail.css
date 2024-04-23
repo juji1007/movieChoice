@@ -1,0 +1,27 @@
+@charset "UTF-8";
+	table {
+		border-collapse: collapse;
+		border : 2px solid black;
+		width: 90%;
+	}
+	
+	#rvTitle {
+		text-align: center;
+		font-size: 2em;
+	}
+	
+	#rvRec {
+		text-align: right;
+	}
+	
+	#rvContent {
+		background-color: lightgray;
+		width: 100%;
+		font-size: 1.2em;
+	}
+	
+	.tfoot {
+		text-align: center;
+		padding: 20px;
+	}
+	

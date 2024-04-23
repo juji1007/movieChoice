@@ -11,7 +11,7 @@
 		ORDER BY R.RV_NO DESC
 	</select>
 	
-	<!-- 조건 선택하여 리뷰 목록 조회 -->
+	<!-- (동적 검색)조건 선택하여 리뷰 목록 조회 -->
 	<select id="one" parameterType="map" resultType="com.mystudy.model.vo.reviewVO">
 		SELECT M.*, R.* 
 		FROM REVIEW R, MOVIE M
@@ -33,15 +33,15 @@
 		ORDER BY R.RV_NO DESC
 	</select>
 	
-	<!-- 영화번호로 영화 제목, 포스터 경로 조회 -->
-	<select id="mvNoSearch" parameterType="int" resultType="com.mystudy.model.vo.listMvRv">
-		SELECT M.MV_TITLE, M.MV_POSTER, R.*
+	<!-- 영화번호로 리뷰vo 조회 -->
+	<select id="mvNoReview" parameterType="map" resultType="com.mystudy.model.vo.reviewVO">
+		SELECT R.*
 		FROM REVIEW R, MOVIE M
 		WHERE R.MV_NO = M.MV_NO
 		AND R.MV_NO = #{mvNO}
+		AND R.RV_NO = #{rvNo}
 		ORDER BY R.RV_NO DESC
 	</select>
-	
 	
 	<!-- 추천수 count -->
 	

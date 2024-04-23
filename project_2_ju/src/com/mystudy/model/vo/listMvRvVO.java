@@ -2,7 +2,7 @@ package com.mystudy.model.vo;
 
 import java.sql.Date;
 
-public class listMvRv {
+public class listMvRvVO {
 	
 	private int rvNo;
 	private int mvNo;
