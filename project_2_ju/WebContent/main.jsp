@@ -113,40 +113,9 @@ img.icon {
 	});
 </script>
 <body>
-<div class="header">
-<img class= "icon" src="img/moviechoice.png">
+<!-- header.jspf -->
+	<%@ include file="include/header.jspf" %>
 
-<ul class="menu">
-  <li><a href="main.jsp">영화목록</a></li>
-  <li><a href="reviewMain.jsp">리뷰모음</a></li>
-  <li><a href="freePost.jsp">자유게시판</a></li>
-  <li><a href="about.asp">Q & A</a></li>
-  <li><a href="about.asp">Review Of The Month</a></li>
-  <li><a href="about.asp">평론가</a></li>
-  <li><a href="about.asp">마이페이지</a></li>
-</ul>
-<ul class="login">
-<% 
-	request.setCharacterEncoding("UTF-8");
-
-	String id = (String) session.getAttribute("id");
-// 	System.out.println("로그인id : " + avo.getId());
-	if (id == null) {
-%>
- <li><a href="login_page.jsp">로그인</a></li>
-<%
-	} else {
-%>
- <li><a href="logout.jsp">로그아웃</a></li>
-<%
-	}
-%>
- <li>/</li>
- 
-  <li><a href="memberJoin.jsp">회원가입</a></li>
-</ul>
-<hr class="mint">
-</div>
 <%--영화검색 --%>
 <form action="controller?type=mvTitleList" method="post">
 <input type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
