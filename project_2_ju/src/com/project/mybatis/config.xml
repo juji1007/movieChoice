@@ -22,7 +22,7 @@
         <property name="username" value="PROJECT2"/>
         <property name="password" value="project22"/>
       </dataSource>
-    </environment>
+    </environment> 
   </environments>
   
   <mappers>
@@ -30,6 +30,7 @@
     <mapper resource="com/project/mybatis/loginMapper.xml" />
     <mapper resource="com/project/mybatis/movieMapper.xml" />
     <mapper resource="com/project/mybatis/reviewMapper.xml" />
+    <mapper resource="com/project/mybatis/criticMapper.xml" />
   </mappers>
   
 </configuration>

@@ -15,7 +15,7 @@
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	System.out.println("list : " + list);
+	System.out.println("list???? : " + list);
 	
 	session.setAttribute("list", list);
 	
