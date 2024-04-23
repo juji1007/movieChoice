@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.mystudy.model.vo.criticVO;
 import com.project.mybatis.DBService;
 
+
 public class criticDAO {
 	//전체 전문가 목록 조회
 	public static List<criticVO> criticList() {
