@@ -1,3 +1,5 @@
+
+
 package com.mystudy.model.dao;
 
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class movieDAO {
 		} 
 		return null;
 	}
+	
 	
 	//영화검색
 			public static movieVO getmvTitleList(String mvTitle) {
