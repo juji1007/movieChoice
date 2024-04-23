@@ -6,7 +6,7 @@
 	
     
     <select id="searchMovieList" resultType="movieVO">
-    	SELECT * FROM MOVIE ORDER BY WARN DESC
+    	SELECT * FROM MOVIE
     
     </select>  
 
