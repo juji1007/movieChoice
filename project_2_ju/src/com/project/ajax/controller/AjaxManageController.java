@@ -40,13 +40,19 @@ public class AjaxManageController extends HttpServlet {
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
 			//없으면 다시 처음화면으로
-			if (keyword == null || keyword.trim().length() == 0) {
+			if (idx == null || idx.trim().length() == 0) {
 				req.getRequestDispatcher("manage.jsp").forward(req, resp);
 				return;
 			}
 			
 			//검색DB처리
-			Map<String, List<?>> listSearch = AdminDAO.selectData(idx);
+			Map<String, List<?>> listSearch = AdminDAO.selectData(idx, keyword);
+			
+			//listSearch없으면 다시 처음화면으로
+			if (listSearch == null) {
+				req.getRequestDispatcher("manage.jsp").forward(req, resp);
+				return;
+			} 
 			// 키값 가져오기
 			Set<String> keys = listSearch.keySet();
 			for (String key : keys) {
@@ -106,6 +112,7 @@ public class AjaxManageController extends HttpServlet {
 			    	result.append("\"mvAudience\":" + mvo.getMvAudience() + ", ");
 			    	result.append("\"mvGrade\":" + mvo.getMvGrade() + ", ");
 			    	result.append("\"mvDate\":" + mvo.getMvDate() + ", ");
+			    	result.append("\"mvPoster\":" + mvo.getMvPoster() + ", ");
 			    	result.append("\"mvPoster\":" + mvo.getMvPoster() + ", ");
 			    	result.append("},");
 		    	}

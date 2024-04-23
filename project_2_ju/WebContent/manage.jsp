@@ -121,11 +121,16 @@ img.icon {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function selectCategory(frm) {
-		var checkCategory = frm.keyword.value;
-		if (checkCategory.trim().length == 0) {
-			alert("아이디를 입력해주세요!");
-			return false;
+		var checkCategory = frm.idx.value;
+		if ("선택" == checkCategory) {
+			alert("검색종류를 선택해주세요!");
+			return;
 		}
+		
+// 		if (checkCategory.trim().length == 0) {
+// 			alert("아이디를 입력해주세요!");
+// 			return false;
+// 		}
 		
 		var idx = frm.idx.value; // idx 값 가져오기
 	    var keyword = frm.keyword.value; // keyword 값 가져오기
@@ -223,10 +228,10 @@ img.icon {
                     <tr>
                         <td>
                             <select name="idx">
-                                <option selected disabled>::선택</option>
+                                <option selected disabled>선택</option>
                                 <option value="0">전체</option>
-                                <option value="1">영화</option>
-                                <option value="2">리뷰</option>
+                                <option value="1">리뷰</option>
+                                <option value="2">영화</option>
                                 <option value="3">유저</option>
                             </select>
                         </td>
