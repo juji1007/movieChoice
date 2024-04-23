@@ -11,5 +11,6 @@ public class FindIdOkCommand implements Command{
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		return "findIdOk.jsp";
+		
 	}
 }

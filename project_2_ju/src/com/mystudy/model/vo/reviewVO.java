@@ -12,7 +12,14 @@ public class reviewVO {
 	private String rvContent;
 	private Date rvDate;
 	private int rvRec;
+	private int warn;
 	
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
+	}
 	public int getRvNo() {
 		return rvNo;
 	}
