@@ -19,15 +19,15 @@ public class movieDAO {
 		return null;
 	}
 	
-	//영화검색(성,이름 모두에서 찾기) - getFullnameList
-		public static List<movieVO> getmvTitleList(String mvTitle) {
-			try (SqlSession ss = DBService.getFactory().openSession()) {
-				return ss.selectList("PROJECT2.mvTitleList", mvTitle);
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
-			return null;
-		}
+	//영화검색
+			public static movieVO getmvTitleList(String mvTitle) {
+				try (SqlSession ss = DBService.getFactory().openSession()) {
+					return ss.selectOne("PROJECT2.mvTitleList", mvTitle);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+				return null;
+			}
 	
 	//동적검색(사번,이름,직종,부서)
 		public static List<movieVO> getMovie(String idx) {

@@ -58,8 +58,8 @@ System.out.println("list : " + list);
 
 
 <%--영화검색 --%>
-<form action="controller?type=mvTitleList" method="post">
-<input type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
+<form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }">
+<input type="text" name="mvNo" placeholder="영화제목을 입력하세요">
 <input type="submit" value="영화검색">
 </form>
 <div>
@@ -71,7 +71,7 @@ System.out.println("list : " + list);
 <div id="frame">
 	<div id="banner">
 	<c:forEach var="vo" items="${attr_list }">
-	<a href="mvDetail.jsp">
+	<a href="movieDetail.jsp?mvNo=${vo.mvNo }">
 	<table>
 			<tr>
 			<td>
