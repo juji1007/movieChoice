@@ -155,10 +155,10 @@ function selectCategory(frm) {
 
             // 테이블 헤더 생성
             let htmltag = "";
-            if (check of respData.listSearch) {
-            htmltag += "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
-            }
-            if ()
+//             if (check of respData.listSearch) {
+//             htmltag += "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
+//             }
+//             if ()
             // 영화 데이터 반복 처리
             if (respData.length === 0) {
                 // 검색 결과가 없을 때

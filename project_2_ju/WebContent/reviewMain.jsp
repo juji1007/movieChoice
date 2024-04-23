@@ -23,6 +23,7 @@
 	function recommand_push() {
 		location.href = "rvRecommand.jsp";
 		submit();
+		
 	}
 	
 	//AJAX controller 연결 - review 전체 조회

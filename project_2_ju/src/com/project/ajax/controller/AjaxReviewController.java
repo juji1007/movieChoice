@@ -24,6 +24,7 @@ public class AjaxReviewController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		
 		System.out.println(":: AjaxReviewController doGet 시작~~");
 		//DB 데이터 조회 후 JSON 형식 문자열 생성해서 응답하기
 		
