@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -79,6 +80,7 @@ public class ReviewController extends HttpServlet {
 				return;
 			}
 			
+			//정렬 검색 조회
 			List<reviewVO> listOne = reviewDAO.selectOne(idx, keyword);
 			System.out.println("list : " + listOne);
 			
@@ -92,6 +94,27 @@ public class ReviewController extends HttpServlet {
 			request.setAttribute("listOne", listOne);
 			request.setAttribute("sort", sort);
 			
+			//정렬 조회 후, 영화vo 1개 조회
+			listOne = (List<reviewVO>) request.getAttribute("listOne");
+			
+			int mvNo = 0;
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+			
+			for (reviewVO rvVo : listOne) {
+				if (rvVo.getRvTitle().equals(keyword)) {
+					mvNo = rvVo.getMvNo();
+				} else if (rvVo.getRvNick().equals(keyword)) {
+					mvNo = rvVo.getMvNo();
+				} else if (rvVo.getRvDate().equals(keyword)) {
+					mvNo = rvVo.getMvNo();
+				}
+			}
+			System.out.println("mvNo : " + mvNo);
+			movieVO mvOne = movieDAO.searchOne(mvNo);
+			System.out.println("mvOne : " + mvOne);
+			
+			request.setAttribute("mvOne", mvOne);
+			
 			request.getRequestDispatcher("selectOne.jsp").forward(request, response);
 			
 			return;
@@ -99,7 +122,6 @@ public class ReviewController extends HttpServlet {
 		
 		
 		//리뷰 상세보기
-		type = request.getParameter("type");
 		System.out.println("type : " + type);
 		
 		request.setCharacterEncoding("UTF-8");
@@ -128,6 +150,8 @@ public class ReviewController extends HttpServlet {
 		
 		
 		//추천수 sum 계산
+		System.out.println("type : " + type);
+		
 		if ("rvRecommand".equals(type)) {
 			System.out.println(">> rvRecommand 페이지");
 			

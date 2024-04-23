@@ -27,18 +27,22 @@
 	<c:forEach var="vo" items="${listOne }">
 	<table>
 		<tr>
-			<td>${vo.mvNo }</td>
+			<td>${mvOne.mvTitle }</td>
 			<td>${vo.rvTitle }</td>
 		</tr>
 		<tr>
+			<td rowspan="2">${mvOne.mvPoster }</td>
 			<td>${vo.rvNick }</td>
+		</tr>
+		<tr>
 			<td>${vo.rvDate }</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="button" value="추천 "> ${vo.rvRec }
+				<input type="button" value="추천수 ">
+				<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
+				${vo.rvRec }
 			</td>
-			<td></td>
 		</tr>
 	</table>
 	<hr>

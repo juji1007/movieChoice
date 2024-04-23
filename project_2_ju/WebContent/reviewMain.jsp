@@ -19,9 +19,9 @@
 <link rel="stylesheet" href="css/rvMain.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-	function recommand_push() {
-		location.href = "rvRecommand.jsp";
-		submit();
+	function rec_push(frm) {
+		frm.action = "reviewController?type=rvRecommand";
+		frm.submit();
 	}
 </script>
 </head>
@@ -50,12 +50,14 @@
 		<table id="reviewOne">
 			<tbody>
 				<tr>
+<!-- DB 영화 제목 추가 -->
 					<td colspan=>영화명${mvVo.mvTitle }</td>
 					<td id="rvDetail" colspan="2">
 						<a href="reviewController?type=rvDetail&mvNo=${vo.mvNo }&rvNo=${vo.rvNo}">${vo.rvTitle }</a>
 					</td>
 				</tr>
 				<tr>
+<!-- DB 영화 포스터 추가 -->				
 					<td rowspan="2"><img src="img/kungfu.jpg" alt="포스터" width="150px"></td>
 					<td>${vo.rvNick }</td>
 					<td>${vo.rvDate }</td>
@@ -64,9 +66,11 @@
 			
 			<tfoot>
 				<td class="recNo" colspan="3">
-					<input type="button" value="추천수 " onclick="reviewController?type=rvRecommand&rvNo=${vo.rvNo}&rvRec=${vo.rvRec}">
-					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">
-					${vo.rvRec }
+					<form action="get">
+						<input type="button" value="추천수 " onclick="rec_push(this.form)">
+						<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">
+						${vo.rvRec }
+					</form>
 				</td>
 			</tfoot>
 		</table>
