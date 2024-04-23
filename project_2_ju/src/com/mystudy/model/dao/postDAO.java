@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.vo.postCommentVO;
 import com.mystudy.model.vo.postVO;
 import com.project.mybatis.DBService;
 
@@ -69,6 +70,27 @@ public class postDAO {
 		public static int insert(postVO pvo) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
 				return ss.insert("post.insert", pvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//========= 댓글 관련 작업================
+		//게시글에 딸린 댓글 찾기/검색/조회/선택
+		public static List<postCommentVO> getCommList(int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {		
+				return ss.selectList("post.commList", psNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		// 댓글입력
+		public static int insertComment(postCommentVO cvo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.insert("post.commInsert", cvo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

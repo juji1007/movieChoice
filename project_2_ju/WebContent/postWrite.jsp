@@ -1,5 +1,15 @@
+<%@page import="java.util.List"%>
+<%@page import="com.mystudy.post.common.Paging"%>
+<%@page import="com.mystudy.model.dao.postDAO"%>
+<%@page import="com.mystudy.model.vo.postVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+// 	int psNo = Integer.parseInt(request.getParameter("psNo"));
+	session.getAttribute("pvo");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +47,9 @@ function list_go() {
 	<tr>
 		
 		<td>
-			<input type="hidden" name="psNo" title="번호">
+<!-- 		<input type="text" name="psNo" title="번호" > -->
+<!-- 		수정하기 ㅜㅜ -->
+		<input type="hidden" name="no" title="작성자">
 		</td>
 	</tr>
 	<tr>
@@ -52,15 +64,15 @@ function list_go() {
 			<textarea name="psContent" rows="8" cols="50" title="내용"></textarea>
 		</td>
 	</tr>
-	<tr>
-		<th>첨부파일</th>
-		<td>
-			<input type="file" name="filename">
-		</td>
-	</tr>
+<!-- 	<tr> -->
+<!-- 		<th>첨부파일</th> -->
+<!-- 		<td> -->
+<!-- 			<input type="file" name="filename"> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
 	<tr>
 		<td colspan="2">
-			<input type="button" value="저장" onclick="sendData()">
+			<input type="submit" value="저장" >
 			<input type="reset" value="초기화">
 			
 			<input type="button" value="목록보기" onclick="list_go()">

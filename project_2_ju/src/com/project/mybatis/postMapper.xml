@@ -54,7 +54,7 @@
 	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
 		INSERT INTO POST
 		       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE)
-		VALUES (#{psNo}, #{no}, #{psTitle}, #{psContent}, #{psDate}) 
+		VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE) 
 	</insert>
 
 
@@ -63,6 +63,21 @@
 				SELECT *
 				FROM POST
 		</select>
-
+	
+	<!-- ======== 댓글 데이터 처리 ======= -->
+	<!-- 게시글에 딸린 댓글 데이터 조회 -->
+	<select id="commList" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
+		SELECT *
+		FROM PS_COMMENT
+		WHERE PS_NO = #{psNo}
+		ORDER BY PC_NO DESC
+	</select>
+	
+	<!-- 댓글입력 -->
+	<insert id="commInsert" parameterType="com.mystudy.model.vo.postCommentVO">
+		INSERT INTO PS_COMMENT
+		       (PC_NO, PS_NO, NO, PC_DATE, PC_CONTENT)
+		VALUES (PS_COMMENT_SEQ.NEXTVAL, #{psNo}, #{no}, SYSDATE, #{pcContent})	
+	</insert>
 	
 </mapper>
