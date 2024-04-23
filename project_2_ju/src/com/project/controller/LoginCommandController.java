@@ -45,7 +45,19 @@ public class LoginCommandController extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
 		request.setCharacterEncoding("UTF-8");
+		// AccountVO에서 사용자의 역할(role)을 가져와서 세션에 저장하는 과정
+//	 	AccountVO avo = accountDAO.getAccountInfo(userId); // 사용자 정보 가져오기
+//	 	session.setAttribute("role", avo.getRole()); // 사용자의 역할을 세션에 저장
 		
+//	 	// 페이지에서 세션에 저장된 사용자 역할을 확인하여 특정 역할에만 접근을 허용하는 예시
+//	 	String role = (String) session.getAttribute("role");
+//	 	if ("admin".equals(role)) {
+//	 	    // 관리자 권한이 있는 경우에만 특정 기능에 접근할 수 있도록 처리
+//	 	    // 예: 관리자 전용 기능을 보여주는 코드
+//	 	} else {
+//	 	    // 일반 사용자 또는 다른 역할에 대한 처리
+//	 	    // 예: 일반 사용자에게 보여주는 코드
+//	 	}
 		if ("login".equals(type)) {
 
 				//아이디, 비번 받기
@@ -55,11 +67,11 @@ public class LoginCommandController extends HttpServlet {
 				
 				//아이디, 비번 DB에서 조회
 				AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
-				System.out.println("avo : " + avo);
+//				System.out.println("avo : " + avo);
 				
 				HttpSession session = request.getSession();
 				
-				session.setAttribute("avo", avo);
+				session.setAttribute("id", avo.getId());
 				
 		}
 		

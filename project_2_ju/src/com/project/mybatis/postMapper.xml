@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
   <mapper namespace="post">
   
 	<!-- 전체 게시글 건수 조회 -->
@@ -55,5 +56,13 @@
 		       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE)
 		VALUES (#{psNo}, #{no}, #{psTitle}, #{psContent}, #{psDate}) 
 	</insert>
+
+<mapper namespace="post">
+	<!-- 자유게시판 목록 전체 조회 -->
+		<select id="all" resultType="com.mystudy.model.vo.postVO">
+				SELECT *
+				FROM POST
+		</select>
+
 	
 </mapper>

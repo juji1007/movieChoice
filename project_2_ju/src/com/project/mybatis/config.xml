@@ -10,7 +10,10 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias alias="reviewVO" type="com.mystudy.model.vo.reviewVO"/>
+		<typeAlias alias="movieVO" type="com.mystudy.model.vo.movieVO"/>
 		<typeAlias alias="accountVO" type="com.project.vo.AccountVO"/>
+		<typeAlias alias="criticVO" type="com.project.vo.CriticVO"/>
 	</typeAliases>
 
   <environments default="development">
@@ -18,11 +21,11 @@
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1522:xe"/>
         <property name="username" value="PROJECT2"/>
         <property name="password" value="project22"/>
       </dataSource>
-    </environment>
+    </environment> 
   </environments>
   
   <mappers>
@@ -30,7 +33,13 @@
     <mapper resource="com/project/mybatis/loginMapper.xml" />
     <mapper resource="com/project/mybatis/movieMapper.xml" />
     <mapper resource="com/project/mybatis/reviewMapper.xml" />
+
     <mapper resource="com/project/mybatis/postMapper.xml" />
+
+    <mapper resource="com/project/mybatis/criticMapper.xml" />
+    <mapper resource="com/project/mybatis/postMapper.xml" />
+    <mapper resource="com/project/mybatis/adminMapper.xml" />
+
   </mappers>
   
 </configuration>

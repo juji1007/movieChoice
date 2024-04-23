@@ -20,7 +20,7 @@
 <title>리뷰목록 검색[ selectOne.jsp ]</title>
 </head>
 <body>
-	<h1>[${sort }] 리뷰목록</h1>
+	<h1>[${sort }-${keyword }] 리뷰목록</h1>
 	<hr>
 	
 	<c:forEach var="vo" items="${listOne }">

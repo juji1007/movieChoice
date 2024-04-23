@@ -1,5 +1,6 @@
 package com.mystudy.model.vo;
 
+
 import java.sql.Date;
 
 public class postVO {
@@ -43,6 +44,20 @@ public class postVO {
 	public String toString() {
 		return "postVO [psNo=" + psNo + ", no=" + no + ", psTitle=" + psTitle + ", psContent=" + psContent + ", psDate="
 				+ psDate + "]";
+	}
+	
+	
+
+
+public class postVO {
+	private int psNo;
+
+	public int getPsNo() {
+		return psNo;
+	}
+
+	public void setPsNo(int psNo) {
+		this.psNo = psNo;
 	}
 	
 	
