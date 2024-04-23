@@ -41,16 +41,16 @@ public class AjaxManageController extends HttpServlet {
 			
 			//없으면 다시 처음화면으로
 			if (idx == null || idx.trim().length() == 0) {
-				req.getRequestDispatcher("manage.jsp").forward(req, resp);
+//				req.getRequestDispatcher("manage.jsp").forward(req, resp);
 				return;
 			}
 			
 			//검색DB처리
 			Map<String, List<?>> listSearch = AdminDAO.selectData(idx, keyword);
-			
+			System.out.println("ajaxlistSearch : " + listSearch);
 			//listSearch없으면 다시 처음화면으로
 			if (listSearch == null) {
-				req.getRequestDispatcher("manage.jsp").forward(req, resp);
+//				req.getRequestDispatcher("manage.jsp").forward(req, resp);
 				return;
 			} 
 			// 키값 가져오기
@@ -62,8 +62,8 @@ public class AjaxManageController extends HttpServlet {
 			
 			System.out.println("result : \n" + result);
 			
-			//응답
-			resp.setContentType("text/html; charset=UTF-8");
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
 			PrintWriter out = resp.getWriter();
 			out.print(result);
 			
@@ -81,52 +81,50 @@ public class AjaxManageController extends HttpServlet {
 		    List<?> value = entry.getValue(); // 현재 항목의 값(리스트) 가져오기
 		    
 		    System.out.println("Key: " + key);
-//		    System.out.println("Value: " + value);
+		    System.out.println("Value: " + value);
 		    // 리스트의 각 요소 Json넣기
 		    for (Object item : value) {
-		    	if ("review".equals(key)) {
-		    		reviewVO rvo = new reviewVO();
-			    	result.append("{");
-			    	result.append("\"table\":" + key + "\", ");
-			    	result.append("\"rvNo\":" + rvo.getRvNo() + ", ");
-			    	result.append("\"mvNo\":" + rvo.getMvNo() + ", ");
-			    	result.append("\"no\":" + rvo.getNo() + ", ");
-			    	result.append("\"rvNick\":" + rvo.getRvNick() + ", ");
-			    	result.append("\"rvTitle\":" + rvo.getRvTitle() + ", ");
-			    	result.append("\"rvContent\":" + rvo.getRvContent() + ", ");
-			    	result.append("\"rvDate\":" + rvo.getRvDate() + ", ");
-			    	result.append("\"rvRec\":" + rvo.getRvRec() + ", ");
-			    	result.append("},");
-		    	}
-		    	
-		    	if ("movie".equals(key)) {
-		    		movieVO mvo = new movieVO();
-			    	result.append("{");
-			    	result.append("\"table\":" + key + ", ");
-			    	result.append("\"mvNo\":" + mvo.getMvNo() + ", ");
-			    	result.append("\"mvTitle\":" + mvo.getMvTitle() + ", ");
-			    	result.append("\"mvDirect\":" + mvo.getMvDirect() + ", ");
-			    	result.append("\"mvActor\":" + mvo.getMvActor() + ", ");
-			    	result.append("\"mvGenre\":" + mvo.getMvGenre() + ", ");
-			    	result.append("\"mvRate\":" + mvo.getMvRate() + ", ");
-			    	result.append("\"mvAudience\":" + mvo.getMvAudience() + ", ");
-			    	result.append("\"mvGrade\":" + mvo.getMvGrade() + ", ");
-			    	result.append("\"mvDate\":" + mvo.getMvDate() + ", ");
-			    	result.append("\"mvPoster\":" + mvo.getMvPoster() + ", ");
-			    	result.append("\"mvPoster\":" + mvo.getMvPoster() + ", ");
-			    	result.append("},");
-		    	}
-		    	
-		    	if ("account".equals(key)) {
-			    	result.append("{");
-			    	result.append("\"table\":" + key + ", ");
-			    	result.append("\"table\":" + key + ", ");
-			    	result.append("\"table\":" + key + ", ");
-			    	result.append("},");
-		    	}
+		        if ("review".equals(key)) {
+		            reviewVO rvo = new reviewVO();
+		            result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"rvNo\": \"" + rvo.getRvNo() + "\", ");
+		            result.append("\"mvNo\": \"" + rvo.getMvNo() + "\", ");
+		            result.append("\"no\": \"" + rvo.getNo() + "\", ");
+		            result.append("\"rvNick\": \"" + rvo.getRvNick() + "\", ");
+		            result.append("\"rvTitle\": \"" + rvo.getRvTitle() + "\", ");
+		            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
+		            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
+		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\"");
+		            result.append("},");
+		        }
+		        
+		        if ("movie".equals(key)) {
+		            movieVO mvo = (movieVO) item;
+		            result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"mvNo\": \"" + mvo.getMvNo() + "\", ");
+		            result.append("\"mvTitle\": \"" + mvo.getMvTitle() + "\", ");
+		            result.append("\"mvDirect\": \"" + mvo.getMvDirect() + "\", ");
+		            result.append("\"mvActor\": \"" + mvo.getMvActor() + "\", ");
+		            result.append("\"mvGenre\": \"" + mvo.getMvGenre() + "\", ");
+		            result.append("\"mvRate\": \"" + mvo.getMvRate() + "\", ");
+		            result.append("\"mvAudience\": \"" + mvo.getMvAudience() + "\", ");
+		            result.append("\"mvGrade\": \"" + mvo.getMvGrade() + "\", ");
+		            result.append("\"mvDate\": \"" + mvo.getMvDate() + "\", ");
+		            result.append("\"mvPoster\": \"" + mvo.getMvPoster() + "\"");
+		            result.append("},");
+		        }
+		        
+		        if ("account".equals(key)) {
+		            result.append("{");
+		            result.append("\"table\": \"" + key + "\"");
+		            // 여기에 account의 속성들을 추가해야 함
+		            result.append("},");
+		        }
 		    }
 		}
-		result.deleteCharAt(result.length() - 1);
+		result.deleteCharAt(result.length() - 1); // 마지막 쉼표(,) 제거
 		result.append("]}");
 
 		return result.toString();
