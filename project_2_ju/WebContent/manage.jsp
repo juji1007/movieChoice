@@ -9,113 +9,124 @@
 <style>
 
 img.icon {
-		position: absolute;
-		left: 200px;
-		top: 60px;
-	}
-	
-	li {
- 	    float: left;
-   	    display: block;
-	    padding: 10px 26px;
-	    font-size: 18px;
-	}
+	position: absolute;
+	left: 200px;
+	top: 60px;
+}
 
-	a {
-		text-decoration: none;
-		color: black;
-	}
-	
-	ul.menu {
-		position: absolute;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		top: 60px;
-		left: 530px;
-	}
-	
-	li a:hover {
-	 	color: #56BEC0;
-	 	font-weight: bold;
-	}
-	
-	hr.mint {
-		background-color: #56BEC0;
-		height: 3px;
-		margin-top: 120px;
-	}
-	
-	ul.login {
-		position: absolute;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		top: 60px;
-		right: 200px;
-	}
-	
-	ul.login li {
-		 padding: 12px 5px;
-		 font-size: 14px;
-	}
-	
-	hr.gray {
-		background-color: D9D9D9;
-		height: 1px;
-	}
-	
-	#banner {width: 5000px;}
-	
-	 #frame {
-        width: 1130px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    table {
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 70%;
-	    max-height: 400px;
-	    overflow-y: auto;
-	    border-collapse: collapse;
-	    border: 1px solid black;
-	}
-	
-	.body {
-	    position: relative;
-	    padding-top: 200px;
-	}
-	
-	caption {
-   	    margin-bottom: 50px;
-	}
-		
-	thead {
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 70%;
-	    border-bottom: none;
-	}
-	
-	thead tr {
-	    display: flex;
-	    align-items: center;
-	}
-	
-	thead select, thead input[type="text"], thead input[type="submit"] {
-	    margin-right: 10px;
-	}
-	
-	tbody {
-/*    	    border: 1px solid black; */
-	}
+li {
+	float: left;
+	display: block;
+	padding: 10px 26px;
+	font-size: 18px;
+}
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
+ul.menu {
+	position: absolute;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	top: 60px;
+	left: 530px;
+}
+
+li a:hover {
+	color: #56BEC0;
+	font-weight: bold;
+}
+
+hr.mint {
+	background-color: #56BEC0;
+	height: 3px;
+	margin-top: 120px;
+}
+
+ul.login {
+	position: absolute;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	top: 60px;
+	right: 200px;
+}
+
+ul.login li {
+	padding: 12px 5px;
+	font-size: 14px;
+}
+
+hr.gray {
+	background-color: D9D9D9;
+	height: 1px;
+}
+
+#banner {
+	width: 5000px;
+}
+
+#frame {
+	width: 1130px;
+	position: relative;
+	overflow: hidden;
+}
+
+table {
+/* 	position: absolute; */
+	top: 50%;
+	left: 50%;
+  	transform: translate(200px, -10px);  
+  	margin-top: -10%;
+  	margin-right: 15px;
+	width: 80%;
+	max-height: 400px;
+	overflow-y: auto;
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+.body {
+	position: relative;
+	padding-top: 200px;
+}
+
+caption {
+	margin-bottom: 50px;
+}
+
+th, td {
+    border: 1px solid black; /* 테이블 경계선 설정 */
+    padding: 8px; /* 셀 안의 여백 설정 */
+    text-align: center; /* 가운데 정렬 */
+}
+
+thead {
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 50%; */
+/* 	transform: translate(-50%, -50%); */
+/* 	width: 70%; */
+ 	border: 1px solid black;  
+}
+
+thead tr, thead td{
+	display: flex;
+	align-items: center;
+	border: none; 
+}
+
+thead select, thead input[type="text"], thead input[type="submit"] {
+	margin-right: 10px;
+}
+
+tbody th tr td{
+	border: 1px solid black; 
+	
+}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -143,8 +154,11 @@ function selectCategory(frm) {
             console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
 
             // 테이블 헤더 생성
-//             let htmltag = "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
-
+            let htmltag = "";
+            if (check of respData.listSearch) {
+            htmltag += "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
+            }
+            if ()
             // 영화 데이터 반복 처리
             if (respData.length === 0) {
                 // 검색 결과가 없을 때
@@ -153,7 +167,9 @@ function selectCategory(frm) {
                 // 검색 결과가 있을 때
                 for (let member of respData.listSearch) {
 					if (member.table === "review") {
+						console.log("리뷰html");
 						htmltag += "<tr class='" + member.table + "'>";
+						htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.rvNo + "</td>";
 			            htmltag += "<td>" + member.mvNo + "</td>";
 			            htmltag += "<td>" + member.no + "</td>";
@@ -166,8 +182,9 @@ function selectCategory(frm) {
 			        }
 			        
 			        if (member.table === "movie") {
-			        	console.log("영화html")
+			        	console.log("영화html");
 			        	htmltag += "<tr class='" + member.table + "'>";
+			            htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.mvNo + "</td>";
 			            htmltag += "<td>" + member.mvTitle + "</td>";
 			            htmltag += "<td>" + member.mvDirect + "</td>";
@@ -177,12 +194,12 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvAudience + "</td>";
 			            htmltag += "<td>" + member.mvGrade + "</td>";
 			            htmltag += "<td>" + member.mvDate + "</td>";
-			            htmltag += "<td>" + member.mvPoster + "</td>";
+			            htmltag += "<td><img src='img/" + member.mvPoster + "' width='200'></td>";
 			            htmltag += "</tr>";
 			        }
 				}
             }
-            htmltag += "</tbody></table>";
+            htmltag += "</tbody>";
 
             // 테이블을 #jsonData 엘리먼트에 추가
             $('#jsonData').html(htmltag);
