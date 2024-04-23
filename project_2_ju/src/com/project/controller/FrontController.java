@@ -76,41 +76,7 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		}
 		
-		//리뷰
-		String category = request.getParameter("category");
-		System.out.println("category : " + category);
 		
-		System.out.println(">> selectOne 처리");
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		if ("selectOne".equals(category)) {
-			System.out.println(">> selectOne 요청 처리~~");
-			
-			String idx = request.getParameter("idx");
-			String keyword = request.getParameter("keyword");
-			System.out.println("idx, keyword : " + idx + ", " + keyword);
-			
-			if (keyword == null || keyword.trim().length() == 0) {
-				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
-				return;
-			}
-			
-			List<reviewVO> listOne = reviewDAO.selectOne(idx, keyword);
-			System.out.println("list : " + listOne);
-			
-			String sort = "";
-			switch(idx) {
-			case "0" : sort="영화명"; break;
-			case "1" : sort="작성자"; break;
-			case "2" : sort="작성일"; break;
-			}
-			
-			request.setAttribute("listOne", listOne);
-			request.setAttribute("sort", sort);
-			
-			request.getRequestDispatcher("selectOne.jsp").forward(request, response);
-		}
 		
 		// 게시판
 		String search = request.getParameter("search");
