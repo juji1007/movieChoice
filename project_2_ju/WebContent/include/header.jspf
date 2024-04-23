@@ -6,7 +6,8 @@
 	
 	<ul class="menu">
 	  <li><a href="main.jsp">영화목록</a></li>
-	  <li><a href="reviewController?type=reviewMain">리뷰모음</a></li>
+	  <li><a href="ajaxReviewController?type=reviewMain">리뷰모음</a></li>
+	  <!-- <li><a href="reviewController?type=reviewMain">리뷰모음</a></li> -->
 	  <li><a href="free.jsp">자유게시판</a></li>
 	  <li><a href="about.asp">Q & A</a></li>
 	  <li><a href="about.asp">Review Of The Month</a></li> 

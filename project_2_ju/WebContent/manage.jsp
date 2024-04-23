@@ -78,20 +78,20 @@ img.icon {
 	    top: 50%;
 	    left: 50%;
 	    transform: translate(-50%, -50%);
-	    width: 70%; /* 테이블 너비를 조절하여 적당한 크기로 설정합니다 */
-	    max-height: 400px; /* 최대 높이를 설정하여 스크롤이 나타나도록 합니다 */
-	    overflow-y: auto; /* 세로 스크롤이 필요할 때만 스크롤이 나타나도록 합니다 */
-	    border-collapse: collapse; /* 테이블 경계를 병합하여 단일 경계선으로 만듭니다 */
-	    border: 1px solid black; /* 테이블의 경계선을 설정합니다 */
+	    width: 70%;
+	    max-height: 400px;
+	    overflow-y: auto;
+	    border-collapse: collapse;
+	    border: 1px solid black;
 	}
 	
 	.body {
-	    position: relative; /* 부모 요소의 상대적 위치 설정 */
-	    padding-top: 200px; /* 헤더 아래 여백을 설정합니다 */
+	    position: relative;
+	    padding-top: 200px;
 	}
 	
 	caption {
-   	    margin-bottom: 50px; /* 캡션 아래 여백을 추가하여 수평선과의 간격을 조절합니다 */
+   	    margin-bottom: 50px;
 	}
 		
 	thead {
@@ -99,8 +99,8 @@ img.icon {
 	    top: 50%;
 	    left: 50%;
 	    transform: translate(-50%, -50%);
-	    width: 70%; /* 테이블 너비를 조절하여 적당한 크기로 설정합니다 */
-	    border-bottom: none; /* thead의 아래쪽 경계선을 없앱니다 */
+	    width: 70%;
+	    border-bottom: none;
 	}
 	
 	thead tr {
@@ -109,99 +109,93 @@ img.icon {
 	}
 	
 	thead select, thead input[type="text"], thead input[type="submit"] {
-	    margin-right: 10px; /* 요소들 간격을 설정합니다 */
+	    margin-right: 10px;
 	}
 	
 	tbody {
-/*    	    border: 1px solid black; /* 테이블 본문의 경계선을 추가합니다 */ */
+/*    	    border: 1px solid black; */
 	}
-	
+
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	function selectCategory(frm) {
-		var checkCategory = frm.idx.value;
-		if ("선택" == checkCategory) {
-			alert("검색종류를 선택해주세요!");
-			return;
-		}
-		
-// 		if (checkCategory.trim().length == 0) {
-// 			alert("아이디를 입력해주세요!");
-// 			return false;
-// 		}
-		
-		var idx = frm.idx.value; // idx 값 가져오기
-	    var keyword = frm.keyword.value; // keyword 값 가져오기
-	    
-		$.ajax ({
-			type: "POST",
-			url: "ajaxManageController",
-			data: {
-				action: "manageCategory",
-				idx: idx,
-				keyword: keyword
-				
-			},
-			dataType: "json",
-			success : function(respData){
-				alert("Ajax 처리 성공 - 응답받은데이터 : " + respData);
-// 				JSON.stringify(obj)
-				console.log(respData); //JSON 객체 1개
-				console.log(respData.list); //배열데이터
-				
-				//Json데이터처리
-				let htmltag = "";
-				
-				for (member of respData.list) {
-					htmltag += "<div id=" + member.table + ">";
-					if ("review".equals(member.table)) {
-						htmltag += "<tr>";
-						htmltag += "<td>" + member.rvNo + "</td>";
-						htmltag += "<td>" + member.mvNo + "</td>";
-						htmltag += "<td>" + member.no + "</td>";
-						htmltag += "<td>" + member.rvNick + "</td>";
-						htmltag += "<td>" + member.rvTitle + "</td>";
-						htmltag += "<td>" + member.rvContent + "</td>";
-						htmltag += "<td>" + member.rvDate + "</td>";
-						htmltag += "<td>" + member.rvRec + "</td>";
-					}
-					
-					if ("movie".equals(member.table)) {
-						htmltag += "<tr>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-					}
-					
-					if ("movie".equals(member.table)) {
-						htmltag += "<tr>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-						htmltag += "<td>" + member.table + "</td>";
-					}
-				}
-			},
-			error : function(jqXHR, textStatus, errorThrown){
-				alert("Ajax 처리 실패 : \n"
-						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-						+ "textStatus : " + textStatus + "\n"
-						+ "errorThrown : " + errorThrown);
-				return false;
-			}
-		});
+function selectCategory(frm) {
+	var checkCategory = frm.idx.value;
+	if ("선택" == checkCategory) {
+		alert("검색종류를 선택해주세요!");
+		return;
 	}
+	
+	var idx = frm.idx.value;
+    var keyword = frm.keyword.value;
+    
+    $.ajax({
+        type: "POST",
+        url: "ajaxManageController",
+        data: {
+            action: "manageCategory",
+            idx: idx,
+            keyword: keyword
+        },
+        dataType: "json",
+        success: function(respData) {
+            console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+
+            // 테이블 헤더 생성
+//             let htmltag = "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
+
+            // 영화 데이터 반복 처리
+            if (respData.length === 0) {
+                // 검색 결과가 없을 때
+                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+            } else {
+                // 검색 결과가 있을 때
+                for (let member of respData.listSearch) {
+					if (member.table === "review") {
+						htmltag += "<tr class='" + member.table + "'>";
+			            htmltag += "<td>" + member.rvNo + "</td>";
+			            htmltag += "<td>" + member.mvNo + "</td>";
+			            htmltag += "<td>" + member.no + "</td>";
+			            htmltag += "<td>" + member.rvNick + "</td>";
+			            htmltag += "<td>" + member.rvTitle + "</td>";
+			            htmltag += "<td>" + member.rvContent + "</td>";
+			            htmltag += "<td>" + member.rvDate + "</td>";
+			            htmltag += "<td>" + member.rvRec + "</td>";
+			            htmltag += "</tr>";
+			        }
+			        
+			        if (member.table === "movie") {
+			        	console.log("영화html")
+			        	htmltag += "<tr class='" + member.table + "'>";
+			            htmltag += "<td>" + member.mvNo + "</td>";
+			            htmltag += "<td>" + member.mvTitle + "</td>";
+			            htmltag += "<td>" + member.mvDirect + "</td>";
+			            htmltag += "<td>" + member.mvActor + "</td>";
+			            htmltag += "<td>" + member.mvGenre + "</td>";
+			            htmltag += "<td>" + member.mvRate + "</td>";
+			            htmltag += "<td>" + member.mvAudience + "</td>";
+			            htmltag += "<td>" + member.mvGrade + "</td>";
+			            htmltag += "<td>" + member.mvDate + "</td>";
+			            htmltag += "<td>" + member.mvPoster + "</td>";
+			            htmltag += "</tr>";
+			        }
+				}
+            }
+            htmltag += "</tbody></table>";
+
+            // 테이블을 #jsonData 엘리먼트에 추가
+            $('#jsonData').html(htmltag);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Ajax 처리 실패:\n" +
+                "jqXHR.readyState: " + jqXHR.readyState + "\n" +
+                "textStatus: " + textStatus + "\n" +
+                "errorThrown: " + errorThrown);
+        }
+    });
+
+}
 </script>
 <body>
     <div class="header">
@@ -221,7 +215,7 @@ img.icon {
         <hr class="mint">
     </div>
     <div class="body">
-        <form method="post">
+        <form method="post"> 
             <table>
                 <caption><h2>관리자 검색</h2></caption>
                 <thead> 
@@ -236,12 +230,12 @@ img.icon {
                             </select>
                         </td>
                         <td><input type="text" name="keyword"/></td>
-                        <td><input type="submit" value="검색" onclick="selectCategory(this.form)"/></td>
+                        <td><input type="button" value="검색" onclick="selectCategory(this.form)"/></td>
                     </tr>
                 </thead>
-                <tbody class="jsonData">
+                <tbody id="jsonData">
                 	<tr>
-                		<td>검색 결과가 없습니다</td>
+                		<td>검색 결과가 없습니다.</td>
                 	</tr>
                 </tbody>
             </table>

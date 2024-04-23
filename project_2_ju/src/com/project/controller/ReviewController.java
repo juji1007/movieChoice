@@ -18,7 +18,7 @@ import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
-@WebServlet("/reviewController")
+//@WebServlet("/reviewController")
 public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
