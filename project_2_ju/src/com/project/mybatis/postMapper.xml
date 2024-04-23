@@ -2,11 +2,67 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="post">
+  
+	<!-- 전체 게시글 건수 조회 -->
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) AS CNT FROM POST
+	</select>
+	
+	<!-- 페이지에 해당하는 게시글 조회 -->
+	<select id="list" parameterType="map" resultType="com.mystudy.model.vo.postVO">
+	<![CDATA[
+		SELECT *
+		FROM (SELECT ROWNUM R_NUM, P.*
+		      FROM (SELECT *
+		            FROM POST
+		            ORDER BY PS_NO DESC
+		           ) P
+		      WHERE ROWNUM <= #{end}
+		     )
+		WHERE R_NUM >= #{begin} 
+	]]>
+	</select>
+	
+	<!-- 게시글 1개 조회 -->
+	<select id="one" parameterType="int" resultType="com.mystudy.model.vo.postVO">
+		SELECT *
+		FROM POST
+		WHERE PS_NO = #{psNo}
+	</select>
+	
+<!-- 	카테고리별 게시글 동적 검색 -->
+	<select id="search" parameterType="map" resultType="com.mystudy.model.vo.postVO">
+		SELECT *
+		FROM POST
+		<choose>
+			<when test="idx == 0">
+				WHERE PS_TITLE = #{keyword}
+			</when>
+			<when test="idx == 1">
+				WHERE TO_CHAR(PS_DATE, 'YYYYMMDD') = #{keyword}
+			</when>
+			<otherwise>
+				AND 1 = 2
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+	<!-- 게시글 입력 -->
+	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
+		INSERT INTO POST
+		       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE)
+		VALUES (#{psNo}, #{no}, #{psTitle}, #{psContent}, #{psDate}) 
+	</insert>
+
 <mapper namespace="post">
 	<!-- 자유게시판 목록 전체 조회 -->
 		<select id="all" resultType="com.mystudy.model.vo.postVO">
 				SELECT *
 				FROM POST
 		</select>
+
 	
 </mapper>
