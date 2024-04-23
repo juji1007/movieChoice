@@ -26,15 +26,6 @@
         <label for="comment">내용</label><br>
         <textarea id="comment" name="comment" rows="4" cols="50" required></textarea>
         <br><br>
-        <label for="rating">평점</label>
-        <select id="rating" name="rating" required>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <br><br>
         <input type="submit" value="리뷰 작성">
     </form>
     

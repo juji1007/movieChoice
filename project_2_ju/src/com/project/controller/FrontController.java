@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mystudy.model.dao.criticDAO;
 import com.mystudy.model.dao.movieDAO;
 import com.mystudy.model.dao.reviewDAO;
+import com.mystudy.model.vo.criticVO;
 import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
 
@@ -25,6 +27,14 @@ public class FrontController extends HttpServlet {
 		
 		String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
+		if ("critic".equals(type)) {
+			
+			List<criticVO> clist = criticDAO.criticList();
+			System.out.println("전문가목록 : " + clist);
+			
+			request.setAttribute("clist", clist);
+			request.getRequestDispatcher("critic.jsp").forward(request, response);
+		}
 		if ("mvTitle".equals(type)) {
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		}
@@ -75,6 +85,7 @@ public class FrontController extends HttpServlet {
 		}
 		
 		
+
 	}
 	
 	@Override
