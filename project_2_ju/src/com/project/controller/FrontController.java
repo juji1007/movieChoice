@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mystudy.model.dao.movieDAO;
+import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.vo.movieVO;
+import com.mystudy.model.vo.reviewVO;
 
 @WebServlet("/controller")
 public class FrontController extends HttpServlet {
@@ -71,7 +73,8 @@ public class FrontController extends HttpServlet {
 			//페이지 전환(searchList.jsp 페이지에 위임)
 			request.getRequestDispatcher("main.jsp").forward(request, response);
 		}
-
+		
+		
 	}
 	
 	@Override
