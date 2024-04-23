@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<div class="header">
+<div class="header">
 	<img class= "icon" src="img/moviechoice.png">
 	
 	<ul class="menu">
@@ -14,10 +14,24 @@
 	</ul>
 	
 	<ul class="login">
-	 <li><a href="login_page.jsp">로그인</a></li>
+<% 
+   request.setCharacterEncoding("UTF-8");
+
+   String id = (String) session.getAttribute("id");
+   if (id == null) {
+%> 	
+	<li><a href="login_page.jsp">로그인</a></li>
+<%
+   } else {
+%>  
+	<li><a href="logout.jsp">로그아웃</a></li>
+<%
+    }
+ %> 
 	 <li>/</li>
-	  <li><a href="memberJoin.jsp">회원가입</a></li>
+	 
+	<li><a href="memberJoin.jsp">회원가입</a></li>
 	</ul>
 	
 	<hr class="mint">
-	</div>
+</div>
