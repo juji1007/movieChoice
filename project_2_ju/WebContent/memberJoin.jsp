@@ -18,7 +18,7 @@
 		}
 		$.ajax ({
 			type: "POST",
-			url: "ajaxController",
+			url: "ajaxLoginController",
 			data: {
 				action: "checkDoubleId",
 				id: checkId
