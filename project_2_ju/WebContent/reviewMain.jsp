@@ -44,7 +44,7 @@
 			    //Json데이터 처리
 			    let str = null;
 			    for (let member of respData.listRv) {
-			        console.log("실행시;ㄹ행")
+			        console.log("실행");
 			        str += "<h2>" + member.rvNo + "</h2>"
 			        str += "<h2>" + member.rvTitle + "</h2>"
 			        str += "<h2>" + member.rvRec + "</h2>"
@@ -62,7 +62,38 @@
 				alert(":: complete 실행");
 			}
 		});
-		
+/*		
+		$.ajax({
+			type : "POST",
+			url : "ajaxReviewController",
+			data : {
+				action: "reviewMain"
+			},
+			dataType: "json",
+			success : function(respData){
+			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+			    //Json데이터 처리
+			    let str = null;
+			    for (let member of respData.lisMv) {
+			        console.log("실행");
+			        str += "<h2>" + member.mvNo + "</h2>"
+			        str += "<h2>" + member.mvTitle + "</h2>"
+			        str += "<h2>" + member.mvPoster + "</h2>"
+			    }
+			    $("#reviewDiv").html(str);
+			},
+
+			error : function(jqXHR, textStatus, errorThrown){
+				alert("Ajax 처리 실패 : \n"
+						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+						+ "textStatus : " + textStatus + "\n"
+						+ "errorThrown : " + errorThrown);
+			},
+			complete : function(){
+				alert(":: complete 실행");
+			}
+		});
+*/		
 	}); 
 	
 	

@@ -86,6 +86,7 @@ public class AjaxManageController extends HttpServlet {
 		    for (Object item : value) {
 		        if ("review".equals(key)) {
 		            reviewVO rvo = new reviewVO();
+		            rvo = (reviewVO) item;
 		            result.append("{");
 		            result.append("\"table\": \"" + key + "\", ");
 		            result.append("\"rvNo\": \"" + rvo.getRvNo() + "\", ");

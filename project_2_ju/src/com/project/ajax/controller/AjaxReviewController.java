@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
-
+import com.mystudy.model.dao.movieDAO;
+import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
@@ -55,27 +56,24 @@ public class AjaxReviewController extends HttpServlet {
 			response.setContentType("application/json; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print(resultRv);
-			
-/*
+/*			
 			//2.영화 제목,포스터 전체 조회
-			List<movieVO> movieList = null;
+			List<movieVO> mvList = null;
 			try (SqlSession ss = DBService.getFactory().openSession()) {
-				movieList = movieDAO.movieList();
+				mvList = movieDAO.movieList();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("movieList : " + movieList);
-			request.setAttribute("movieList", movieList);
+			System.out.println("mvList : " + mvList);
+			request.setAttribute("mvList", mvList);
 			
 			//JSON 형식 문자열 만들기
 			// { "list" : [ {},{},{}, ..., {}] }
-			String resultMv = makeJsonMv(movieList);
+			String resultMv = makeJsonMv(mvList);
 			System.out.println("result : \n" + resultMv);
 			
 			//응답하기
 			out.print(resultMv);
-			
-			//request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
 */
 		}
 		
@@ -99,7 +97,6 @@ public class AjaxReviewController extends HttpServlet {
 			result.append("\"mvGrade\" : " + vo.getMvGrade() + ", ");
 			result.append("\"mvDate\" : " + vo.getMvDate() + ", ");
 			result.append("\"mvPoster\" : " + vo.getMvPoster() + ", ");
-			result.append("\"Warn\" : " + vo.getWarn() + ", ");
 			result.append("},");
 		}
 		result.deleteCharAt(result.length() - 1);
