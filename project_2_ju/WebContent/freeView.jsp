@@ -19,16 +19,32 @@
 	session.setAttribute("cPage", cPage);
 	
 	// 게시물 댓글
+	session.getAttribute("no");
+	session.getAttribute("nick");
+	
 	List<postCommentVO> commList = postDAO.getCommList(psNo);
 	System.out.println("댓글목록 commList : " + commList);
 	
-	pageContext.setAttribute("c_list", commList);//댓글목록
+	session.setAttribute("c_list", commList);//댓글목록
 %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판 상세</title>
+<script>
+
+// 댓글 삭제 확인
+	function pc_delete(frm) {
+		let isDelete = confirm("삭제하시겠습니까?");
+		if(isDelete) {
+			frm.submit();
+		} else {
+			history.back();
+		}
+	}
+	
+</script>
 </head>
 <body>
 <table>
@@ -36,11 +52,16 @@
 	<td colspan=3><h1>${pvo.psTitle }</h1></td>
 	</tr>
 	<tr>
-	<td>작성자</td>
+	<td>${nick }</td>
 	<td>${pvo.psDate }</td>
-	<td>추천수</td>
+	<td>
+	<a href = "postUpdate.jsp"><input type="button" value="수정"></a>
+	</td>
 	</tr>
+	
+	
 </table>
+
 <hr>
 <tr>
 	<td colspan=3>${pvo.psContent }</td>
@@ -50,8 +71,7 @@
 <hr>
 <!-- 댓글작성 -->
 <form action="postComment_write_ok.jsp" method="post">
-<!-- 로그인 후 댓글작성가능, 댓글작성한사람의 회원번호 받아와서 사용해야함 -->
-		<input type="hidden" name="no" value="${pvo.no }">
+		<input type="hidden" name="no" value="${no }">
 		<textarea name="pcContent" rows="2" cols="55"></textarea>
 		<input type="submit" value="댓글작성">
 		<input type="hidden" name="psNo" value="${pvo.psNo }">
@@ -62,11 +82,11 @@
 <!-- 댓글표시 -->
 <c:forEach var="commVO" items="${c_list }">
 	<div>
-		<form action="postComment_del.jsp" method="get">
-			<p>작성자  ${commVO.pcDate }</p>
+		<form action="postComment_del_ok.jsp" method="get">
+			<p>${nick}  ${commVO.pcDate }</p>
 			<p>${commVO.pcContent }</p>
-			<input type="submit" value="댓글삭제">
-<%-- 			<input type="hidden" name="pcNo" value="${commVO.pcNo }"> --%>
+			<input type="button" value="댓글삭제" onclick="pc_delete(this.form)">
+			<input type="hidden" name="pcNo" value="${commVO.pcNo }">
 		</form>
 	</div>
 	<hr>

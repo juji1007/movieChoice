@@ -67,9 +67,27 @@ public class postDAO {
 		}
 		
 		// 게시글 입력(INSERT) 
-		public static int insert(postVO pvo) {
+		public static int insert(postVO po) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
-				return ss.insert("post.insert", pvo);
+				return ss.insert("post.insert", po);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		//게시글 수정(UPDATE)
+		public static int update(postVO po) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.update("post.update", po);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		//게시글 삭제(DELETE)
+		public static int delete(int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("post.delete", psNo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -96,5 +114,26 @@ public class postDAO {
 			}
 			return -1;
 		}
+		
+		//댓글 1개 조회
+		public static postCommentVO getComment(int pcNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.selectOne("post.commOne", pcNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//댓글삭제
+		public static int deleteComment(int pcNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("post.commDelete", pcNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
 }
 

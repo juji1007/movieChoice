@@ -1,3 +1,5 @@
+<%@page import="com.project.dao.AccountDAO"%>
+<%@page import="com.project.vo.AccountVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mystudy.post.common.Paging"%>
 <%@page import="com.mystudy.model.dao.postDAO"%>
@@ -7,7 +9,11 @@
 <%
 	
 // 	int psNo = Integer.parseInt(request.getParameter("psNo"));
-	session.getAttribute("pvo");
+//	session.getAttribute("pvo");
+
+// 	AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
+// 	System.out.println("avo : " + avo);
+	session.getAttribute("no");
 	
 %>
 <!DOCTYPE html>
@@ -42,14 +48,13 @@ function list_go() {
 </head>
 <body>
 <div>
-<form action="postWrite_ok.jsp" method="post" enctype="multipart/form-data">
+<form action="postWrite_ok.jsp" method="post">
 <table>
 	<tr>
 		
 		<td>
-<!-- 		<input type="text" name="psNo" title="번호" > -->
-<!-- 		수정하기 ㅜㅜ -->
-		<input type="hidden" name="no" title="작성자">
+<!-- 		로그인 한 작성자 받아오기로 수정 -->
+		<input type="hidden" name="no"  value="${no }">
 		</td>
 	</tr>
 	<tr>

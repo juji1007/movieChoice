@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.mystudy.post.common.Paging"%>
 <%@page import="com.mystudy.model.dao.postDAO"%>
@@ -59,13 +60,24 @@
 	// 페이징처리객체 page 영역에 저장
 	
 	session.setAttribute("pvo", p);
-	pageContext.setAttribute("list", list);
+	session.setAttribute("list", list);
+	
+	session.getAttribute("c_list");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+// 	게시물 삭제 확인
+	function ps_delete(frm) {
+		let isDelete = confirm("삭제하시겠습니까?");
+		if(isDelete) {
+			frm.submit();
+		}
+	}
+</script>
 </head>
 <style>
 
@@ -167,6 +179,7 @@ img.icon {
 
 <div id="post">
 <table border>
+
 <c:forEach var="vo" items="${vo }">
 <tr>
 <td>${vo.nick }</td>
@@ -181,6 +194,14 @@ img.icon {
 ${vo.psTitle }
 </a>
 </td>
+<td>
+	<form action="postDelete.jsp" method="get">
+		<input type="button" value="삭제" onclick="ps_delete(this.form)">
+		<input type="hidden" name="psNo" value="${vo.psNo }">
+<%-- 		<input type="hidden" name="pcNo" value="${c_list.pcNo }"> --%>
+	</form>
+</td>
+
 </tr>
 </c:forEach>
 

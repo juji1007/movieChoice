@@ -72,7 +72,9 @@ public class LoginCommandController extends HttpServlet {
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("id", avo.getId());
-				
+				session.setAttribute("no",avo.getNo());
+				session.setAttribute("nick", avo.getNick());
+//				session.setAttribute("avo", avo);
 		}
 		
 		if ("findIdOk".equals(type)) {

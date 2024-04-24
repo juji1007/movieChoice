@@ -53,16 +53,30 @@
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
 		INSERT INTO POST
-		       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE)
-		VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE) 
+			       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE)
+			VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE) 
 	</insert>
 
-
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="com.mystudy.model.vo.postVO">
+		UPDATE POST
+			SET PS_TITLE = #{psTitle} 
+				, PS_CONTENT = #{psContent}
+				, PS_DATE = SYSDATE
+			WHERE PS_NO = #{psNo}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="com.mystudy.model.vo.postVO">
+		DELETE FROM POST
+		WHERE PS_NO = #{psNo}
+	</delete>
+	
 	<!-- 자유게시판 목록 전체 조회 -->
-		<select id="all" resultType="com.mystudy.model.vo.postVO">
-				SELECT *
-				FROM POST
-		</select>
+	<select id="all" resultType="com.mystudy.model.vo.postVO">
+			SELECT *
+			FROM POST
+	</select>
 	
 	<!-- ======== 댓글 데이터 처리 ======= -->
 	<!-- 게시글에 딸린 댓글 데이터 조회 -->
@@ -73,11 +87,22 @@
 		ORDER BY PC_NO DESC
 	</select>
 	
+	<!-- 댓글 1개 조회(댓글번호 사용) -->
+	<select id="commOne" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
+		SELECT *
+		FROM PS_COMMENT
+		WHERE PC_NO = #{pcNo}
+	</select>
+	
 	<!-- 댓글입력 -->
 	<insert id="commInsert" parameterType="com.mystudy.model.vo.postCommentVO">
 		INSERT INTO PS_COMMENT
 		       (PC_NO, PS_NO, NO, PC_DATE, PC_CONTENT)
 		VALUES (PS_COMMENT_SEQ.NEXTVAL, #{psNo}, #{no}, SYSDATE, #{pcContent})	
 	</insert>
+	<!-- 댓글삭제 -->
+	<delete id="commDelete" parameterType="int">
+		DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
+	</delete>
 	
 </mapper>
