@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
+
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
@@ -29,10 +30,10 @@ public class AjaxReviewController extends HttpServlet {
 		
 		// DB 데이터 가져오기(조회)
 		//리뷰메인 페이지
-		String type = request.getParameter("type");
-		System.out.println("type : " + type);
+		String action = request.getParameter("action");
+		System.out.println("action : " + action);
 		
-		if ("reviewMain".equals(type)) {
+		if ("reviewMain".equals(action)) {
 			System.out.println(">> reviewMain 요청 처리~~");
 			
 			//1.리뷰 전체조회
@@ -112,17 +113,17 @@ public class AjaxReviewController extends HttpServlet {
 		StringBuilder result = new StringBuilder();
 		result.append("{ \"listRv\" : [");
 	
-		for (reviewVO vo : list) {
+		for (reviewVO rvo : list) {
 			result.append("{");
-			result.append("\"rvNo\" : " + vo.getRvNo() + ", ");
-			result.append("\"mvNo\" : " + vo.getMvNo() + ", ");
-			result.append("\"no\" : " + vo.getNo() + ", ");
-			result.append("\"rvNick\" : " + vo.getRvNick() + ", ");
-			result.append("\"rvTitle\" : " + vo.getRvTitle() + ", ");
-			result.append("\"rvContent\" : " + vo.getRvContent() + ", ");
-			result.append("\"rvDate\" : " + vo.getRvDate() + ", ");
-			result.append("\"rvRec\" : " + vo.getRvRec() + ", ");
-			result.append("\"Warn\" : " + vo.getWarn() + ", ");
+			result.append("\"rvNo\": \"" + rvo.getRvNo() + "\", ");
+            result.append("\"mvNo\": \"" + rvo.getMvNo() + "\", ");
+            result.append("\"no\": \"" + rvo.getNo() + "\", ");
+            result.append("\"rvNick\": \"" + rvo.getRvNick() + "\", ");
+            result.append("\"rvTitle\": \"" + rvo.getRvTitle() + "\", ");
+            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
+            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
+            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
+			result.append("\"Warn\" : \"" + rvo.getWarn() + "\"");
 			result.append("},");
 		}
 		result.deleteCharAt(result.length() - 1);

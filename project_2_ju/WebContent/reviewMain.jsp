@@ -20,10 +20,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
-
 	function recommand_push() {
 		location.href = "rvRecommand.jsp";
 		submit();
+		
 	}
 	
 	//AJAX controller 연결 - review 전체 조회
@@ -34,35 +34,24 @@
 		$.ajax({
 			type : "POST",
 			url : "ajaxReviewController",
-			//dataType : "json",
-			//contentType : "application/json",
-			success : function(respData){
-				alert("Ajax 처리 성공 - 응답받은데이터:", result);
-				console.log(respData);
-				console.log(respData.list);
-				console.log(respData.list[0]);
-				
-				//Json데이터 처리
- 				$.each(respData, function(i){
-					str += "<h2>" + respData[i].rvNo + "</h2>"
-					str += "<h2>" + respData[i].rvTitle + "</h2>"
-					str += "<h2>" + respData[i].rvRec + "</h2>"
-				});
-				$("reviewDiv").append(str);
-/*				
-				let htmlTag = "";
-				
-				for (inforVo of respData.list) {
-// 					htmlTag += "<h4>" + inforVo.mvTitle + "</h4>";
-// 					htmlTag += "<h4>" + inforVo.mvPoster + "</h4>";
-					htmlTag += "<h4>" + inforVo.rvNo + "</h4>";
-					htmlTag += "<h4>" + inforVo.rvTitle + "</h4>";
-					htmlTag += "<h4>" + inforVo.rvRec + "</h4>";
-				}
-				alert(htmlTag);
-				$("#reviewDiv").html(htmlTag);
-*/
+			data : {
+				action: "reviewMain"
 			},
+			dataType: "json",
+			//dataType : "html",
+			success : function(respData){
+			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+			    //Json데이터 처리
+			    let str = null;
+			    for (let member of respData.listRv) {
+			        console.log("실행시;ㄹ행")
+			        str += "<h2>" + member.rvNo + "</h2>"
+			        str += "<h2>" + member.rvTitle + "</h2>"
+			        str += "<h2>" + member.rvRec + "</h2>"
+			    }
+			    $("#reviewDiv").html(str);
+			},
+
 			error : function(jqXHR, textStatus, errorThrown){
 				alert("Ajax 처리 실패 : \n"
 						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
@@ -74,7 +63,7 @@
 			}
 		});
 		
-	}; 
+	}); 
 	
 	
 </script>
