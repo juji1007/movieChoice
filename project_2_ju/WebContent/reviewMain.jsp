@@ -52,7 +52,8 @@
 			        
 			        str += "<tr>";
  			        str += "<td rowspan=\"2\">";
-			        str += "<img src=\"img/\" + member.mvPoster + \" alt=\"포스터\" width=\"150px\">";
+ 			        str += "<img src=\"img/\" + member.mvPoster + \" alt=\"포스터\" width=\"150px\">";
+// 			        str += "<img src=\"img/exhuma.jpg" alt=\"포스터\" width=\"150px\">";
 			        str += "</td>"; 
 			        str += "<td>" + member.rvNick +"</td>";
 			        str += "<td>" + member.rvDate +"</td>";
@@ -81,10 +82,7 @@
 
 	}); 
 	
-	function rvWrite_down(){
-		location.href="rvWrite.jsp";
-		submit();
-	}
+	
 	
 </script>
 </head>
@@ -106,7 +104,7 @@
 	</form>
 	
 	<h2>리뷰모음</h2>
-	<input type="button" value="리뷰작성" onclick="rvWrite_down()">
+	<input type="button" value="리뷰작성" onclick="javascript:location.href='rvWrite.jsp'">
 	<hr>
 
 	<h3>리뷰 목록</h3>

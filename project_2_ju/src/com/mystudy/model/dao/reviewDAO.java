@@ -54,5 +54,15 @@ public class reviewDAO {
 		}
 		return null;
 	}
+	
+	//리뷰 작성
+	public static int insert(reviewVO vo){
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.insert("review.insert", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }

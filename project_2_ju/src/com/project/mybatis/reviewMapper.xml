@@ -43,6 +43,13 @@
 		ORDER BY R.RV_NO DESC
 	</select>
 	
+	<!-- 리뷰 작성 -->
+	<insert id="insert" parameterType="com.mystudy.model.vo.reviewVO">
+		INSERT INTO REVIEW
+	    (RV_NO, MV_NO, NO, RV_NICK, RV_TITLE, RV_CONTENT, RV_DATE, RV_REC)
+		VALUES (REVIEW_SEQ.NEXTVAL, #{mvNo}, #{no}, #{rvNick}, #{rvTitle}, #{rvContent}, SYSDATE, 0)
+	</insert>
+	
 	<!-- 추천수 count -->
 	
 	

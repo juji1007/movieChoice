@@ -1,44 +1,93 @@
+<%@page import="com.project.mybatis.DBService"%>
+<%@page import="org.apache.ibatis.session.SqlSession"%>
+<%@page import="com.mystudy.model.vo.movieVO"%>
+<%@page import="com.mystudy.model.dao.movieDAO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setCharacterEncoding("UTF-8");
-	//int no = (int) session.getAttribute("no");
-	//System.out.println(no);
+	//영화 제목, 번호 불러오기
+	List<movieVO> list = null;
+	try (SqlSession ss = DBService.getFactory().openSession()) {
+		list =  ss.selectList("movie.all");
+	} catch (Exception e) {
+		e.printStackTrace();
+	} 
 	
-	//String nick = (String) session.getAttribute("nick");
-	//System.out.println(nick);
+	System.out.println("list : " + list);
+	pageContext.setAttribute("list", list);
+	
+	
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리뷰 작성</title>
+<!-- style 태그 -->
+<link rel="stylesheet" href="css/header.css">
+<style>
+	#btn {
+		align-content: ceter;
+	}
+</style>
+<script>
+	function sendRv(frm) {
+		frm.submit();
+	}
+</script>
 </head>
 <body>
-	<h1>리뷰 작성하기</h1>
-    <form action="reviewController?type=rvWrite" method="get">
-        <label for="movie">영화 선택:</label>
-        <select id="movie" name="movie">
-            <option value="1">쿵푸팬더4</option>
-            <option value="2">파묘</option>
-            <option value="3">댓글부대</option>
-        </select>
-        <label for="rate">평점</label>
-        <input type="number" id="rate" name="rate" min="0" max="10" required>
-        <br><br>
-        <label for="username">작성자</label>
-        <input type="text" id="username" name="username" value="${nick }">
-        <br><br>
-        <label for="title">제목</label>
-        <input id="title" name="title" required>
-        <br><br>
-        <label for="comment">내용</label><br>
-        <textarea id="comment" name="comment" rows="4" cols="50" required></textarea>
-        <br><br>
-        <input type="submit" value="등록하기">
-        <input type="reset" value="초기화">
-        <input type="button" value="리뷰목록" onclick="rvList()">
-    </form>
+	<!-- header.jspf -->
+	<%@ include file="include/header.jspf" %>
+	  
+    <form action="rvWrite_ok.jsp" method="get" enctype="application/x-wwaw-form-urlencoded">
+	<table>
+		<caption>리뷰 작성하기</caption>
+		<tbody>
+			<tr>
+				<th>영화</th>
+				<td>
+					<select id="movie" name="movie">
+			        	<c:forEach var="mvVo" items="${list}">
+				            <option value=${mvVo['mvNo'] }>${mvVo['mvTitle'] }</option>
+			        	</c:forEach>
+        			</select>
+				</td>
+			</tr>
+			<tr>
+				<th>평점</th>
+				<td>
+					<input type="number" name="rate" min="0" max="10" title="평점">
+				</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>
+					<input type="text" name="subject" title="제목">
+				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>
+					<textarea name="content" rows="8" cols="50" title="내용"></textarea>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr id="btn">
+				<td colspan="2">
+					<input type="button" value="등록" onclick="sendRv(this.form)">
+			        <input type="reset" value="초기화">
+			        <input type="button" value="목록보기" 
+			        	onclick="javascript:location.href='reviewMain.jsp'">
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
     
 </body>
 </html>

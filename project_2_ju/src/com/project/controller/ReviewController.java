@@ -122,17 +122,6 @@ public class ReviewController extends HttpServlet {
 			return;
 		}
 		
-		//리뷰 작성
-		type = request.getParameter("type");
-		System.out.println("type : " + type);
-		
-		if ("rvWrite".equals(type)) {
-			System.out.println(">> rvWrite 페이지");
-			
-			/* reviewVO vo = reviewDAO; */
-		}
-		
-		
 		//추천수 sum 계산
 		if ("rvRecommand".equals(type)) {
 			System.out.println(">> rvRecommand 페이지");
