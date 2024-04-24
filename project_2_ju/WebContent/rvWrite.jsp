@@ -43,7 +43,7 @@
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
 	  
-    <form action="rvWrite_ok.jsp" method="get" enctype="application/x-wwaw-form-urlencoded">
+    <form action="rvWrite_ok.jsp" method="get" enctype="multipart/form-data">
 	<table>
 		<caption>리뷰 작성하기</caption>
 		<tbody>
