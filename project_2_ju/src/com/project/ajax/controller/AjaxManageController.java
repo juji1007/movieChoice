@@ -18,6 +18,7 @@ import com.mystudy.model.vo.reviewVO;
 import com.project.dao.AccountDAO;
 //import com.project.dao.AdminDAO;
 import com.project.dao.AdminDAO;
+import com.project.vo.AccountVO;
 
 @WebServlet("/ajaxManageController")
 public class AjaxManageController extends HttpServlet {
@@ -84,6 +85,7 @@ public class AjaxManageController extends HttpServlet {
 		    System.out.println("Value: " + value);
 		    // 리스트의 각 요소 Json넣기
 		    for (Object item : value) {
+		    	
 		        if ("review".equals(key)) {
 		            reviewVO rvo = (reviewVO) item;
 		            result.append("{");
@@ -95,7 +97,8 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"rvTitle\": \"" + rvo.getRvTitle() + "\", ");
 		            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
 		            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
-		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\"");
+		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
+		            result.append("\"warn\": \"" + rvo.getWarn() + "\"");
 		            result.append("},");
 		        }
 		        
@@ -117,9 +120,16 @@ public class AjaxManageController extends HttpServlet {
 		        }
 		        
 		        if ("account".equals(key)) {
+		        	AccountVO avo = (AccountVO) item;
 		            result.append("{");
-		            result.append("\"table\": \"" + key + "\"");
-		            // 여기에 account의 속성들을 추가해야 함
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"no\": \"" + avo.getNo() + "\", ");
+		            result.append("\"name\": \"" + avo.getName() + "\", ");
+		            result.append("\"id\": \"" + avo.getId() + "\", ");
+		            result.append("\"nick\": \"" + avo.getNick() + "\", ");
+		            result.append("\"critic_check\": \"" + avo.getCritic_check() + "\", ");
+		            result.append("\"email\": \"" + avo.getEmail() + "\", ");
+		            result.append("\"warn\": \"" + avo.getWarn() + "\"");
 		            result.append("},");
 		        }
 		    }

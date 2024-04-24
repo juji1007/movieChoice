@@ -53,7 +53,28 @@ public class FrontController extends HttpServlet {
 			//4. 응답페이지(fullnameList.jsp)로 응답 위임(전가) 처리
 			request.getRequestDispatcher("mvTitleList.jsp").forward(request, response);
 		}
-
+		if ("movieDelete".equals(type)) {
+			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+			System.out.println("mvNo : " + mvNo);
+			
+			int result = movieDAO.delete(mvNo);
+		}
+		if ("movieFix".equals(type)) {
+			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+			System.out.println("mvNo : " + mvNo);
+			
+			request.setAttribute("mvNo", mvNo);
+			request.getRequestDispatcher("movieFixOk.jsp").forward(request, response);
+		}
+		
+		if ("movieFix".equals(type)) {
+			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+			System.out.println("mvNo : " + mvNo);
+			
+			movieDAO.update(mvNo);
+			request.getRequestDispatcher("manage.jsp").forward(request, response);
+		}
+		
 		if ("movie".equals(type)) {
 			String idx = request.getParameter("idx");
 			System.out.println("idx: "+ idx );

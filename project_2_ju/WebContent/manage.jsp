@@ -1,5 +1,11 @@
+<%@page import="com.mystudy.post.common.Paging"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	Paging p = new Paging();
+
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,6 +137,40 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function delete(frm, table, param) {
+	if ("review" === table) {
+		
+	}
+	
+	if ("movie" === table) {
+		console.log("영화삭제");
+		frm.action="controller?type=movieDelete&mvNo="+param;
+		frm.submit();
+	}
+	
+	if ("account" === table) {
+		console.log("유저삭제");
+		frm.action="loginController?type=";
+		frm.submit();
+	}
+}
+function update(frm, table, param) {
+	if ("review" === table) {
+		
+	}
+	
+	if ("movie" === table) {
+		console.log("영화수정");
+		frm.action="controller?type=movieFix&mvNo="+param;
+		frm.submit();
+	}
+	
+	if ("account" === table) {
+		console.log("유저삭제");
+		frm.action="loginController?type=";
+		frm.submit();
+	}
+}
 function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
 	if ("선택" == checkCategory) {
@@ -155,6 +195,9 @@ function selectCategory(frm) {
 
             // 테이블 헤더 생성
             let htmltag = "";
+            var checkMovie = 1;
+            var checkReview = 1;
+            var checkAccount = 1;
 //             if (check of respData.listSearch) {
 //             htmltag += "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
 //             }
@@ -166,8 +209,18 @@ function selectCategory(frm) {
             } else {
                 // 검색 결과가 있을 때
                 for (let member of respData.listSearch) {
+                	respData.listSearch.sort((a, b) => {
+                	    if (a.warn > b.warn) return -1; // 내림차순으로 정렬
+                	    if (a.warn < b.warn) return 1;  // 오름차순으로 정렬
+                	    return 0; // 같은 경우
+                	});
+
+                	console.log("sort : ", respData);
 					if (member.table === "review") {
 						console.log("리뷰html");
+						if (checkReview > 0) {
+							htmltag += "<tr><th>테이블</th><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
+						}
 						htmltag += "<tr class='" + member.table + "'>";
 						htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.rvNo + "</td>";
@@ -178,11 +231,21 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.rvContent + "</td>";
 			            htmltag += "<td>" + member.rvDate + "</td>";
 			            htmltag += "<td>" + member.rvRec + "</td>";
+			            htmltag += "<td>" + member.warn + "</td>";
+			            htmltag += "<td><input type='button' value='삭제' onclick='delete(this.form, review)'>";
+			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
 			            htmltag += "</tr>";
+			            
+			            checkReview--;
+						checkMovie = 1;
+						checkAccount = 1;
 			        }
 			        
 			        if (member.table === "movie") {
 			        	console.log("영화html");
+						if (checkMovie > 0) {
+							htmltag += "<tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th><th>관리</th></tr>";
+						}
 			        	htmltag += "<tr class='" + member.table + "'>";
 			            htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.mvNo + "</td>";
@@ -195,11 +258,40 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvGrade + "</td>";
 			            htmltag += "<td>" + member.mvDate + "</td>";
 			            htmltag += "<td><img src='img/" + member.mvPoster + "' width='200'></td>";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='delete(this.form, movie, " + member.mvNo + ")'>";
+			            htmltag += "<input type='button' value='수정' onclick='update(this.form, movie, " + member.mvNo + ")'></td>";
 			            htmltag += "</tr>";
+			            
+			            checkMovie--;
+			            checkReview = 1;
+			            checkAccount = 1;
+			        }
+			        
+			        if (member.table === "account") {
+			            console.log("유저html");
+			            if (checkAccount > 0) {
+			                htmltag += "<tr><th>테이블</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>관리</th></tr>";
+			            }
+			            htmltag += "<tr class='" + member.table + "'>";
+			            htmltag += "<td>" + member.table + "</td>";
+			            htmltag += "<td>" + member.no + "</td>";
+			            htmltag += "<td>" + member.name + "</td>";
+			            htmltag += "<td>" + member.id + "</td>";
+			            htmltag += "<td>" + member.nick + "</td>";
+			            htmltag += "<td>" + member.critic_check + "</td>";
+			            htmltag += "<td>" + member.email + "</td>";
+			            htmltag += "<td>" + member.warn + "</td>"; 
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
+			            htmltag += "<input type='button' value='수정' onclick='updateAccount()'></td>";
+			            htmltag += "</tr>";
+
+			            checkAccount--;
+			            checkReview = 1;
+			            checkMovie = 1;
 			        }
 				}
             }
-            htmltag += "</tbody>";
+//             htmltag += "</tbody>";
 
             // 테이블을 #jsonData 엘리먼트에 추가
             $('#jsonData').html(htmltag);
@@ -221,7 +313,7 @@ function selectCategory(frm) {
 		</a>
     	
         <ul class="menu">
-          <li><a href="main.jsp">영화목록 관리</a></li>
+          <li><a href="mainAdmin.jsp">영화목록 관리</a></li>
           <li><a href="reviewMain.jsp">리뷰모음 관리</a></li>
           <li><a href="free.jsp">자유게시판 관리</a></li>
           <li><a href="about.asp">Q & A 관리</a></li>

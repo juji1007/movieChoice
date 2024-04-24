@@ -15,4 +15,23 @@
 		WHERE MV_NO = #{mvNo}
 	</select>
 	
+	<delete id="delete" parameterType="int">
+		DELETE INTO MOVIE
+		WHERE MV_NO = #{mvNo}
+	</delete>
+	
+	<update id="update" parameterType="int">
+		UPDATE MOVIE
+			SET MV_TITLE = #{mvTitle}
+MV_DIRECT
+MV_ACTOR
+MV_GENRE
+MV_RATE
+MV_AUDIENCE
+MV_GRADE
+MV_DATE
+MV_POSTER
+		WHERE MV_NO = #{mvNo}
+	</update>
+	
 </mapper>

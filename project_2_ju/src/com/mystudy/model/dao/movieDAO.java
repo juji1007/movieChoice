@@ -63,4 +63,24 @@ public class movieDAO {
 			return null;
 		}
 		
+		//재일
+		//영화번호로 삭제
+		public static int delete(int mvNo) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.delete("movie.delete", mvNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		//영화번호로 수정
+		public static int update(int mvNo) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.update("movie.update", mvNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
 }
