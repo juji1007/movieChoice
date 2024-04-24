@@ -74,9 +74,9 @@ public class movieDAO {
 			return -1;
 		}
 		//영화번호로 수정
-		public static int update(int mvNo) {
+		public static int update(movieVO mvo) {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
-				return ss.update("movie.update", mvNo);
+				return ss.update("movie.update", mvo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
