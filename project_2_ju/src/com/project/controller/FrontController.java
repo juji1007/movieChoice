@@ -108,7 +108,7 @@ public class FrontController extends HttpServlet {
 		    System.out.println("resultconrotenkqlknwk : " + mvo);
 			int result = movieDAO.update(mvo);
 			System.out.println("resultresultconrotenkqlknwk : " + result);
-			request.getRequestDispatcher("#").forward(request, response);
+			request.getRequestDispatcher("").forward(request, response);
 		}
 		
 		if ("movie".equals(type)) {

@@ -69,6 +69,9 @@ public class LoginCommandController extends HttpServlet {
 				AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
 //				System.out.println("avo : " + avo);
 				
+				if (avo == null) {
+					
+				}
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("no", avo.getNo());
