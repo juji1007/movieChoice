@@ -18,7 +18,7 @@ import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
-//@WebServlet("/reviewController")
+@WebServlet("/reviewController")
 public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -63,8 +63,6 @@ public class ReviewController extends HttpServlet {
 		String category = request.getParameter("category");
 		System.out.println("category : " + category);
 		
-		request.setCharacterEncoding("UTF-8");
-		
 		if ("selectOne".equals(category)) {
 			System.out.println(">> selectOne 요청 처리~~");
 			
@@ -102,8 +100,6 @@ public class ReviewController extends HttpServlet {
 		type = request.getParameter("type");
 		System.out.println("type : " + type);
 		
-		request.setCharacterEncoding("UTF-8");
-		
 		if ("rvDetail".equals(type)) {
 			System.out.println(">> rvDetail 페이지");
 			
@@ -124,6 +120,16 @@ public class ReviewController extends HttpServlet {
 			request.getRequestDispatcher("rvDetail.jsp").forward(request, response);
 			
 			return;
+		}
+		
+		//리뷰 작성
+		type = request.getParameter("type");
+		System.out.println("type : " + type);
+		
+		if ("rvWrite".equals(type)) {
+			System.out.println(">> rvWrite 페이지");
+			
+			/* reviewVO vo = reviewDAO; */
 		}
 		
 		

@@ -72,6 +72,10 @@ public class LoginCommandController extends HttpServlet {
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("id", avo.getId());
+				session.setAttribute("no", avo.getNo());
+				//System.out.println(avo.getNo());
+				session.setAttribute("nick", avo.getNick());
+				//System.out.println(avo.getNick());
 				
 		}
 		

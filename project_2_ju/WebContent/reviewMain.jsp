@@ -1,5 +1,4 @@
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
-<%@page import="com.mystudy.model.vo.listMvRvVO"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
 <%@page import="com.mystudy.model.vo.movieVO"%>
@@ -30,7 +29,6 @@
 	$(document).ready(function(){
 		console.log(">> reviewMain.jsp 접속 성공!!");
 		
-		
 		$.ajax({
 			type : "POST",
 			url : "ajaxReviewController",
@@ -38,18 +36,36 @@
 				action: "reviewMain"
 			},
 			dataType: "json",
-			//dataType : "html",
 			success : function(respData){
 			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
 			    //Json데이터 처리
 			    let str = null;
-			    for (let member of respData.listRv) {
+			    for (let member of respData.listAll) {
 			        console.log("실행");
-			        str += "<h2>" + member.rvNo + "</h2>"
-			        str += "<h2>" + member.rvTitle + "</h2>"
-			        str += "<h2>" + member.rvRec + "</h2>"
+			        str += "<tbody>";
+			        str += "<tr>";
+ 			        str += "<td>" + member.mvTitle + "</td>"
+			        str += "<td id=\"rvDetail\" colspan=\"2\">";
+			        str += "<a href=\"reviewController?type=rvDetail&rvNo=\" + member.rvNo + \">" + member.rvTitle + "</a>";
+			        str += "</td>";
+			        str += "</tr>";
+			        
+			        str += "<tr>";
+ 			        str += "<td rowspan=\"2\">";
+			        str += "<img src=\"img/\" + member.mvPoster + \" alt=\"포스터\" width=\"150px\">";
+			        str += "</td>"; 
+			        str += "<td>" + member.rvNick +"</td>";
+			        str += "<td>" + member.rvDate +"</td>";
+			        str += "</tbody>";
+			        
+			        str += "<tr>";
+			        str += "<td class=\"recNo\" colspan=\"3\">";
+			        str += "<input type=\"button\" value=\"추천수 \" onclick=\"reviewController?type=rvRecommand&rvNo=&rvRec=\">";
+			        str += "<img src=\"img/iconRec.png\" id=\"iconRec\" alt=\"추천\" width=\"25px\">" + member.rvRec;
+			        str += "</td>";
+			        str += "</tr>";
 			    }
-			    $("#reviewDiv").html(str);
+			    $("#reviewOne").html(str);
 			},
 
 			error : function(jqXHR, textStatus, errorThrown){
@@ -62,40 +78,13 @@
 				alert(":: complete 실행");
 			}
 		});
-/*		
-		$.ajax({
-			type : "POST",
-			url : "ajaxReviewController",
-			data : {
-				action: "reviewMain"
-			},
-			dataType: "json",
-			success : function(respData){
-			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
-			    //Json데이터 처리
-			    let str = null;
-			    for (let member of respData.lisMv) {
-			        console.log("실행");
-			        str += "<h2>" + member.mvNo + "</h2>"
-			        str += "<h2>" + member.mvTitle + "</h2>"
-			        str += "<h2>" + member.mvPoster + "</h2>"
-			    }
-			    $("#reviewDiv").html(str);
-			},
 
-			error : function(jqXHR, textStatus, errorThrown){
-				alert("Ajax 처리 실패 : \n"
-						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-						+ "textStatus : " + textStatus + "\n"
-						+ "errorThrown : " + errorThrown);
-			},
-			complete : function(){
-				alert(":: complete 실행");
-			}
-		});
-*/		
 	}); 
 	
+	function rvWrite_down(){
+		location.href="rvWrite.jsp";
+		submit();
+	}
 	
 </script>
 </head>
@@ -117,17 +106,44 @@
 	</form>
 	
 	<h2>리뷰모음</h2>
+	<input type="button" value="리뷰작성" onclick="rvWrite_down()">
 	<hr>
 
 	<h3>리뷰 목록</h3>
-	<div id="reviewDiv">
+<!--
+ 	<div id="reviewDiv">
 		<h4>영화제목</h4>
 		<h4>영화포스터</h4>
 		<h4>리뷰번호</h4>
 		<h4>리뷰제목</h4>
 		<h4>리뷰추천수</h4>
-	</div>
-
+	</div> 
+-->
+	<table id="reviewOne" border>
+		<tbody>
+			<tr>
+				<td id="movieTitle">영화명</td>
+				<td id="rvDetail" colspan="2">
+					<a href="reviewController?type=rvDetail&mvNo=&rvNo=">영화제목</a>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="2" id="moviePoster"><img src="img/kungfu.jpg" alt="포스터" width="150px">포스터</td>
+				<td>작성자</td>
+				<td>작성일</td>
+			</tr>
+		</tbody>
+		
+		<tfoot id="tfoot">
+			<tr>
+				<td class="recNo" colspan="3">
+					<input type="button" value="추천수 " onclick="reviewController?type=rvRecommand&rvNo=&rvRec=">
+					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">
+					추천수0
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 	
 <%-- 	<c:forEach var="vo" items="${listMv }">
 		<!-- <a href="reviewController?type=rvDetail"> -->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="listTotal">
+	
+	<!-- 회원,영화,리뷰 테이블 전체조회 -->
+	<select id="listAll" resultType="com.mystudy.model.vo.listTotVO">
+		SELECT A.*, M.*,  R.*
+		FROM ACCOUNT A, MOVIE M, REVIEW R
+		WHERE R.NO = A.NO
+		AND R.MV_NO = M.MV_NO
+		ORDER BY A.NO
+	</select>
+	
+	
+	
+</mapper>

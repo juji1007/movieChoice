@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.mystudy.model.vo.listMvRvVO;
+import com.mystudy.model.vo.listTotVO;
 import com.project.mybatis.DBService;
 
-public class listMvRvDAO {
+public class listTotDAO {
 
-	//영화 번호로 리뷰 상세내용 1개 조회
-	public static listMvRvVO selectList(int mvNo) {
+	// 회원,영화,리뷰 테이블 전체조회
+	public static List<listTotVO> getList() {
 		try (SqlSession ss = DBService.getFactory().openSession()) {			
-			return ss.selectOne("review.mvNoSearch", mvNo);
+			return ss.selectList("listTotal.listAll");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

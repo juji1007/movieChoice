@@ -26,7 +26,7 @@
 	System.out.println("criticCheckInt : " + criticCheckInt);
 	
 	AccountVO avo = new AccountVO();
-	avo.setNo(12);
+// 	avo.setNo(13);
 	avo.setName(name);
 	avo.setId(id);
 	avo.setPwd(pwd);

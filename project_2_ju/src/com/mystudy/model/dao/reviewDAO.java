@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.mystudy.model.vo.listMvRvVO;
+
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
