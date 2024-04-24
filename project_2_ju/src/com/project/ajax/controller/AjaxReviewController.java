@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
-
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
@@ -23,6 +22,7 @@ public class AjaxReviewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
 		
 		System.out.println(":: AjaxReviewController doGet 시작~~");
 		//DB 데이터 조회 후 JSON 형식 문자열 생성해서 응답하기

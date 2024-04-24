@@ -20,6 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
+
 	function recommand_push() {
 		location.href = "rvRecommand.jsp";
 		submit();
@@ -33,22 +34,23 @@
 		$.ajax({
 			type : "POST",
 			url : "ajaxReviewController",
-			//dataType : "html",
+			//dataType : "json",
+			//contentType : "application/json",
 			success : function(respData){
-				alert("Ajax 처리 성공 - 응답받은데이터:", respData);
+				alert("Ajax 처리 성공 - 응답받은데이터:", result);
 				console.log(respData);
-				console.log(respData.listRv);
-				console.log(respData.listRv[0]);
+				console.log(respData.list);
+				console.log(respData.list[0]);
 				
 				//Json데이터 처리
-				$.each(respData, function(i){
+ 				$.each(respData, function(i){
 					str += "<h2>" + respData[i].rvNo + "</h2>"
 					str += "<h2>" + respData[i].rvTitle + "</h2>"
 					str += "<h2>" + respData[i].rvRec + "</h2>"
 				});
 				$("reviewDiv").append(str);
-				
-				/* let htmlTag = "";
+/*				
+				let htmlTag = "";
 				
 				for (inforVo of respData.list) {
 // 					htmlTag += "<h4>" + inforVo.mvTitle + "</h4>";
@@ -58,7 +60,8 @@
 					htmlTag += "<h4>" + inforVo.rvRec + "</h4>";
 				}
 				alert(htmlTag);
-				$("#reviewDiv").html(htmlTag); */
+				$("#reviewDiv").html(htmlTag);
+*/
 			},
 			error : function(jqXHR, textStatus, errorThrown){
 				alert("Ajax 처리 실패 : \n"
