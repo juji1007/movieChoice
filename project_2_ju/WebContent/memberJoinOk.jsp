@@ -17,6 +17,7 @@
 	String email = request.getParameter("email");
 	String crticCheck = request.getParameter("criticCheck"); // 관리자페이지랑연결
 	System.out.println("crticCheck : " + crticCheck);
+
 	int criticCheckInt = 0;
 	if (crticCheck != null && !crticCheck.isEmpty()) {
 		criticCheckInt = Integer.parseInt(crticCheck);
@@ -27,7 +28,6 @@
 	
 	System.out.println("nickName : " + nickName);
 	AccountVO avo = new AccountVO();
-	avo.setNo(10);
 	avo.setName(name);
 	avo.setId(id);
 	avo.setPwd(pwd);
@@ -37,6 +37,8 @@
 	
 	// 회원가입 데이터 DB에 삽입
 	int checkJoin = AccountDAO.insertMember(avo);
+	
+	System.out.println("checkJoin : " + checkJoin);
 	if (checkJoin == -1) {
 		String alertMessage = "회원가입이 실패하였습니다.";
 %>
@@ -47,6 +49,15 @@
 <%
 // 	response.sendRedirect("login_page.jsp");
 	} else {
+		System.out.println("avo.getId() : " + avo.getId());
+			if (criticCheckInt == 1) {
+%>
+					<script>
+<%-- 					location.href="criticApply.jsp?no=<%=avo.getNo()%>"; --%>
+					location.href="criticApply.jsp?id=<%=avo.getId() %>";
+					</script>
+<%
+				}
 %>
 
 	<script>
