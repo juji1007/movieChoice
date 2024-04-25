@@ -43,7 +43,23 @@
 			history.back();
 		}
 	}
-	
+	//목록보기
+	function list_go() {
+		location.href = "free.jsp";
+	}
+	//로그인 후 작성가능
+	function login_confirm(frm) {
+<% 
+	if (session.getAttribute("no") == null) {
+%>
+	alert("로그인 후 작성 가능합니다.");
+	frm.location.href = "freeView.jsp";
+<%
+	}
+	else 
+%>
+	frm.submit();
+}
 </script>
 </head>
 <body>
@@ -56,6 +72,7 @@
 	<td>${pvo.psDate }</td>
 	<td>
 	<a href = "postUpdate.jsp"><input type="button" value="수정"></a>
+	<input type="button" value="목록보기" onclick="list_go()">
 	</td>
 	</tr>
 	
@@ -73,7 +90,7 @@
 <form action="postComment_write_ok.jsp" method="post">
 		<input type="hidden" name="no" value="${no }">
 		<textarea name="pcContent" rows="2" cols="55"></textarea>
-		<input type="submit" value="댓글작성">
+		<input type="button" value="댓글작성" onclick="login_confirm(this.form)">
 		<input type="hidden" name="psNo" value="${pvo.psNo }">
 		<input type="hidden" name="cPage" value="${cPage }">
 	</form>

@@ -69,6 +69,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 // 	게시물 삭제 확인
 	function ps_delete(frm) {
@@ -77,6 +78,29 @@
 			frm.submit();
 		}
 	}
+//로그인 후 작성가능
+	function login_confirm(frm) {
+<% 
+	if (session.getAttribute("no") == null) {
+%>
+	alert("로그인 후 작성 가능합니다.");
+	frm.location.href = "free.jsp";
+<%
+	}
+	else 
+%>
+	frm.submit();
+}
+// 본인이 작성한 글 아니면 삭제 버튼 숨기기
+	$(function(){
+<%
+	if(session.getAttribute("no") == null || session.getAttribute("list.no") != session.getAttribute("no")){
+%>
+	      $('.h_button').css('display','none');
+<%
+	}
+%>
+	})
 </script>
 </head>
 <style>
@@ -162,7 +186,7 @@ img.icon {
 <hr class="mint">
 </div>
 <h2>자유게시판</h2>
-<a href="postWrite.jsp"><input type="button" value="작성하기"></a>
+<form action="postWrite.jsp" method="get"><input type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
 
 
 <form action="postController?search=freeList" method="get">
@@ -179,7 +203,6 @@ img.icon {
 
 <div id="post">
 <table border>
-
 <c:forEach var="vo" items="${vo }">
 <tr>
 <td>${vo.nick }</td>
@@ -196,9 +219,8 @@ ${vo.psTitle }
 </td>
 <td>
 	<form action="postDelete.jsp" method="get">
-		<input type="button" value="삭제" onclick="ps_delete(this.form)">
+		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
 		<input type="hidden" name="psNo" value="${vo.psNo }">
-<%-- 		<input type="hidden" name="pcNo" value="${c_list.pcNo }"> --%>
 	</form>
 </td>
 

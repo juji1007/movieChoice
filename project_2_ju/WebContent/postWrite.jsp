@@ -53,7 +53,6 @@ function list_go() {
 	<tr>
 		
 		<td>
-<!-- 		로그인 한 작성자 받아오기로 수정 -->
 		<input type="hidden" name="no"  value="${no }">
 		</td>
 	</tr>
@@ -69,12 +68,12 @@ function list_go() {
 			<textarea name="psContent" rows="8" cols="50" title="내용"></textarea>
 		</td>
 	</tr>
-<!-- 	<tr> -->
-<!-- 		<th>첨부파일</th> -->
-<!-- 		<td> -->
-<!-- 			<input type="file" name="filename"> -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
+	<tr>
+		<th>첨부파일</th>
+		<td>
+			<input type="file" name="filename">
+		</td>
+	</tr>
 	<tr>
 		<td colspan="2">
 			<input type="submit" value="저장" >

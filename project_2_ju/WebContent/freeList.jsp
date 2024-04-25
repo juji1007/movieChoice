@@ -22,5 +22,11 @@
 	</tr>
 	</table>
 	</c:forEach>
+	<c:if test="${empty listOne }">
+			<tr>
+				<td colspan="3">검색 결과가 없습니다.</td>
+			</tr>
+		</c:if>
+	
 </body>
 </html>
