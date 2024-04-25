@@ -1,21 +1,21 @@
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.project.dao.AccountDAO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <% 
 	request.setCharacterEncoding("UTF-8");
 %>
 <%-- 	<jsp:useBean id="" --%>
 <%
 	
-	// È¸¿ø°¡ÀÔ µ¥ÀÌÅÍ ¹Ş±â
+	// íšŒì›ê°€ì… ë°ì´í„° ë°›ê¸°
 // 	int no = 3;
 	String name = request.getParameter("name");
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 	String nickName = request.getParameter("nickName");
 	String email = request.getParameter("email");
-	String crticCheck = request.getParameter("criticCheck"); // °ü¸®ÀÚÆäÀÌÁö¶û¿¬°á
+	String crticCheck = request.getParameter("criticCheck"); // ê´€ë¦¬ìí˜ì´ì§€ë‘ì—°ê²°
 	System.out.println("crticCheck : " + crticCheck);
 
 	int criticCheckInt = 0;
@@ -26,20 +26,21 @@
 	}
 	System.out.println("criticCheckInt : " + criticCheckInt);
 	
+	System.out.println("nickName : " + nickName);
 	AccountVO avo = new AccountVO();
 	avo.setName(name);
 	avo.setId(id);
 	avo.setPwd(pwd);
 	avo.setNick(nickName);
 	avo.setEmail(email);
-	avo.setCritic_check(criticCheckInt);
-
-	// È¸¿ø°¡ÀÔ µ¥ÀÌÅÍ DB¿¡ »ğÀÔ
+	avo.setCriticCheck(criticCheckInt);
+	
+	// íšŒì›ê°€ì… ë°ì´í„° DBì— ì‚½ì…
 	int checkJoin = AccountDAO.insertMember(avo);
 	
 	System.out.println("checkJoin : " + checkJoin);
 	if (checkJoin == -1) {
-		String alertMessage = "È¸¿ø°¡ÀÔÀÌ ½ÇÆĞÇÏ¿´½À´Ï´Ù.";
+		String alertMessage = "íšŒì›ê°€ì…ì´ ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 %>
 	<script>
 		alert("<%= alertMessage %>");
@@ -60,7 +61,7 @@
 %>
 
 	<script>
-		alert("È¸¿ø°¡ÀÔ¿¡ ¼º°øÇÏ¼Ì½À´Ï´Ù.");
+		alert("íšŒì›ê°€ì…ì— ì„±ê³µí•˜ì…¨ìŠµë‹ˆë‹¤.");
 		location.href="login_page.jsp";
 	</script>
 <%
