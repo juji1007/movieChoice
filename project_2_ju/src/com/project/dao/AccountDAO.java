@@ -26,6 +26,7 @@ public class AccountDAO {
 			Map<String, String> map = new HashMap<>();
 			map.put("id", id);
 			map.put("pwd", pwd);
+//			System.out.println(ss.selectOne("project2.login", map));
 			return ss.selectOne("project2.login", map);
 		} catch (Exception e) {
 			e.printStackTrace();

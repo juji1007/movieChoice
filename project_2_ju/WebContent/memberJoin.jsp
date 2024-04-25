@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>È¸¿ø°¡ÀÔ</title>
+<title>íšŒì›ê°€ì…</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var isCheckId = false;
@@ -13,7 +13,7 @@
 // 		var checkId = form.elements["id"];
 		var checkId = frm.id.value;
 		if (checkId.trim().length == 0) {
-			alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+			alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 			return false;
 		}
 		$.ajax ({
@@ -25,17 +25,17 @@
 			},
 			success : function(response){
 				if(response == "true") {
-					alert("ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğ ÀÔ´Ï´Ù.");
+					alert("ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë”” ì…ë‹ˆë‹¤.");
 					frm.id.value = "";
 					return false;
 				} else {
-					alert("»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğ ÀÔ´Ï´Ù.");
+					alert("ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë”” ì…ë‹ˆë‹¤.");
 					isCheckId = true;
 					return true;
 				}
 			},
 			error : function(jqXHR, textStatus, errorThrown){
-				alert("Ajax Ã³¸® ½ÇÆĞ : \n"
+				alert("Ajax ì²˜ë¦¬ ì‹¤íŒ¨ : \n"
 						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
 						+ "textStatus : " + textStatus + "\n"
 						+ "errorThrown : " + errorThrown);
@@ -49,7 +49,7 @@
 		var checkPwd = frm.pwdCheck.value;
 		
 		if(pwd != checkPwd) {
-			alert("ºñ¹Ğ¹øÈ£¿Í ºñ¹Ğ¹øÈ£È®ÀÎ °ªÀÌ ´Ù¸¨´Ï´Ù!");
+			alert("ë¹„ë°€ë²ˆí˜¸ì™€ ë¹„ë°€ë²ˆí˜¸í™•ì¸ ê°’ì´ ë‹¤ë¦…ë‹ˆë‹¤!");
 			frm.pwdCheck.value="";
 			return false;
 		}
@@ -69,7 +69,7 @@
 	function memberJoin_ok(frm) {
 		
 		if(!isCheckId) {
-			alert("¾ÆÀÌµğ Áßº¹Ã¼Å©¸¦ ¸ÕÀú ÇØÁÖ¼¼¿ä!");
+			alert("ì•„ì´ë”” ì¤‘ë³µì²´í¬ë¥¼ ë¨¼ì € í•´ì£¼ì„¸ìš”!");
 			return;
 		}
 		
@@ -90,69 +90,69 @@
 	<div id="loginArea">
 		<form method="post">
 			<table>
-				<caption><h2>È¸¿ø°¡ÀÔ</h2></caption>
+				<caption><h2>íšŒì›ê°€ì…</h2></caption>
 				<thead>
 					<tr>
-						<th>¾ÆÀÌµğ</th>
+						<th>ì•„ì´ë””</th>
 						<td colspan="3">
-							<input type="text" name="id" title="¾ÆÀÌµğ" />
-							<input type="button" value="¾ÆÀÌµğÁßº¹Ã¼Å©" onclick="checkId(this.form)"/>
+							<input type="text" name="id" title="ì•„ì´ë””" />
+							<input type="button" value="ì•„ì´ë””ì¤‘ë³µì²´í¬" onclick="checkId(this.form)"/>
 						</td>
 					</tr>
 					<tr>
-						<th>ºñ¹Ğ¹øÈ£</th>
+						<th>ë¹„ë°€ë²ˆí˜¸</th>
 						<td colspan="3">
-							<input type="password" name="pwd" title="ºñ¹Ğ¹øÈ£" />
+							<input type="password" name="pwd" title="ë¹„ë°€ë²ˆí˜¸" />
 						</td>
 					</tr>
 					<tr>
-						<th>ºñ¹Ğ¹øÈ£È®ÀÎ</th>
+						<th>ë¹„ë°€ë²ˆí˜¸í™•ì¸</th>
 						<td colspan="3">
-							<input type="password" name="pwdCheck" title="ºñ¹Ğ¹øÈ£È®ÀÎ" onblur="check_pwd(this.form)"/>
+							<input type="password" name="pwdCheck" title="ë¹„ë°€ë²ˆí˜¸í™•ì¸" onblur="check_pwd(this.form)"/>
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th>ÀÌ¸§</th>
+						<th>ì´ë¦„</th>
 						<td colspan="3">
-							<input type="text" name="name" title="ÀÌ¸§" />
+							<input type="text" name="name" title="ì´ë¦„" />
 						</td>
 					</tr>
 					<tr>
-						<th>´Ğ³×ÀÓ</th>
+						<th>ë‹‰ë„¤ì„</th>
 						<td colspan="3">
-							<input type="text" name="nickName" title="´Ğ³×ÀÓ" />
+							<input type="text" name="nickName" title="ë‹‰ë„¤ì„" />
 						</td>
 					</tr>
 <!-- 					<tr> -->
-<!-- 						<th>ÁÖ¼Ò</th> -->
+<!-- 						<th>ì£¼ì†Œ</th> -->
 <!-- 						<td colspan="3"> -->
-<!-- 							<input type="text" name="address" title="ÁÖ¼Ò" /> -->
+<!-- 							<input type="text" name="address" title="ì£¼ì†Œ" /> -->
 <!-- 						</td> -->
 <!-- 					</tr> -->
 					<tr>
-						<th>ÀÌ¸ŞÀÏ</th>
+						<th>ì´ë©”ì¼</th>
 						<td colspan="3">
-							<input type="text" name="email" title="ÀÌ¸ŞÀÏ" />
+							<input type="text" name="email" title="ì´ë©”ì¼" />
 						</td>
 					</tr>
 					<tr>
-						<th>Æò·Ğ°¡ÀÎÁõ</th>
+						<th>í‰ë¡ ê°€ì¸ì¦</th>
 						<td colspan="3">
-							<input type="radio" name="criticCheck" title="Æò·Ğ°¡" onclick="check_critic(this.form)"/>
+							<input type="radio" name="criticCheck" title="í‰ë¡ ê°€" onclick="check_critic(this.form)"/>
 						</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="2">
-							<input type="reset" value="ÃÊ±âÈ­"/>
+							<input type="reset" value="ì´ˆê¸°í™”"/>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4">
-							<input type="button" value="È¸¿ø°¡ÀÔÇÏ±â" onclick="memberJoin_ok(this.form)"/>
+							<input type="button" value="íšŒì›ê°€ì…í•˜ê¸°" onclick="memberJoin_ok(this.form)"/>
 						</td>
 					</tr>
 				</tfoot>

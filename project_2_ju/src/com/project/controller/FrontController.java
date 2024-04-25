@@ -1,6 +1,9 @@
 package com.project.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -24,6 +27,8 @@ public class FrontController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("FrontController doGet() 실행~~~");
+		
+		request.setCharacterEncoding("UTF-8");
 		
 		String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
@@ -53,7 +58,73 @@ public class FrontController extends HttpServlet {
 			//4. 응답페이지(fullnameList.jsp)로 응답 위임(전가) 처리
 			request.getRequestDispatcher("mvTitleList.jsp").forward(request, response);
 		}
-
+		if ("movieDelete".equals(type)) {
+			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+			System.out.println("mvNo : " + mvNo);
+			
+			int result = movieDAO.delete(mvNo);
+		}
+		if ("movieFix".equals(type)) {
+			String location = request.getParameter("location");
+			System.out.println("location : " + location);
+			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+			System.out.println("mvNo : " + mvNo);
+			
+			request.setAttribute("mvNo", mvNo);
+			// movieFix를 페이지를 만들고 movieFixOk에서 location 처리하는 것도 생각
+//			if ("mainAdmin".equals(location)) {
+//				request.getRequestDispatcher("movieFixOk.jsp?location="+location).forward(request, response);
+//			}
+			request.getRequestDispatcher("movieFixOk.jsp?location="+location).forward(request, response);
+		}
+		
+		// 관리자 페이지에서 수정
+		if ("movieFixOk".equals(type)) {
+			System.out.println("dao실행");
+			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+			String mvTitle = request.getParameter("mvTitle");
+		    String mvDirect = request.getParameter("mvDirect");
+		    String mvActor = request.getParameter("mvActor");
+		    String mvGenre = request.getParameter("mvGenre");
+		    int mvRate = Integer.parseInt(request.getParameter("mvRate"));
+		    String mvDateStr = request.getParameter("mvDate");
+		    java.util.Date utilDate = null;
+		    java.sql.Date sqlDate = null;
+		    try {
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		        utilDate = sdf.parse(mvDateStr);
+		        sqlDate = new java.sql.Date(utilDate.getTime());
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		    }
+		    
+		    movieVO mvo = new movieVO();
+		    mvo.setMvDate(sqlDate);
+		    String mvAudience = request.getParameter("mvAudience");
+		    String mvGrade = request.getParameter("mvGrade");
+		    String mvPoster = request.getParameter("mvPoster");
+		    mvo.setMvNo(mvNo);
+		    mvo.setMvTitle(mvTitle);
+		    mvo.setMvDirect(mvDirect);
+		    mvo.setMvActor(mvActor);
+		    mvo.setMvGenre(mvGenre);
+		    mvo.setMvRate(mvRate);
+		    mvo.setMvAudience(mvAudience);
+		    mvo.setMvGrade(mvGrade);
+		    mvo.setMvPoster(mvPoster);
+		    
+//			System.out.println("mvNo : " + mvNo);
+		    System.out.println("resultconrotenkqlknwk : " + mvo);
+			int result = movieDAO.update(mvo);
+			System.out.println("resultresultconrotenkqlknwk : " + result);
+			String location = request.getParameter("location");
+			System.out.println("mainadmin locatuib: " + location);
+			if ("mainAdmin".equals(location)) {
+				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
+			}
+			request.getRequestDispatcher("manage.jsp").forward(request, response);
+		}
+		
 		if ("movie".equals(type)) {
 			String idx = request.getParameter("idx");
 			System.out.println("idx: "+ idx );
@@ -82,6 +153,36 @@ public class FrontController extends HttpServlet {
 			
 			//페이지 전환(searchList.jsp 페이지에 위임)
 			request.getRequestDispatcher("main.jsp").forward(request, response);
+		}
+		
+		if ("movieAdmin".equals(type)) {
+			String idx = request.getParameter("idx");
+			System.out.println("idx: "+ idx );
+			
+			//단순 페이지 전환인지 DB데이터 조회(검색)처리를 해야 하는지 결정 처리 
+			
+			// 동적검색 처리 작업 진행
+			System.out.println(">>>> 동적검색 처리 작업 진행");
+			List<movieVO> list2 = movieDAO.getMovie(idx);
+			System.out.println("list2 : " + list2);
+			
+			//동적검색 작업 형태 확인
+			String title = "";
+			switch (idx) {
+			case "0": title = "정렬"; break;
+			case "1": title = "최신순"; break;
+			case "2": title = "평점순"; break;
+		
+			default:
+				title = "선택안함";
+			}
+			
+			//동적검색 결과 데이터 응답페이지로 전달
+			request.setAttribute("list2", list2);
+			
+			
+			//페이지 전환(searchList.jsp 페이지에 위임)
+			request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 		}
 		
 		

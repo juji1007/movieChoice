@@ -7,20 +7,20 @@ public class AccountVO {
 	private String id;
 	private String pwd;
 	private String nick;
-	private int critic_check;
+	private int criticCheck;
 	private String email;
 	private int warn;
 	
 	public AccountVO() {
 	}
 
-	public AccountVO(int no, String name, String id, String pwd, String nick, int critic_check, String email) {
+	public AccountVO(int no, String name, String id, String pwd, String nick, int criticCheck, String email) {
 		this.no = no;
 		this.name = name;
 		this.id = id;
 		this.pwd = pwd;
 		this.nick = nick;
-		this.critic_check = critic_check;
+		this.criticCheck = criticCheck;
 		this.email = email;
 	}
 
@@ -72,12 +72,12 @@ public class AccountVO {
 		this.nick = nick;
 	}
 
-	public int getCritic_check() {
-		return critic_check;
+	public int getCriticCheck() {
+		return criticCheck;
 	}
 
-	public void setCritic_check(int critic_check) {
-		this.critic_check = critic_check;
+	public void setCriticCheck(int criticCheck) {
+		this.criticCheck = criticCheck;
 	}
 
 	public String getEmail() {
@@ -91,7 +91,7 @@ public class AccountVO {
 	@Override
 	public String toString() {
 		return "AccountVO [no=" + no + ", name=" + name + ", id=" + id + ", pwd=" + pwd + ", nick=" + nick
-				+ ", critic_check=" + critic_check + ", email=" + email + "]";
+				+ ", criticCheck=" + criticCheck + ", email=" + email + "]";
 	}
 	
 	

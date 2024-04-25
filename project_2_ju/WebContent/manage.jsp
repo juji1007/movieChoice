@@ -1,10 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="com.mystudy.post.common.Paging"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Paging p = new Paging();
+
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>°ü¸®ÀÚÆäÀÌÁö</title>
+<meta charset="UTF-8">
+<title>ê´€ë¦¬ìí˜ì´ì§€</title>
 </head>
 <style>
 
@@ -99,9 +105,9 @@ caption {
 }
 
 th, td {
-    border: 1px solid black; /* Å×ÀÌºí °æ°è¼± ¼³Á¤ */
-    padding: 8px; /* ¼¿ ¾ÈÀÇ ¿©¹é ¼³Á¤ */
-    text-align: center; /* °¡¿îµ¥ Á¤·Ä */
+    border: 1px solid black; /* í…Œì´ë¸” ê²½ê³„ì„  ì„¤ì • */
+    padding: 8px; /* ì…€ ì•ˆì˜ ì—¬ë°± ì„¤ì • */
+    text-align: center; /* ê°€ìš´ë° ì •ë ¬ */
 }
 
 thead {
@@ -133,8 +139,8 @@ tbody th tr td{
 <script>
 function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
-	if ("¼±ÅÃ" == checkCategory) {
-		alert("°Ë»öÁ¾·ù¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä!");
+	if ("ì„ íƒ" == checkCategory) {
+		alert("ê²€ìƒ‰ì¢…ë¥˜ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”!");
 		return;
 	}
 	
@@ -151,23 +157,36 @@ function selectCategory(frm) {
         },
         dataType: "json",
         success: function(respData) {
-            console.log("Ajax Ã³¸® ¼º°ø - ÀÀ´ä¹ŞÀºµ¥ÀÌÅÍ:", respData);
+            console.log("Ajax ì²˜ë¦¬ ì„±ê³µ - ì‘ë‹µë°›ì€ë°ì´í„°:", respData);
 
-            // Å×ÀÌºí Çì´õ »ı¼º
+            // í…Œì´ë¸” í—¤ë” ìƒì„±
             let htmltag = "";
+            var checkMovie = 1;
+            var checkReview = 1;
+            var checkAccount = 1;
 //             if (check of respData.listSearch) {
-//             htmltag += "<table border='1'><thead><tr><th>Å×ÀÌºí</th><th>¿µÈ­ ¹øÈ£</th><th>Á¦¸ñ</th><th>°¨µ¶</th><th>¹è¿ì</th><th>Àå¸£</th><th>ÆòÁ¡</th><th>°ü¶÷°´ ¼ö</th><th>µî±Ş</th><th>°³ºÀÀÏ</th><th>Æ÷½ºÅÍ</th></tr></thead><tbody>";
+//             htmltag += "<table border='1'><thead><tr><th>í…Œì´ë¸”</th><th>ì˜í™” ë²ˆí˜¸</th><th>ì œëª©</th><th>ê°ë…</th><th>ë°°ìš°</th><th>ì¥ë¥´</th><th>í‰ì </th><th>ê´€ëŒê° ìˆ˜</th><th>ë“±ê¸‰</th><th>ê°œë´‰ì¼</th><th>í¬ìŠ¤í„°</th></tr></thead><tbody>";
 //             }
 //             if ()
-            // ¿µÈ­ µ¥ÀÌÅÍ ¹İº¹ Ã³¸®
+            // ì˜í™” ë°ì´í„° ë°˜ë³µ ì²˜ë¦¬
             if (respData.length === 0) {
-                // °Ë»ö °á°ú°¡ ¾øÀ» ¶§
-                htmltag += "<tr><td colspan='11'>°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.</td></tr>";
+                // ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ì„ ë•Œ
+                htmltag += "<tr><td colspan='11'>ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</td></tr>";
             } else {
-                // °Ë»ö °á°ú°¡ ÀÖÀ» ¶§
+                // ê²€ìƒ‰ ê²°ê³¼ê°€ ìˆì„ ë•Œ
                 for (let member of respData.listSearch) {
+                	respData.listSearch.sort((a, b) => {
+                	    if (a.warn > b.warn) return -1; // ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
+                	    if (a.warn < b.warn) return 1;  // ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬
+                	    return 0; // ê°™ì€ ê²½ìš°
+                	});
+
+                	console.log("sort : ", respData);
 					if (member.table === "review") {
-						console.log("¸®ºähtml");
+						console.log("ë¦¬ë·°html");
+						if (checkReview > 0) {
+							htmltag += "<tr><th>í…Œì´ë¸”</th><th>ë¦¬ë·° ë²ˆí˜¸</th><th>ì˜í™” ë²ˆí˜¸</th><th>ìœ ì € ë²ˆí˜¸</th><th>ìœ ì € ë‹‰ë„¤ì„</th><th>ë¦¬ë·° ì œëª©</th><th>ë¦¬ë·° ë‚´ìš©</th><th>ë¦¬ë·° ì‘ì„±ì¼</th><th>ë¦¬ë·° ì¶”ì²œìˆ˜</th><th>ì‹ ê³  ìˆ˜</th><th>ê´€ë¦¬</th></tr>";
+						}
 						htmltag += "<tr class='" + member.table + "'>";
 						htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.rvNo + "</td>";
@@ -178,11 +197,21 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.rvContent + "</td>";
 			            htmltag += "<td>" + member.rvDate + "</td>";
 			            htmltag += "<td>" + member.rvRec + "</td>";
+			            htmltag += "<td>" + member.warn + "</td>";
+			            htmltag += "<td><input type='button' value='ì‚­ì œ' onclick='delete(this.form, review)'>";
+			            htmltag += "<input type='button' value='ìˆ˜ì •' onclick='updateReview(this.form)'></td>";
 			            htmltag += "</tr>";
+			            
+			            checkReview--;
+						checkMovie = 1;
+						checkAccount = 1;
 			        }
 			        
 			        if (member.table === "movie") {
-			        	console.log("¿µÈ­html");
+			        	console.log("ì˜í™”html");
+						if (checkMovie > 0) {
+							htmltag += "<tr><th>í…Œì´ë¸”</th><th>ì˜í™” ë²ˆí˜¸</th><th>ì œëª©</th><th>ê°ë…</th><th>ë°°ìš°</th><th>ì¥ë¥´</th><th>í‰ì </th><th>ê´€ëŒê° ìˆ˜</th><th>ë“±ê¸‰</th><th>ê°œë´‰ì¼</th><th>í¬ìŠ¤í„°</th><th>ê´€ë¦¬</th></tr>";
+						}
 			        	htmltag += "<tr class='" + member.table + "'>";
 			            htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.mvNo + "</td>";
@@ -195,17 +224,47 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvGrade + "</td>";
 			            htmltag += "<td>" + member.mvDate + "</td>";
 			            htmltag += "<td><img src='img/" + member.mvPoster + "' width='200'></td>";
+// 			            htmltag += "<td colspan='2'><input type='button' value='ì‚­ì œ' onclick='delete(this.form, movie, " + member.mvNo + ")'>";
+			            htmltag += "<td colspan='2'><input type='button' value='ì‚­ì œ' onclick=\"location.href='controller?type=movieDelete&mvNo=" + member.mvNo + "'\">";
+			            htmltag += "<input type='button' value='ìˆ˜ì •' onclick=\"location.href='controller?type=movieFix&mvNo=" + member.mvNo + "'\"></td>";
 			            htmltag += "</tr>";
+			            
+			            checkMovie--;
+			            checkReview = 1;
+			            checkAccount = 1;
+			        }
+			        
+			        if (member.table === "account") {
+			            console.log("ìœ ì €html");
+			            if (checkAccount > 0) {
+			                htmltag += "<tr><th>í…Œì´ë¸”</th><th>ìœ ì € ë²ˆí˜¸</th><th>ìœ ì € ì´ë¦„</th><th>ìœ ì € ì•„ì´ë””</th><th>ìœ ì € ë‹‰ë„¤ì„</th><th>í‰ë¡ ê°€ êµ¬ë¶„</th><th>ì´ë©”ì¼</th><th>ì‹ ê³  ìˆ˜</th><th>ê´€ë¦¬</th></tr>";
+			            }
+			            htmltag += "<tr class='" + member.table + "'>";
+			            htmltag += "<td>" + member.table + "</td>";
+			            htmltag += "<td>" + member.no + "</td>";
+			            htmltag += "<td>" + member.name + "</td>";
+			            htmltag += "<td>" + member.id + "</td>";
+			            htmltag += "<td>" + member.nick + "</td>";
+			            htmltag += "<td>" + member.criticCheck + "</td>";
+			            htmltag += "<td>" + member.email + "</td>";
+			            htmltag += "<td>" + member.warn + "</td>"; 
+			            htmltag += "<td colspan='2'><input type='button' value='ì‚­ì œ' onclick='deleteAccount(this.form, account)'>";
+			            htmltag += "<input type='button' value='ìˆ˜ì •' onclick='updateAccount()'></td>";
+			            htmltag += "</tr>";
+
+			            checkAccount--;
+			            checkReview = 1;
+			            checkMovie = 1;
 			        }
 				}
             }
-            htmltag += "</tbody>";
+//             htmltag += "</tbody>";
 
-            // Å×ÀÌºíÀ» #jsonData ¿¤¸®¸ÕÆ®¿¡ Ãß°¡
+            // í…Œì´ë¸”ì„ #jsonData ì—˜ë¦¬ë¨¼íŠ¸ì— ì¶”ê°€
             $('#jsonData').html(htmltag);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert("Ajax Ã³¸® ½ÇÆĞ:\n" +
+            alert("Ajax ì²˜ë¦¬ ì‹¤íŒ¨:\n" +
                 "jqXHR.readyState: " + jqXHR.readyState + "\n" +
                 "textStatus: " + textStatus + "\n" +
                 "errorThrown: " + errorThrown);
@@ -215,44 +274,31 @@ function selectCategory(frm) {
 }
 </script>
 <body>
-    <div class="header">
-    	<a href="main.jsp">
-    		<img class= "icon" src="img/moviechoice.png">
-		</a>
-    	
-        <ul class="menu">
-          <li><a href="main.jsp">¿µÈ­¸ñ·Ï °ü¸®</a></li>
-          <li><a href="reviewMain.jsp">¸®ºä¸ğÀ½ °ü¸®</a></li>
-          <li><a href="free.jsp">ÀÚÀ¯°Ô½ÃÆÇ °ü¸®</a></li>
-          <li><a href="about.asp">Q & A °ü¸®</a></li>
-          <li><a href="about.asp">Review Of The Month °ü¸®</a></li>
-          <li><a href="about.asp">Æò·Ğ°¡ °ü¸®</a></li>
-          <li><a href="about.asp">À¯Àú °ü¸®</a></li>
-        </ul>
-        <hr class="mint">
-    </div>
+    <!-- header.jspf -->
+	<%@ include file="include/headerAdmin.jspf" %>
+	
     <div class="body">
         <form method="post"> 
             <table>
-                <caption><h2>°ü¸®ÀÚ °Ë»ö</h2></caption>
+                <caption><h2>ê´€ë¦¬ì ê²€ìƒ‰</h2></caption>
                 <thead> 
                     <tr>
                         <td>
                             <select name="idx">
-                                <option selected disabled>¼±ÅÃ</option>
-                                <option value="0">ÀüÃ¼</option>
-                                <option value="1">¸®ºä</option>
-                                <option value="2">¿µÈ­</option>
-                                <option value="3">À¯Àú</option>
+                                <option selected disabled>ì„ íƒ</option>
+                                <option value="0">ì „ì²´</option>
+                                <option value="1">ë¦¬ë·°</option>
+                                <option value="2">ì˜í™”</option>
+                                <option value="3">ìœ ì €</option>
                             </select>
                         </td>
                         <td><input type="text" name="keyword"/></td>
-                        <td><input type="button" value="°Ë»ö" onclick="selectCategory(this.form)"/></td>
+                        <td><input type="button" value="ê²€ìƒ‰" onclick="selectCategory(this.form)"/></td>
                     </tr>
                 </thead>
                 <tbody id="jsonData">
                 	<tr>
-                		<td>°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.</td>
+                		<td>ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.</td>
                 	</tr>
                 </tbody>
             </table>
