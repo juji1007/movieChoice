@@ -74,6 +74,8 @@ public class ReviewController extends HttpServlet {
 			
 			if (keyword == null || keyword.trim().length() == 0) {
 				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
+				//키워드 입력 alert(); 출력
+				
 				return;
 			}
 			

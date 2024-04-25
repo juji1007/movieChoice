@@ -1,3 +1,5 @@
+<%@page import="com.mystudy.model.dao.listTotDAO"%>
+<%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.mystudy.model.vo.reviewVO"%>
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,38 +8,32 @@
 	//리뷰 작성
 	request.setCharacterEncoding("UTF-8");
 %>
-	<jsp:useBean id="rvVo" class="com.mystudy.model.vo.reviewVO" />
-	<jsp:setProperty property="*" name="rvVo"/>
-	\${rvVo } : ${rvVo }
+	<%-- enctype="multipart/form-data" 사용시 setProperty 값 설정안됨 --%>
+	<jsp:useBean id="voList" class="com.mystudy.model.vo.reviewVO" />
+	<jsp:setProperty property="*" name="voList"/>
+	
 	<hr>
+	
 <%
 	reviewVO vo = new reviewVO();
 	
-	//int mvNo = Integer.parseInt(request.getParameter("mvNo"));
-	int no = (Integer) session.getAttribute("no");
-	String rvNick = request.getParameter("rvNick");
-	String rvTitle = request.getParameter("rvTitle");
-	String rvContent = request.getParameter("rvContent");
-	//vo.setMvNo(mvNo);
-	vo.setNo(no);
-	vo.setRvNick(rvNick);
-	vo.setRvTitle(rvTitle);
-	vo.setRvContent(rvContent);
+	vo.setNo((Integer) session.getAttribute("no"));
+	vo.setRvNick((String) session.getAttribute("nick"));
+	//rvNo 임의 7
+	vo.setRvNo(7);
+	//vo.getRvNo();
+	
+	//듄 mvNo = 4
+	vo.setMvNo(4);
+	System.out.println(vo.getMvNo());
+	
+	vo.setRvRate(Integer.parseInt(request.getParameter("rate")));
+	vo.setRvTitle(request.getParameter("subject"));
+	vo.setRvContent(request.getParameter("content"));
 	System.out.println(">> write_ok.jsp vo :" + vo);
 	
 	int result = reviewDAO.insert(vo);
 	System.out.println(":: 입력 건수 " + result);
 	
-	response.sendRedirect("reviewMain.jsp");
-// 	response.sendRedirect("rvDetail.jsp?rvNo=" + vo.getRvNo());
+	response.sendRedirect("rvDetail.jsp?rvNo=" + vo.getRvNo());
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

@@ -15,10 +15,10 @@
 		e.printStackTrace();
 	} 
 	
-	System.out.println("list : " + list);
-	pageContext.setAttribute("list", list);
+	//System.out.println("list : " + list);
+	request.setAttribute("list", list);
 	
-	
+	//request.getRequestDispatcher("rvWrite_ok.jsp").forward(request, response);
 %>
 
 <!DOCTYPE html>
@@ -35,14 +35,31 @@
 </style>
 <script>
 	function sendRv(frm) {
-		frm.submit();
+		alert("sendData() 실행~~");
+		console.log(document.forms[0]);
+		let firstForm = document.forms[0];
+		console.log(firstForm.elements);
+		
+		for (let htmlObj of firstForm.elements) {
+			console.log(htmlObj);
+			
+			if (htmlObj.value.trim() == "") {
+				console.log(htmlObj);
+				if (htmlObj.getAttribute("type") == "file") continue;
+				alert(htmlObj.title + " 입력하세요");
+				htmlObj.focus();
+				return;
+			}
+			console.log(":: 데이터 확인 완료, 입력요청 처리~~~");
+			firstForm.submit();
+		}
 	}
 </script>
 </head>
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
-	  
+<div>
     <form action="rvWrite_ok.jsp" method="get" enctype="multipart/form-data">
 	<table>
 		<caption>리뷰 작성하기</caption>
@@ -79,7 +96,7 @@
 		<tfoot>
 			<tr id="btn">
 				<td colspan="2">
-					<input type="button" value="등록" onclick="sendRv(this.form)">
+					<input type="button" value="등록" onclick="sendRv()">
 			        <input type="reset" value="초기화">
 			        <input type="button" value="목록보기" 
 			        	onclick="javascript:location.href='reviewMain.jsp'">
@@ -88,6 +105,7 @@
 		</tfoot>
 	</table>
 	</form>
+</div>
     
 </body>
 </html>

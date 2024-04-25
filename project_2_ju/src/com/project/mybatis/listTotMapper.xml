@@ -10,9 +10,8 @@
 		FROM ACCOUNT A, MOVIE M, REVIEW R
 		WHERE R.NO = A.NO
 		AND R.MV_NO = M.MV_NO
-		ORDER BY A.NO
+		ORDER BY R.RV_NO
 	</select>
-	
 	
 	
 </mapper>
