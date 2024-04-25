@@ -32,7 +32,7 @@
 	<insert id="insertMember" parameterType="accountVO">
 		INSERT INTO ACCOUNT
 			(NO, NAME, ID, PWD, NICK, CRITIC_CHECK, EMAIL)
-		VALUES (ACCOUNT_SEQ.NEXTVAL, #{name}, #{id}, #{pwd}, #{nick}, #{critic_check}, #{email})
+		VALUES (ACCOUNT_SEQ.NEXTVAL, #{name}, #{id}, #{pwd}, #{nick}, #{criticCheck}, #{email})
 		
 	
 	</insert>

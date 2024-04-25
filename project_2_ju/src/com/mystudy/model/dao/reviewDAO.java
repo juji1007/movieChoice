@@ -81,7 +81,7 @@ public class reviewDAO {
 
 	//리뷰 작성
 	public static int insert(reviewVO vo){
-		try (SqlSession ss = DBService.getFactory().openSession()) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
 			return ss.insert("review.insert", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
