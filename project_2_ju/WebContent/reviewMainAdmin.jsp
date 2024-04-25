@@ -1,5 +1,4 @@
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
-<%@page import="com.mystudy.model.vo.listMvRvVO"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
 <%@page import="com.mystudy.model.vo.movieVO"%>
