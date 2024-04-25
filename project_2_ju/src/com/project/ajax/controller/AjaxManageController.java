@@ -43,7 +43,7 @@ public class AjaxManageController extends HttpServlet {
 			
 			//없으면 다시 처음화면으로
 			if (idx == null || idx.trim().length() == 0) {
-				req.getRequestDispatcher("manage.jsp").forward(req, resp);
+//				req.getRequestDispatcher("manage.jsp").forward(req, resp);
 				return;
 			}
 			
@@ -52,7 +52,7 @@ public class AjaxManageController extends HttpServlet {
 			System.out.println("ajaxlistSearch : " + listSearch);
 			//listSearch없으면 다시 처음화면으로
 			if (listSearch == null) {
-				req.getRequestDispatcher("manage.jsp").forward(req, resp);
+//				req.getRequestDispatcher("manage.jsp").forward(req, resp);
 				return;
 			} 
 			// 키값 가져오기
@@ -124,7 +124,8 @@ public class AjaxManageController extends HttpServlet {
 		    for (Object item : value) {
 		    	
 		        if ("review".equals(key)) {
-		            reviewVO rvo = (reviewVO) item;
+		            reviewVO rvo = new reviewVO();
+		            rvo = (reviewVO) item;
 		            result.append("{");
 		            result.append("\"table\": \"" + key + "\", ");
 		            result.append("\"rvNo\": \"" + rvo.getRvNo() + "\", ");

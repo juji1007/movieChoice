@@ -36,6 +36,7 @@
     <mapper resource="com/project/mybatis/criticMapper.xml" />
     <mapper resource="com/project/mybatis/postMapper.xml" />
     <mapper resource="com/project/mybatis/adminMapper.xml" />
+    <mapper resource="com/project/mybatis/listTotMapper.xml" />
 
   </mappers>
   

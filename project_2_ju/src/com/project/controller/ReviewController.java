@@ -63,8 +63,6 @@ public class ReviewController extends HttpServlet {
 		String category = request.getParameter("category");
 		System.out.println("category : " + category);
 		
-		request.setCharacterEncoding("UTF-8");
-		
 		if ("selectOne".equals(category)) {
 			System.out.println(">> selectOne 요청 처리~~");
 			
@@ -76,6 +74,8 @@ public class ReviewController extends HttpServlet {
 			
 			if (keyword == null || keyword.trim().length() == 0) {
 				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
+				//키워드 입력 alert(); 출력
+				
 				return;
 			}
 			
@@ -102,8 +102,6 @@ public class ReviewController extends HttpServlet {
 		type = request.getParameter("type");
 		System.out.println("type : " + type);
 		
-		request.setCharacterEncoding("UTF-8");
-		
 		if ("rvDetail".equals(type)) {
 			System.out.println(">> rvDetail 페이지");
 			
@@ -125,7 +123,6 @@ public class ReviewController extends HttpServlet {
 			
 			return;
 		}
-		
 		
 		//추천수 sum 계산
 		if ("rvRecommand".equals(type)) {

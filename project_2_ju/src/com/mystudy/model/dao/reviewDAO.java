@@ -6,22 +6,12 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.mystudy.model.vo.listMvRvVO;
+
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
 
 public class reviewDAO {
-
-	//리뷰 전체 목록 조회
-	public static List<reviewVO> getList() {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			return ss.selectList("review.all");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	//카테고리별(영화명,작성자,작성일) 목록 조회
 	public static List<reviewVO> selectOne(String idx, String keyword) {
@@ -54,5 +44,59 @@ public class reviewDAO {
 		}
 		return null;
 	}
+	
+	//리뷰 전체 건수 조회
+	public static int getTotalCount() {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectOne("review.totalCnt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	//리뷰 전체 목록 조회
+	public static List<reviewVO> getList() {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectList("review.all");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//페이징 처리 - 해당 페이지의 리뷰 목록 조회
+	public static List<reviewVO> pList(int begin, int end) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("begin", begin);
+			map.put("end", end);
+			
+			return ss.selectList("review.pageList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	//리뷰 작성
+	public static int insert(reviewVO vo){
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.insert("review.insert", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	//리뷰 1건 조회
+	public static reviewVO selectOne(int rvNo) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectOne("review.rvOne", rvNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
