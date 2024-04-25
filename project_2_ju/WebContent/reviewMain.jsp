@@ -1,4 +1,4 @@
-<%@page import="com.mystudy.post.common.Paging"%>
+<%@page import="com.project.review.paging.Paging"%>
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
@@ -45,46 +45,31 @@
 			        console.log(">> 리뷰 내용 실행");
 			        str += "<tr>";
 			        str += "<td>" + member.mvTitle + "</td>";
-			        str += "<td>" + member.rvTitle + "</td>";
+			        str += "<td>";
+			        str += "<a href=\"reviewController?type=rvDetail\"" + member.rvNo + ">";
+			        str += member.rvTitle;
+			        str += "</a>";
+			        str += "</td>";
 			        str += "</tr>";
 			        
 					str += "<tr>";
 					str += "<td>" + member.rvNick + "</td>";
 			        str += "<td>" + member.rvDate + "</td>";
 			        str += "</tr>";
-			       
-/*
-			        str += "<tr>";
- 			        str += "<td>" + member.mvTitle + "</td>"
-			        str += "<td id=\"rvDetail\" colspan=\"2\">";
-			        str += "<a href=\"reviewController?type=rvDetail&rvNo=\"" + member.rvNo + ">" + member.rvTitle + "</a>";
-			        str += "</td>";
-			        str += "</tr>";
 			        
 			        str += "<tr>";
- 			        str += "<td rowspan=\"2\">";
- 			        str += "포스터 경로";
-// 			        str += "<img src=\"img\"" + member.mvPoster + \" alt=\"포스터\" width=\"150px\">";
-// 			        str += "<img src=\"img/exhuma.jpg" alt=\"포스터\" width=\"150px\">";
-			        str += "</td>"; 
-			        str += "<td>" + member.rvNick +"</td>";
-			        str += "<td>" + member.rvDate +"</td>";
-			        
-			        str += "<tr>";
-			        str += "<td class=\"recNo\" colspan=\"2\">";
-			        str += "<input type=\"button\" value=\"추천수 \" onclick=\"reviewController?type=rvRecommand&rvNo=&rvRec=\">";
-			        str += "<img src=\"img/iconRec.png\" id=\"iconRec\" alt=\"추천\" width=\"25px\">" + member.rvRec;
-			        str += "</td>";
-			        str += "</tr>";
-*/
+			    	str += "<td>";
+			        str += "<input type=\"button\" value=\"추천수 \" onclick=\"reviewController?type=rvRecommand\">";
+			    	str += member.rvRec;
+			    	str += "</td>";
+			    	str += "<td>";
+			        str += "<input type=\"button\" value=\"신고수 \" onclick=\"reviewController?type=rvWarn\">";
+			    	str += member.warn;
+			    	str += "</td>";
+			    	str += "</tr>";
 			    }
-			    $("#reviewOne").html(str);
+			    $("#reviewOne").html(str);			    
 			    
-// 			    for (let member of respData.listAll) {
-// 			       console.log(">> 리뷰 btn 실행");
-			        
-// 			    }
-// 			    $("#reviewOne").html(str);
 			},
 
 			error : function(jqXHR, textStatus, errorThrown){
@@ -123,23 +108,23 @@
 	<hr>
 	<h2>리뷰모음</h2>
 	<!-- 리뷰 전체보기 -->
-	<table border>
+	<table>
 		<tbody id="reviewOne">
 	        <tr>
-	            <td class="col1">파묘</td>
+	            <td>파묘</td>
 	            <td>리뷰-제목</td>
 	        </tr>
 	        <tr>
-	            <td class="col1">작성자-닉네임</td>
+	            <td>작성자-닉네임</td>
 	            <td>작성일</td>
+	        </tr>
+	        <tr>
+	            <td>추천수</td>
+	            <td>신고수</td>
 	        </tr>
 	    </tbody>
 	    
-	    <tfoot>
-	        <tr>
-	            <td id="recBtn">추천수</td>
-	            <td id="warnBtn">신고수</td>
-	        </tr>
+	    <tfoot id="page">
 	        <tr>
 	        	<td>
 					<ol class="paging">
@@ -183,70 +168,7 @@
 	    	</tr>
 	    </tfoot>
 	</table>
-			<!-- <tr>
-				<td id="movieTitle">영화명</td>
-				<td id="rvDetail" colspan="2">
-					<a href="reviewController?type=rvDetail&mvNo=&rvNo=">영화제목</a>
-				</td>
-			</tr>
-			<tr>
-				<td rowspan="2" id="moviePoster"><img src="img/kungfu.jpg" alt="포스터" width="150px">포스터</td>
-				<td>작성자</td>
-				<td>작성일</td>
-			</tr>
-			<tr>
-				<td class="recNo" colspan="2">
-					<input type="button" value="추천수 " onclick="reviewController?type=rvRecommand&rvNo=&rvRec=">
-					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">
-					추천수0
-				</td>
-			</tr> -->
-	
-	<!-- 페이징 버튼 -->
-		<%-- <tfoot>
-		<tr>
-			<td colspan="2">
-				<ol class="paging">
-				[이전]에 대한 사용여부 처리
-				<c:if test="${pvo.beginPage == 1 }">
-					<li class="disable">이전</li> 
-				</c:if>
-				<c:if test="${pvo.beginPage != 1 }">
-					<li>
-						<a href="reviewMain.jsp?cPage=${pvo.endPage - 1 }">이전</a>
-					</li> 
-				</c:if>
-				
-				블록내에 표시할 페이지 태그 작성(시작~끝)
-				<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
-				<c:choose>
-					<c:when test="${pageNo == pvo.nowPage }">
-						<li class="now">${pageNo }</li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="reveiwMain.jsp?cPage=${pageNo }">${pageNo }</a></li>
-					</c:otherwise>
-				</c:choose>
-				</c:forEach>
-					
-				[다음]에 대한 사용여부 처리	
-				<c:if test="${pvo.endPage < pvo.totalPage }">
-					<li>
-						<a href="reveiwMain.jsp?cPage=${pvo.endPage + 1 }">다음</a>
-					</li> 
-				</c:if>
-				<c:if test="${pvo.endPage >= pvo.totalPage }">
-					<li class="disable">다음</li> 
-				</c:if>
-				</ol>
-			</td>
-			<td>
-				<input type="button" value="리뷰작성" 
-					onclick="javascript:location.href='rvWrite.jsp'">
-			</td>
-		</tr>
-		</tfoot>
-	</table> --%>
 	
 </body>
 </html>
+
