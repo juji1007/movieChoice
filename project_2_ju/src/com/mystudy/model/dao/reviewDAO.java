@@ -91,7 +91,7 @@ public class reviewDAO {
 	
 	//리뷰 1건 조회
 	public static reviewVO selectOne(int rvNo) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
 			return ss.selectOne("review.rvOne", rvNo);
 		} catch (Exception e) {
 			e.printStackTrace();

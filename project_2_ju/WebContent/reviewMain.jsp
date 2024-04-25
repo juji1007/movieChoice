@@ -1,3 +1,5 @@
+<%@page import="com.mystudy.model.dao.listTotDAO"%>
+<%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.project.review.paging.Paging"%>
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
 <%@page import="com.project.mybatis.DBService"%>
@@ -9,7 +11,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+	List<listTotVO> listAll = listTotDAO.getList();
+	try (SqlSession ss = DBService.getFactory().openSession()) {
+		listAll = ss.selectList("listTotal.listAll");
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	System.out.println("listAll : " + listAll);
+	
+	pageContext.setAttribute("list", listAll);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -26,65 +38,10 @@
 		submit();
 	}
 	
-	//AJAX controller 연결 - review 전체 조회
-	$(document).ready(function(){
-		console.log(">> reviewMain.jsp 접속 성공!!");
-		
-		$.ajax({
-			type : "POST",
-			url : "ajaxReviewController",
-			data : {
-				action: "reviewMain"
-			},
-			dataType: "json",
-			success : function(respData){
-			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
-			    //Json데이터 처리
-			    let str = null;
-			    for (let member of respData.listAll) {
-			        console.log(">> 리뷰 내용 실행");
-			        str += "<tr>";
-			        str += "<td>" + member.mvTitle + "</td>";
-			        str += "<td>";
-			        str += "<a href=\"reviewController?type=rvDetail\"" + member.rvNo + ">";
-			        str += member.rvTitle;
-			        str += "</a>";
-			        str += "</td>";
-			        str += "</tr>";
-			        
-					str += "<tr>";
-					str += "<td>" + member.rvNick + "</td>";
-			        str += "<td>" + member.rvDate + "</td>";
-			        str += "</tr>";
-			        
-			        str += "<tr>";
-			    	str += "<td>";
-			        str += "<input type=\"button\" value=\"추천수 \" onclick=\"reviewController?type=rvRecommand\">";
-			    	str += member.rvRec;
-			    	str += "</td>";
-			    	str += "<td>";
-			        str += "<input type=\"button\" value=\"신고수 \" onclick=\"reviewController?type=rvWarn\">";
-			    	str += member.warn;
-			    	str += "</td>";
-			    	str += "</tr>";
-			    }
-			    $("#reviewOne").html(str);			    
-			    
-			},
-
-			error : function(jqXHR, textStatus, errorThrown){
-				alert("Ajax 처리 실패 : \n"
-						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-						+ "textStatus : " + textStatus + "\n"
-						+ "errorThrown : " + errorThrown);
-			},
-			complete : function(){
-				alert(":: complete 실행");
-			}
-		});
-
-	}); 
-	
+	function warn_push() {
+		location.href = "rvWarn.jsp";
+		submit();
+	}
 </script>
 </head>
 <body>
@@ -106,27 +63,32 @@
 	</form>
 	
 	<hr>
-	<h2>리뷰모음</h2>
+	<h2>
+		리뷰모음
+		<input type="button" value="등록하기" 
+			onclick="javascript:location.href='rvWrite.jsp'">
+	</h2>
 	<!-- 리뷰 전체보기 -->
-	<table>
+	<table border>
+	<c:forEach var="vo" items="${list}">
 		<tbody id="reviewOne">
 	        <tr>
-	            <td>파묘</td>
-	            <td>리뷰-제목</td>
+	            <td>${vo.mvTitle }</td>
+	            <td><a href="rvDetail.jsp?rvNo=${vo.rvNo }">${vo.rvTitle }</a></td>
 	        </tr>
 	        <tr>
-	            <td>작성자-닉네임</td>
-	            <td>작성일</td>
+	            <td>${vo.rvNick }</td>
+	            <td>${vo.rvDate }</td>
 	        </tr>
 	        <tr>
-	            <td>추천수</td>
-	            <td>신고수</td>
+	            <td><input type="button" value="추천수" onclick="recommand_push()">${vo.rvRec }</td>
+	            <td><input type="button" value="신고" onclick="warn_push()"></td>
 	        </tr>
 	    </tbody>
-	    
+	</c:forEach>  
 	    <tfoot id="page">
 	        <tr>
-	        	<td>
+	        	<td colspan="2">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${pvo.beginPage == 1 }">
@@ -160,10 +122,6 @@
 						<li class="disable">다음</li> 
 					</c:if>
 					</ol>
-				</td>
-				<td>
-					<input type="button" value="리뷰작성" 
-						onclick="javascript:location.href='rvWrite.jsp'">
 				</td>
 	    	</tr>
 	    </tfoot>
