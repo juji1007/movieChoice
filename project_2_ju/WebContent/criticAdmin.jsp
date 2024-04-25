@@ -34,6 +34,18 @@
 <head>
 <meta charset="UTF-8">
 <title>평론가</title>
+<script type="text/javascript">
+	function criticDelete() {
+	    var result = confirm("정말로 삭제하시겠습니까?");
+	    
+	    if (result) {
+	       
+	        alert("삭제되었습니다."); 
+	    } else {
+	       
+	    }
+	}
+</script>
 <style>
 	table { border-collapse: collapse; }
 	table, th, td { border: 1px solid black; }
@@ -67,7 +79,10 @@
 		    	<td colspan="2">${vo.career }</td>
 		    </tr>
 		    <tr>
-		    	<td colspan="4">리뷰건수 : <a href="criticDetail.jsp?critic=${vo.no }">${numa[loop.index]}</a></td>
+		    	<td colspan="4">리뷰건수 : <a href="criticDetail.jsp?critic=${vo.no }">${numa[loop.index]}</a>
+		    	<input type="button" value="삭제"  onclick="criticDelete()">
+		    	<input type="button" value="수정" onclick="location.href='criticUpdate.jsp?critic=${vo.no }'">
+		    	</td>
 		    </tr>
 		</table>
 	</c:forEach>

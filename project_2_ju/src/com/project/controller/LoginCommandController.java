@@ -72,7 +72,6 @@ public class LoginCommandController extends HttpServlet {
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("id", avo.getId());
-				
 		}
 		
 		if ("findIdOk".equals(type)) {

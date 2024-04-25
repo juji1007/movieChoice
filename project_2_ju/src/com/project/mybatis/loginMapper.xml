@@ -22,11 +22,17 @@
 		ORDER BY NAME
 	</select>
 	
+	<!-- 아이디중복체크 -->
+	<select id="NoById" parameterType="string" resultType="int">
+		SELECT NO FROM ACCOUNT 
+		WHERE ID = #{id}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="accountVO">
 		INSERT INTO ACCOUNT
 			(NO, NAME, ID, PWD, NICK, CRITIC_CHECK, EMAIL)
-		VALUES (#{no}, #{name}, #{id}, #{pwd}, #{nick}, #{critic_check}, #{email})
+		VALUES (ACCOUNT_SEQ.NEXTVAL, #{name}, #{id}, #{pwd}, #{nick}, #{critic_check}, #{email})
 		
 	
 	</insert>
