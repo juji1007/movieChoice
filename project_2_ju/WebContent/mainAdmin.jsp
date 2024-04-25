@@ -7,13 +7,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%
-List<movieVO> list = null; 
+List<movieVO> list = null;
 try (SqlSession ss = DBService.getFactory().openSession()) {
 	list =  ss.selectList("PROJECT2.mvTitle");
 } catch (Exception e) {
 	e.printStackTrace();
 } 
-
 
 System.out.println("list : " + list);
  System.out.println("list.size : " + list.size());
@@ -25,7 +24,7 @@ System.out.println("list : " + list);
 <html>
 <head>
 <meta charset="UTF-8">
-<title>main</title>
+<title>mainAdmin</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -55,7 +54,7 @@ System.out.println("list : " + list);
 </script>
 <body>
 	<!-- header.jspf -->
-	<%@ include file="include/header.jspf" %>
+	<%@ include file="include/headerAdmin.jspf" %>
 
 
 <%--영화검색 --%>
@@ -96,7 +95,7 @@ System.out.println("list : " + list);
 
 <div>
 <h2>영화목록</h2> 
-<form action="controller?type=movie" method="post">
+<form action="controller?type=movieAdmin" method="post">
   <select name="idx">
   <option value="0" disabled selected>정렬</option>
     <option value="1" >최신순</option>
@@ -106,18 +105,23 @@ System.out.println("list : " + list);
 </form>
 <hr class="gray">
 <c:forEach var="vo" items="${list2 }">
-<a href="movieDetail.jsp?mvNo=${vo.mvNo }">
 	<table>
 			<tr>
 			<td>
-			<img src="img/${vo.mvPoster }" alt="제품이미지" width="200">
+			<a href="movieDetail.jsp?mvNo=${vo.mvNo }"><img src="img/${vo.mvPoster }" alt="제품이미지" width="200"></a>
 			</td>
 			</tr>
 			<tr>
 			<td >${vo.mvTitle }</td>
 			</tr>
+			<tr>
+			<td>
+			<input type="button" value="삭제" onclick="">
+			<input type="button" value="수정" onclick="location.href='controller?type=movieFix&location=mainAdmin&mvNo=${vo.mvNo }'">
+			<input type="hidden" name="mvNo" value="${vo.mvNo }">
+			</td>
+			</tr>
 	</table>
-</a>
 </c:forEach>
 
 </div>

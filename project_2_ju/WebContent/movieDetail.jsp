@@ -42,10 +42,8 @@
     </style>
 </head>
 <body>
-    <img src="ui/title.png" alt="UiTitle">
-    <hr>
     <div>
-        <img src="poster/${vo.mvPoster }" alt="Kungfu Panda4 Poster">
+        <img src="img/${vo.mvPoster }" alt="${vo.mvTitle } Poster">
     </div>
     <button onclick="location.href='writeReview.jsp'">리뷰 작성</button>
 	<div>	
