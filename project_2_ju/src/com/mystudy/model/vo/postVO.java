@@ -1,6 +1,5 @@
 package com.mystudy.model.vo;
 
-
 import java.sql.Date;
 
 public class postVO {

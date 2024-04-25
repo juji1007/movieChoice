@@ -11,8 +11,8 @@ List<movieVO> list = null;
 try (SqlSession ss = DBService.getFactory().openSession()) {
 	list =  ss.selectList("PROJECT2.mvTitle");
 } catch (Exception e) {
-	e.printStackTrace();
-} 
+	e.printStackTrace(); 
+}  
 
 
 System.out.println("list : " + list);
