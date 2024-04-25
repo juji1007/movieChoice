@@ -1,5 +1,21 @@
+<%@page import="com.project.dao.AccountDAO"%>
+<%@page import="com.project.vo.AccountVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.mystudy.post.common.Paging"%>
+<%@page import="com.mystudy.model.dao.postDAO"%>
+<%@page import="com.mystudy.model.vo.postVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+// 	int psNo = Integer.parseInt(request.getParameter("psNo"));
+//	session.getAttribute("pvo");
+
+// 	AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
+// 	System.out.println("avo : " + avo);
+	session.getAttribute("no");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,12 +48,12 @@ function list_go() {
 </head>
 <body>
 <div>
-<form action="postWrite_ok.jsp" method="post" enctype="multipart/form-data">
+<form action="postWrite_ok.jsp" method="post">
 <table>
 	<tr>
 		
 		<td>
-			<input type="hidden" name="psNo" title="번호">
+		<input type="hidden" name="no"  value="${no }">
 		</td>
 	</tr>
 	<tr>
@@ -60,7 +76,7 @@ function list_go() {
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="button" value="저장" onclick="sendData()">
+			<input type="submit" value="저장" >
 			<input type="reset" value="초기화">
 			
 			<input type="button" value="목록보기" onclick="list_go()">
