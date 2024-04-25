@@ -67,15 +67,16 @@ public class LoginCommandController extends HttpServlet {
 				
 				//아이디, 비번 DB에서 조회
 				AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
-//				System.out.println("avo : " + avo);
+				System.out.println("avo : " + avo);
 				
+				if (avo == null) {
+					
+				}
 				HttpSession session = request.getSession();
 				
-				session.setAttribute("id", avo.getId());
 				session.setAttribute("no", avo.getNo());
-				//System.out.println(avo.getNo());
+				session.setAttribute("id", avo.getId());
 				session.setAttribute("nick", avo.getNick());
-				//System.out.println(avo.getNick());
 				
 		}
 		

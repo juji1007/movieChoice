@@ -26,6 +26,7 @@ public class AccountDAO {
 			Map<String, String> map = new HashMap<>();
 			map.put("id", id);
 			map.put("pwd", pwd);
+//			System.out.println(ss.selectOne("project2.login", map));
 			return ss.selectOne("project2.login", map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,6 +47,17 @@ public class AccountDAO {
 		}
 		return false;
 	}
+	
+	//	아이디중복체크 -> 입력된아이디 DB에서 조회 null이면 성공
+	public static int getAccountSearchNo(String id) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				System.out.println("checki id : " + id);
+				return ss.selectOne("project2.NoById", id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			return -1;
+		}
 	
 	//회원가입 데이터 넣기
 	public static int insertMember(AccountVO avo) {

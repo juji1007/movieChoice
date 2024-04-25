@@ -10,17 +10,17 @@
 <body>
     <h1>리뷰 작성하기</h1>
     <form action="ReviewServlet" method="post">
-        <label for="movie">영화 선택:</label>
+        <label for="movie">영화 선택</label>
         <select id="movie" name="movie">
             <option value="1">쿵푸팬더4</option>
             <option value="2">파묘</option>
             <option value="3">댓글부대</option>
         </select>
         <br><br>
-        <label for="username">작성자</label>
+        <label for="username">작성자</label><br>
         <input type="text" id="username" name="username" required>
         <br><br>
-        <label for="title">제목</label>
+        <label for="title">제목</label><br>
         <input id="title" name="title" required>
         <br><br>
         <label for="comment">내용</label><br>

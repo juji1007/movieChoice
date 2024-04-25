@@ -15,4 +15,23 @@
 		WHERE MV_NO = #{mvNo}
 	</select>
 	
+	<delete id="delete" parameterType="int">
+		DELETE INTO MOVIE
+		WHERE MV_NO = #{mvNo}
+	</delete>
+	
+	<update id="update" parameterType="com.mystudy.model.vo.movieVO">
+		UPDATE MOVIE
+		SET MV_TITLE = #{mvTitle},
+		    MV_DIRECT = #{mvDirect},
+		    MV_ACTOR = #{mvActor},
+		    MV_GENRE = #{mvGenre},
+		    MV_RATE = #{mvRate},
+		    MV_AUDIENCE = #{mvAudience},
+		    MV_GRADE = #{mvGrade},
+		    MV_DATE = #{mvDate},
+		    MV_POSTER = #{mvPoster}
+		WHERE MV_NO = #{mvNo}
+	</update>
+	
 </mapper>

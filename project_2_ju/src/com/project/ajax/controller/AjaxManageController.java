@@ -3,6 +3,7 @@ package com.project.ajax.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +19,7 @@ import com.mystudy.model.vo.reviewVO;
 import com.project.dao.AccountDAO;
 //import com.project.dao.AdminDAO;
 import com.project.dao.AdminDAO;
+import com.project.vo.AccountVO;
 
 @WebServlet("/ajaxManageController")
 public class AjaxManageController extends HttpServlet {
@@ -69,6 +71,42 @@ public class AjaxManageController extends HttpServlet {
 			
 		}
 		
+		//유저관리자검색처리
+		if ("accountManageCategory".equals(action)) {
+			System.out.println("유저검색처리");
+			
+			//검색종류 받아서 검색
+			String idx = req.getParameter("idx");
+			String keyword = req.getParameter("keyword");
+			System.out.println("idx, keyword : " + idx + ", " + keyword);
+			
+			//없으면 다시 처음화면으로
+			if (idx == null || idx.trim().length() == 0) {
+				req.getRequestDispatcher("accountManage.jsp").forward(req, resp);
+				return;
+			}
+			
+			//검색DB처리
+			List<AccountVO> list = AdminDAO.selectAccountData(idx, keyword);
+			System.out.println("ajaxlistSearch : " + list);
+			//listSearch없으면 다시 처음화면으로
+			if (list == null) {
+				req.getRequestDispatcher("accountManage.jsp").forward(req, resp);
+				return;
+			} 
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("account", list);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+			
+		}
+		
 	}
 	
 	private String makeJson(Map<String, List<?>> listSearch) {
@@ -84,6 +122,7 @@ public class AjaxManageController extends HttpServlet {
 		    System.out.println("Value: " + value);
 		    // 리스트의 각 요소 Json넣기
 		    for (Object item : value) {
+		    	
 		        if ("review".equals(key)) {
 		            reviewVO rvo = new reviewVO();
 		            rvo = (reviewVO) item;
@@ -96,7 +135,8 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"rvTitle\": \"" + rvo.getRvTitle() + "\", ");
 		            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
 		            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
-		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\"");
+		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
+		            result.append("\"warn\": \"" + rvo.getWarn() + "\"");
 		            result.append("},");
 		        }
 		        
@@ -118,9 +158,16 @@ public class AjaxManageController extends HttpServlet {
 		        }
 		        
 		        if ("account".equals(key)) {
+		        	AccountVO avo = (AccountVO) item;
 		            result.append("{");
-		            result.append("\"table\": \"" + key + "\"");
-		            // 여기에 account의 속성들을 추가해야 함
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"no\": \"" + avo.getNo() + "\", ");
+		            result.append("\"name\": \"" + avo.getName() + "\", ");
+		            result.append("\"id\": \"" + avo.getId() + "\", ");
+		            result.append("\"nick\": \"" + avo.getNick() + "\", ");
+		            result.append("\"criticCheck\": \"" + avo.getCriticCheck() + "\", ");
+		            result.append("\"email\": \"" + avo.getEmail() + "\", ");
+		            result.append("\"warn\": \"" + avo.getWarn() + "\"");
 		            result.append("},");
 		        }
 		    }
