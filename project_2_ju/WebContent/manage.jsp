@@ -245,7 +245,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.name + "</td>";
 			            htmltag += "<td>" + member.id + "</td>";
 			            htmltag += "<td>" + member.nick + "</td>";
-			            htmltag += "<td>" + member.critic_check + "</td>";
+			            htmltag += "<td>" + member.criticCheck + "</td>";
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
@@ -274,22 +274,9 @@ function selectCategory(frm) {
 }
 </script>
 <body>
-    <div class="header">
-    	<a href="main.jsp">
-    		<img class= "icon" src="img/moviechoice.png">
-		</a>
-    	
-        <ul class="menu">
-          <li><a href="mainAdmin.jsp">영화목록 관리</a></li>
-          <li><a href="reviewMain.jsp">리뷰모음 관리</a></li>
-          <li><a href="free.jsp">자유게시판 관리</a></li>
-          <li><a href="about.asp">Q & A 관리</a></li>
-          <li><a href="about.asp">Review Of The Month 관리</a></li>
-          <li><a href="about.asp">평론가 관리</a></li>
-          <li><a href="about.asp">유저 관리</a></li>
-        </ul>
-        <hr class="mint">
-    </div>
+    <!-- header.jspf -->
+	<%@ include file="include/headerAdmin.jspf" %>
+	
     <div class="body">
         <form method="post"> 
             <table>

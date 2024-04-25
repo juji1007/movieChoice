@@ -2,11 +2,16 @@
 <%@page import="com.mystudy.model.vo.movieVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+
 <%
 	int mvNo = Integer.parseInt(request.getParameter("mvNo"));
+	String location = request.getParameter("location");
 	movieVO mvo = movieDAO.searchOne(mvNo);
 	System.out.println("mvNo : " + mvNo);
+	System.out.println("moviefixOklocation : " + location);
 	System.out.println("mvo : " + mvo);
+	request.setAttribute("location", location);
 	request.setAttribute("mvo", mvo);
 	
 %>
@@ -17,7 +22,7 @@
 <title>영화정보수정</title>
 <script>
 	function update(frm) {
-		frm.action="controller?type=movieFixOk";
+		frm.action="controller?type=movieFixOk&location=${location}";
 		frm.submit();
 	}
 </script>

@@ -66,7 +66,7 @@ public class movieDAO {
 		//재일
 		//영화번호로 삭제
 		public static int delete(int mvNo) {
-			try (SqlSession ss = DBService.getFactory().openSession()) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
 				return ss.delete("movie.delete", mvNo);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -75,7 +75,7 @@ public class movieDAO {
 		}
 		//영화번호로 수정
 		public static int update(movieVO mvo) {
-			try (SqlSession ss = DBService.getFactory().openSession()) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
 				return ss.update("movie.update", mvo);
 			} catch (Exception e) {
 				e.printStackTrace();

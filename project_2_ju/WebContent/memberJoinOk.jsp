@@ -27,13 +27,13 @@
 	
 	System.out.println("nickName : " + nickName);
 	AccountVO avo = new AccountVO();
-	avo.setNo(14);
+	avo.setNo(10);
 	avo.setName(name);
 	avo.setId(id);
 	avo.setPwd(pwd);
 	avo.setNick(nickName);
 	avo.setEmail(email);
-	avo.setCritic_check(criticCheckInt);
+	avo.setCriticCheck(criticCheckInt);
 	
 	// 회원가입 데이터 DB에 삽입
 	int checkJoin = AccountDAO.insertMember(avo);

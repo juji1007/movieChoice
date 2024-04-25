@@ -5,13 +5,15 @@
 	<img class= "icon" src="img/moviechoice.png">
 	
 	<ul class="menu">
-	  <li><a href="mainAdmin.jsp">영화목록</a></li>
-	  <li><a href="reviewController?type=reviewMain">리뷰모음</a></li>
-	  <li><a href="free.jsp">자유게시판</a></li>
-	  <li><a href="about.asp">Q & A</a></li>
-	  <li><a href="about.asp">Review Of The Month</a></li> 
+	  <li><a href="mainAdmin.jsp">영화목록 관리</a></li>
+	  <li><a href="reviewController?type=reviewMain">리뷰모음 관리</a></li>
+	  <li><a href="free.jsp">자유게시판 관리</a></li>
+	  <li><a href="about.asp">Q & A 관리자</a></li>
+	  <li><a href="about.asp">Review Of The Month 관리</a></li> 
 	  <li><a href="controller?type=critic">평론가</a></li>
-	  <li><a href="about.asp">마이페이지</a></li>
+	  <li><a href="accountManage.jsp">유저 관리 페이지</a></li>
+	  <li><a href="manage.jsp">관리자 페이지</a></li>
+<!-- 	  <li><a href="about">유저마이페이지 관리</a></li> -->
 	</ul>
 	
 	<ul class="login">
@@ -25,7 +27,7 @@
 <%
    } else {
 %>  
-	<li><a href="logout.jsp">로그아웃</a></li>
+	<li><a href="logout.jsp">관리자 로그아웃</a></li>
 <%
     }
  %> 

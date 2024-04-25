@@ -3,6 +3,7 @@ package com.project.ajax.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,6 +60,42 @@ public class AjaxManageController extends HttpServlet {
 			for (String key : keys) {
 			    System.out.println("Key: " + key);
 			}
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+			
+		}
+		
+		//유저관리자검색처리
+		if ("accountManageCategory".equals(action)) {
+			System.out.println("유저검색처리");
+			
+			//검색종류 받아서 검색
+			String idx = req.getParameter("idx");
+			String keyword = req.getParameter("keyword");
+			System.out.println("idx, keyword : " + idx + ", " + keyword);
+			
+			//없으면 다시 처음화면으로
+			if (idx == null || idx.trim().length() == 0) {
+				req.getRequestDispatcher("accountManage.jsp").forward(req, resp);
+				return;
+			}
+			
+			//검색DB처리
+			List<AccountVO> list = AdminDAO.selectAccountData(idx, keyword);
+			System.out.println("ajaxlistSearch : " + list);
+			//listSearch없으면 다시 처음화면으로
+			if (list == null) {
+				req.getRequestDispatcher("accountManage.jsp").forward(req, resp);
+				return;
+			} 
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("account", list);
 			String result = makeJson(listSearch);
 			
 			System.out.println("result : \n" + result);
@@ -127,7 +164,7 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"name\": \"" + avo.getName() + "\", ");
 		            result.append("\"id\": \"" + avo.getId() + "\", ");
 		            result.append("\"nick\": \"" + avo.getNick() + "\", ");
-		            result.append("\"critic_check\": \"" + avo.getCritic_check() + "\", ");
+		            result.append("\"criticCheck\": \"" + avo.getCriticCheck() + "\", ");
 		            result.append("\"email\": \"" + avo.getEmail() + "\", ");
 		            result.append("\"warn\": \"" + avo.getWarn() + "\"");
 		            result.append("},");
