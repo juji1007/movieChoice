@@ -8,6 +8,8 @@ public class postVO {
 	private String psTitle;
 	private String psContent;
 	private Date psDate;
+	private String psFile;
+	private String psOrifile;
 	
 	public int getPsNo() {
 		return psNo;
@@ -39,12 +41,24 @@ public class postVO {
 	public void setPsDate(Date psDate) {
 		this.psDate = psDate;
 	}
+	public String getPsFile() {
+		return psFile;
+	}
+	public void setPsFile(String psFile) {
+		this.psFile = psFile;
+	}
+	public String getPsOrifile() {
+		return psOrifile;
+	}
+	public void setPsOrifile(String psOrifile) {
+		this.psOrifile = psOrifile;
+	}
 	@Override
 	public String toString() {
 		return "postVO [psNo=" + psNo + ", no=" + no + ", psTitle=" + psTitle + ", psContent=" + psContent + ", psDate="
-				+ psDate + "]";
+				+ psDate + ", psFile=" + psFile + ", psOrifile=" + psOrifile + "]";
 	}
-	
+
 	
 
 
