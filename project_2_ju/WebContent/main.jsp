@@ -14,6 +14,7 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 	e.printStackTrace();
 } 
 
+
 System.out.println("list : " + list);
  System.out.println("list.size : " + list.size());
  session.setAttribute("attr_list", list);
