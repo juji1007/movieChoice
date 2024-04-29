@@ -90,7 +90,7 @@
 	<c:if test="${empty pvo.psFile }">
 		첨부파일없음
 		</c:if>
-		<a href="#">${pvo.psFile }</a>
+		${pvo.psFile }
 	
 	</td>
 </tr>
