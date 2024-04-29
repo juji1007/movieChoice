@@ -66,7 +66,7 @@
 <div>
     <form action="rvWrite_ok.jsp" method="get" enctype="multipart/form-data">
 	<table>
-		<caption>리뷰 작성하기</caption>
+		<caption><%= mvTitle %> 리뷰 작성하기</caption>
 		<tbody>
 			<tr>
 				<th>영화</th>
