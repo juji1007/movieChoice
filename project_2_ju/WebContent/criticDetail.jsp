@@ -18,14 +18,20 @@
 		}
 		System.out.println("cvoList : " + cvoList);
 		request.setAttribute("cvoList", cvoList);
+		
+		criticVO vo = criticDAO.criticCname(cNo);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>상세정보</title> 
+<link rel="stylesheet" href="css/header.css">
 </head>
 <body>
+<%@ include file="include/header.jspf" %>
+	<h2><%=vo.getName() %> 평론가 리뷰</h2> 
+	<hr>
 	<c:forEach var="cvo" items="${cvoList}">
 		<p>${cvo.rvNick }</p>
 		<p>${cvo.rvTitle }</p>

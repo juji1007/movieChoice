@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="critic">
+	<!-- 전문가 한명 조회 -->
+	<select id="cone" resultType="com.mystudy.model.vo.criticVO">
+		SELECT *
+		FROM CRITIC 
+		WHERE No = #{no}
+	</select>
+	
 	<!-- 전문가 목록 전체 조회 -->
 	<select id="all" resultType="com.mystudy.model.vo.criticVO">
 		SELECT A.*, C.*
@@ -50,6 +57,14 @@
 		DELETE FROM CRITIC
 		WHERE NO = #{no}
 	</delete>
+	
+	<!-- 계정 번호 받아서 전문가 이름 찾기 -->
+	<select id="cname" resultType="com.mystudy.model.vo.criticVO">
+		SELECT A.NAME
+		FROM CRITIC C, ACCOUNT A
+		WHERE A.No = C.NO
+        AND C.NO = #{no}
+	</select>
 	
 </mapper>
 
