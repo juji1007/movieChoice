@@ -11,8 +11,8 @@ List<movieVO> list = null;
 try (SqlSession ss = DBService.getFactory().openSession()) {
 	list =  ss.selectList("PROJECT2.mvTitle");
 } catch (Exception e) {
-	e.printStackTrace();
-} 
+	e.printStackTrace(); 
+}  
 
 
 System.out.println("list : " + list);
@@ -56,7 +56,7 @@ System.out.println("list : " + list);
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
-
+ 
 
 <%--영화검색 --%>
 <form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }">

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.vo.criticVO;
 import com.mystudy.model.vo.movieVO;
 import com.project.mybatis.DBService;
 
@@ -81,6 +82,17 @@ public class movieDAO {
 				e.printStackTrace();
 			}
 			return -1;
+		}
+		
+		//영화 번호로 조회(추가)
+		public static movieVO rOne(int mvNo) {
+			System.out.println("rOne실행");
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("movie.rone", mvNo);
+			} catch (Exception e) { 
+				e.printStackTrace();
+			}
+			return null;
 		}
 		
 }

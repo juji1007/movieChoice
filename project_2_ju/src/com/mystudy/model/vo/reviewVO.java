@@ -83,7 +83,4 @@ public class reviewVO {
 				+ rvRec + ", warn=" + warn + "]";
 	}
 	
-	
-	
-	
 }

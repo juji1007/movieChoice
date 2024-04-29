@@ -91,7 +91,7 @@
 %>
 	frm.submit();
 }
-// 본인이 작성한 글 아니면 삭제 버튼 숨기기
+// 본인이 작성한 글 아니면 삭제 버튼 숨기기(코드 수정)
 	$(function(){
 <%
 	if(session.getAttribute("no") == null || session.getAttribute("list.no") != session.getAttribute("no")){

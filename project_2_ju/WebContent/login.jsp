@@ -38,7 +38,7 @@
 	 	
 	
 		System.out.println("id : " + id);
-// 		System.out.println("pwd : " + avo.getPwd());
+// 		System.out.println("pwd : " + avo.getPwd()); 
 %>
 		<script>
 			alert("로그인에 성공하셨습니다.");
