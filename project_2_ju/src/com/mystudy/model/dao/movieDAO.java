@@ -35,8 +35,14 @@ public class movieDAO {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("mvTitle", mvTitle);
+				
+				//형식지정해야함 수정필요
+				String checkMvDirect = mvDirect.replace(" ", "").replace(",", "");
+				System.out.println("checkMvDirect : " + checkMvDirect);
+				
 				map.put("mvDirect", mvDirect);
-				String CheckmvTitle = ss.selectOne("movie.searchDup", mvTitle);
+				System.out.println("map : " + map);
+				String CheckmvTitle = ss.selectOne("movie.searchDup", map);
 				System.out.println("CheckmvTitle : " + CheckmvTitle);
 				if (CheckmvTitle != null) return true;
 				else return false;
@@ -99,10 +105,10 @@ public class movieDAO {
 			}
 			return -1;
 		}
-		//영화번호로 수정
-		public static int insert() {
+		//영화번호로 추가
+		public static int insert(movieVO mvo) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
-				return ss.update("movie.insert");
+				return ss.update("movie.insert", mvo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

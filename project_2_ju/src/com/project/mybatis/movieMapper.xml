@@ -24,7 +24,7 @@
 	</select>
 	
 	<delete id="delete" parameterType="int">
-		DELETE INTO MOVIE
+		DELETE FROM MOVIE
 		WHERE MV_NO = #{mvNo}
 	</delete>
 	
@@ -43,8 +43,8 @@
 	</update>
 	
 	<insert id="insert" parameterType="com.mystudy.model.vo.movieVO">
-		INSERT INTO MOVIE
-		VALUES (MOVIE_SEQ.NEXTVAL, #{mvTitle}, #{mvDirect}, #{mvActor}, #{mvGenre}, #{mvRate}, #{mvAudience}, #{mvGrade}, #{mvDate}, #{mvPoster}) 
+		INSERT INTO MOVIE (MV_NO, MV_TITLE, MV_DIRECT, MV_ACTOR, MV_GENRE, MV_RATE, MV_AUDIENCE, MV_GRADE, MV_DATE, MV_POSTER)
+		VALUES (11, #{mvTitle}, #{mvDirect}, #{mvActor}, #{mvGenre}, #{mvRate}, #{mvAudience}, #{mvGrade}, #{mvDate}, #{mvPoster}) 
 	</insert>
 	
 	<select id="rone" resultType="com.mystudy.model.vo.movieVO">

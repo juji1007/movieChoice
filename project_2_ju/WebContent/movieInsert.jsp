@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>회원가입</title>
+<title>영화추가</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var isCheckDup = false;
@@ -13,6 +13,15 @@
 // 		var checkId = form.elements["id"];
 		var checkMovieTitle = frm.mvTitle.value;
 		var checkMovieDirect = frm.mvDirect.value;
+		
+		//특정 입력조건 필요
+		if (!/^[\s,가-힣]+$/.test(checkMovieDirect)) {
+			alert("형식에 맞지않습니다.")
+			frm.mvDirect.value = "";
+			return false;
+		}
+		
+		console.log(checkMovieDirect);
 		if (checkMovieTitle.trim().length == 0) {
 			alert("영화제목을 입력해주세요!");
 			return false;
@@ -27,7 +36,7 @@
 			url: "ajaxMovieController",
 			data: {
 				action: "checkDoubleMovie",
-				mvTitle: checkMovieTitle
+				mvTitle: checkMovieTitle,
 				mvDirect: checkMovieDirect
 			},
 			success : function(response){
@@ -58,7 +67,7 @@
 			return;
 		}
 		
-		frm.action="mainAdmin.jsp";
+		frm.action="controller?type=movieInsertOK";
 		frm.submit();
 	}
 </script>
@@ -72,7 +81,7 @@
 </style>
 </head>
 <body>
-	<div id="loginArea">
+	<div id="movieInserArea">
 		<form method="post">
 			<table>
 				<caption><h2>영화추가</h2></caption>
@@ -86,7 +95,7 @@
 					<tr>
 						<th>영화감독</th>
 						<td colspan="3">
-							<input type="text" name="mvDirect" title="영화감독" />
+							<input type="text" name="mvDirect" title="영화감독" placeholder="쉼표와 공백 한글로만 써주세요"/>
 						</td>
 					</tr>
 					<tr>

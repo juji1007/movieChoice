@@ -131,10 +131,49 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher("manage.jsp").forward(request, response);
 		}
 		
-		if ("movieInsert".equals(type)) {
-			System.out.println("movieInsert실행");
-			
-			request.getRequestDispatcher("movieInsert.jsp").forward(request, response);
+		if ("movieInsertOK".equals(type)) {
+			System.out.println("movieInsertOK실행");
+			// 영화 데이터 받기
+			String mvTitle = request.getParameter("mvTitle");
+			System.out.println("mvTitle" + mvTitle);
+		    String mvDirect = request.getParameter("mvDirect");
+		    String mvActor = request.getParameter("mvActor");
+		    String mvGenre = request.getParameter("mvGenre");
+		    int mvRate = Integer.parseInt(request.getParameter("mvRate"));
+		    String mvDateStr = request.getParameter("mvDate");
+		    java.util.Date utilDate = null;
+		    java.sql.Date sqlDate = null;
+		    try {
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		        utilDate = sdf.parse(mvDateStr);
+		        sqlDate = new java.sql.Date(utilDate.getTime());
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		    }
+		    
+		    movieVO mvo = new movieVO();
+		    mvo.setMvDate(sqlDate);
+		    String mvAudience = request.getParameter("mvAudience");
+		    String mvGrade = request.getParameter("mvGrade");
+		    String mvPoster = request.getParameter("mvPoster");
+		    //영화번호 search해서 뽑아야될듯
+		    mvo.setMvNo(11);
+		    mvo.setMvTitle(mvTitle);
+		    mvo.setMvDirect(mvDirect);
+		    mvo.setMvActor(mvActor);
+		    mvo.setMvGenre(mvGenre);
+		    mvo.setMvRate(mvRate);
+		    mvo.setMvAudience(mvAudience);
+		    mvo.setMvGrade(mvGrade);
+		    mvo.setMvPoster(mvPoster);
+		    
+		    System.out.println("mvo : " + mvo);
+		    int result = movieDAO.insert(mvo);
+		    if (result != 1) {
+		    	System.out.println("실패");
+		    	request.getRequestDispatcher("movieInsert.jsp").forward(request, response);
+		    }
+			request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			
 			
 		}
