@@ -29,6 +29,7 @@ public class listTotVO {
 	private String rvContent;
 	private Date rvDate;
 	private int rvRec;
+	private int warn;
 	
 	public int getNo() {
 		return no;
@@ -168,6 +169,12 @@ public class listTotVO {
 	public void setRvRec(int rvRec) {
 		this.rvRec = rvRec;
 	}
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
+	}
 	
 	@Override
 	public String toString() {
@@ -176,7 +183,8 @@ public class listTotVO {
 				+ ", mvDirect=" + mvDirect + ", mvActor=" + mvActor + ", mvGenre=" + mvGenre + ", mvRate=" + mvRate
 				+ ", mvAudience=" + mvAudience + ", mvGrade=" + mvGrade + ", mvDate=" + mvDate + ", mvPoster="
 				+ mvPoster + ", rvNo=" + rvNo + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle + ", rvContent="
-				+ rvContent + ", rvDate=" + rvDate + ", rvRec=" + rvRec + "]";
+				+ rvContent + ", rvDate=" + rvDate + ", rvRec=" + rvRec + ", warn=" + warn + "]";
 	}
+	
 
 }

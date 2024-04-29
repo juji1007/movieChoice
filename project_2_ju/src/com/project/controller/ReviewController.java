@@ -28,7 +28,7 @@ public class ReviewController extends HttpServlet {
 		System.out.println("type : " + type);
 		
 		request.setCharacterEncoding("UTF-8");
-		
+/*		
 		if ("reviewMain".equals(type)) {
 			System.out.println(">> reviewMain 요청 처리~~");
 			
@@ -58,7 +58,7 @@ public class ReviewController extends HttpServlet {
 			
 			return;
 		}
-		
+*/		
 		//리뷰 선택(영화명,작성자,작성일) 검색
 		String category = request.getParameter("category");
 		System.out.println("category : " + category);
@@ -98,7 +98,7 @@ public class ReviewController extends HttpServlet {
 			return;
 		}
 		
-		
+/*		
 		//리뷰 상세보기
 		type = request.getParameter("type");
 		System.out.println("type : " + type);
@@ -132,7 +132,7 @@ public class ReviewController extends HttpServlet {
 			//rvNo, rvRec 가져오기
 			
 		}
-		
+*/		
 		
 	}
 

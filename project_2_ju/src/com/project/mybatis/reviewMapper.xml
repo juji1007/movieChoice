@@ -67,8 +67,11 @@
 	<!-- 리뷰 작성 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.reviewVO">
 		INSERT INTO REVIEW
-	    (RV_NO, MV_NO, NO, RV_NICK, RV_TITLE, RV_CONTENT, RV_DATE, RV_REC, RV_RATE, WARN)
-		VALUES (REVIEW_SEQ.NEXTVAL, #{mvNo}, #{no}, #{rvNick}, #{rvTitle}, #{rvContent}, SYSDATE, 0, #{rvRate}, 0)
+	    (RV_NO, MV_NO, NO, RV_NICK, RV_TITLE, 
+	     RV_CONTENT, RV_DATE, RV_REC, RV_RATE, WARN)
+		VALUES (REVIEW_SEQ.NEXTVAL, #{mvNo
+		}, #{no}, #{rvNick}, #{rvTitle}, 
+				#{rvContent}, SYSDATE, 0, #{rvRate}, 0)
 	</insert>
 	
 	<!-- 리뷰 1건 조회 -->
@@ -79,5 +82,6 @@
 	</select>
 	
 	<!-- 추천수 count -->
+	
 	
 </mapper>
