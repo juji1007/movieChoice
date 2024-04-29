@@ -70,6 +70,8 @@
 	<tr>
 	<td>${nick }</td>
 	<td>${pvo.psDate }</td>
+	
+	
 	<td>
 	<a href = "postUpdate.jsp"><input type="button" value="수정"></a>
 	<input type="button" value="목록보기" onclick="list_go()">
@@ -83,7 +85,15 @@
 <tr>
 	<td colspan=3>${pvo.psContent }</td>
 </tr>
+<tr>
+<td>
+	<c:if test="${empty pvo.psFile }">
+		첨부파일없음
+		</c:if>
+		${pvo.psFile }
 	
+	</td>
+</tr>
 
 <hr>
 <!-- 댓글작성 -->
