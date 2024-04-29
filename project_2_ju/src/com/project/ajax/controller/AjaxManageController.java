@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
@@ -96,6 +98,37 @@ public class AjaxManageController extends HttpServlet {
 			} 
 			Map<String, List<?>> listSearch = new HashMap<>();
 			listSearch.put("account", list);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+			
+		}
+		
+		//마이페이지처리
+		if ("accountMypage".equals(action)) {
+			System.out.println("마이페이지유저처리");
+			
+			//로그인 아이디로 검색처리
+			HttpSession session = req.getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id : " + id);
+			
+			//없으면 다시 처음화면으로
+			if (id == null || id.trim().length() == 0) {
+				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
+				return;
+			}
+			
+			List<AccountVO> avoList = AccountDAO.getAccountList(id);
+			System.out.println("avoList : " + avoList);
+			
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("account", avoList);
 			String result = makeJson(listSearch);
 			
 			System.out.println("result : \n" + result);

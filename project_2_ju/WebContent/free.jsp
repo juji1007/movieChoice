@@ -1,3 +1,4 @@
+<%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.mystudy.post.common.Paging"%>
@@ -218,10 +219,16 @@ ${vo.psTitle }
 </a>
 </td>
 <td>
-	<form action="postDelete.jsp" method="get">
-		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
-		<input type="hidden" name="psNo" value="${vo.psNo }">
-	</form>
+<%
+	String id = (String) request.getAttribute("id");
+	int no = (int) AccountDAO.getAccountNo(id);
+%>
+<%-- 	<c:if test="10 == ${vo.psNo }"> --%>
+<!-- 		<form action="postDelete.jsp" method="get"> -->
+<!-- 			<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)"> -->
+<%-- 			<input type="hidden" name="psNo" value="${vo.psNo }"> --%>
+<!-- 		</form> -->
+<%-- 	</c:if> --%>
 </td>
 
 </tr>

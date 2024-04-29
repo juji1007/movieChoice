@@ -137,7 +137,7 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function selectCategory(frm) {
+function selectCategory(Frm) {
 	var checkCategory = frm.idx.value;
 	if ("선택" == checkCategory) {
 		alert("검색종류를 선택해주세요!");
@@ -217,7 +217,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvNo + "</td>";
 			            htmltag += "<td>" + member.mvTitle + "</td>";
 			            htmltag += "<td>" + member.mvDirect + "</td>";
-			            htmltag += "<td>" + member.mvActor + "</td>";
+			            htmltag += "<td>" + member.mvactor + "</td>";
 			            htmltag += "<td>" + member.mvGenre + "</td>";
 			            htmltag += "<td>" + member.mvRate + "</td>";
 			            htmltag += "<td>" + member.mvAudience + "</td>";
@@ -261,7 +261,7 @@ function selectCategory(frm) {
 //             htmltag += "</tbody>";
 
             // 테이블을 #jsonData 엘리먼트에 추가
-            $('#jsonData').html(htmltag);
+            $('#jsonData').html(Htmltag);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert("Ajax 처리 실패:\n" +

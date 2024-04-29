@@ -68,7 +68,10 @@ public class FrontController extends HttpServlet {
 			
 			int result = movieDAO.delete(mvNo);
 			
-			request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
+			if ("mainAdmin".equals(location)) {
+				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
+			}
+			request.getRequestDispatcher("manage.jsp").forward(request, response);
 		}
 		if ("movieFix".equals(type)) {
 			String location = request.getParameter("location");

@@ -12,7 +12,16 @@
 	</select>
 	
 	<select id="all" resultType="accountVO">
-		SELECT * FROM ACCOUNT ORDER BY NO
+		SELECT * FROM ACCOUNT 
+		WHERE 
+    	ID = #{id} 
+    	ORDER BY NO
+	</select>
+	
+	<select id="noById" parameterType="String" resultType="int">
+		SELECT NO FROM ACCOUNT 
+		WHERE 
+    	ID = #{id} 
 	</select>
 	
 	<!-- 아이디중복체크 -->

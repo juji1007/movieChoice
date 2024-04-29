@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -45,6 +46,7 @@ public class LoginCommandController extends HttpServlet {
 		String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		// AccountVO에서 사용자의 역할(role)을 가져와서 세션에 저장하는 과정
 //	 	AccountVO avo = accountDAO.getAccountInfo(userId); // 사용자 정보 가져오기
 //	 	session.setAttribute("role", avo.getRole()); // 사용자의 역할을 세션에 저장
@@ -72,7 +74,6 @@ public class LoginCommandController extends HttpServlet {
 				if (avo == null) {
 					
 				}
-				HttpSession session = request.getSession();
 				
 				session.setAttribute("no", avo.getNo());
 				session.setAttribute("id", avo.getId());
@@ -91,6 +92,22 @@ public class LoginCommandController extends HttpServlet {
 		    
 		    request.setAttribute("id", id);
 			
+		}
+		
+		if ("updateAccount".equals(type)) {
+			request.setCharacterEncoding("UTF-8");
+
+			// 유저정보 받기
+		    String id = (String) session.getAttribute("id");
+		    System.out.println("upid : " + id);
+		    
+		    // 아이디 DB에서 조회
+		    List<AccountVO> list = AccountDAO.getAccountList(id);
+		    AccountVO avo = (AccountVO) list;
+		    
+		    request.setAttribute("avo", avo);
+		    
+			request.getRequestDispatcher("updateAccount.jsp").forward(request, response);
 		}
 		
 		

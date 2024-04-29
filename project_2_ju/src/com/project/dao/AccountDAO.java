@@ -105,5 +105,29 @@ public class AccountDAO {
 		return -1;
 	}
 	
+	// 자유게시판 =====================================================
+	//아이디로 유저넘버 조회 
+	public static int getAccountNo(String id) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			System.out.println("id : " + id);
+			return ss.selectOne("project2.noById", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	// 마이페이지 =====================================================
+	//로그인시 아이디로 전체내용 조회 
+	public static List<AccountVO> getAccountList(String id) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			System.out.println("id : " + id);
+			return ss.selectList("project2.all", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 }
