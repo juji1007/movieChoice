@@ -59,10 +59,16 @@ public class FrontController extends HttpServlet {
 			request.getRequestDispatcher("mvTitleList.jsp").forward(request, response);
 		}
 		if ("movieDelete".equals(type)) {
+			String location = request.getParameter("location");
+			System.out.println("location : " + location);
 			int mvNo = Integer.parseInt(request.getParameter("mvNo"));
 			System.out.println("mvNo : " + mvNo);
 			
+			request.setAttribute("mvNo", mvNo);
+			
 			int result = movieDAO.delete(mvNo);
+			
+			request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 		}
 		if ("movieFix".equals(type)) {
 			String location = request.getParameter("location");
@@ -123,6 +129,14 @@ public class FrontController extends HttpServlet {
 				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
 			}
 			request.getRequestDispatcher("manage.jsp").forward(request, response);
+		}
+		
+		if ("movieInsert".equals(type)) {
+			System.out.println("movieInsert실행");
+			
+			request.getRequestDispatcher("movieInsert.jsp").forward(request, response);
+			
+			
 		}
 		
 		if ("movie".equals(type)) {

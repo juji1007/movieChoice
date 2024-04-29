@@ -116,7 +116,7 @@ System.out.println("list : " + list);
 			</tr>
 			<tr>
 			<td>
-			<input type="button" value="삭제" onclick="">
+			<input type="button" value="삭제" onclick="location.href='controller?type=movieDelete&location=mainAdmin&mvNo=${vo.mvNo }'">
 			<input type="button" value="수정" onclick="location.href='controller?type=movieFix&location=mainAdmin&mvNo=${vo.mvNo }'">
 			<input type="hidden" name="mvNo" value="${vo.mvNo }">
 			</td>

@@ -22,47 +22,47 @@
     
     <!-- 유저 동적 검색 -->
 	<select id="searchAccountDynamic" parameterType="map" resultType="accountVO">
-		SELECT *
-		FROM ACCOUNT
-		<choose>
-			<when test="keyword == null or keyword=''">
-				<choose>
-					<when test="idx == 0">
-					</when>
-					<when test="idx == 1">
-						ORDER BY WARN DESC
-					</when>
-					<when test="idx == 2">
-						ORDER BY NAME
-					</when>
-					<otherwise>
-						WHERE CRITIC_CHECK = 1
-						ORDER BY NAME
-					</otherwise>
-				</choose>
-			</when>
-			<when test="idx == 0">
-				WHERE NAME LIKE '%'||#{keyword}||'%'
-			</when>
-			<when test="idx == 1">
-				WHERE NAME LIKE '%'||#{keyword}||'%'
-				ORDER BY WARN DESC 
-			</when>
-			<when test="idx == 2">
-				WHERE NAME LIKE '%'||#{keyword}||'%'
-				ORDER BY NAME 
-			</when>
-			<when test="idx == 3">
-				WHERE NAME LIKE '%'||#{keyword}||'%'
-						AND CRITIC_CHECK = 1
-				ORDER BY NAME 
-			</when>
-			<otherwise>
-				ORDER BY WARN
-			</otherwise>
-		</choose>
-		
+    SELECT *
+    FROM ACCOUNT
+    <choose>
+        <when test="keyword == null or keyword == ''">
+            <choose>
+                <when test="idx == 0">
+                </when>
+                <when test="idx == 1">
+                    ORDER BY WARN DESC
+                </when>
+                <when test="idx == 2">
+                    ORDER BY NAME
+                </when>
+                <otherwise>
+                    WHERE CRITIC_CHECK = 1
+                    ORDER BY NAME
+                </otherwise>
+            </choose>
+	        </when>
+	        <when test="idx == 0">
+	            WHERE NAME LIKE '%' || #{keyword} || '%'
+	        </when>
+	        <when test="idx == 1">
+	            WHERE NAME LIKE '%' || #{keyword} || '%'
+	            ORDER BY WARN DESC 
+	        </when>
+	        <when test="idx == 2">
+	            WHERE NAME LIKE '%' || #{keyword} || '%'
+	            ORDER BY NAME 
+	        </when>
+	        <when test="idx == 3">
+	            WHERE NAME LIKE '%' || #{keyword} || '%'
+	            AND CRITIC_CHECK = 1
+	            ORDER BY NAME 
+	        </when>
+	        <otherwise>
+	            ORDER BY WARN
+	        </otherwise>
+	    </choose>
 	</select>
+
 </mapper>
 
 
