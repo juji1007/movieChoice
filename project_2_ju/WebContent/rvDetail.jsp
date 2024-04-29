@@ -10,7 +10,7 @@
 	reviewVO vo = reviewDAO.selectOne(rvNo);
 	System.out.println("vo : " + vo);
 	
-	request.setAttribute("rvVo", vo);
+	session.setAttribute("rvVo", vo);
 %>
 <!DOCTYPE html>
 <html>
@@ -26,10 +26,20 @@
 	}
 	
 	function list_go() {
-		
+		location.href = "reviewMain.jsp";
 	}
 	
 	function next_go() {
+		
+	}
+	
+	function update_go(frm) {
+		location.href = "rvUpdate.jsp?rvNo=${rvVo.rvNo}";
+	}
+	
+	function delete_go(frm) {
+		location.href = "rvDelete.jsp?rvNo=${rvVo.rvNo}";
+		alert("삭제하시겠습니까?");
 		
 	}
 	
@@ -40,6 +50,7 @@
 	<%@ include file="include/header.jspf" %>
 	
 	<h2>리뷰 상세보기</h2>
+	<form>
 	<table border>
 		<tbody>
 			<tr>
@@ -49,9 +60,10 @@
 			<tr>
 				<td id="rvNick">${rvVo.rvNick }</td>
 				<td id="rvDate">${rvVo.rvDate }</td>
-				<td id="rvRec">
-					<input type="button" value="추천수 " onclick="recommand_push()">
+				<td id="btn">
+					<input type="button" value="추천 " onclick="recommand_push()">
 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
+					<input type="button" value="신고" onclick="warn_push()">
 					${rvVo.rvRec }
 				</td>
 			</tr>
@@ -59,43 +71,24 @@
 				<td id="rvContent" colspan="3">${rvVo.rvContent }</td>
 			</tr>
 		</tbody>
+	
 		<tfoot class="tfoot">
-			<td colspan="4">
-				<input type="button" value="이전" onclick="prev_go()">
-				<input type="button" value="목록" onclick="reviewMain.jsp">
-				<input type="button" value="다음" onclick="next_go()">
-			</td>
+			<tr>
+				<td colspan="3">
+					<input type="button" value="이전" onclick="prev_go()">
+					<input type="button" value="목록" onclick="reviewMain.jsp">
+					<input type="button" value="다음" onclick="next_go()">
+				</td>
+				<td>
+					<input type="button" value="수정" onclick="update_go(this.form)">
+					<input type="button" value="삭제" onclick="delete_go(this.form)">
+					
+					<input type="hidden" value="${rvVo}">
+				</td>
+			</tr>
 		</tfoot>
 	</table>
-	
-<%-- 	<h2>[${mvOne.mvTitle }] - 리뷰</h2> --%>
-<!-- 	<table border> -->
-<!-- 		<tbody> -->
-<!-- 			<tr> -->
-<%-- 				<td rowspan="3"><img src="img/${mvOne.mvPoster }" alt="포스터" width="300px"></td> --%>
-<%-- 				<td id="rvTitle" colspan="3">${rvOne.rvTitle }</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<%-- 				<td id="rvNick">${rvOne.rvNick }</td> --%>
-<%-- 				<td id="rvWrite">${rvOne.rvDate }</td> --%>
-<!-- 				<td id="rvRec"> -->
-<!-- 					<input type="button" value="추천수 " onclick="recommand_push()"> -->
-<!-- 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">  -->
-<%-- 					${rvOne.rvRec } --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<%-- 				<td id="rvContent" colspan="3">${rvOne.rvContent }</td> --%>
-<!-- 			</tr> -->
-<!-- 		</tbody> -->
-<!-- 		<tfoot class="tfoot"> -->
-<!-- 			<td colspan="4"> -->
-<!-- 				<input type="button" value="이전" onclick="prev_go()"> -->
-<!-- 				<input type="button" value="목록" onclick="reviewMain.jsp"> -->
-<!-- 				<input type="button" value="다음" onclick="next_go()"> -->
-<!-- 			</td> -->
-<!-- 		</tfoot> -->
-<!-- 	</table> -->
+	</form>
 	
 	
 </body>

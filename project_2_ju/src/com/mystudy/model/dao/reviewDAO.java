@@ -79,15 +79,35 @@ public class reviewDAO {
 		return null;
 	}
 
-	//리뷰 작성
+	//리뷰 작성(INSERT)
 	public static int insert(reviewVO vo){
-		try (SqlSession ss = DBService.getFactory().openSession()) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
 			return ss.insert("review.insert", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return -1;
 	}
+	
+	//리뷰 수정(UPDATE)
+	public static int update(reviewVO vo) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			return ss.update("review.update", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	//리뷰 삭제(DELETE)
+		public static int delete(int rvNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("review.delete", rvNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 	
 	//리뷰 1건 조회
 	public static reviewVO selectOne(int rvNo) {
@@ -98,5 +118,20 @@ public class reviewDAO {
 		}
 		return null;
 	}
+	
+	//추천수 COUNT+1(본인 리뷰가 아닌 경우 추천+1)
+	public static int recCnt(int rvNo, int no) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("rvNo", rvNo);
+			map.put("no", no);
+			
+			return ss.update("review.rec", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	
 }

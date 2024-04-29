@@ -64,15 +64,29 @@
 	]]>	
 	</select>
 	
-	<!-- 리뷰 작성 -->
+	<!-- 리뷰 작성(INSERT) -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.reviewVO">
 		INSERT INTO REVIEW
-	    (RV_NO, MV_NO, NO, RV_NICK, RV_TITLE, 
-	     RV_CONTENT, RV_DATE, RV_REC, RV_RATE, WARN)
-		VALUES (REVIEW_SEQ.NEXTVAL, #{mvNo
-		}, #{no}, #{rvNick}, #{rvTitle}, 
-				#{rvContent}, SYSDATE, 0, #{rvRate}, 0)
+	    	(RV_NO, MV_NO, NO, RV_NICK, RV_TITLE, 
+	     	 RV_CONTENT, RV_DATE, RV_REC, RV_RATE, RV_WARN)
+		VALUES (REVIEW_SEQ.NEXTVAL, #{mvNo}, #{no}, #{rvNick}, #{rvTitle}, 
+				#{rvContent}, SYSDATE, #{rvRec}, #{rvRate}, #{rvWarn})
 	</insert>
+	
+	<!-- 리뷰 수정(UPDATE) -->
+	<update id="update" parameterType="com.mystudy.model.vo.reviewVO">
+		UPDATE REVIEW
+		SET RV_RATE = #{rvRate},
+		    RV_TITLE = #{rvTitle},
+		    RV_CONTENT = #{rvContent}
+		WHERE RV_NO = #{rvNo}
+	</update>
+	
+	<!-- 리뷰 삭제(DELETE)  -->
+	<delete id="delete" parameterType="int">
+		DELETE REVIEW
+		WHERE RV_NO = #{rvNo}
+	</delete>
 	
 	<!-- 리뷰 1건 조회 -->
 	<select id="rvOne" parameterType="int" resultType="com.mystudy.model.vo.reviewVO">
@@ -81,7 +95,15 @@
 		WHERE RV_NO = #{rvNo}
 	</select>
 	
-	<!-- 추천수 count -->
+	<update id="rec" parameterType="map">
+		UPDATE REVIEW
+		SET RV_REC = RV_REC + 1
+		WHERE RV_NO = #{rvNo}
+		AND NO != #{no}
+	</update>
+	
+	<!-- 리뷰 RvNo 조회 -->
+	
 	
 	
 </mapper>

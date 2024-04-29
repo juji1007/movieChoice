@@ -8,15 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
-import org.apache.ibatis.session.SqlSession;
 
-import com.mystudy.model.dao.movieDAO;
 import com.mystudy.model.dao.reviewDAO;
-import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
-import com.project.mybatis.DBService;
 
 @WebServlet("/reviewController")
 public class ReviewController extends HttpServlet {
@@ -28,37 +23,7 @@ public class ReviewController extends HttpServlet {
 		System.out.println("type : " + type);
 		
 		request.setCharacterEncoding("UTF-8");
-/*		
-		if ("reviewMain".equals(type)) {
-			System.out.println(">> reviewMain 요청 처리~~");
-			
-			//리뷰 전체조회
-			List<reviewVO> list = null;
-			try (SqlSession ss = DBService.getFactory().openSession()) {
-				list = ss.selectList("review.all");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			System.out.println("list : " + list);
-			
-			request.setAttribute("listMv", list);
-			
-			//영화 제목,포스터 전체 조회
-			List<movieVO> movieList = null;
-			try (SqlSession ss = DBService.getFactory().openSession()) {
-				movieList = movieDAO.movieList();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			System.out.println("movieList : " + movieList);
-			
-			request.setAttribute("movieList", movieList);
-			
-			request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
-			
-			return;
-		}
-*/		
+
 		//리뷰 선택(영화명,작성자,작성일) 검색
 		String category = request.getParameter("category");
 		System.out.println("category : " + category);

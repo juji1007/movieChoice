@@ -136,7 +136,7 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
 		            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
 		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
-		            result.append("\"warn\": \"" + rvo.getWarn() + "\"");
+		            result.append("\"warn\": \"" + rvo.getRvWarn() + "\"");
 		            result.append("},");
 		        }
 		        

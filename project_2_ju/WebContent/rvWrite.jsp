@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	//영화 제목, 번호 불러오기
+	//영화 제목, 번호 목록(selection) 불러오기
 	List<movieVO> list = null;
 	try (SqlSession ss = DBService.getFactory().openSession()) {
 		list =  ss.selectList("movie.all");
@@ -18,6 +18,8 @@
 	System.out.println(">>mvlist : " + list);
 	request.setAttribute("mvlist", list);
 	
+	//
+	System.out.println("session.getAttribute(no) : " + session.getAttribute("no"));
 %>
 
 <!DOCTYPE html>
@@ -58,8 +60,9 @@
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
+	
 <div>
-    <form action="rvWrite_ok.jsp" method="get">
+<form action="rvWrite_ok.jsp" method="post">
 	<table>
 		<caption>리뷰 작성하기</caption>
 		<tbody>
@@ -99,11 +102,12 @@
 			        <input type="reset" value="초기화">
 			        <input type="button" value="목록보기" 
 			        	onclick="javascript:location.href='reviewMain.jsp'">
+			        
 				</td>
 			</tr>
 		</tfoot>
 	</table>
-	</form>
+</form>
 </div>
     
 </body>

@@ -1,8 +1,11 @@
 package com.mystudy.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class movieVO {
+public class movieVO  implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private int mvNo;
 	private String mvTitle;
 	private String mvDirect;
