@@ -22,7 +22,7 @@ public class criticDAO {
 	}
 		
 	//전문가 한명의 정보 조회
-	public static List<criticVO> criticOne(int no) {
+	public static criticVO criticOne(int no) {
 		System.out.println("criticOne실행");
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			return ss.selectOne("critic.one", no);
@@ -73,6 +73,28 @@ public class criticDAO {
 		}
 		return -1;
 	}
+	
+	//전문가 한명의 정보 조회
+	public static criticVO criticCone(int no) {
+		System.out.println("criticCone실행");
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectOne("critic.cone", no);
+		} catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//계정 번호 받아서 전문가 이름 찾기
+		public static criticVO criticCname(int no) {
+			System.out.println("criticCname실행");
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("critic.cname", no);
+			} catch (Exception e) { 
+				e.printStackTrace();
+			}
+			return null;
+		}
 	
 }
 

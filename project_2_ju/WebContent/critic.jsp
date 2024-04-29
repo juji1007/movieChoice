@@ -40,9 +40,10 @@
 	td { text-align: center; }
 	tr { height: 40px; }
 </style>
+<link rel="stylesheet" href="css/header.css">
 </head>
 <body>
-
+<%@ include file="include/header.jspf" %>
 <h1>평론가</h1>
 	<c:forEach var="vo" items="${listc }" varStatus="loop">
 		<table border>
@@ -54,7 +55,7 @@
 				<col width="200">
 			</colgroup>
 		    <tr>
-		        <th rowspan="4"><img src="img/noImage.jpg" width="100" height="150px" alt="평론가 사진"></th>
+		        <th rowspan="4"><img src="img/${vo.filename }" width="100" height="150px" alt="평론가 사진"></th>
 		        <th colspan="4">정보</th>
 		    </tr>
 		    <tr>

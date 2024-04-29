@@ -70,6 +70,7 @@ public class ReviewController extends HttpServlet {
 			String keyword = request.getParameter("keyword");
 			request.setAttribute("keyword", keyword);
 			
+			System.out.println("keyword : " + keyword);
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
 			if (keyword == null || keyword.trim().length() == 0) {

@@ -94,7 +94,6 @@
 						+ "errorThrown : " + errorThrown);
 			},
 			complete : function(){
-				alert(":: complete 실행");
 			}
 		});
 
