@@ -34,4 +34,11 @@
 		WHERE MV_NO = #{mvNo}
 	</update>
 	
+	<select id="rone" resultType="com.mystudy.model.vo.movieVO">
+		SELECT * 
+		FROM MOVIE M, REVIEW R
+		WHERE M.MV_NO = R.MV_NO
+		AND M.MV_NO = #{mvNo}
+	</select>
+	
 </mapper>

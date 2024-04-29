@@ -38,10 +38,86 @@
 		submit();
 	}
 	
+<<<<<<< HEAD
 	function warn_push() {
 		location.href = "rvWarn.jsp";
 		submit();
 	}
+=======
+	//AJAX controller 연결 - review 전체 조회
+	$(document).ready(function(){
+		console.log(">> reviewMain.jsp 접속 성공!!");
+		
+		$.ajax({
+			type : "POST",
+			url : "ajaxReviewController",
+			data : {
+				action: "reviewMain"
+			},
+			dataType: "json",
+			success : function(respData){
+			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+			    //Json데이터 처리
+			    let str = null;
+			    for (let member of respData.listAll) {
+			        console.log(">> 리뷰 내용 실행");
+			        str += "<tr>";
+			        str += "<td>" + member.mvTitle + "</td>";
+			        str += "<td>" + member.rvTitle + "</td>";
+			        str += "</tr>";
+			        
+					str += "<tr>";
+					str += "<td>" + member.rvNick + "</td>";
+			        str += "<td>" + member.rvDate + "</td>";
+			        str += "</tr>";
+			       
+/*
+			        str += "<tr>";
+ 			        str += "<td>" + member.mvTitle + "</td>"
+			        str += "<td id=\"rvDetail\" colspan=\"2\">";
+			        str += "<a href=\"reviewController?type=rvDetail&rvNo=\"" + member.rvNo + ">" + member.rvTitle + "</a>";
+			        str += "</td>";
+			        str += "</tr>";
+			        
+			        str += "<tr>";
+ 			        str += "<td rowspan=\"2\">";
+ 			        str += "포스터 경로";
+// 			        str += "<img src=\"img\"" + member.mvPoster + \" alt=\"포스터\" width=\"150px\">";
+// 			        str += "<img src=\"img/exhuma.jpg" alt=\"포스터\" width=\"150px\">";
+			        str += "</td>"; 
+			        str += "<td>" + member.rvNick +"</td>";
+			        str += "<td>" + member.rvDate +"</td>";
+			        
+			        str += "<tr>";
+			        str += "<td class=\"recNo\" colspan=\"2\">";
+			        str += "<input type=\"button\" value=\"추천수 \" onclick=\"reviewController?type=rvRecommand&rvNo=&rvRec=\">";
+			        str += "<img src=\"img/iconRec.png\" id=\"iconRec\" alt=\"추천\" width=\"25px\">" + member.rvRec;
+			        str += "</td>";
+			        str += "</tr>";
+*/
+			    }
+			    $("#reviewOne").html(str);
+			    
+// 			    for (let member of respData.listAll) {
+// 			       console.log(">> 리뷰 btn 실행");
+			        
+// 			    }
+// 			    $("#reviewOne").html(str);
+			},
+
+			error : function(jqXHR, textStatus, errorThrown){
+				alert("Ajax 처리 실패 : \n"
+						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+						+ "textStatus : " + textStatus + "\n"
+						+ "errorThrown : " + errorThrown);
+			},
+			complete : function(){
+			}
+		});
+
+	}); 
+	
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 </script>
 </head>
 <body>
