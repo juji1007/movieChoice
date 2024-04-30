@@ -103,7 +103,8 @@
 		            
 	            	let footerHtml = "";
 	            	
-	            	footerHtml = "<tr><td colspan='2'><input type='button' value='수정' onclick='updateAccount(this.form)'></td></tr>";
+	            	footerHtml = "<tr><td colspan='2'><input type='button' value='회원정보수정' onclick='updateAccount(this.form)'>";
+	            	footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick='updateAccount(this.form)'></td></tr>";
 	            	 $('#accountTbody').html(footerHtml);
 			 },
 		        error: function(jqXHR, textStatus, errorThrown) {

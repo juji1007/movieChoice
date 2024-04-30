@@ -38,6 +38,7 @@
 	var checkCritic = frm.elements["criticCheck"];
 		if (checkCritic.checked) {
 		    checkCritic.value = "1";
+		    location.href="criticApply.jsp?location=myPage&id=<%=avo.getId() %>";
 		} else {
 		    checkCritic.value = "0";
 		}
@@ -101,11 +102,18 @@
 				        </td>
 				    </tr>
 				    <tr>
-				        <th>평론가 구분</th>
-				        <td colspan="3">
-				            <input type="radio" name="criticCheck" title="평론가" value="<%= avo.getCriticCheck() %>" onclick="check_critic(this.form)"/>
-				        </td>
-				    </tr>
+					    <th>평론가 구분</th>
+					    <td colspan="3">
+					        <input type="radio" name="criticCheck" title="평론가" value="1"
+					            <c:if test="${avo.getCriticCheck() == 1}">
+					                checked
+					            </c:if>
+					        <c:if test="${avo.getCriticCheck() != 1}">
+					            onclick="check_critic(this.form)"
+					        </c:if>
+					        />
+					    </td>
+					</tr>
 				    <tr>
 				        <th>이메일</th>
 				        <td colspan="3">
