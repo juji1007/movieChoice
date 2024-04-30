@@ -8,7 +8,7 @@
 	int result = reviewDAO.delete(rvNo);
 	System.out.println(">> delete 건수 : " + result);
 	
-	response.sendRedirect("reviewMain.jsp");
+	response.sendRedirect("reviewController?category=rvMain");
 %>
 <!DOCTYPE html>
 <html>

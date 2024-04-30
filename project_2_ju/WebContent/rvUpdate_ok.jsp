@@ -6,18 +6,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-	<jsp:useBean id="upVo" class="com.mystudy.model.vo.reviewVO"/>
-	<jsp:setProperty property="*" name="upVo"/>
-	<jsp:setProperty property="no" name="upVo" value="${rvVo.no }"/>
-	<jsp:setProperty property="rvNick" name="upVo" value="${rvVo.rvNick }"/>
-	<jsp:setProperty property="rvNo" name="upVo" value="${rvVo.rvNo }"/>
+	<jsp:useBean id="update" class="com.mystudy.model.vo.reviewVO"/>
+	<jsp:setProperty property="*" name="update"/>
+	<jsp:setProperty property="no" name="update" value="${upVo.no }"/>
+	<jsp:setProperty property="rvNick" name="update" value="${upVo.rvNick }"/>
+	<jsp:setProperty property="rvNo" name="update" value="${upVo.rvNo }"/>
 <%
-	System.out.println(">>rvUpdate.jsp totVo : " + upVo);
+	System.out.println(">>rvUpdate.jsp totVo : " + update);
 	//DB연동 - 리뷰 update
-	int result = reviewDAO.update(upVo);
+	int result = reviewDAO.update(update);
 	System.out.println(">> 수정 건수 : " + result);
 	
-	response.sendRedirect("rvDetail.jsp?rvNo=" + upVo.getRvNo());
+	response.sendRedirect("reviewController?category=rvMain&rvNo=" + update.getRvNo());
 %>
 <!DOCTYPE html>
 <html>

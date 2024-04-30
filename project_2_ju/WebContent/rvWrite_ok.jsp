@@ -21,7 +21,5 @@
  	int result = reviewDAO.insert(voList);
  	System.out.println(":: 입력 건수 " + result);
 	
-	response.sendRedirect("reviewMain.jsp");
-// 	response.sendRedirect("rvDetail.jsp?rvNo=" + voList.getRvNo());
-//	response.sendRedirect("rvDetail.jsp?rvNo=" + vo.getRvNo());
+	response.sendRedirect("reviewController?category=rvMain");
 %>

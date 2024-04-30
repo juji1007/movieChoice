@@ -6,24 +6,49 @@
 	
 	<!-- (동적 검색)조건 선택하여 리뷰 목록 조회 -->
 	<select id="one" parameterType="map" resultType="com.mystudy.model.vo.reviewVO">
-		SELECT M.*, R.* 
+	<![CDATA[
+		SELECT ROWNUM R_NUM, M.*, R.* 
+     	FROM REVIEW R, MOVIE M
+     	WHERE R.MV_NO = M.MV_NO
+     	AND ROWNUM >= #{BEGIN}
+     	AND ROWNUM <= #{END}
+	]]>	
+     	<choose>
+     		<when test = "idx == 0">
+		     	AND M.MV_TITLE = #{keyword}
+     		</when>
+     		<when test = "idx == 1">
+		     	AND R.RV_NICK = #{keyword}
+     		</when>
+     		<when test = "idx == 1">
+		     	AND TO_CHAR(R.RV_DATE, 'YYYYMMDD') = #{keyword}
+     		</when>
+     		<otherwise>
+				AND 1 = 2
+			</otherwise>
+     	</choose>
+     	ORDER BY R.RV_NO DESC
+	</select>
+	
+	<!-- (동적 검색)카테고리별 리뷰 건수 조회 **현재 진행 -->
+	<select id="cnt" parameterType="collection" resultType="int">
+		SELECT COUNT(*) AS CNT 
 		FROM REVIEW R, MOVIE M
 		WHERE R.MV_NO = M.MV_NO
 		<choose>
-			<when test="idx == 0">
-				AND M.MV_TITLE = #{keyword}
-			</when>
-			<when test="idx == 1">
-				AND R.RV_NICK = #{keyword}
-			</when>
-			<when test="idx == 2">
-				AND TO_CHAR(R.RV_DATE, 'YYYYMMDD') = #{keyword}
-			</when>
-			<otherwise>
+     		<when test = "idx == 0">
+		     	AND M.MV_TITLE = #{keyword}
+     		</when>
+     		<when test = "idx == 1">
+		     	AND R.RV_NICK = #{keyword}
+     		</when>
+     		<when test = "idx == 1">
+		     	AND TO_CHAR(R.RV_DATE, 'YYYYMMDD') = #{keyword}
+     		</when>
+     		<otherwise>
 				AND 1 = 2
 			</otherwise>
-		</choose>
-		ORDER BY R.RV_NO DESC
+     	</choose>
 	</select>
 	
 	<!-- 영화번호로 리뷰vo 조회 -->
@@ -95,12 +120,13 @@
 		WHERE RV_NO = #{rvNo}
 	</select>
 	
-	<update id="rec" parameterType="map">
+	<!-- 추천수 -->
+ 	<update id="rec" parameterType="map">
 		UPDATE REVIEW
 		SET RV_REC = RV_REC + 1
 		WHERE RV_NO = #{rvNo}
 		AND NO != #{no}
-	</update>
+	</update> 
 	
 	<!-- 리뷰 RvNo 조회 -->
 	

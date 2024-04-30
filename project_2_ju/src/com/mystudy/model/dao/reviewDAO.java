@@ -1,5 +1,6 @@
 package com.mystudy.model.dao;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +15,17 @@ import com.project.mybatis.DBService;
 public class reviewDAO {
 
 	//카테고리별(영화명,작성자,작성일) 목록 조회
-	public static List<reviewVO> selectOne(String idx, String keyword) {
+	public static List<reviewVO> selectOne(String idx, String keyword, int begin, int end) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, Object> map = new HashMap<>();
 			map.put("idx", idx);
 			map.put("keyword", keyword);
+			map.put("begin", begin);
+			map.put("end", end);
+			System.out.println(">> reviewDAO map : " + map);
+			
+//			java.util.Set<String> set = map.keySet();
+//			System.out.println("set : " + set);
 			
 			return ss.selectList("review.one", map);
 		} catch (Exception e) {
@@ -26,6 +33,19 @@ public class reviewDAO {
 		}
 		return null;
 	}	
+//	//카테고리별 리뷰 건수 조회
+		public static int getCount(String idx, String keyword) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("idx", idx);
+				map.put("keyword", keyword);
+				
+				return ss.selectOne("review.cnt", map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 	
 	//영화번호로 리뷰vo 조회
 	public static reviewVO mvNoRv(int mvNo, int rvNo) {
