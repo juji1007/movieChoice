@@ -156,7 +156,7 @@
 							<a href="reveiwMain.jsp?cPage=${pvo.endPage + 1 }">다음</a>
 						</li> 
 					</c:if>
-					<c:if test="${pvo.endPage >= pvo.totalPage }">
+					<c:if test="${Pvo.endPage >= pvo.totalPage }">
 						<li class="disable">다음</li> 
 					</c:if>
 					</ol>

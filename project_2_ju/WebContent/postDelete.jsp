@@ -14,7 +14,14 @@
 	int result = postDAO.delete(psNo);
 	pageContext.setAttribute("result", result);
 	
-	response.sendRedirect("free.jsp");
+	String location = request.getParameter("location");
+	if ("myPage".equals(location)) {
+		System.out.println("location은 myPage");
+		
+		response.sendRedirect("myPage.jsp");
+	} else {
+		response.sendRedirect("free.jsp");
+	}
 %>
 
 

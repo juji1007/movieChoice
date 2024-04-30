@@ -1,3 +1,4 @@
+<%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.criticVO"%>
 <%@page import="com.mystudy.model.dao.criticDAO"%>
@@ -28,8 +29,24 @@
 	cvo.setCompany(company);
 	
 	criticDAO.insert(cvo);
+
+			String location = request.getParameter("location");
+			if ("myPage".equals(location)) {
+				
+				
+				System.out.println("myPage 회원정보수정");
 %>	
-<script> 
-		alert("신청이 완료되었습니다!");
-		location.href="memberJoinOk.jsp";
-</script> 
+		<script>
+			alert("신청이 완료되었습니다!");
+			location.href="loginController?type=updateAccount&location=checkApply&criticCheck=1";
+		</script>		
+<%
+			} else {
+%>			
+		<script>
+			alert("신청이 완료되었습니다!");
+			location.href="memberJoinOk.jsp";
+		</script> 
+<%
+			}
+%>

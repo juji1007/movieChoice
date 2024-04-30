@@ -83,5 +83,17 @@
 	
 	<!-- 추천수 count -->
 	
+	<!-- 마이페이지 나의 리뷰 조회 -->
+	<select id="getReviewByNo" parameterType="int" resultType="com.mystudy.model.vo.reviewVO">
+		SELECT *
+		FROM REVIEW
+		WHERE NO = #{no}
+	</select>
+	
+	<update id="updateNickReview" parameterType="map">
+		UPDATE REVIEW
+		SET RV_NICK = #{nick}
+		WHERE NO = #{no}
+	</update>
 	
 </mapper>

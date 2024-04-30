@@ -92,7 +92,7 @@
 				    <tr>
 				        <th>영화포스터</th>
 				        <td colspan="3">
-				            <input type="text" name="mvPoster" title="영화포스터" value="<%= mvo.getMvPoster() %>" />
+				            <input type="file" name="mvPoster" title="영화포스터" value="<%= mvo.getMvPoster() %>" />
 				        </td>
 				    </tr>
 				</thead>

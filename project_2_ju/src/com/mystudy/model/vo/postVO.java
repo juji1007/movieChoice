@@ -10,9 +10,24 @@ public class postVO {
 	private Date psDate;
 	private String psFile;
 	private String psOrifile;
-	private String psNick;
+
 	private int psWarn;
+	private String psNick;
+
 	
+	
+	public int getPsWarn() {
+		return psWarn;
+	}
+	public void setPsWarn(int psWarn) {
+		this.psWarn = psWarn;
+	}
+	public String getPsNick() {
+		return psNick;
+	}
+	public void setPsNick(String psNick) {
+		this.psNick = psNick;
+	}
 	public int getPsNo() {
 		return psNo;
 	}

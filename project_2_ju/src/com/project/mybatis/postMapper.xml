@@ -108,4 +108,18 @@
 		DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
 	</delete>
 	
+	<!-- 마이페이지 나의 자유게시판조회 -->
+	<select id="getPostByNo" parameterType="int" resultType="com.mystudy.model.vo.postVO">
+		SELECT *
+		FROM POST
+		WHERE NO = #{no}
+	</select>
+	
+	<!-- 자유게시판 닉네임 업데이트 -->
+	<update id="updateNickPost" parameterType="map">
+		UPDATE POST
+		SET PS_NICK = #{nick}
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>
