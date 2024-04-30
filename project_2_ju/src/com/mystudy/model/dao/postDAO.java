@@ -135,7 +135,8 @@ public class postDAO {
 			return -1;
 		}
 		
-		//마이페이지 나의 자유게시판 조회
+		//마이페이지 ============================================ 
+		//나의 자유게시판 조회
 		public static List<postVO> getPostList(int no) {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
 				return ss.selectList("post.getPostByNo", no);
@@ -143,6 +144,19 @@ public class postDAO {
 				e.printStackTrace();
 			}
 			return null;
+		}
+		
+		//닉네임 수정 시 자유게시판 닉네임 변경
+		public static int updateNickPost(int no, String nick) {
+		    try (SqlSession ss = DBService.getFactory().openSession(true)) {
+		        Map<String, Object> map = new HashMap<>();
+		        map.put("no", no);
+		        map.put("nick", nick);
+		        return ss.update("post.updateNickPost", map);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return -1;
 		}
 		
 }

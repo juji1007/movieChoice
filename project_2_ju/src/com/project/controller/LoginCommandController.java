@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.mystudy.model.dao.postDAO;
+import com.mystudy.model.dao.reviewDAO;
 import com.project.command.Command;
 import com.project.command.FindIdCommand;
 import com.project.command.FindIdOkCommand;
@@ -133,9 +135,7 @@ public class LoginCommandController extends HttpServlet {
 			} else {
 				criticCheckInt = 0;
 			}
-			System.out.println("criticCheckInt : " + criticCheckInt);
 			
-			System.out.println("nickName : " + nickName);
 			AccountVO avo = new AccountVO();
 			avo.setNo(no);
 			avo.setName(name);
@@ -146,7 +146,13 @@ public class LoginCommandController extends HttpServlet {
 			System.out.println("avo ok : " + avo);
 		    int result = AccountDAO.UpdateAccount(avo);
 		    
-		    if (result == -1) {
+		    //리뷰 닉네임 업데이트
+		    int resultR = reviewDAO.updateNickReview(no, nickName);
+		    
+		    //포스트 닉네임 업데이트
+		    int resultP = postDAO.updateNickPost(no, nickName);
+		    
+		    if (result == -1 && resultR == -1 && resultP == -1) {
 		    	System.out.println("실패");
 		    }
 		    System.out.println("성공");

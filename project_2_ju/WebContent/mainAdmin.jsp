@@ -58,10 +58,17 @@ System.out.println("list : " + list);
 
 
 <%--영화검색 --%>
-<form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }">
-<input type="text" name="mvNo" placeholder="영화제목을 입력하세요">
-<input type="submit" value="영화검색">
-</form>
+<div id="movieSearchArea">
+    <form action="movieDetail.jsp?mvNo=${mvDetail.mvNo}">
+        <input type="text" name="mvNo" placeholder="영화제목을 입력하세요">
+        <input type="submit" value="영화검색">
+    </form>
+</div>
+<div id="movieInsertArea">
+    <input type="button" value="영화추가" onclick="location.href='movieInsert.jsp'">
+</div>
+
+
 <div>
 
 <h3 class="top">현재 상영 영화 TOP10</h3>

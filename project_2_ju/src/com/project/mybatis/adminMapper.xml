@@ -11,7 +11,7 @@
     </select>  
 
 	<select id="searchReviewList" resultType="reviewVO">
-    	SELECT * FROM REVIEW ORDER BY WARN DESC
+    	SELECT * FROM REVIEW ORDER BY RV_WARN DESC
     
     </select>
     

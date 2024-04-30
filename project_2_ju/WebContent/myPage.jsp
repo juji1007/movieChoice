@@ -27,56 +27,14 @@
 <link rel="stylesheet" href="css/header.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<style>
-table {
-/* 	position: absolute; */
-	top: 50%;
-	left: 60%;
-  	transform: translate(200px, -10px);  
-  	margin-top: 10%;
-  	margin-right: 15%;
-	width: 80%;
-	max-height: 400px;
-	overflow-y: auto;
-	border-collapse: collapse;
-	border: 1px solid black;
-}
-
-.body {
-	position: relative;
-	padding-top: 200px;
-}
-
-caption {
-	margin-bottom: 50px;
-}
-
-th, td {
-    border: 1px solid black; /* 테이블 경계선 설정 */
-    padding: 8px; /* 셀 안의 여백 설정 */
-    text-align: center; /* 가운데 정렬 */
-}
-
-
-select, thead input[type="text"], thead input[type="submit"] {
-	margin-right: 10px;
-}
-
-th tr td{
-	display: flex;
-	align-items: center;
-	border: none; 
-	border: 1px solid black; 
-	
-}
-</style>
+<!-- style 태그 -->
+<link rel="stylesheet" href="css/myPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function updateAccount(frm) {
 		console.log("회원정보수정실행");
 		console.log(frm);
 		frm.action="loginController?type=updateAccount";
-// 		frm.action="mainAdmin.jsp";
 		frm.submit();
 	}
 	function updateReview(frm) {

@@ -90,4 +90,10 @@
 		WHERE NO = #{no}
 	</select>
 	
+	<update id="updateNickReview" parameterType="map">
+		UPDATE REVIEW
+		SET RV_NICK = #{nick}
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>

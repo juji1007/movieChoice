@@ -114,4 +114,11 @@
 		WHERE NO = #{no}
 	</select>
 	
+	<!-- 자유게시판 닉네임 업데이트 -->
+	<update id="updateNickPost" parameterType="map">
+		UPDATE POST
+		SET PS_NICK = #{nick}
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>

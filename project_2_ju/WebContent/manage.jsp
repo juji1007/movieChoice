@@ -137,7 +137,14 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function selectCategory(Frm) {
+function updateAccount(frm) {
+	console.log("회원정보수정실행");
+	console.log(frm);
+// 	frm.action="loginController?type=updateAccount";
+// 	frm.submit();
+}
+
+function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
 	if ("선택" == checkCategory) {
 		alert("검색종류를 선택해주세요!");
@@ -249,7 +256,7 @@ function selectCategory(Frm) {
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
-			            htmltag += "<input type='button' value='수정' onclick='updateAccount()'></td>";
+			            htmltag += "<input type='button' value='수정' onclick='updateAccount(this.form)'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
@@ -261,7 +268,7 @@ function selectCategory(Frm) {
 //             htmltag += "</tbody>";
 
             // 테이블을 #jsonData 엘리먼트에 추가
-            $('#jsonData').html(Htmltag);
+            $('#jsonData').html(htmltag);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert("Ajax 처리 실패:\n" +

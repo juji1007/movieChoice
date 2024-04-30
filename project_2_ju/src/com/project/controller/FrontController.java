@@ -160,7 +160,7 @@ public class FrontController extends HttpServlet {
 		    String mvGrade = request.getParameter("mvGrade");
 		    String mvPoster = request.getParameter("mvPoster");
 		    //영화번호 search해서 뽑아야될듯
-		    mvo.setMvNo(11);
+//		    mvo.setMvNo(11);
 		    mvo.setMvTitle(mvTitle);
 		    mvo.setMvDirect(mvDirect);
 		    mvo.setMvActor(mvActor);
