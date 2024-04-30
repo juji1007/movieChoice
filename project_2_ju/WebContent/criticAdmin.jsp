@@ -16,6 +16,8 @@
    System.out.println("listc : " + listc);
    request.setAttribute("listc", listc);
    
+   String cNo = request.getParameter("critic");
+   
    int[] numa=new int[listc.size()]; 
    int i = 0;
    for (criticVO cvo :  listc) {
@@ -34,15 +36,13 @@
 <head>
 <meta charset="UTF-8">
 <title>평론가</title>
-<script type="text/javascript">
-	function criticDelete() {
-	    var result = confirm("정말로 삭제하시겠습니까?");
-	    
-	    if (result) {
-	       
-	        alert("삭제되었습니다."); 
+<link rel="stylesheet" href="css/header.css">
+<script>
+	function criticDelete(frm) {
+	    let cDelete = confirm("정말로 삭제하시겠습니까?");
+	    if (cDelete) {
+	    	frm.submit();
 	    } else {
-	       
 	    }
 	}
 </script>
@@ -54,37 +54,39 @@
 </style>
 </head>
 <body>
-
+<%@ include file="include/headerAdmin.jspf" %>
 <h1>평론가</h1>
 	<c:forEach var="vo" items="${listc }" varStatus="loop">
-		<table border>
-			<colgroup>
-				<col width="100">
-				<col width="100">
-				<col width="50">
-				<col width="100">
-				<col width="200">
-			</colgroup>
-		    <tr>
-		        <th rowspan="4"><img src="img/noImage.jpg" width="100" height="150px" alt="평론가 사진"></th>
-		        <th colspan="4">정보</th>
-		    </tr>
-		    <tr>
-		        <td rowspan="2"><strong>${vo.name }</strong></td>
-		        <td colspan="2">소속</td>
-		        <td colspan="2">경력</td>
-		    </tr>
-		    <tr>
-		    	<td colspan="2">${vo.company }</td>
-		    	<td colspan="2">${vo.career }</td>
-		    </tr>
-		    <tr>
-		    	<td colspan="4">리뷰건수 : <a href="criticDetail.jsp?critic=${vo.no }">${numa[loop.index]}</a>
-		    	<input type="button" value="삭제"  onclick="criticDelete()">
-		    	<input type="button" value="수정" onclick="location.href='criticUpdate.jsp?critic=${vo.no }'">
-		    	</td>
-		    </tr>
-		</table>
+		<form action="criticDeleteOk.jsp?critic=${vo.no }" method="post">
+			<table border>
+				<colgroup>
+					<col width="100">
+					<col width="100">
+					<col width="50">
+					<col width="100">
+					<col width="200">
+				</colgroup>
+			    <tr>
+			        <th rowspan="4"><img src="img/${vo.filename }" width="100" height="150px" alt="평론가 사진"></th>
+			        <th colspan="4">정보</th>
+			    </tr>
+			    <tr>
+			        <td rowspan="2"><strong>${vo.name }</strong></td>
+			        <td colspan="2">소속</td>
+			        <td colspan="2">경력</td>
+			    </tr>
+			    <tr>
+			    	<td colspan="2">${vo.company }</td>
+			    	<td colspan="2">${vo.career }</td>
+			    </tr>
+			    <tr>
+			    	<td colspan="4">리뷰건수 : <a href="criticDetail.jsp?critic=${vo.no }">${numa[loop.index]}</a>
+			    	<input type="button" value="삭제"  onclick="criticDelete(this.form)">
+			    	<input type="button" value="수정" onclick="location.href='criticUpdate.jsp?critic=${vo.no }'"> 
+			    	</td>
+			    </tr>
+			</table>
+		</form>
 	</c:forEach>
 </body>
 </html>

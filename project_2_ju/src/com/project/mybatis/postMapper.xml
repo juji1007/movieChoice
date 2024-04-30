@@ -50,11 +50,12 @@
 		
 	</select>
 	
+
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
 		INSERT INTO POST
-			       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE)
-			VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE) 
+			       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE, PS_FILE, PS_ORIFILE, PS_NICK)
+			VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE, #{psFile}, #{psOrifile}, #{psNick}) 
 	</insert>
 
 	<!-- 게시글 수정 -->
@@ -63,6 +64,8 @@
 			SET PS_TITLE = #{psTitle} 
 				, PS_CONTENT = #{psContent}
 				, PS_DATE = SYSDATE
+				, PS_FILE = #{psFile}
+				, PS_ORIFILE = #{psOrifile}
 			WHERE PS_NO = #{psNo}
 	</update>
 	
@@ -97,12 +100,26 @@
 	<!-- 댓글입력 -->
 	<insert id="commInsert" parameterType="com.mystudy.model.vo.postCommentVO">
 		INSERT INTO PS_COMMENT
-		       (PC_NO, PS_NO, NO, PC_DATE, PC_CONTENT)
-		VALUES (PS_COMMENT_SEQ.NEXTVAL, #{psNo}, #{no}, SYSDATE, #{pcContent})	
+		       (PC_NO, PS_NO, NO, PC_DATE, PC_CONTENT, PC_NICK)
+		VALUES (PS_COMMENT_SEQ.NEXTVAL, #{psNo}, #{no}, SYSDATE, #{pcContent}, #{pcNick})	
 	</insert>
 	<!-- 댓글삭제 -->
 	<delete id="commDelete" parameterType="int">
 		DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
 	</delete>
+	
+	<!-- 마이페이지 나의 자유게시판조회 -->
+	<select id="getPostByNo" parameterType="int" resultType="com.mystudy.model.vo.postVO">
+		SELECT *
+		FROM POST
+		WHERE NO = #{no}
+	</select>
+	
+	<!-- 자유게시판 닉네임 업데이트 -->
+	<update id="updateNickPost" parameterType="map">
+		UPDATE POST
+		SET PS_NICK = #{nick}
+		WHERE NO = #{no}
+	</update>
 	
 </mapper>

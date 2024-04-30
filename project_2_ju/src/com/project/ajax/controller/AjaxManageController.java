@@ -8,13 +8,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.mystudy.model.dao.postDAO;
+import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.vo.movieVO;
+import com.mystudy.model.vo.postVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.dao.AccountDAO;
 //import com.project.dao.AdminDAO;
@@ -107,6 +112,100 @@ public class AjaxManageController extends HttpServlet {
 			
 		}
 		
+		//마이페이지처리 =====================================
+		//회원정보
+		if ("accountMypage".equals(action)) {
+			System.out.println("마이페이지유저처리");
+			
+			//로그인 아이디로 검색처리
+			HttpSession session = req.getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id : " + id);
+			
+			//없으면 다시 처음화면으로
+			if (id == null || id.trim().length() == 0) {
+				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
+				return;
+			}
+			
+			List<AccountVO> avoList = AccountDAO.getAccountList(id);
+			System.out.println("avoList : " + avoList);
+			
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("account", avoList);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+			
+		}
+		//나의 리뷰목록
+		if ("reviewMypage".equals(action)) {
+			System.out.println("마이페이지리뷰처리");
+			
+			//로그인 아이디로 검색처리
+			HttpSession session = req.getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id : " + id);
+			
+			//없으면 다시 처음화면으로
+			if (id == null || id.trim().length() == 0) {
+				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
+				return;
+			}
+			
+			int no = AccountDAO.getAccountNo(id);
+			System.out.println("avoNo : " + no);
+			
+		    List<reviewVO> rvoList = reviewDAO.getReviewList(no);
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("review", rvoList);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+			
+		}
+		//나의 자유게시판
+		if ("postMypage".equals(action)) {
+			System.out.println("마이페이지post처리");
+			
+			//로그인 아이디로 검색처리
+			HttpSession session = req.getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id : " + id);
+			
+			//없으면 다시 처음화면으로
+			if (id == null || id.trim().length() == 0) {
+				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
+				return;
+			}
+			
+			int no = AccountDAO.getAccountNo(id);
+			System.out.println("avoNo : " + no);
+			
+		    List<postVO> pvoList = postDAO.getPostList(no);
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("post", pvoList);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+					
+		}
+		
 	}
 	
 	private String makeJson(Map<String, List<?>> listSearch) {
@@ -136,7 +235,7 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
 		            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
 		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
-		            result.append("\"warn\": \"" + rvo.getWarn() + "\"");
+		            result.append("\"warn\": \"" + rvo.getRvWarn() + "\"");
 		            result.append("},");
 		        }
 		        
@@ -168,6 +267,21 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"criticCheck\": \"" + avo.getCriticCheck() + "\", ");
 		            result.append("\"email\": \"" + avo.getEmail() + "\", ");
 		            result.append("\"warn\": \"" + avo.getWarn() + "\"");
+		            result.append("},");
+		        }
+		        
+		        if ("post".equals(key)) {
+		        	postVO pvo = (postVO) item;
+		        	 result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"psNo\": \"" + pvo.getPsNo() + "\", ");
+		            result.append("\"no\": \"" + pvo.getNo() + "\", ");
+		            result.append("\"psTitle\": \"" + pvo.getPsTitle() + "\", ");
+		            result.append("\"psContent\": \"" + pvo.getPsContent() + "\", ");
+		            result.append("\"psDate\": \"" + pvo.getPsDate() + "\", ");
+		            result.append("\"psFile\": \"" + pvo.getPsFile() + "\", ");
+		            result.append("\"psWarn\": \"" + pvo.getPsWarn() + "\", ");
+		            result.append("\"psNick\": \"" + pvo.getPsNick() + "\"");
 		            result.append("},");
 		        }
 		    }

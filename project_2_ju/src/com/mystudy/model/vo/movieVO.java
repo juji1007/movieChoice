@@ -1,8 +1,11 @@
 package com.mystudy.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class movieVO {
+public class movieVO  implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private int mvNo;
 	private String mvTitle;
 	private String mvDirect;
@@ -13,7 +16,35 @@ public class movieVO {
 	private String mvGrade;
 	private Date mvDate;
 	private String mvPoster;
+	private String rvNick;
+	private String rvTitle;
+	private String rvContent;
+	private Date rvDate;
 	
+	public String getRvNick() {
+		return rvNick;
+	}
+	public void setRvNick(String rvNick) {
+		this.rvNick = rvNick;
+	}
+	public String getRvTitle() {
+		return rvTitle;
+	}
+	public void setRvTitle(String rvTitle) {
+		this.rvTitle = rvTitle;
+	}
+	public String getRvContent() {
+		return rvContent;
+	}
+	public void setRvContent(String rvContent) {
+		this.rvContent = rvContent;
+	}
+	public Date getRvDate() {
+		return rvDate;
+	}
+	public void setRvDate(Date rvDate) {
+		this.rvDate = rvDate;
+	}
 	public int getMvNo() {
 		return mvNo;
 	}
@@ -74,14 +105,13 @@ public class movieVO {
 	public void setMvPoster(String mvPoster) {
 		this.mvPoster = mvPoster;
 	}
+	
 	@Override
 	public String toString() {
 		return "movieVO [mvNo=" + mvNo + ", mvTitle=" + mvTitle + ", mvDirect=" + mvDirect + ", mvActor=" + mvActor
 				+ ", mvGenre=" + mvGenre + ", mvRate=" + mvRate + ", mvAudience=" + mvAudience + ", mvGrade=" + mvGrade
-				+ ", mvDate=" + mvDate + ", mvPoster=" + mvPoster + "]";
-	}
-	
-	
-	
+				+ ", mvDate=" + mvDate + ", mvPoster=" + mvPoster + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle
+				+ ", rvContent=" + rvContent + ", rvDate=" + rvDate + "]";
+	}	
 	
 }

@@ -16,8 +16,8 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 
 
 System.out.println("list : " + list);
- System.out.println("list.size : " + list.size());
- session.setAttribute("attr_list", list);
+System.out.println("list.size : " + list.size());
+session.setAttribute("attr_list", list);
 
 
 %>  
@@ -56,10 +56,10 @@ System.out.println("list : " + list);
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
-
+ 
 
 <%--영화검색 --%>
-<form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }">
+<form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }" method="get">
 <input type="text" name="mvNo" placeholder="영화제목을 입력하세요">
 <input type="submit" value="영화검색">
 </form>
@@ -105,6 +105,7 @@ System.out.println("list : " + list);
   <input type="submit" value="동적검색">
 </form>
 <hr class="gray">
+
 <c:forEach var="vo" items="${list2 }">
 <a href="movieDetail.jsp?mvNo=${vo.mvNo }">
 	<table>
@@ -119,6 +120,7 @@ System.out.println("list : " + list);
 	</table>
 </a>
 </c:forEach>
+
 
 </div>
 </body>

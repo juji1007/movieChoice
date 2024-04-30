@@ -48,7 +48,7 @@ function list_go() {
 </head>
 <body>
 <div>
-<form action="postWrite_ok.jsp" method="post">
+<form action="postWrite_ok.jsp" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
 		
@@ -71,12 +71,12 @@ function list_go() {
 	<tr>
 		<th>첨부파일</th>
 		<td>
-			<input type="file" name="filename">
+			<input type="file" name="psFile">
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="저장" >
+			<input type="button" value="저장" onclick="sendData()">
 			<input type="reset" value="초기화">
 			
 			<input type="button" value="목록보기" onclick="list_go()">

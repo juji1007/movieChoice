@@ -15,8 +15,16 @@
 		WHERE MV_NO = #{mvNo}
 	</select>
 	
+	<select id="searchDup" parameterType="map" resultType="String">
+		SELECT MV_TITLE 
+		FROM MOVIE
+		WHERE MV_TITLE = #{mvTitle} 
+			  AND
+		   	  MV_DIRECT = #{mvDirect}
+	</select>
+	
 	<delete id="delete" parameterType="int">
-		DELETE INTO MOVIE
+		DELETE FROM MOVIE
 		WHERE MV_NO = #{mvNo}
 	</delete>
 	
@@ -33,5 +41,17 @@
 		    MV_POSTER = #{mvPoster}
 		WHERE MV_NO = #{mvNo}
 	</update>
+	
+	<insert id="insert" parameterType="com.mystudy.model.vo.movieVO">
+		INSERT INTO MOVIE (MV_NO, MV_TITLE, MV_DIRECT, MV_ACTOR, MV_GENRE, MV_RATE, MV_AUDIENCE, MV_GRADE, MV_DATE, MV_POSTER)
+		VALUES (MOVIE_SEQ.NEXTVAL, #{mvTitle}, #{mvDirect}, #{mvActor}, #{mvGenre}, #{mvRate}, #{mvAudience}, #{mvGrade}, #{mvDate}, #{mvPoster}) 
+	</insert>
+	
+	<select id="rone" resultType="com.mystudy.model.vo.movieVO">
+		SELECT * 
+		FROM MOVIE M, REVIEW R
+		WHERE M.MV_NO = R.MV_NO
+		AND M.MV_NO = #{mvNo}
+	</select>
 	
 </mapper>
