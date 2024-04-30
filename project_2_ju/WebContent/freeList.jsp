@@ -13,9 +13,10 @@
 	<table>
 	<tr>
 		<td>${vo.psNo }</td>
+		<td>${vo.psNick }</td>
 		<td>${vo.psDate }</td>
 		<td>
-		<a href="freeView.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
+		<a href="freeView.jsp?psNo=${vo.psNo }">
 		${vo.psTitle }
 		</a>
 		</td>
