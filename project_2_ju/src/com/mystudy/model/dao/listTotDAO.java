@@ -19,5 +19,14 @@ public class listTotDAO {
 		return null;
 	}
 
+	// 리뷰 번호로 조회
+	public static listTotVO selectOne(int rvNo) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {			
+			return ss.selectOne("listTotal.one", rvNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

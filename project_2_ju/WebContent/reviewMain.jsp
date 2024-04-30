@@ -11,112 +11,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	List<listTotVO> listAll = listTotDAO.getList();
-	try (SqlSession ss = DBService.getFactory().openSession()) {
-		listAll = ss.selectList("listTotal.listAll");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	System.out.println("listAll : " + listAll);
-	
-	pageContext.setAttribute("list", listAll);
-%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰목록 메인 페이지</title>
+<title>리뷰 메인</title>
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/rvMain.css">
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
-	function recommand_push() {
-		location.href = "rvRecommand.jsp";
-		submit();
+	function rec_push(frm) {
+		location.href = "rvRec.jsp?rvNo=";
+		frm.submit();
 	}
 	
 
 	function warn_push() {
 		location.href = "rvWarn.jsp";
-		submit();
+		frm.submit();
 	}
-
-	//AJAX controller 연결 - review 전체 조회
-	$(document).ready(function(){
-		console.log(">> reviewMain.jsp 접속 성공!!");
-		
-		$.ajax({
-			type : "POST",
-			url : "ajaxReviewController",
-			data : {
-				action: "reviewMain"
-			},
-			dataType: "json",
-			success : function(respData){
-			    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
-			    //Json데이터 처리
-			    let str = null;
-			    for (let member of respData.listAll) {
-			        console.log(">> 리뷰 내용 실행");
-			        str += "<tr>";
-			        str += "<td>" + member.mvTitle + "</td>";
-			        str += "<td>" + member.rvTitle + "</td>";
-			        str += "</tr>";
-			        
-					str += "<tr>";
-					str += "<td>" + member.rvNick + "</td>";
-			        str += "<td>" + member.rvDate + "</td>";
-			        str += "</tr>";
-			       
-/*
-			        str += "<tr>";
- 			        str += "<td>" + member.mvTitle + "</td>"
-			        str += "<td id=\"rvDetail\" colspan=\"2\">";
-			        str += "<a href=\"reviewController?type=rvDetail&rvNo=\"" + member.rvNo + ">" + member.rvTitle + "</a>";
-			        str += "</td>";
-			        str += "</tr>";
-			        
-			        str += "<tr>";
- 			        str += "<td rowspan=\"2\">";
- 			        str += "포스터 경로";
-// 			        str += "<img src=\"img\"" + member.mvPoster + \" alt=\"포스터\" width=\"150px\">";
-// 			        str += "<img src=\"img/exhuma.jpg" alt=\"포스터\" width=\"150px\">";
-			        str += "</td>"; 
-			        str += "<td>" + member.rvNick +"</td>";
-			        str += "<td>" + member.rvDate +"</td>";
-			        
-			        str += "<tr>";
-			        str += "<td class=\"recNo\" colspan=\"2\">";
-			        str += "<input type=\"button\" value=\"추천수 \" onclick=\"reviewController?type=rvRecommand&rvNo=&rvRec=\">";
-			        str += "<img src=\"img/iconRec.png\" id=\"iconRec\" alt=\"추천\" width=\"25px\">" + member.rvRec;
-			        str += "</td>";
-			        str += "</tr>";
-*/
-			    }
-			    $("#reviewOne").html(str);
-			    
-// 			    for (let member of respData.listAll) {
-// 			       console.log(">> 리뷰 btn 실행");
-			        
-// 			    }
-// 			    $("#reviewOne").html(str);
-			},
-
-			error : function(jqXHR, textStatus, errorThrown){
-				alert("Ajax 처리 실패 : \n"
-						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-						+ "textStatus : " + textStatus + "\n"
-						+ "errorThrown : " + errorThrown);
-			},
-			complete : function(){
-			}
-		});
-
-	}); 
-	
 
 </script>
 </head>
@@ -124,8 +40,14 @@
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
 
+	<h2>
+		리뷰모음
+		<input type="button" value="등록하기" 
+			onclick="javascript:location.href='reviewController?category=rvWrite'">
+	</h2>
+	
 	<!-- 리뷰 목록 검색 -->	
-	<form action="reviewController?category=selectOne" method="get">
+	<form action="reviewController?category=selectOne" method="post">
 		<select name="idx">
 			<option selected disabled>::선택</option>
 			<option value="0">영화명</option>
@@ -138,63 +60,65 @@
 		<input type="hidden" name="category" value="selectOne">
 	</form>
 	
-	<hr>
-	<h2>
-		리뷰모음
-		<input type="button" value="등록하기" 
-			onclick="javascript:location.href='rvWrite.jsp'">
-	</h2>
 	<!-- 리뷰 전체보기 -->
-	<table border>
-	<c:forEach var="vo" items="${List}">
+<form>
+	<table>
+	<c:forEach var="vo" items="${rvList}">
 		<tbody id="reviewOne">
 	        <tr>
-	            <td>${vo.mvTitle }</td>
-	            <td><a href="rvDetail.jsp?rvNo=${vo.rvNo }">${vo.rvTitle }</a></td>
+	            <td>${vo.mvNo }-영화명으로 변경</td>
+	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
+<%-- 	            <td id="rvTitle"><a href="reviewController?category=rvDetail&rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td> --%>
 	        </tr>
 	        <tr>
 	            <td>${vo.rvNick }</td>
 	            <td>${vo.rvDate }</td>
 	        </tr>
 	        <tr>
-	            <td><input type="button" value="추천수" onclick="recommand_push()">${vo.rvRec }</td>
-	            <td><input type="button" value="신고" onclick="warn_push()"></td>
+	            <td colspan="2">
+<%-- 	            	<input type="button" value="추천" onclick="rec_push(this.form)">${vo.rvRec } --%>
+	            	<input type="button" value="추천" onclick="javascript:location.href='rvRec.jsp?rvNo=${vo.rvNo}'">${vo.rvRec }
+	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn }
+	            	
+	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
+	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
+	            </td>
 	        </tr>
 	    </tbody>
-	</c:forEach>  
+	</c:forEach>
 	    <tfoot id="page">
 	        <tr>
 	        	<td colspan="2">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
-					<c:if test="${pvo.beginPage == 1 }">
+					<c:if test="${rvPvo.nowPage == 1 }">
 						<li class="disable">이전</li> 
 					</c:if>
-					<c:if test="${pvo.beginPage != 1 }">
+					<c:if test="${rvPvo.nowPage != 1 }">
 						<li>
-							<a href="reviewMain.jsp?cPage=${pvo.endPage - 1 }">이전</a>
+							<a href="reviewController?category=rvMain&cPage=${rvPvo.endPage - 1 }">이전</a>
 						</li> 
 					</c:if>
 					
 					<%--블록내에 표시할 페이지 태그 작성(시작~끝) --%>
-					<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
+					<c:forEach var="pageNo" begin="${rvPvo.beginPage }" end="${rvPvo.endPage }">
 					<c:choose>
-						<c:when test="${pageNo == pvo.nowPage }">
+						<c:when test="${pageNo == rvPvo.nowPage }">
 							<li class="now">${pageNo }</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="reveiwMain.jsp?cPage=${pageNo }">${pageNo }</a></li>
+							<li><a href="reviewController?category=rvMain&cPage=${pageNo }">${pageNo }</a></li>
 						</c:otherwise>
 					</c:choose>
 					</c:forEach>
 						
 					<%--[다음]에 대한 사용여부 처리 --%>	
-					<c:if test="${pvo.endPage < pvo.totalPage }">
+					<c:if test="${rvPvo.nowPage < rvPvo.totalPage }">
 						<li>
-							<a href="reveiwMain.jsp?cPage=${pvo.endPage + 1 }">다음</a>
+							<a href="reviewController?category=rvMain&cPage=${rvPvo.nowPage + 1 }">다음</a>
 						</li> 
 					</c:if>
-					<c:if test="${pvo.endPage >= pvo.totalPage }">
+					<c:if test="${rvPvo.nowPage >= rvPvo.totalPage }">
 						<li class="disable">다음</li> 
 					</c:if>
 					</ol>
@@ -202,6 +126,7 @@
 	    	</tr>
 	    </tfoot>
 	</table>
+</form>
 	
 </body>
 </html>
