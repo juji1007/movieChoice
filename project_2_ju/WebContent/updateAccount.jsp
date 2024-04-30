@@ -18,42 +18,7 @@
 <title>회원정보수정</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-	var isCheckId = false;
-
-	function checkId(frm) {
-	//		var checkId = form.elements["id"];
-		var checkId = frm.id.value;
-		if (checkId.trim().length == 0) {
-			alert("아이디를 입력해주세요!");
-			return false;
-		}
-		$.ajax ({
-			type: "POST",
-			url: "ajaxLoginController",
-			data: {
-				action: "checkDoubleId",
-				id: checkId
-			},
-			success : function(response){
-				if(response == "true") {
-					alert("이미 사용중인 아이디 입니다.");
-					frm.id.value = "";
-					return false;
-				} else {
-					alert("사용 가능한 아이디 입니다.");
-					isCheckId = true;
-					return true;
-				}
-			},
-			error : function(jqXHR, textStatus, errorThrown){
-				alert("Ajax 처리 실패 : \n"
-						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-						+ "textStatus : " + textStatus + "\n"
-						+ "errorThrown : " + errorThrown);
-				return false;
-			}
-		});
-	}
+	var check = false;
 	
 	function check_pwd(frm) {
 		var pwd = frm.pwd.value;
@@ -62,29 +27,38 @@
 		if(pwd != checkPwd) {
 			alert("비밀번호와 비밀번호확인 값이 다릅니다!");
 			frm.pwdCheck.value="";
+			check = false;
 			return false;
 		}
+		check = true;
 		return true;
 	}
 	
 	function check_critic(frm) {
 	var checkCritic = frm.elements["criticCheck"];
-	if (checkCritic.checked) {
-	    checkCritic.value = "1";
-	} else {
-	    checkCritic.value = "0";
-	}
+		if (checkCritic.checked) {
+		    checkCritic.value = "1";
+		} else {
+		    checkCritic.value = "0";
+		}
 	}
 	
 	function update(frm) {
 		
-		if(!isCheckId) {
-			alert("아이디 중복체크를 먼저 해주세요!");
+		if(!check) {
+			alert("비밀번호와 비밀번호확인 값이 다릅니다!");
+			frm.pwdCheck.value="";
 			return;
 		}
 		
-		frm.action="loginController?type=";
-		frm.submit();
+	    if (confirm("회원정보를 수정 하시겠습니까?")) {
+	    	
+	        frm.action = "loginController?type=updateAccountOk";
+	        frm.submit();
+	        
+	    } else {
+	    	
+	    }
 	}
 </script>
 <style type="text/css">
@@ -109,16 +83,9 @@
 				        </td>
 				    </tr>
 				    <tr>
-				        <th>아이디</th>
-				        <td colspan="3">
-				            <input type="text" name="id" title="아이디" value="<%=avo.getId() %>" />
-				            <input type="button" value="아이디중복체크" onclick="checkId(this.form)"/>
-				        </td>
-				    </tr>
-				    <tr>
 				        <th>비밀번호</th>
 				        <td colspan="3">
-				            <input type="password" name="pwd" title="비밀번호" />
+				            <input type="password" name="pwd" title="비밀번호" value="<%= avo.getPwd() %>"/>
 				        </td>
 				    </tr>
 				    <tr>
@@ -136,7 +103,7 @@
 				    <tr>
 				        <th>평론가 구분</th>
 				        <td colspan="3">
-				            <input type="number" name="criticCheck" title="평론가구분" value="<%= avo.getCriticCheck() %>" />
+				            <input type="radio" name="criticCheck" title="평론가" value="<%= avo.getCriticCheck() %>" onclick="check_critic(this.form)"/>
 				        </td>
 				    </tr>
 				    <tr>
@@ -155,7 +122,7 @@
 					<tr>
 						<td colspan="4">
 							<input type="button" value="수정하기" onclick="update(this.form)"/>
-							<input type="hidden" name="mvNo" value="<%= avo.getNo()%>" />
+							<input type="hidden" name="no" value="<%= avo.getNo()%>" />
 						</td>
 					</tr>
 				</tbody>

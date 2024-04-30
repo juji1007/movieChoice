@@ -22,6 +22,8 @@ import com.project.command.FindPasswordOkCommand;
 import com.project.command.LoginCommand;
 import com.project.command.MemberJoinCommand;
 import com.project.command.MemberJoinOkCommand;
+import com.project.command.UpdateAccountCommand;
+import com.project.command.UpdateAccountOkCommand;
 import com.project.dao.AccountDAO;
 import com.project.vo.AccountVO;
 
@@ -39,6 +41,8 @@ public class LoginCommandController extends HttpServlet {
 		commands.put("findPasswordOk", new FindPasswordOkCommand());
 		commands.put("memberJoin", new MemberJoinCommand());
 		commands.put("memberJoinOk", new MemberJoinOkCommand());
+		commands.put("updateAccount", new UpdateAccountCommand());
+		commands.put("updateAccountOk", new UpdateAccountOkCommand());
 	}
 	
 	@Override
@@ -102,12 +106,50 @@ public class LoginCommandController extends HttpServlet {
 		    System.out.println("upid : " + id);
 		    
 		    // 아이디 DB에서 조회
-		    List<AccountVO> list = AccountDAO.getAccountList(id);
-		    AccountVO avo = (AccountVO) list;
+		    AccountVO avo = AccountDAO.getAccount(id);
 		    
 		    request.setAttribute("avo", avo);
 		    
-			request.getRequestDispatcher("updateAccount.jsp").forward(request, response);
+		}
+		
+		if ("updateAccountOk".equals(type)) {
+			request.setCharacterEncoding("UTF-8");
+
+			// 유저정보 받기
+//		    AccountVO avo = (AccountVO) request.getAttribute("avo");
+//		    System.out.println("avo ok : " + avo);
+		    
+			int no = Integer.parseInt(request.getParameter("no"));
+		    String name = request.getParameter("name");
+			String pwd = request.getParameter("pwd");
+			String nickName = request.getParameter("nick");
+			String email = request.getParameter("email");
+			String crticCheck = request.getParameter("criticCheck"); // 관리자페이지랑연결
+			System.out.println("crticCheck : " + crticCheck);
+
+			int criticCheckInt = 0;
+			if (crticCheck != null && !crticCheck.isEmpty()) {
+				criticCheckInt = Integer.parseInt(crticCheck);
+			} else {
+				criticCheckInt = 0;
+			}
+			System.out.println("criticCheckInt : " + criticCheckInt);
+			
+			System.out.println("nickName : " + nickName);
+			AccountVO avo = new AccountVO();
+			avo.setNo(no);
+			avo.setName(name);
+			avo.setPwd(pwd);
+			avo.setNick(nickName);
+			avo.setEmail(email);
+			avo.setCriticCheck(criticCheckInt);
+			System.out.println("avo ok : " + avo);
+		    int result = AccountDAO.UpdateAccount(avo);
+		    
+		    if (result == -1) {
+		    	System.out.println("실패");
+		    }
+		    System.out.println("성공");
 		}
 		
 		

@@ -129,5 +129,26 @@ public class AccountDAO {
 		return null;
 	}
 	
+	public static AccountVO getAccount(String id) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			System.out.println("id : " + id);
+			return ss.selectOne("project2.accountInfo", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static int UpdateAccount(AccountVO avo) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			System.out.print("update계정실행 : ");
+			System.out.println(avo);
+			return ss.update("project2.update", avo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	
 }
