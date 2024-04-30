@@ -11,7 +11,7 @@
 	  <li><a href="about.asp">Q & A</a></li>
 	  <li><a href="about.asp">Review Of The Month</a></li> 
 	  <li><a href="controller?type=critic">평론가</a></li>
-	  <li><a href="about.asp">마이페이지</a></li>
+	  <li><a href="myPage.jsp">마이페이지</a></li>
 	</ul>
 	
 	<ul class="login">
@@ -22,6 +22,10 @@
    if (id == null) {
 %> 	
 	<li><a href="login_page.jsp">로그인</a></li>
+	<li>/</li>
+	 
+	<li><a href="memberJoin.jsp">회원가입</a></li>
+	
 <%
    } else {
 %>  
@@ -29,9 +33,6 @@
 <%
     }
  %> 
-	 <li>/</li>
-	 
-	<li><a href="memberJoin.jsp">회원가입</a></li>
 	</ul>
 	
 	<hr class="mint">

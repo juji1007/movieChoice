@@ -28,7 +28,8 @@
 		frm.submit();
 	}
 	
-	function warn_push(frm) {
+
+	function warn_push() {
 		location.href = "rvWarn.jsp";
 		frm.submit();
 	}
