@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	//request.setCharacterEncoding("UTF-8");
-	
+	String mvTitle = request.getParameter("mvTitle");
 	int mvNo = Integer.parseInt(request.getParameter("mvNo"));
 	System.out.println("mvNo : " + mvNo);
 	movieVO mvo = movieDAO.searchOne(mvNo);
@@ -19,14 +19,14 @@
 	pageContext.setAttribute("vo", mvo); 
 	
 	//영화 검색-주은
-		movieVO vo = null;
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			vo =  ss.selectOne("PROJECT2.mvTitleDetail", mvNo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		System.out.println("vo : " + vo);
-		session.setAttribute("mvDetail", vo); 
+// 		movieVO vo = null;
+// 		try (SqlSession ss = DBService.getFactory().openSession()) {
+// 			vo =  ss.selectOne("PROJECT2.mvTitleDetail", mvTitle);
+// 		} catch (Exception e) {
+// 			e.printStackTrace();
+// 		} 
+// 		System.out.println("vo : " + vo);
+// 		session.setAttribute("mvDetail", vo); 
 		
 	//영화 번호로 리뷰 검색-건희
 	List<movieVO> mvoList = null; 

@@ -48,15 +48,12 @@ public class FrontController extends HttpServlet {
 			String mvTitle = request.getParameter("mvTitle");
 			System.out.println("mvTitle : " + mvTitle);
 
-			//2. DB에서 성명(fullname)에 있는 직원 조회(DAO 사용)
 			movieVO list = movieDAO.getmvTitleList(mvTitle);
 			System.out.println(list);
 			
-			//3. 조회된 데이터를 응답페이지(deptList.jsp)에서 사용토록 저장한다
 			request.setAttribute("list", list);
 			
-			//4. 응답페이지(fullnameList.jsp)로 응답 위임(전가) 처리
-			request.getRequestDispatcher("mvTitleList.jsp").forward(request, response);
+			request.getRequestDispatcher("movieDetail.jsp?mvNo=${mvDetail.mvNo }").forward(request, response);
 		}
 		if ("movieDelete".equals(type)) {
 			int mvNo = Integer.parseInt(request.getParameter("mvNo"));

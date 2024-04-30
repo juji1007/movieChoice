@@ -11,13 +11,14 @@
  	
  	postCommentVO cvo = postDAO.getComment(pcNo);
  	System.out.println("cvo : " + cvo);
+ 	session.setAttribute("cvo", cvo);
  	
  	postVO pvo = (postVO)session.getAttribute("pvo");
  	String cPage = (String)session.getAttribute("cPage");
 
 	int result = postDAO.deleteComment(pcNo);
 	pageContext.setAttribute("result", result);
-	
+
 	response.sendRedirect("freeView.jsp?psNo=" + pvo.getPsNo() + "&cPage=" + cPage);
 // 	response.sendRedirect("free.jsp");
 %>

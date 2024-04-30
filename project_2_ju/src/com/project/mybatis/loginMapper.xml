@@ -54,6 +54,12 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<select id="noById" parameterType="String" resultType="int">
+      SELECT NO FROM ACCOUNT 
+      WHERE 
+       ID = #{id} 
+   </select>
+	
 </mapper>
 
 

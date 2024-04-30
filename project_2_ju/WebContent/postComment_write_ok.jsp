@@ -9,6 +9,7 @@
  	<jsp:useBean id="cvo" class="com.mystudy.model.vo.postCommentVO"/>
  	<jsp:setProperty property="*" name="cvo"/>
 <%
+	cvo.setPcNick((String) session.getAttribute("nick"));
 	System.out.println("cvo : " + cvo);
 	postDAO.insertComment(cvo);
 	

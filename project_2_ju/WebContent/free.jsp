@@ -63,6 +63,10 @@
 	session.setAttribute("list", list);
 	
 	session.getAttribute("c_list");
+	
+// 	postVO po = new postVO();
+// 	po.setPsNick((String) session.getAttribute("nick"));
+//  	po.setNo((Integer) session.getAttribute("no"));
 %>
 <!DOCTYPE html>
 <html>
@@ -71,13 +75,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-// 	게시물 삭제 확인
-	function ps_delete(frm) {
-		let isDelete = confirm("삭제하시겠습니까?");
-		if(isDelete) {
-			frm.submit();
-		}
-	}
+
 //로그인 후 작성가능
 	function login_confirm(frm) {
 <% 
@@ -91,16 +89,18 @@
 %>
 	frm.submit();
 }
-// 본인이 작성한 글 아니면 삭제 버튼 숨기기(코드 수정)
-	$(function(){
-<%
-	if(session.getAttribute("no") == null || session.getAttribute("list.no") != session.getAttribute("no")){
-%>
-	      $('.h_button').css('display','none');
-<%
-	}
-%>
-	})
+
+
+// 본인이 작성한 글 아니면 삭제 버튼 클릭시 권한없습니다
+// 	$(function(){
+<%-- <% --%>
+// 	if(session.getAttribute("no") == null || po.getNo() ){
+<%--  %>  --%>
+// 	      $('.h_button').css('display','none');
+<%-- <% --%>
+// 	}
+<%-- %> --%>
+// 	})
 </script>
 </head>
 <style>
@@ -164,6 +164,19 @@ img.icon {
     	float: left;
     	margin: 10px;
     }
+    .body {
+    margin-left: 300px;
+    margin-top: 100px;
+    margin-right: 300px;
+    width: 1200px;
+    height: 1000px;
+/*     background-color: yellow; */
+    }
+    .write {
+/*     position: absolute; */
+/*     float: left; */
+    color: red;
+    }
 </style>
 <body>
 <div class="header">
@@ -185,8 +198,9 @@ img.icon {
   </ul>
 <hr class="mint">
 </div>
+<div class="body">
 <h2>자유게시판</h2>
-<form action="postWrite.jsp" method="get"><input type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
+<form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
 
 
 <form action="postController?search=freeList" method="get">
@@ -203,25 +217,16 @@ img.icon {
 
 <div id="post">
 <table border>
-<c:forEach var="vo" items="${vo }">
-<tr>
-<td>${vo.nick }</td>
-</tr>
-</c:forEach>
+
 <c:forEach var="vo" items="${list }">
 <tr>
 <td>${vo.psNo }</td>
+<td>${vo.psNick }</td>
 <td>${vo.psDate }</td>
 <td>
 <a href="freeView.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
 ${vo.psTitle }
 </a>
-</td>
-<td>
-	<form action="postDelete.jsp" method="get">
-		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
-		<input type="hidden" name="psNo" value="${vo.psNo }">
-	</form>
 </td>
 
 </tr>
@@ -268,6 +273,7 @@ ${vo.psTitle }
 			</tr>
 		</tfoot>
 		</table>
+</div>
 </div>
 </body>
 </html>

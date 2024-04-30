@@ -30,12 +30,21 @@ public class movieDAO {
 				return null;
 			}
 	
-	//동적검색(사번,이름,직종,부서)
+	//동적검색
 		public static List<movieVO> getMovie(String idx) {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
-				Map<String, String> map = new HashMap<>();
-				map.put("idx", idx);
-				return ss.selectList("PROJECT2.movie", map);
+				if (idx == null || idx.isEmpty()) {
+		            // idx가 null이거나 비어 있는 경우 전체 영화 목록을 가져옵니다.
+		            return ss.selectList("PROJECT2.mvTitle");
+		        } else {
+		            Map<String, String> map = new HashMap<>();
+		            map.put("idx", idx);
+		            return ss.selectList("PROJECT2.movie", map);
+		        }
+//				
+//				Map<String, String> map = new HashMap<>();
+//				map.put("idx", idx);
+//				return ss.selectList("PROJECT2.movie", map);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 

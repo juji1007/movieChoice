@@ -66,6 +66,16 @@ public class postDAO {
 			return null;
 		}
 		
+//		//게시글 작성자 닉네임 조회
+//		public static postVO selectNick(int no) {
+//			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+//				return ss.selectOne("post.nick", no);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return null;
+//		}
+		
 		// 게시글 입력(INSERT) 
 		public static int insert(postVO po) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
