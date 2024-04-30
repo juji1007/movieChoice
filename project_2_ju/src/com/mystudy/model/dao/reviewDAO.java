@@ -81,7 +81,7 @@ public class reviewDAO {
 
 	//리뷰 작성
 	public static int insert(reviewVO vo){
-		try (SqlSession ss = DBService.getFactory().openSession()) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
 			return ss.insert("review.insert", vo);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,5 +98,30 @@ public class reviewDAO {
 		}
 		return null;
 	}
+	
+	//마이페이지 ==================================================
+	//나의 리뷰목록 조회
+	public static List<reviewVO> getReviewList(int no) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectList("review.getReviewByNo", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//닉네임 수정 시 리뷰의 닉네임 업데이트
+	public static int updateNickReview(int no, String nick) {
+	    try (SqlSession ss = DBService.getFactory().openSession(true)) {
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("no", no);
+	        map.put("nick", nick);
+	        return ss.update("review.updateNickReview", map);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return -1;
+	}
+
 	
 }

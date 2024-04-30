@@ -12,7 +12,23 @@
 	</select>
 	
 	<select id="all" resultType="accountVO">
-		SELECT * FROM ACCOUNT ORDER BY NO
+		SELECT * FROM ACCOUNT 
+		WHERE 
+    	ID = #{id} 
+    	ORDER BY NO
+	</select>
+	
+	<select id="accountInfo" resultType="accountVO">
+		SELECT * FROM ACCOUNT 
+		WHERE 
+    	ID = #{id} 
+    	ORDER BY NO
+	</select>
+	
+	<select id="noById" parameterType="String" resultType="int">
+		SELECT NO FROM ACCOUNT 
+		WHERE 
+    	ID = #{id} 
 	</select>
 	
 	<!-- 아이디중복체크 -->
@@ -33,8 +49,6 @@
 		INSERT INTO ACCOUNT
 			(NO, NAME, ID, PWD, NICK, CRITIC_CHECK, EMAIL)
 		VALUES (ACCOUNT_SEQ.NEXTVAL, #{name}, #{id}, #{pwd}, #{nick}, #{criticCheck}, #{email})
-		
-	
 	</insert>
 	
 	<select id="searchIdByEmail" parameterType="string" resultType="string">
@@ -52,6 +66,17 @@
 		UPDATE ACCOUNT
 		SET PWD = #{pwd}
 		WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원정보수정 -->
+	<update id="update" parameterType="accountVO">
+		UPDATE ACCOUNT
+		SET NAME = #{name},
+		    PWD = #{pwd},
+		    NICK = #{nick},
+		    CRITIC_CHECK = #{criticCheck},
+		    EMAIL = #{email}
+		WHERE NO = #{no}
 	</update>
 	
 </mapper>

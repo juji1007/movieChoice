@@ -54,7 +54,7 @@
 </style>
 </head>
 <body>
-<%@ include file="include/header.jspf" %>
+<%@ include file="include/headerAdmin.jspf" %>
 <h1>평론가</h1>
 	<c:forEach var="vo" items="${listc }" varStatus="loop">
 		<form action="criticDeleteOk.jsp?critic=${vo.no }" method="post">

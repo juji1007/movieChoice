@@ -38,12 +38,12 @@
 		submit();
 	}
 	
-<<<<<<< HEAD
+
 	function warn_push() {
 		location.href = "rvWarn.jsp";
 		submit();
 	}
-=======
+
 	//AJAX controller 연결 - review 전체 조회
 	$(document).ready(function(){
 		console.log(">> reviewMain.jsp 접속 성공!!");
@@ -117,7 +117,7 @@
 
 	}); 
 	
->>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
+
 </script>
 </head>
 <body>
@@ -146,7 +146,7 @@
 	</h2>
 	<!-- 리뷰 전체보기 -->
 	<table border>
-	<c:forEach var="vo" items="${list}">
+	<c:forEach var="vo" items="${List}">
 		<tbody id="reviewOne">
 	        <tr>
 	            <td>${vo.mvTitle }</td>
