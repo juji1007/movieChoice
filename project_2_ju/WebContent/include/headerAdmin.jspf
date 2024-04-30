@@ -6,7 +6,7 @@
 	
 	<ul class="menu">
 	  <li><a href="mainAdmin.jsp">영화목록 관리</a></li>
-	  <li><a href="reviewController?type=reviewMain">리뷰모음 관리</a></li>
+	  <li><a href="reviewMain.jsp">리뷰모음 관리</a></li>
 	  <li><a href="freeAdmin.jsp">자유게시판 관리</a></li>
 	  <li><a href="about.asp">Q & A 관리자</a></li>
 	  <li><a href="about.asp">Review Of The Month 관리</a></li> 
