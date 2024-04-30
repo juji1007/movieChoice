@@ -106,7 +106,7 @@ public class AccountDAO {
 	}
 	
 	// 자유게시판 =====================================================
-	//아이디로 유저넘버 조회 
+	//아이디로 유저넘버 조회 (마이페이지에서도)
 	public static int getAccountNo(String id) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			System.out.println("id : " + id);

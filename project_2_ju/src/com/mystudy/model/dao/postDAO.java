@@ -135,5 +135,15 @@ public class postDAO {
 			return -1;
 		}
 		
+		//마이페이지 나의 자유게시판 조회
+		public static List<postVO> getPostList(int no) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectList("post.getPostByNo", no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 }
 

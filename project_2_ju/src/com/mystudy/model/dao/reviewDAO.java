@@ -99,4 +99,14 @@ public class reviewDAO {
 		return null;
 	}
 	
+	//마이페이지 나의 리뷰목록 조회
+	public static List<reviewVO> getReviewList(int no) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectList("review.getReviewByNo", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
