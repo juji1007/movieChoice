@@ -341,6 +341,7 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"no\": \"" + avo.getNo() + "\", ");
 		            result.append("\"name\": \"" + avo.getName() + "\", ");
 		            result.append("\"id\": \"" + avo.getId() + "\", ");
+		            result.append("\"pwd\": \"" + avo.getPwd() + "\", ");
 		            result.append("\"nick\": \"" + avo.getNick() + "\", ");
 		            result.append("\"criticCheck\": \"" + avo.getCriticCheck() + "\", ");
 		            result.append("\"email\": \"" + avo.getEmail() + "\", ");
