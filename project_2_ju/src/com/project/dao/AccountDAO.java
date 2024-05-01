@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.postVO;
 import com.project.mybatis.DBService;
 import com.project.vo.AccountVO;
@@ -162,5 +163,14 @@ public class AccountDAO {
 		return -1;
 	}
 	
+	//아이디로 회원번호 조회
+	public static int findNo(String id) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectOne("project2.findNo", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 }

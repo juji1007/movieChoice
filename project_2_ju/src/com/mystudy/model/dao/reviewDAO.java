@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-
+import com.mystudy.model.vo.criticVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
@@ -139,6 +139,15 @@ public class reviewDAO {
 		return null;
 	}
 	
+	//리뷰 정보 삭제(DELETE)
+		public static int delete(reviewVO rvo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("review.delete", rvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 
 	//추천수 COUNT+1(본인 리뷰가 아닌 경우 추천+1)
 	public static int recCnt(int rvNo, int no) {

@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.model.vo.postCommentVO;
 import com.mystudy.model.vo.postVO;
+import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
 
@@ -94,10 +95,21 @@ public class postDAO {
 			}
 			return -1;
 		}
+		
 		//게시글 삭제(DELETE)
 		public static int delete(int psNo) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
 				return ss.delete("post.delete", psNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//게시글 삭제(DELETE) - 건희
+		public static int pDelete(postVO pvo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("post.delete", pvo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

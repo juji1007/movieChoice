@@ -19,6 +19,15 @@ public class listTotDAO {
 		return null;
 	}
 
+	// 회원,영화,리뷰 테이블 전체조회
+		public static listTotVO getOne() {
+			try (SqlSession ss = DBService.getFactory().openSession()) {			
+				return ss.selectOne("listTotal.listOne");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 	// 리뷰 번호로 조회
 	public static listTotVO selectOne(int rvNo) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {			

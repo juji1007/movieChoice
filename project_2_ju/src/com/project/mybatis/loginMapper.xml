@@ -68,6 +68,12 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<select id="findNo" parameterType="string" resultType="int">
+		SELECT P.NO
+		FROM ACCOUNT A, POST P
+		WHERE A.NO = P.NO
+        AND A.ID = #{id}
+	</select>
 	<!-- 회원정보수정 -->
 	<update id="update" parameterType="accountVO">
 		UPDATE ACCOUNT

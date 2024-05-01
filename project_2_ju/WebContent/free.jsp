@@ -1,3 +1,4 @@
+<%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.mystudy.post.common.Paging"%>
@@ -51,6 +52,7 @@ if (p.getEndPage() > p.getTotalPage()) {
 }
 %>
 <%
+
 List<postVO> list = postDAO.getList(p.getBegin(), p.getEnd());
 System.out.println(">> 현재페이지 글목록 : " + list);
 %>
@@ -86,6 +88,7 @@ session.getAttribute("c_list");
 
 
 
+
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
@@ -112,7 +115,9 @@ session.getAttribute("c_list");
 			<table border>
 
 <div id="post">
+<form action="postDelete.jsp" method="get">
 <table border>
+
 
 <c:forEach var="vo" items="${list }">
 <tr>
@@ -167,6 +172,7 @@ ${vo.psTitle }
 			</tr>
 		</tfoot>
 		</table>
+		</form>
 </div>
 </div>
 
