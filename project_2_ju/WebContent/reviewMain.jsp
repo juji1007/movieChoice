@@ -23,6 +23,15 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
+//로그인 후 작성가능
+	function login_confirm(frm) {
+		<%if (session.getAttribute("no") == null) {%>
+			alert("로그인 후 작성 가능합니다.");
+			frm.location.href = "reviewController?category=rvMain";
+		<%} else%>
+			frm.submit();
+	}
+	
 	function rec_push(frm) {
 		location.href = "rvRec.jsp?rvNo=";
 		frm.submit();
@@ -39,13 +48,13 @@
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
-
+	<form action="reviewController?category=rvWrite" method="post">
 	<h2>
 		리뷰모음
 		<input type="button" value="등록하기" 
-			onclick="javascript:location.href='reviewController?category=rvWrite'">
+			onclick="login_confirm(this.form)">
 	</h2>
-	
+	</form>
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne" method="post">
 		<select name="idx">
@@ -68,7 +77,6 @@
 	        <tr>
 	            <td>${vo.mvNo }-영화명으로 변경</td>
 	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
-<%-- 	            <td id="rvTitle"><a href="reviewController?category=rvDetail&rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td> --%>
 	        </tr>
 	        <tr>
 	            <td>${vo.rvNick }</td>
