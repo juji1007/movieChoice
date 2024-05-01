@@ -20,6 +20,8 @@ public class deleteAccountOkCommand implements Command{
 	    System.out.println("delid : " + id);
 	    System.out.println("delpw : " + pwd);
 	    
+	    String location = request.getParameter("location");
+	    System.out.println("location : " + location);
 	    // 아이디 DB에서 조회
 	    AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
 	    if (avo == null) {
@@ -29,6 +31,11 @@ public class deleteAccountOkCommand implements Command{
 	    } else {
 		    int delNo = avo.getNo();
 		    AccountDAO.delete(delNo);
+		    if ("admin".equals(location)) {
+			    return "manage.jsp";
+		    } else if ("accountAdmin".equals(location)) {
+		    	return "accountManage.jsp";
+		    }
 		    return "logout.jsp";
 	    }
 	    

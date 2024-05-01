@@ -137,12 +137,6 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function updateAccount(frm) {
-	console.log("회원정보수정실행");
-	console.log(frm);
-// 	frm.action="loginController?type=updateAccount";
-// 	frm.submit();
-}
 
 function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
@@ -253,7 +247,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.criticCheck + "</td>";
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=admin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
