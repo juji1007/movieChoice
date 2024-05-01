@@ -4,6 +4,24 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="listTotal">
 	
+	<!-- 리뷰 메인(전체목록 페이징) -->
+	<select id="tot" parameterType="map" resultType="com.mystudy.model.vo.listTotVO">
+	<![CDATA[
+		SELECT RV_NO, NO, MV_TITLE, MV_POSTER
+		     , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT
+		     , RV_CONTENT, RV_DATE, RV_REC, RV_WARN
+		FROM (SELECT ROWNUM R_NUM, R.*, M.*
+		      FROM (SELECT *
+		            FROM REVIEW
+		            ORDER BY RV_NO DESC
+		            ) R, MOVIE M
+		      WHERE R.MV_NO = M.MV_NO
+		      AND ROWNUM <= #{end}
+		)
+    	WHERE R_NUM >= #{begin}
+	]]>
+	</select>
+
 	<!-- 회원,영화,리뷰 테이블 전체조회 -->
 	<select id="listAll" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT A.*, M.*,  R.*
@@ -13,13 +31,15 @@
 		ORDER BY R.RV_NO DESC
 	</select>
 	
+
 		
-	<!-- mvNo로 검색하여 movie 정보(title,poster) select -->
+	<!-- rvNo로 검색하여 movie 정보(title,poster) select -->
 	<select id="one" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT A.*, M.*,  R.*
 		FROM ACCOUNT A, MOVIE M, REVIEW R
 		WHERE R.NO = A.NO
 		AND R.MV_NO = M.MV_NO
 		AND R.RV_NO = #{rvNo}
+		ORDER BY R.RV_NO DESC
 	</select>
 </mapper>

@@ -21,7 +21,7 @@
 </style>
 <script>
 	function sendRv(frm) {
-		alert("sendData() 실행~~");
+		//alert("sendData() 실행~~");
 		console.log(document.forms[0]);
 		let firstForm = document.forms[0];
 		console.log(firstForm.elements);

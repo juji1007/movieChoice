@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.dao.listTotDAO;
 import com.mystudy.model.dao.reviewDAO;
+import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
@@ -28,7 +30,7 @@ public class ReviewController extends HttpServlet {
 		String category = request.getParameter("category");
 		System.out.println("category : " + category);
 		
-		//리뷰메인 페이지(rvMain) - 영화명 구현X
+		//리뷰메인 페이지(rvMain)
 		if ("rvMain".equals(category)) {
 			System.out.println(">> rvMain 실행 중~");
 			
@@ -78,23 +80,18 @@ public class ReviewController extends HttpServlet {
 				System.out.println(">>정정 후 endPage : " + p.getEndPage());
 			}
 			
-//			//리뷰 전체(영화,회원) 목록 - mapper에서 3개 테이블의 row_num 번호 sql문 작성이 안됨
-//			List<listTotVO> listAll = listTotDAO.getList();
-//			try (SqlSession ss = DBService.getFactory().openSession()) {
-//				listAll = ss.selectList("listTotal.listAll");
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			System.out.println(">> 리뷰 메인 listAll : " + listAll);
-//			
-//			request.setAttribute("list", listAll);
+			//페이징 + 리뷰 전체(영화,회원) 목록
+			List<listTotVO> listAll = listTotDAO.listTot(p.getBegin(), p.getEnd());
+			System.out.println(">> 리뷰 메인 listAll : " + listAll);
 			
-			//페이징 처리 위한 리뷰 전체 목록
-			List<reviewVO> list = reviewDAO.pList(p.getBegin(), p.getEnd());
-			System.out.println(">> 현재페이지 글목록 : " + list);
+			request.setAttribute("listAll", listAll);
 			
 			request.setAttribute("rvPvo", p);
-			request.setAttribute("rvList", list);
+			
+			//페이징 처리 위한 리뷰 전체 목록
+//			List<reviewVO> list = reviewDAO.pList(p.getBegin(), p.getEnd());
+//			System.out.println(">> 현재페이지 글목록 : " + list);
+//			request.setAttribute("rvList", list);
 			
 			String location = request.getParameter("location");
 			if ("admin".equals(location)) {
@@ -126,7 +123,7 @@ public class ReviewController extends HttpServlet {
 		}
 		
 		
-		//리뷰 카테고리별(영화명,작성자,작성일) 동적 검색 - 일부만 구현!
+		//리뷰 카테고리별(영화명,작성자,작성일) 동적 검색 - 작성일 검색X
 		if ("selectOne".equals(category)) {
 			System.out.println(">> selectOne 요청 처리~~");
 			
@@ -136,9 +133,8 @@ public class ReviewController extends HttpServlet {
 			
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
-			if (keyword == null || keyword.trim().length() == 0) {
-				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
-				//키워드 입력 alert(); 출력
+			if (idx == null || keyword == null || keyword.trim().length() == 0) {
+				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
 				
 				return;
 			}
@@ -201,13 +197,14 @@ public class ReviewController extends HttpServlet {
 				case "1" : sort="작성자"; break;
 				case "2" : sort="작성일"; break;
 			}
+			System.out.println("keyword 타입 : " + keyword.getClass().getName());
 			
-			List<reviewVO> listOne = reviewDAO.selectOne(idx, keyword, p.getBegin(), p.getEnd());
+			List<listTotVO> listOne = reviewDAO.selectOne(idx, keyword, p.getBegin(), p.getEnd());
 			System.out.println("::DB 연결 후, listOne : " + listOne);
 			
-			request.setAttribute("rvPvo", p);
-			request.setAttribute("sort", sort);
-//			//DB 연결이 안돼서 null - 중단
+			request.setAttribute("selPvo", p);
+//			request.setAttribute("sort", sort);
+			
 			request.setAttribute("listOne", listOne);
 			
 			request.getRequestDispatcher("selectOne.jsp").forward(request, response);

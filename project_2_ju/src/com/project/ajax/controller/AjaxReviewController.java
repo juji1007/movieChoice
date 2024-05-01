@@ -86,12 +86,12 @@ public class AjaxReviewController extends HttpServlet {
 		 	//DB 연동 작업
 		 	//현재페이지 기준으로 DB 데이터(게시글) 가져오기
 		 	//시작번호(begin), 끝번호(end)
-		 	List<reviewVO> plist = reviewDAO.pList(p.getBegin(), p.getEnd());
-		 	System.out.println(">> 현재페이지 글목록 : " + plist);
+//		 	List<reviewVO> plist = reviewDAO.pList(p.getBegin(), p.getEnd());
+//		 	System.out.println(">> 현재페이지 글목록 : " + plist);
 		 	
 		 	//EL, JSTL 사용을 위해 scope에 데이터 등록(page영역)
 		 	// 페이징처리객체 page 영역에 저장
-		 	request.setAttribute("pList", plist);
+//		 	request.setAttribute("pList", plist);
 		 	request.setAttribute("pvo", p);
 //		 	
 		 	//ajax 이용하여 리뷰 전체조회

@@ -36,8 +36,6 @@
 		location.href = "rvRec.jsp?rvNo=";
 		frm.submit();
 	}
-	
-
 	function warn_push() {
 		location.href = "rvWarn.jsp";
 		frm.submit();
@@ -55,6 +53,8 @@
 			onclick="login_confirm(this.form)">
 	</h2>
 	</form>
+	
+	<h3>전체조회</h3>
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne" method="post">
 		<select name="idx">
@@ -69,13 +69,13 @@
 		<input type="hidden" name="category" value="selectOne">
 	</form>
 	 
-	<!-- 리뷰 전체보기 -->
+<!-- 리뷰 (전체)목록 -->
 <form>
 	<table>
-	<c:forEach var="vo" items="${rvList}">
+	<c:forEach var="vo" items="${listAll}">
 		<tbody id="reviewOne">
 	        <tr>
-	            <td>${vo.mvNo }-영화명으로 변경</td>
+	            <td>${vo.mvTitle }</td>
 	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
 	        </tr>
 	        <tr>
@@ -84,8 +84,7 @@
 	        </tr>
 	        <tr>
 	            <td colspan="2">
-<%-- 	            	<input type="button" value="추천" onclick="rec_push(this.form)">${vo.rvRec } --%>
-	            	<input type="button" value="추천" onclick="javascript:location.href='rvRec.jsp?rvNo=${vo.rvNo}'">${vo.rvRec }
+	            	<input type="button" value="추천" onclick="rec_push(this.form)">${vo.rvRec }
 	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn }
 	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
@@ -94,6 +93,7 @@
 	        </tr>
 	    </tbody>
 	</c:forEach>
+	
 	    <tfoot id="page">
 	        <tr>
 	        	<td colspan="2">
