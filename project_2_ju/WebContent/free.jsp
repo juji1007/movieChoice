@@ -86,50 +86,82 @@ session.getAttribute("c_list");
 	frm.submit();
 }
 
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 </script>
 </head>
+<style>
+.body {
+	margin-left : 420px;
+	margin-top : 100px;
+	margin-right : 420px;
+}
+.write {
+	position: absolute;
+	top: 240px;
+	right: 430px;
+	background-color:#56BEC0;
+	color: white;
+	border: none;
+	 width: 100px;
+  height: 30px;
+}
+.search {
+position: relative;
+  width: 500px;
+  height: 25px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.searchimg {
+  position : absolute;
+  width: 17px;
+  top: 300px;
+  right: 880px;
+  margin: 0;
+}
+.select {
+width: 100px;
+height: 46px;
+ border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+table {
+  border-collapse: collapse;
+  border-left:none;
+  border-right:none;
+  width: 1040px;
+  height: 500px;
+}
+
+</style>
 <link rel="stylesheet" href="css/header.css">
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf"%>
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 <div class="body">
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
-
+<hr>
 		<form action="postController?search=freeList" method="get">
-			<select name="idx">
-				<option selected disabled>::선택</option>
+			<select class="select" name="idx">
+				<option selected disabled>구분</option>
 				<option value="0">제목</option>
 				<option value="1">작성일</option>
-			</select> <input type="text" name="keyword"> <input type="submit"
-				value="검색"> <input type="hidden" name="search"
-				value="freeList">
+			</select> 
+			<input class="search" type="text" name="keyword" placeholder="검색어 입력"> 
+			<input class="searchbtn" type="submit" value="검색"> 
+			<img class="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" >
+			<input type="hidden" name="search" value="freeList">
 		</form>
 
 
-		<div id="post">
-			<table border>
-
 <div id="post">
-<form action="postDelete.jsp" method="get">
-<table border>
 
-
+<table border frame=void>
 <c:forEach var="vo" items="${list }">
 <tr>
 <td>${vo.psNo }</td>
@@ -142,6 +174,7 @@ ${vo.psTitle }
 </td>
 </tr>
 </c:forEach>
+
 <tfoot>
 			<tr>
 				<td colspan="4">

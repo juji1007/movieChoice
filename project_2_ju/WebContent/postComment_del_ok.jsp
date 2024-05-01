@@ -7,12 +7,12 @@
  	request.setCharacterEncoding("UTF-8");
  
  	int pcNo = Integer.parseInt(request.getParameter("pcNo"));
- 	pageContext.setAttribute("pcNo", pcNo);
- 	
+ 	session.setAttribute("pcNo", pcNo);
+ 	int no = (Integer)session.getAttribute("no");
  	postCommentVO cvo = postDAO.getComment(pcNo);
  	System.out.println("cvo : " + cvo);
- 	session.setAttribute("cvo", cvo);
- 	
+ 	System.out.println("cvoNo : " + cvo.getNo());
+
  	postVO pvo = (postVO)session.getAttribute("pvo");
  	String cPage = (String)session.getAttribute("cPage");
 

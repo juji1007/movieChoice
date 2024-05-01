@@ -15,7 +15,6 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 }  
 
 
-
 System.out.println("list : " + list);
 System.out.println("list.size : " + list.size());
 session.setAttribute("attr_list", list);
@@ -58,17 +57,12 @@ session.setAttribute("attr_list", list);
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
  
-<!-- 영화검색 -->
-<form action="controller" method="get">
-	<input type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
-	<input type="submit" value="영화검색">
-	<input type="hidden" name="type" value="mvTitleList">
-</form>
+
 <%--영화검색 --%>
-<%-- <form action="movieDetail.jsp?mvNo=${attr_list.mvNo }" method="post"> --%>
-<!-- <input type="text" name="mvNo" placeholder="영화제목을 입력하세요"> -->
-<!-- <input type="submit" value="영화검색"> -->
-<!-- </form> -->
+<form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }" method="get">
+<input type="text" name="mvNo" placeholder="영화제목을 입력하세요">
+<input type="submit" value="영화검색">
+</form>
 <div>
 
 <h3 class="top">현재 상영 영화 TOP10</h3>
@@ -103,31 +97,14 @@ session.setAttribute("attr_list", list);
 <div>
 <h2>영화목록</h2> 
 <form action="controller?type=movie" method="post">
-<!-- <form action="main2.jsp" method="get"> -->
   <select name="idx">
   <option value="0" disabled selected>정렬</option>
     <option value="1" >최신순</option>
     <option value="2"  >평점순</option>
   </select>
   <input type="submit" value="동적검색">
-<input type="hidden" name="type" value="movie">
 </form>
 <hr class="gray">
-<!-- 영화 목록 보기 -->
-<c:forEach var="vo" items="${attr_list }">
-	<a href="movieDetail.jsp?mvNo=${vo.mvNo }">
-	<table>
-			<tr>
-			<td>
-			<img src="img/${vo.mvPoster }" alt="제품이미지" width="200">
-			</td>
-			</tr>
-			<tr>
-			<td >${vo.mvTitle }</td>
-			</tr>
-	</table>
-	</a>
-	</c:forEach>
 
 <c:forEach var="vo" items="${list2 }">
 <a href="movieDetail.jsp?mvNo=${vo.mvNo }">

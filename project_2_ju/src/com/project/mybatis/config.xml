@@ -38,6 +38,7 @@
     <mapper resource="com/project/mybatis/adminMapper.xml" />
     <mapper resource="com/project/mybatis/listTotMapper.xml" />
     <mapper resource="com/project/mybatis/qnaMapper.xml" />
+
   </mappers>
   
 </configuration>

@@ -23,7 +23,7 @@ public class movieDAO {
 		//영화검색
 		public static movieVO getmvTitleList(String mvTitle) {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
-				return ss.selectOne("PROJECT2.mvTitleList", mvTitle);
+				return ss.selectOne("PROJECT2.mvTitleDetail", mvTitle);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 

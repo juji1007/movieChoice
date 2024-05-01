@@ -15,10 +15,10 @@
 		SELECT *
 		FROM MOVIE
 <!-- 		WHERE MV_TITLE = (SELECT MV_TITLE FROM MOVIE WHERE MV_NO = #{mvNo}) -->
-		WHERE MV_TITLE = #{keyword};
+		WHERE MV_TITLE LIKE '%'||#{mvTitle}||'%'
 	</select>
 	
-	<!-- 동적 검색 -->
+	<!-- 동적 영화 정렬 -->
 	<select id="movie" parameterType="map" resultType="com.mystudy.model.vo.movieVO">
 		SELECT *
 		FROM MOVIE
