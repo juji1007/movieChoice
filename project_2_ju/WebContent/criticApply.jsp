@@ -2,8 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+// 	   AccountVO avo =  (AccountVO) request.getAttribute("avo");
        String id = request.getParameter("id");
 	   System.out.println("crapply Id() : " + id);
+// 	   System.out.println("crapply avo() : " + avo);
 	   
 	   String location = request.getParameter("location");
 %>

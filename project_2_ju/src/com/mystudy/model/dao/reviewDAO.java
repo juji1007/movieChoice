@@ -1,13 +1,12 @@
 package com.mystudy.model.dao;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.mystudy.model.vo.criticVO;
+import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
@@ -15,7 +14,7 @@ import com.project.mybatis.DBService;
 public class reviewDAO {
 
 	//카테고리별(영화명,작성자,작성일) 목록 조회
-	public static List<reviewVO> selectOne(String idx, String keyword, int begin, int end) {
+	public static List<listTotVO> selectOne(String idx, String keyword, int begin, int end) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("idx", idx);
@@ -24,28 +23,25 @@ public class reviewDAO {
 			map.put("end", end);
 			System.out.println(">> reviewDAO map : " + map);
 			
-//			java.util.Set<String> set = map.keySet();
-//			System.out.println("set : " + set);
-			
 			return ss.selectList("review.one", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}	
-//	//카테고리별 리뷰 건수 조회
-		public static int getCount(String idx, String keyword) {
-			try (SqlSession ss = DBService.getFactory().openSession()) {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("idx", idx);
-				map.put("keyword", keyword);
-				
-				return ss.selectOne("review.cnt", map);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return -1;
+	//카테고리별 리뷰 건수 조회
+	public static int getCount(String idx, String keyword) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("idx", idx);
+			map.put("keyword", keyword);
+			
+			return ss.selectOne("review.cnt", map);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return -1;
+	}
 	
 	//영화번호로 리뷰vo 조회
 	public static reviewVO mvNoRv(int mvNo, int rvNo) {
@@ -85,19 +81,19 @@ public class reviewDAO {
 		return null;
 	}
 	
-	//페이징 처리 - 해당 페이지의 리뷰 목록 조회
-	public static List<reviewVO> pList(int begin, int end) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			Map<String, Integer> map = new HashMap<>();
-			map.put("begin", begin);
-			map.put("end", end);
-			
-			return ss.selectList("review.pageList", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	//페이징 처리 - 해당 페이지의 리뷰 목록 조회
+//	public static List<reviewVO> pList(int begin, int end) {
+//		try (SqlSession ss = DBService.getFactory().openSession()) {
+//			Map<String, Integer> map = new HashMap<>();
+//			map.put("begin", begin);
+//			map.put("end", end);
+//			
+//			return ss.selectList("review.pageList", map);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
 	//리뷰 작성(INSERT)
 	public static int insert(reviewVO vo){
@@ -150,11 +146,11 @@ public class reviewDAO {
 		}
 
 	//추천수 COUNT+1(본인 리뷰가 아닌 경우 추천+1)
-	public static int recCnt(int rvNo, int no) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			Map<String, Integer> map = new HashMap<String, Integer>();
+	public static int recCnt(int rvNo, int rvRec) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			Map<String, Integer> map = new HashMap<>();
 			map.put("rvNo", rvNo);
-			map.put("no", no);
+			map.put("rvRec", rvRec);
 			
 			return ss.update("review.rec", map);
 		} catch (Exception e) {

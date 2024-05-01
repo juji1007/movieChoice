@@ -6,26 +6,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	if (session.getAttribute("recVo") != null) {
-		listTotVO recVo = (listTotVO)session.getAttribute("recVo");
-		session.setAttribute("listOne", recVo);
-	}
-	
 	int rvNo = Integer.parseInt(request.getParameter("rvNo"));
 	System.out.println("rvNo : " + rvNo);
 	
 	int cPage = Integer.parseInt(request.getParameter("cPage"));
 	System.out.println("cPage : " + cPage);
 	
+	String Adminid = (String) session.getAttribute("id");
+	System.out.println(">> id : " + Adminid);
 	//리뷰 전체(영화,회원) 목록 - mapper에서 3개 테이블 조인
 	listTotVO listOne = listTotDAO.selectOne(rvNo);
 	System.out.println(">> 리뷰 상세 listOne : " + listOne);
 	
 	session.setAttribute("listOne", listOne);
 	session.setAttribute("cPage", cPage);
-	
-	int no = (Integer)session.getAttribute("no");
-	pageContext.setAttribute("no", no);
 %>
 <!DOCTYPE html>
 <html>
@@ -36,50 +30,23 @@
 <link rel="stylesheet" href="css/rvDetail.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-	//추천수,신고수 버튼 적용
-	function rec_push(frm) {
-		//본인 리뷰가 아닌 경우 추천 가능
-		if (${no} != ${listOne.no}) {
-			//추천 클릭 처리
-			alert("추천을 눌렀습니다.");
-			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
-			
-		} else {
-			alert("본인 리뷰는 추천할 수 없습니다!!");
-			location.href= "rvDetail.jsp?rvNo=${listOne.rvNo}&cPage=${cPage}";
-		}
-	}
-	function warn_push() {
-		location.href = "rvWarn.jsp";
-		frm.submit();
-	}
-
-	//시간 여유 시, 구현 예정
 	function prev_go() {
 		
 	}
+
+	
 	function next_go() {
 		
-	}
-	
-	//리뷰 수정 권한
-	function update_go(frm) {
-		//회원번호 확인
-		if(${no} == ${listOne.no}) {
-			frm.submit();
-		} else {
-			alert("수정권한이 없습니다.");
-		}
 	}
 	
 	//리뷰 삭제 확인 및 권한
 	function delete_go(frm) {
 		let isDelete = confirm("삭제하시겠습니까?");
-		
+		var adminId = "ju123";
 		if(isDelete) {
 			//회원번호 확인
-			if(${no} == ${listOne.no}) {
-	 			location.href = "rvDelete.jsp?rvNo=${listOne.rvNo}";
+			if(${no} == ${listOne.no} || adminId === "<%=Adminid %>") {
+	 			location.href = "rvDelete.jsp?rvNo=${listOne.rvNo}&location=reviewAdmin";
 				alert("삭제가 완료되었습니다.");
 			} else {
 				alert("삭제권한이 없습니다.");
@@ -92,7 +59,7 @@
 </head>
 <body>
 	<!-- header.jspf -->
-	<%@ include file="include/header.jspf" %>
+	<%@ include file="include/headerAdmin.jspf" %>
 	
 	<h2>리뷰 상세보기</h2>
 	<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post">
@@ -106,11 +73,10 @@
 				<td id="rvNick">${listOne.rvNick }</td>
 				<td id="rvDate">${listOne.rvDate }</td>
 				<td id="btn">
-					<input type="button" value="추천 " onclick="rec_push(this.form)">
-<%-- 					<input type="button" value="추천 " onclick="javascript:location.href='rvRec.jsp?rvNo=${listOne.rvNo}'"> --%>
+					<input type="button" value="추천 수" >
 					${listOne.rvRec }
 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
-					<input type="button" value="신고" onclick="warn_push()">
+					<input type="button" value="신고 수" >
 					${listOne.rvWarn }
 				</td>
 			</tr>
@@ -123,11 +89,10 @@
 			<tr>
 				<td colspan="3">
 					<input type="button" value="이전" onclick="prev_go()">
-					<input type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
+					<input type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&location=admin&cPage=${cPage}'">
 					<input type="button" value="다음" onclick="next_go()">
 				</td>
 				<td>
-					<input type="button" value="수정" onclick="update_go(this.form)">
 					<input type="button" value="삭제" onclick="delete_go(this.form)">
 					
 					<input type="hidden" name="listOne" value="${listOne}">

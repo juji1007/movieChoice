@@ -9,19 +9,45 @@
 <meta charset="UTF-8">
 <title>리뷰목록 검색[ selectOne.jsp ]</title>
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/rvMain.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+//로그인 후 작성가능
+	function login_confirm(frm) {
+		<%if (session.getAttribute("no") == null) {%>
+			alert("로그인 후 작성 가능합니다.");
+			frm.location.href = "reviewController?category=rvMain";
+		<%} else%>
+			frm.submit();
+	}
+	
+	function rec_push(frm) {
+		location.href = "rvRec.jsp?rvNo=";
+		frm.submit();
+	}
+	
+
+	function warn_push() {
+		location.href = "rvWarn.jsp";
+		frm.submit();
+	}
+
+</script>
 </head>
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
-
 	<h2>
 		리뷰모음
 		<input type="button" value="등록하기" 
-			onclick="javascript:location.href='rvWrite.jsp'">
+			onclick="login_confirm(this.form)">
 	</h2>
 	
+	<h3>[${keyword }] 조회</h3>
 	<!-- 리뷰 목록 검색 -->	
-	<form action="reviewController?category=selectOne" method="get">
+	<form action="reviewController?category=selectOne" method="post">
 		<select name="idx">
 			<option selected disabled>::선택</option>
 			<option value="0">영화명</option>
@@ -34,13 +60,13 @@
 		<input type="hidden" name="category" value="selectOne">
 	</form>
 	
-	<h1>[${sort }-${keyword }] 리뷰목록</h1>
+<!-- 리뷰 (조건)목록 -->
 <form>
 	<table>
 	<c:forEach var="vo" items="${listOne }">
 		<tbody id="reviewOne">
 	        <tr>
-	            <td>${vo.mvNo }-영화명으로 변경</td>
+	            <td>${vo.mvTitle }</td>
 	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
 	        </tr>
 	        <tr>
@@ -53,6 +79,7 @@
 	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn }
 	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
+	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
 	            </td>
 	        </tr>
 	    </tbody>
@@ -63,19 +90,19 @@
 	        	<td colspan="2">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
-					<c:if test="${rvPvo.nowPage == 1 }">
+					<c:if test="${selPvo.nowPage == 1 }">
 						<li class="disable">이전</li> 
 					</c:if>
-					<c:if test="${rvPvo.nowPage != 1 }">
+					<c:if test="${selPvo.nowPage != 1 }">
 						<li>
-							<a href="reviewController?category=selectOne&cPage=${rvPvo.endPage - 1 }">이전</a>
+							<a href="reviewController?category=selectOne&cPage=${selPvo.endPage - 1 }">이전</a>
 						</li> 
 					</c:if>
 					
 					<%--블록내에 표시할 페이지 태그 작성(시작~끝) --%>
-					<c:forEach var="pageNo" begin="${rvPvo.beginPage }" end="${rvPvo.endPage }">
+					<c:forEach var="pageNo" begin="${selPvo.beginPage }" end="${selPvo.endPage }">
 					<c:choose>
-						<c:when test="${pageNo == rvPvo.nowPage }">
+						<c:when test="${pageNo == selPvo.nowPage }">
 							<li class="now">${pageNo }</li>
 						</c:when>
 						<c:otherwise>
@@ -85,12 +112,12 @@
 					</c:forEach>
 						
 					<%--[다음]에 대한 사용여부 처리 --%>	
-					<c:if test="${rvPvo.nowPage < rvPvo.totalPage }">
+					<c:if test="${selPvo.nowPage < selPvo.totalPage }">
 						<li>
-							<a href="reviewController?category=selectOne&cPage=${rvPvo.nowPage + 1 }">다음</a>
+							<a href="reviewController?category=selectOne&cPage=${selPvo.nowPage + 1 }">다음</a>
 						</li> 
 					</c:if>
-					<c:if test="${rvPvo.nowPage >= rvPvo.totalPage }">
+					<c:if test="${selPvo.nowPage >= selPvo.totalPage }">
 						<li class="disable">다음</li> 
 					</c:if>
 					</ol>

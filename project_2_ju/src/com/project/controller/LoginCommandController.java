@@ -26,6 +26,8 @@ import com.project.command.MemberJoinCommand;
 import com.project.command.MemberJoinOkCommand;
 import com.project.command.UpdateAccountCommand;
 import com.project.command.UpdateAccountOkCommand;
+import com.project.command.deleteAccountCommand;
+import com.project.command.deleteAccountOkCommand;
 import com.project.dao.AccountDAO;
 import com.project.vo.AccountVO;
 
@@ -45,6 +47,8 @@ public class LoginCommandController extends HttpServlet {
 		commands.put("memberJoinOk", new MemberJoinOkCommand());
 		commands.put("updateAccount", new UpdateAccountCommand());
 		commands.put("updateAccountOk", new UpdateAccountOkCommand());
+		commands.put("deleteAccount", new deleteAccountCommand());
+		commands.put("deleteAccountOk", new deleteAccountOkCommand());
 	}
 	
 	@Override
@@ -100,72 +104,8 @@ public class LoginCommandController extends HttpServlet {
 			
 		}
 		
-		if ("updateAccount".equals(type)) {
-			request.setCharacterEncoding("UTF-8");
-
-			// 유저정보 받기
-		    String id = (String) session.getAttribute("id");
-		    System.out.println("upid : " + id);
-		    
-		    // 아이디 DB에서 조회
-		    AccountVO avo = AccountDAO.getAccount(id);
-		    
-		    String location = request.getParameter("location");
-		    System.out.println("location updateAccount : " + location);
-		    if ("checkApply".equals(location)) {
-		    	int criticCheck = Integer.parseInt(request.getParameter("criticCheck"));
-			    System.out.println("criticCheck updateAccount : " + criticCheck);
-		    	avo.setCriticCheck(criticCheck);
-		    }
-		    request.setAttribute("avo", avo);
-		    
-		}
-		
 		if ("updateAccountOk".equals(type)) {
-			request.setCharacterEncoding("UTF-8");
-
-			// 유저정보 받기
-//		    AccountVO avo = (AccountVO) request.getAttribute("avo");
-//		    System.out.println("avo ok : " + avo);
-		    
-			int no = Integer.parseInt(request.getParameter("no"));
-		    String name = request.getParameter("name");
-			String pwd = request.getParameter("pwd");
-			String nickName = request.getParameter("nick");
-			String email = request.getParameter("email");
-			String crticCheck = request.getParameter("criticCheck"); // 관리자페이지랑연결
-			System.out.println("crticCheck : " + crticCheck);
-
-			int criticCheckInt = 0;
-			if (crticCheck != null && !crticCheck.isEmpty()) {
-				criticCheckInt = Integer.parseInt(crticCheck);
-			} else {
-				criticCheckInt = 0;
-			}
-			
-			AccountVO avo = new AccountVO();
-			avo.setNo(no);
-			avo.setName(name);
-			avo.setPwd(pwd);
-			avo.setNick(nickName);
-			avo.setEmail(email);
-			avo.setCriticCheck(criticCheckInt);
-			System.out.println("avo ok : " + avo);
-		    int result = AccountDAO.UpdateAccount(avo);
-		    
-		    //리뷰 닉네임 업데이트
-		    int resultR = reviewDAO.updateNickReview(no, nickName);
-		    
-		    //포스트 닉네임 업데이트
-		    int resultP = postDAO.updateNickPost(no, nickName);
-		    
-		    if (result == -1 && resultR == -1 && resultP == -1) {
-		    	System.out.println("실패");
-		    }
-		    System.out.println("성공");
 		}
-		
-		
 		
 		Command command = null;
 		command = commands.get(type);

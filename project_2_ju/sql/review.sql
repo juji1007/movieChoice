@@ -26,3 +26,36 @@ VALUES (REVIEW_SEQ.NEXTVAL, 1, 4, 'kim1990', 5, '아이들이랑 함께 봤어�
 INSERT INTO REVIEW
 VALUES (REVIEW_SEQ.NEXTVAL, 4, 6, 'lim704', 7, '여름에 볼 영화로 추천'
       , '시원하게 여름에 보기 좋아요', SYSDATE, 0, 0);
+---
+--reviewMapper.xml
+<!-- (동적 검색)조건 선택하여 리뷰 목록 조회 -->
+	<select id="one" parameterType="map" resultType="com.mystudy.model.vo.listTotVO">
+		SELECT RV_NO, NO, MV_TITLE, MV_POSTER
+		     , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT
+		     , RV_CONTENT, RV_DATE, RV_REC, RV_WARN
+		FROM (SELECT ROWNUM R_NUM, R.*, M.*
+		      FROM (SELECT *
+		            FROM REVIEW
+		            ORDER BY RV_NO DESC
+		            ) R, MOVIE M
+		      WHERE R.MV_NO = M.MV_NO
+		<choose>
+     		<when test = "idx == 0">
+		      AND MV_TITLE = #{keyword}
+     		</when>
+     		<when test = "idx == 1">
+		      AND RV_NICK = #{keyword}
+     		</when>
+     		<when test = "idx == 2">
+		      AND TO_CHAR(RV_DATE, 'YYYYMMDD') = #{keyword}
+     		</when>
+     		<otherwise>
+			  AND 1 = 2
+			</otherwise>
+     	</choose>
+	<![CDATA[
+		      AND ROWNUM <= #{end}
+		      )
+    WHERE R_NUM >= #{begin}
+	]]>
+    </select>

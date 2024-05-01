@@ -10,6 +10,7 @@
 	System.out.println("avo : " + avo);
 	
 	request.setAttribute("avo", avo);
+	String location = request.getParameter("loaction");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@
 	function update(frm) {
 		
 		if(!check) {
-			alert("비밀번호와 비밀번호확인 값이 다릅니다!");
+			alert("비밀번호와 비밀번호확인 값이 다릅니다!");     
 			frm.pwdCheck.value="";
 			return;
 		}
