@@ -37,12 +37,6 @@
   		AND A.NO = #{no}  	
   	</select>
 	
-	<!-- 전문가 신청서 입력 -->
-	<insert id="insert" parameterType="com.mystudy.model.vo.criticVO">
-		INSERT INTO CRITIC (NO, COMPANY, CAREER, FILENAME)
-		VALUES (#{no}, #{company}, #{career}, #{filename})
-	</insert>
-	
 	<!-- 전문가 정보 업데이트 -->
 	<update id="update" parameterType="com.mystudy.model.vo.criticVO"> 
 		UPDATE CRITIC
@@ -65,6 +59,34 @@
 		WHERE A.No = C.NO
         AND C.NO = #{no}
 	</select>
+	
+	<!-- CRITICAPPLY 테이블 -->
+	<!-- 전문가 승인 대기 목록 전체 조회 -->
+	<select id="allApply" resultType="com.mystudy.model.vo.criticVO">
+		SELECT A.*, C.*
+		FROM ACCOUNT A, CRITICAPPLY C
+		WHERE A.NO = C.NO
+	</select>
+	
+	<!-- 전문가 신청 승인 CRITICAPPLY 테이블로 보내기 -->
+	<insert id="insertApply" parameterType="com.mystudy.model.vo.criticVO">
+		INSERT INTO CRITICAPPLY (NO, COMPANY, CAREER, FILENAME)
+		VALUES (#{no}, #{company}, #{career}, #{filename})
+	</insert>
+	
+	<!-- 전문가 승인 완료 이후 CRITIC INSERT -->
+	<insert id="insert" parameterType="int">
+		INSERT INTO CRITIC
+		SELECT * 
+		FROM CRITICAPPLY
+		WHERE NO = #{no}
+	</insert>
+	
+	<!-- 전문가 승인 대기 정보 삭제 -->
+	<delete id="deleteApply" parameterType="int">
+		DELETE FROM CRITICAPPLY
+		WHERE NO = #{no}
+	</delete>
 	
 </mapper>
 

@@ -34,6 +34,8 @@
 	avo.setNick(nickName);
 	avo.setEmail(email);
 // 	avo.setCriticCheck(criticCheckInt);
+// 	request.setAttribute("avo", avo);
+
 	
 	// 회원가입 데이터 DB에 삽입
 	int checkJoin = AccountDAO.insertMember(avo);
@@ -50,14 +52,13 @@
 // 	response.sendRedirect("login_page.jsp");
 	} else {
 		System.out.println("avo.getId() : " + avo.getId());
-			if (criticCheckInt == 1) {
+ 			if (criticCheckInt == 1) {
 %>
 					<script>
-<%-- 					location.href="criticApply.jsp?no=<%=avo.getNo()%>"; --%>
 					location.href="criticApply.jsp?id=<%=avo.getId() %>";
-					</script>
+				</script>
 <%
-				}
+		} else {
 %>
 
 	<script>
@@ -65,6 +66,7 @@
 		location.href="login_page.jsp";
 	</script>
 <%
+		}
 	}
 // 	response.sendRedirect("login_page.jsp");
 %>
