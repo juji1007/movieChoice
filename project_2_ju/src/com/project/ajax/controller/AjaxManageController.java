@@ -143,7 +143,7 @@ public class AjaxManageController extends HttpServlet {
 			out.print(result);
 			
 		}
-		//나의 리뷰목록
+		//나의 영화목록
 		if ("movieMypage".equals(action)) {
 			System.out.println("마이페이지영화처리");
 			
@@ -193,8 +193,10 @@ public class AjaxManageController extends HttpServlet {
 			System.out.println("avoNo : " + no);
 			
 		    List<reviewVO> rvoList = reviewDAO.getReviewList(no);
+		    System.out.println("rvoList : " + rvoList);
 			Map<String, List<?>> listSearch = new HashMap<>();
 			listSearch.put("review", rvoList);
+			System.out.println("listSearch : " + listSearch);
 			String result = makeJson(listSearch);
 			
 			System.out.println("result : \n" + result);
@@ -251,8 +253,53 @@ public class AjaxManageController extends HttpServlet {
 		    System.out.println("Key: " + key);
 		    System.out.println("Value: " + value);
 		    // 리스트의 각 요소 Json넣기
+		    
+		    if (value == null || value.isEmpty()) {
+		    	if ("review".equals(key)) {
+		    		System.out.println("review value null");
+		            result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"rvNo\": \"" + null + "\", ");
+		            result.append("\"mvNo\": \"" + null + "\", ");
+		            result.append("\"no\": \"" + null + "\", ");
+		            result.append("\"rvNick\": \"" + null + "\", ");
+		            result.append("\"rvTitle\": \"" + null + "\", ");
+		            result.append("\"rvContent\": \"" + null + "\", ");
+		            result.append("\"rvDate\": \"" + null + "\", ");
+		            result.append("\"rvRec\": \"" + null + "\", ");
+		            result.append("\"warn\": \"" + null + "\"");
+		            result.append("},");
+		    	}
+		    	if ("movie".equals(key)) {
+		    		 result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"mvNo\": \"" + null + "\", ");
+		            result.append("\"mvTitle\": \"" + null + "\", ");
+		            result.append("\"mvDirect\": \"" + null + "\", ");
+		            result.append("\"mvActor\": \"" + null + "\", ");
+		            result.append("\"mvGenre\": \"" + null + "\", ");
+		            result.append("\"mvRate\": \"" + null + "\", ");
+		            result.append("\"mvAudience\": \"" + null + "\", ");
+		            result.append("\"mvGrade\": \"" + null + "\", ");
+		            result.append("\"mvDate\": \"" + null + "\", ");
+		            result.append("\"mvPoster\": \"" + null + "\"");
+		            result.append("},");
+		    	}
+		    	if ("post".equals(key)) {
+		    		result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"psNo\": \"" + null + "\", ");
+		            result.append("\"no\": \"" + null + "\", ");
+		            result.append("\"psTitle\": \"" + null + "\", ");
+		            result.append("\"psContent\": \"" + null + "\", ");
+		            result.append("\"psDate\": \"" + null + "\", ");
+		            result.append("\"psFile\": \"" + null + "\", ");
+		            result.append("\"psWarn\": \"" + null + "\", ");
+		            result.append("\"psNick\": \"" + null + "\"");
+		            result.append("},");
+		    	}
+		    }
 		    for (Object item : value) {
-		    	
 		        if ("review".equals(key)) {
 		            reviewVO rvo = new reviewVO();
 		            rvo = (reviewVO) item;
@@ -303,7 +350,7 @@ public class AjaxManageController extends HttpServlet {
 		        
 		        if ("post".equals(key)) {
 		        	postVO pvo = (postVO) item;
-		        	 result.append("{");
+		        	result.append("{");
 		            result.append("\"table\": \"" + key + "\", ");
 		            result.append("\"psNo\": \"" + pvo.getPsNo() + "\", ");
 		            result.append("\"no\": \"" + pvo.getNo() + "\", ");

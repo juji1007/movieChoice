@@ -33,7 +33,7 @@
 	avo.setPwd(pwd);
 	avo.setNick(nickName);
 	avo.setEmail(email);
-	avo.setCriticCheck(criticCheckInt);
+// 	avo.setCriticCheck(criticCheckInt);
 	
 	// 회원가입 데이터 DB에 삽입
 	int checkJoin = AccountDAO.insertMember(avo);

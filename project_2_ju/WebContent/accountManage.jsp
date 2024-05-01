@@ -183,7 +183,6 @@ function selectCategory(frm) {
 		            htmltag += "<td>" + member.email + "</td>";
 		            htmltag += "<td>" + member.warn + "</td>"; 
 		            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
-		            htmltag += "<input type='button' value='수정' onclick='updateAccount()'></td>";
 		            htmltag += "</tr>";
 		            
 		            checkAccount--;
