@@ -11,24 +11,25 @@
 	  <li><a href="about.asp">Q & A</a></li>
 	  <li><a href="about.asp">Review Of The Month</a></li> 
 	  <li><a href="controller?type=critic">평론가</a></li>
-	  <li><a href="myPage.jsp">마이페이지</a></li>
-	</ul>
-	
-	<ul class="login">
 <% 
    request.setCharacterEncoding("UTF-8");
 
    String id = (String) session.getAttribute("id");
    if (id == null) {
 %> 	
+	</ul>
+	<ul class="login">
+	
 	<li><a href="login_page.jsp">로그인</a></li>
 	<li>/</li>
 	 
 	<li><a href="memberJoin.jsp">회원가입</a></li>
-	
 <%
    } else {
-%>  
+%>
+	<li><a href="myPage.jsp">마이페이지</a></li>
+	</ul>
+	<ul class="login">  
 	<li><a href="logout.jsp">로그아웃</a></li>
 <%
     }

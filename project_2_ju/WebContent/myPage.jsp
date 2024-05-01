@@ -59,6 +59,7 @@
 	}
 	window.onload = function() {
 		getAccountInfo();
+		getMovieInfo();
 		getReviewInfo();
 		getPostInfo();
 	};
@@ -106,6 +107,59 @@
 	            	footerHtml = "<tr><td colspan='2'><input type='button' value='회원정보수정' onclick='updateAccount(this.form)'>";
 	            	footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick='updateAccount(this.form)'></td></tr>";
 	            	 $('#accountTbody').html(footerHtml);
+			 },
+		        error: function(jqXHR, textStatus, errorThrown) {
+		            alert("Ajax 처리 실패:\n" +
+		                "jqXHR.readyState: " + jqXHR.readyState + "\n" +
+		                "textStatus: " + textStatus + "\n" +
+		                "errorThrown: " + errorThrown);
+		        }
+
+		});
+	}
+	
+	function geMovieInfo() {
+		
+		$.ajax({
+			type: "POST",
+			url: "ajaxManageController",
+			data: {
+				action: "movieMypage"
+			},
+			dataType: "json",
+			 success: function(respData) {
+	            console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+	            
+	            let htmltag = "";
+	       	    // 데이터 처리
+	            if (respData.length === 0) {
+	                // 검색 결과가 없을 때
+	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	            } else {
+	                // 검색 결과가 있을 때
+	                htmltag += "<tr><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
+	                for (let member of respData.listSearch) {
+	                	 if (member.table === "review") {
+	 			            console.log("리뷰html");
+	 			            htmltag += "<tr>";
+	 			            htmltag += "<td>" + member.rvNo + "</td>";
+				            htmltag += "<td>" + member.mvNo + "</td>";
+				            htmltag += "<td>" + member.no + "</td>";
+				            htmltag += "<td>" + member.rvNick + "</td>";
+				            htmltag += "<td>" + member.rvTitle + "</td>";
+				            htmltag += "<td>" + member.rvContent + "</td>";
+				            htmltag += "<td>" + member.rvDate + "</td>";
+				            htmltag += "<td>" + member.rvRec + "</td>";
+				            htmltag += "<td>" + member.warn + "</td>";
+ 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
+ 	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
+ 	 			            htmltag += "</tr>";
+	 			        }
+	                }
+	            }
+	       	    
+	            $('#reviewThead').html(htmltag);
+		            
 			 },
 		        error: function(jqXHR, textStatus, errorThrown) {
 		            alert("Ajax 처리 실패:\n" +

@@ -126,4 +126,17 @@ public class movieDAO {
 			return null;
 		}
 		
+		//마이페이지 ====================================
+		//영화 테이블에 추천 수, 회원 번호
+		//회원 번호로 조회
+		public static movieVO getMovie(int mvNo) {
+			System.out.println("rOne실행");
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("movie.rone", mvNo);
+			} catch (Exception e) { 
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 }
