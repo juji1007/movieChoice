@@ -105,17 +105,7 @@ public class AccountDAO {
 		}
 		return -1;
 	}
-	// 자유게시판 =====================================================
-	   //아이디로 유저넘버 조회 
-	   public static int getAccountNo(String id) {
-	      try (SqlSession ss = DBService.getFactory().openSession()) {
-	         System.out.println("id : " + id);
-	         return ss.selectOne("project2.noById", id);
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-	      return -1;
-	   }
+	
 	
 	// 자유게시판 =====================================================
 	//아이디로 유저넘버 조회 (마이페이지에서도)

@@ -85,30 +85,15 @@ session.getAttribute("c_list");
 }
 
 
-// 본인이 작성한 글 아니면 삭제 버튼 클릭시 권한없습니다
-// 	$(function(){
-<%-- <% --%>
-// 	if(session.getAttribute("no") == null || po.getNo() ){
-<%--  %>  --%>
-// 	      $('.h_button').css('display','none');
-<%-- <% --%>
-// 	}
-<%-- %> --%>
-// 	})
+
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf"%>
-	<div class="body">
-		<h2>자유게시판</h2>
-		<form class="write" action="postWrite.jsp" method="get">
-			<input type="button" value="작성하기" onclick="login_confirm(this.form)">
-		</form>
+	
 
-
-</div>
 <div class="body">
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>

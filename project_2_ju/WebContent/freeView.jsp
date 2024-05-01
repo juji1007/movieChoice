@@ -71,7 +71,7 @@ function ps_update(frm) {
 // 댓글 삭제 확인
 	function pc_delete(frm) {
 		let isDelete = confirm(${no});
-// 		if(isDelete) {
+// 		if(isDelete) {  
 // 			if(${no} == ${pcvo.no}) {
 // 			frm.submit();
 // 			}
@@ -101,16 +101,12 @@ function ps_update(frm) {
 	//게시물 신고버튼
 	
 	function warn_push() {
-	let isWarn = alert("신고하시겠습니까?")
-	if (isWarn) {
-	
+		var psNo =  <%= pvo.getPsWarn() %>;
+		console.log(psNo);
 		<%
-		pvo.setPsWarn(1);
-		System.out.println(pvo.getPsWarn());
+		 
 		%>
 	}
-	}
-
 	
 </script>
 </head>
