@@ -55,6 +55,8 @@
 			onclick="login_confirm(this.form)">
 	</h2>
 	</form>
+	
+	<h3>전체조회</h3>
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne" method="post">
 		<select name="idx">
@@ -69,13 +71,13 @@
 		<input type="hidden" name="category" value="selectOne">
 	</form>
 	 
-	<!-- 리뷰 전체보기 -->
+<!-- 리뷰 (전체)목록 -->
 <form>
 	<table>
-	<c:forEach var="vo" items="${rvList}">
+	<c:forEach var="vo" items="${listAll}">
 		<tbody id="reviewOne">
 	        <tr>
-	            <td>${vo.mvNo }-영화명으로 변경</td>
+	            <td>${vo.mvTitle }</td>
 	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
 	        </tr>
 	        <tr>
@@ -94,6 +96,7 @@
 	        </tr>
 	    </tbody>
 	</c:forEach>
+	
 	    <tfoot id="page">
 	        <tr>
 	        	<td colspan="2">

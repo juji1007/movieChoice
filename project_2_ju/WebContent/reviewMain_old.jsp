@@ -67,11 +67,11 @@
 	pageContext.setAttribute("list", listAll);
 	
 	//페이징 처리 위한 리뷰 전체 목록
-	List<reviewVO> list = reviewDAO.pList(p.getBegin(), p.getEnd());
-	System.out.println(">> 현재페이지 글목록 : " + list);
+// 	List<reviewVO> list = reviewDAO.pList(p.getBegin(), p.getEnd());
+// 	System.out.println(">> 현재페이지 글목록 : " + list);
 	
-	session.setAttribute("rvPvo", p);
-	session.setAttribute("rvList", list);
+// 	session.setAttribute("rvPvo", p);
+// 	session.setAttribute("rvList", list);
 	
 	//추천수 +1
 %>
