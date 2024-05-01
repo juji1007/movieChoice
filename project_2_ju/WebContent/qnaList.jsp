@@ -10,7 +10,7 @@
 <body>
 	<h1>${sort } 검색결과</h1>
 	<c:forEach var="vo" items="${listOne }">
-	<table>
+	<table> 
 		<tr>
 			<td>${vo.qaNo }</td>
 			<td>${vo.qaDate }</td>
