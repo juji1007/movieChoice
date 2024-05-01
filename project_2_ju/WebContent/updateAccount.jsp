@@ -38,7 +38,7 @@
 	function check_critic(frm) {
 	var checkCritic = frm.elements["criticCheck"];
 		if (checkCritic.checked) {
-		    checkCritic.value = "3";
+		    checkCritic.value = "1";
 		    location.href="criticApply.jsp?location=myPage&id=<%=avo.getId() %>";
 		} else {
 		    checkCritic.value = "0";

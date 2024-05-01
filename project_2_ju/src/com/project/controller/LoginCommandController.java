@@ -105,23 +105,6 @@ public class LoginCommandController extends HttpServlet {
 		}
 		
 		if ("updateAccount".equals(type)) {
-			request.setCharacterEncoding("UTF-8");
-
-			// 유저정보 받기
-		    String id = (String) session.getAttribute("id");
-		    System.out.println("upid : " + id);
-		    
-		    // 아이디 DB에서 조회
-		    AccountVO avo = AccountDAO.getAccount(id);
-		    
-		    String location = request.getParameter("location");
-		    System.out.println("location updateAccount : " + location);
-		    if ("checkApply".equals(location)) {
-		    	int criticCheck = Integer.parseInt(request.getParameter("criticCheck"));
-			    System.out.println("criticCheck updateAccount : " + criticCheck);
-		    	avo.setCriticCheck(criticCheck);
-		    }
-		    request.setAttribute("avo", avo);
 		    
 		}
 		
