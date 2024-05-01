@@ -16,7 +16,7 @@
 
 <%
 	//파일 저장
-	String path = "c:/aaa/upload/post";
+	String path = application.getRealPath("/fileSave");
 	File fileDir = new File(path);
 	if (!fileDir.exists()) {
 		fileDir.mkdirs();
@@ -26,7 +26,8 @@
 			"UTF-8", new DefaultFileRenamePolicy());
 	
 	postVO po = new postVO();
-	po.setNo(Integer.parseInt(mr.getParameter("no")));
+	po.setPsNick((String) session.getAttribute("nick"));
+	po.setNo((Integer) session.getAttribute("no"));
 	po.setPsTitle(mr.getParameter("psTitle"));
 	po.setPsContent(mr.getParameter("psContent"));
 	

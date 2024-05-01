@@ -11,10 +11,11 @@
 	</select>
 	
 	<!-- 영화제목으로 검색 -->
-	<select id="mvTitleDetail"  parameterType="int" resultType="com.mystudy.model.vo.movieVO">
+	<select id="mvTitleDetail"  parameterType="string" resultType="com.mystudy.model.vo.movieVO">
 		SELECT *
 		FROM MOVIE
-		WHERE MV_TITLE = (SELECT MV_TITLE FROM MOVIE WHERE MV_NO = #{mvNo})
+<!-- 		WHERE MV_TITLE = (SELECT MV_TITLE FROM MOVIE WHERE MV_NO = #{mvNo}) -->
+		WHERE MV_TITLE = #{keyword};
 	</select>
 	
 	<!-- 동적 검색 -->

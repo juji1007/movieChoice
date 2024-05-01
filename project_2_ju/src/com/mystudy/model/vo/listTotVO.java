@@ -28,8 +28,9 @@ public class listTotVO {
 	private String rvTitle;
 	private String rvContent;
 	private Date rvDate;
+	private int rvRate;
 	private int rvRec;
-	private int warn;
+	private int rvWarn;
 	
 	public int getNo() {
 		return no;
@@ -169,11 +170,17 @@ public class listTotVO {
 	public void setRvRec(int rvRec) {
 		this.rvRec = rvRec;
 	}
-	public int getWarn() {
-		return warn;
+	public int getRvRate() {
+		return rvRate;
 	}
-	public void setWarn(int warn) {
-		this.warn = warn;
+	public void setRvRate(int rvRate) {
+		this.rvRate = rvRate;
+	}
+	public int getRvWarn() {
+		return rvWarn;
+	}
+	public void setRvWarn(int rvWarn) {
+		this.rvWarn = rvWarn;
 	}
 	
 	@Override
@@ -183,8 +190,8 @@ public class listTotVO {
 				+ ", mvDirect=" + mvDirect + ", mvActor=" + mvActor + ", mvGenre=" + mvGenre + ", mvRate=" + mvRate
 				+ ", mvAudience=" + mvAudience + ", mvGrade=" + mvGrade + ", mvDate=" + mvDate + ", mvPoster="
 				+ mvPoster + ", rvNo=" + rvNo + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle + ", rvContent="
-				+ rvContent + ", rvDate=" + rvDate + ", rvRec=" + rvRec + ", warn=" + warn + "]";
+				+ rvContent + ", rvDate=" + rvDate + ", rvRate=" + rvRate + ", rvRec=" + rvRec + ", rvWarn=" + rvWarn
+				+ "]";
 	}
 	
-
 }

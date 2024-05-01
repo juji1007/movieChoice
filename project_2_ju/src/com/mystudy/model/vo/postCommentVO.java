@@ -9,6 +9,7 @@ public class postCommentVO {
 	private int no;
 	private Date pcDate;
 	private String pcContent;
+	private String pcNick;
 	
 	public int getPcNo() {
 		return pcNo;
@@ -40,12 +41,18 @@ public class postCommentVO {
 	public void setPcContent(String pcContent) {
 		this.pcContent = pcContent;
 	}
-	
+	public String getPcNick() {
+		return pcNick;
+	}
+	public void setPcNick(String pcNick) {
+		this.pcNick = pcNick;
+	}
 	@Override
 	public String toString() {
 		return "postCommentVO [pcNo=" + pcNo + ", psNo=" + psNo + ", no=" + no + ", pcDate=" + pcDate + ", pcContent="
-				+ pcContent + "]";
+				+ pcContent + ", pcNick=" + pcNick + "]";
 	}
+	
 	
 	
 	

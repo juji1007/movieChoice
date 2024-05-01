@@ -137,6 +137,13 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function updateAccount(frm) {
+	console.log("회원정보수정실행");
+	console.log(frm);
+// 	frm.action="loginController?type=updateAccount";
+// 	frm.submit();
+}
+
 function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
 	if ("선택" == checkCategory) {
@@ -217,7 +224,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvNo + "</td>";
 			            htmltag += "<td>" + member.mvTitle + "</td>";
 			            htmltag += "<td>" + member.mvDirect + "</td>";
-			            htmltag += "<td>" + member.mvActor + "</td>";
+			            htmltag += "<td>" + member.mvactor + "</td>";
 			            htmltag += "<td>" + member.mvGenre + "</td>";
 			            htmltag += "<td>" + member.mvRate + "</td>";
 			            htmltag += "<td>" + member.mvAudience + "</td>";
@@ -249,7 +256,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
-			            htmltag += "<input type='button' value='수정' onclick='updateAccount()'></td>";
+			            htmltag += "<input type='button' value='수정' onclick='updateAccount(this.form)'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
