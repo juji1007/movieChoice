@@ -147,6 +147,8 @@ public class postDAO {
 			return null;
 		}
 		
+		
+		
 		//댓글삭제
 		public static int deleteComment(int pcNo) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
@@ -156,6 +158,8 @@ public class postDAO {
 			}
 			return -1;
 		}
+		
+		
 		
 		//마이페이지 ============================================ 
 		//나의 자유게시판 조회

@@ -53,7 +53,8 @@ public class FrontController extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			
-			request.getRequestDispatcher("movieDetail.jsp?mvNo=${mvDetail.mvNo }").forward(request, response);
+//			request.getRequestDispatcher("movieDetail.jsp?mvNo=${mvDetail.mvNo }").forward(request, response);
+			request.getRequestDispatcher("mvTitleList.jsp").forward(request, response);
 		}
 		if ("movieDelete".equals(type)) {
 			String location = request.getParameter("location");
@@ -205,7 +206,7 @@ public class FrontController extends HttpServlet {
 			
 			
 			//페이지 전환(searchList.jsp 페이지에 위임)
-			request.getRequestDispatcher("main.jsp").forward(request, response);
+			request.getRequestDispatcher("main2.jsp").forward(request, response);
 		}
 		
 		if ("movieAdmin".equals(type)) {

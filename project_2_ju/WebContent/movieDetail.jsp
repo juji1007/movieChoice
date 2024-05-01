@@ -19,12 +19,7 @@
 	pageContext.setAttribute("vo", mvo); 
 	
 	//영화 검색-주은
-// 		movieVO vo = null;
-// 		try (SqlSession ss = DBService.getFactory().openSession()) {
-// 			vo =  ss.selectOne("PROJECT2.mvTitleDetail", mvTitle);
-// 		} catch (Exception e) {
-// 			e.printStackTrace();
-// 		} 
+// 		movieVO vo = movieDAO.getmvTitleList(mvTitle);
 // 		System.out.println("vo : " + vo);
 // 		session.setAttribute("mvDetail", vo); 
 		

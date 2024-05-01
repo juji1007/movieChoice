@@ -24,23 +24,26 @@
 	session.getAttribute("nick");
 	List<postCommentVO> commList = postDAO.getCommList(psNo);
 	System.out.println("댓글목록 commList : " + commList);
-	
 	session.setAttribute("c_list", commList);//댓글목록
+// 	System.out.println("댓글작성자번호 : " + commList.get(0).getNo());
 	
-	//댓글 1개조회
-//   	int pcNo = Integer.parseInt(request.getParameter("pcNo"));
-// 	postCommentVO mo = postDAO.getComment(pcNo);
-// 	System.out.println("댓글1개 mo : " + mo);
-// 	session.setAttribute("mo", mo);
-	session.getAttribute("cvo");
- 	
+// int i = 0;
+// for (  i = 0; i < commList.size(); i++){
+	 
+// 		System.out.println("commListNo : " + commList.get(i).getNo());
+// 	}
+// 		session.setAttribute("coo", commList.get(i).getNo());
+// 	session.getAttribute("coo");
+
+
+
 %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판 상세</title>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
 <script>
 
 //	게시물 삭제 확인 및 권한
@@ -70,17 +73,38 @@ function ps_update(frm) {
 
 // 댓글 삭제 확인
 	function pc_delete(frm) {
-		let isDelete = confirm(${no});
+
+		<%
+		for(int i = 0; i <commList.size(); i++) {
+		System.out.println(commList.get(i).getNo()); 
+		}
+		%>
+
+
 // 		if(isDelete) {
-// 			if(${no} == ${pcvo.no}) {
-// 			frm.submit();
+<%-- <% --%>
+// 			for(int i = 0; i <commList.size(); i++) {
+// 				if((Integer)session.getAttribute("no") == commList.get(i).getNo()) {
+<%-- %> --%>
+// 				frm.submit();
+// 	 			alert("삭제가 완료되었습니다.")
+<%-- <% --%>
 // 			}
-// 			else {
-// 			alert("삭제권한이 없습니다");
-// // 			history.back();
+<%-- %> --%>
+// // 				else {
+// // 					alert("삭제권한이 없습니다");
+// // 				}
+<%-- <% --%>
 // 			}
-// 	}
+<%-- %> --%>
+// }
 }
+
+	//댓글수정
+	function pc_update(frm) {
+		
+	}
+
 	//목록보기
 	function list_go() {
 		location.href = "free.jsp";
@@ -101,13 +125,16 @@ function ps_update(frm) {
 	//게시물 신고버튼
 	
 	function warn_push() {
-		var psNo =  <%= pvo.getPsWarn() %>;
-		console.log(psNo);
+	let isWarn = alert("신고하시겠습니까?")
+	if (isWarn) {
+	
 		<%
-		 
+		pvo.setPsWarn(1);
+		System.out.println(pvo.getPsWarn());
 		%>
 	}
-	
+	}
+
 </script>
 </head>
 <body>
@@ -144,7 +171,6 @@ function ps_update(frm) {
 	</tr>
 </table>
 
-
 <hr>
 <tr>
 	<td colspan=3>${pvo.psContent }</td>
@@ -172,7 +198,7 @@ function ps_update(frm) {
 	</form>
 	<hr>
 
-<!-- 댓글표시 -->
+<!-- 댓글표시 및 삭제-->
 <c:forEach var="commVO" items="${c_list }">
 	<div>
 		<form action="postComment_del_ok.jsp" method="get">
@@ -180,7 +206,9 @@ function ps_update(frm) {
 			<p>${commVO.pcContent }</p>
 			<input type="button" value="댓글삭제" onclick="pc_delete(this.form)">
 			<input type="hidden" name="pcNo" value="${commVO.pcNo }">
+			<input type="hidden" name="no" value="${commVO.no }">
 		</form>
+	
 	</div>
 	<hr>
 	</c:forEach>
