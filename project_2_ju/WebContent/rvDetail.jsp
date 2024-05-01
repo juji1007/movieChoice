@@ -37,15 +37,29 @@
 		
 	}
 	
+	//리뷰 수정 권한
 	function update_go(frm) {
-		location.href = "rvUpdate.jsp?rvNo=${listOne.rvNo}";
-		//조건 작성 - 아이디 확인 후
+		//회원번호 확인
+		if(${no} == ${listOne.no}) {
+			frm.submit();
+		} else {
+			alert("수정권한이 없습니다.");
+		}
 	}
 	
+	//리뷰 삭제 확인 및 권한
 	function delete_go(frm) {
- 		location.href = "rvDelete.jsp?rvNo=${listOne.rvNo}";
-		alert("삭제하시겠습니까?");
-		//조건 작성 - 아이디 확인
+		let isDelete = confirm("삭제하시겠습니까?");
+		
+		if(isDelete) {
+			//회원번호 확인
+			if(${no} == ${listOne.no}) {
+	 			location.href = "rvDelete.jsp?rvNo=${listOne.rvNo}";
+				alert("삭제가 완료되었습니다.");
+			} else {
+				alert("삭제권한이 없습니다.");
+			}
+		}
 		
 	}
 	
@@ -57,7 +71,7 @@
 	
 	<h2>리뷰 상세보기</h2>
 	<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post">
-	<table border>
+	<table>
 		<tbody>
 			<tr>
 				<td rowspan="3"><img src="img/${listOne.mvPoster }" alt="포스터" width="300px"></td>
