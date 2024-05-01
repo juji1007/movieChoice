@@ -13,5 +13,12 @@
 		ORDER BY R.RV_NO
 	</select>
 	
+	<select id="listOne" resultType="com.mystudy.model.vo.listTotVO">
+		SELECT R.*
+		FROM ACCOUNT A, MOVIE M, REVIEW R
+		WHERE R.NO = A.NO
+		AND R.MV_NO = M.MV_NO
+		AND R.RV_NO = #{rvNo}
+	</select>
 	
 </mapper>

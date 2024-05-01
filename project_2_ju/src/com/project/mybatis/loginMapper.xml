@@ -54,6 +54,13 @@
 		WHERE ID = #{id}
 	</update>
 	
+	<select id="findNo" parameterType="string" resultType="int">
+		SELECT P.NO
+		FROM ACCOUNT A, POST P
+		WHERE A.NO = P.NO
+        AND A.ID = #{id}
+	</select>
+	
 </mapper>
 
 

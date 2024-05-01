@@ -1,3 +1,4 @@
+<%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.mystudy.post.common.Paging"%>
@@ -52,7 +53,7 @@
 %>
 <%
 	
-	List<postVO> list = postDAO.getList(p.getBegin(), p.getEnd());
+ 	List<postVO> list = postDAO.getList(p.getBegin(), p.getEnd());
 	System.out.println(">> 현재페이지 글목록 : " + list);
 %>
 <%
@@ -62,7 +63,16 @@
 	session.setAttribute("pvo", p);
 	session.setAttribute("list", list);
 	
+	System.out.println("list : " + list);
+	
 	session.getAttribute("c_list");
+	
+	List<postVO> pList = postDAO.getList(p.getBegin(), p.getEnd());
+    for (postVO post : pList) {
+        session.setAttribute("pList.no", post.getNo());
+        System.out.println("post.getNo() : " + post.getNo());
+    }
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -92,15 +102,15 @@
 	frm.submit();
 }
 // 본인이 작성한 글 아니면 삭제 버튼 숨기기(코드 수정)
-	$(function(){
-<%
-	if(session.getAttribute("no") == null || session.getAttribute("list.no") != session.getAttribute("no")){
-%>
-	      $('.h_button').css('display','none');
-<%
-	}
-%>
-	})
+// 	$(function(){
+<%-- <% --%>
+// 	if(session.getAttribute("no") == null || session.getAttribute("list.no") != session.getAttribute("no")){
+<%-- %> --%>
+// 	      $('.h_button').css('display','none');
+<%-- <% --%>
+// 	}
+<%-- %> --%>
+// 	})
 </script>
 </head>
 <style>
@@ -202,30 +212,29 @@ img.icon {
 
 
 <div id="post">
+<form action="postDelete.jsp" method="get">
 <table border>
-<c:forEach var="vo" items="${vo }">
+<c:forEach var="voA" items="${vo }">
 <tr>
-<td>${vo.nick }</td>
+<td>${voA.nick }</td>
 </tr>
 </c:forEach>
-<c:forEach var="vo" items="${list }">
-<tr>
-<td>${vo.psNo }</td>
-<td>${vo.psDate }</td>
-<td>
-<a href="freeView.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
-${vo.psTitle }
-</a>
-</td>
-<td>
-	<form action="postDelete.jsp" method="get">
-		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
-		<input type="hidden" name="psNo" value="${vo.psNo }">
-	</form>
-</td>
+<c:forEach var="vo" items="${list}">
+    <tr>
+        <td>${vo.psNo}</td>
+        <td>${vo.psDate}</td>
+        <td>
+            <a href="freeView.jsp?psNo=${vo.psNo}&cPage=${pvo.nowPage}">
+                ${vo.psTitle}
+            </a>
+        </td>
+	    <td>
+			<input type="button" value="삭제" onclick="ps_delete(this.form)">
+            <input type="hidden" name="psNo" value="${vo.psNo}">
+        </td>
+    </tr>
+</c:forEach>
 
-</tr>
-</c:forEach>
 
 <tfoot>
 			<tr>
@@ -268,6 +277,7 @@ ${vo.psTitle }
 			</tr>
 		</tfoot>
 		</table>
+		</form>
 </div>
 </body>
 </html>

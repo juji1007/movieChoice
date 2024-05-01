@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.mystudy.post.common.Paging"%>
 <%@page import="com.mystudy.model.dao.postDAO"%>
@@ -59,13 +60,47 @@
 	// 페이징처리객체 page 영역에 저장
 	
 	session.setAttribute("pvo", p);
-	pageContext.setAttribute("list", list);
+	session.setAttribute("list", list);
+	
+	session.getAttribute("c_list");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+// 	게시물 삭제 확인
+	function ps_delete(frm) {
+		let isDelete = confirm("삭제하시겠습니까?");
+		if(isDelete) {
+			frm.submit();
+		}
+	}
+//로그인 후 작성가능
+	function login_confirm(frm) {
+<% 
+	if (session.getAttribute("no") == null) {
+%>
+	alert("로그인 후 작성 가능합니다.");
+	frm.location.href = "free.jsp";
+<%
+	}
+	else 
+%>
+	frm.submit();
+}
+
+	function postDelete(frm) {
+	    let pDelete = confirm("정말로 삭제하시겠습니까?");
+	    if (pDelete) {
+	    	frm.action = "postDeleteOk.jsp";
+	    	frm.submit();
+	    } else {
+	    }
+	}
+</script>
 </head>
 <style>
 
@@ -150,7 +185,7 @@ img.icon {
 <hr class="mint">
 </div>
 <h2>자유게시판</h2>
-<a href="postWrite.jsp"><input type="button" value="작성하기"></a>
+<form action="postWrite.jsp" method="get"><input type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
 
 
 <form action="postController?search=freeList" method="get">
@@ -166,6 +201,7 @@ img.icon {
 
 
 <div id="post">
+<form method="post">
 <table border>
 <c:forEach var="vo" items="${vo }">
 <tr>
@@ -181,6 +217,11 @@ img.icon {
 ${vo.psTitle }
 </a>
 </td>
+<td>
+		<input type="button" value="삭제" onclick="postDelete(this.form)">
+		<input type="hidden" name="psNo" value="${vo.psNo }">
+</td>
+
 </tr>
 </c:forEach>
 
@@ -225,6 +266,7 @@ ${vo.psTitle }
 			</tr>
 		</tfoot>
 		</table>
+		</form>
 </div>
 </body>
 </html>
