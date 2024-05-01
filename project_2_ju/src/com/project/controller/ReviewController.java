@@ -96,7 +96,13 @@ public class ReviewController extends HttpServlet {
 			request.setAttribute("rvPvo", p);
 			request.setAttribute("rvList", list);
 			
-			request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
+			String location = request.getParameter("location");
+			if ("admin".equals(location)) {
+				request.getRequestDispatcher("reviewMainAdmin.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
+			}
+			
 		}
 
 		

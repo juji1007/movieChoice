@@ -139,7 +139,7 @@
 	</select>
 	
 	<!-- 리뷰번호 받아서 리뷰 삭제 -->
-	<delete id="delete" parameterType="com.mystudy.model.vo.reviewVO">
+	<delete id="deleteMypage" parameterType="com.mystudy.model.vo.reviewVO">
 		DELETE FROM REVIEW
 		WHERE RV_NO = #{rvNo}
 	</delete>

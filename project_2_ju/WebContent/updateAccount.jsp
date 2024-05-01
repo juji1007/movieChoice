@@ -10,6 +10,7 @@
 	System.out.println("avo : " + avo);
 	
 	request.setAttribute("avo", avo);
+	String location = request.getParameter("loaction");
 %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,7 @@
 	function check_critic(frm) {
 	var checkCritic = frm.elements["criticCheck"];
 		if (checkCritic.checked) {
-		    checkCritic.value = "1";
+		    checkCritic.value = "3";
 		    location.href="criticApply.jsp?location=myPage&id=<%=avo.getId() %>";
 		} else {
 		    checkCritic.value = "0";
@@ -47,7 +48,7 @@
 	function update(frm) {
 		
 		if(!check) {
-			alert("비밀번호와 비밀번호확인 값이 다릅니다!");
+			alert("비밀번호와 비밀번호확인 값이 다릅니다!");     
 			frm.pwdCheck.value="";
 			return;
 		}

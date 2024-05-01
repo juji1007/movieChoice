@@ -163,6 +163,17 @@ public class AccountDAO {
 		return -1;
 	}
 	
+	public static int delete(int no) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			System.out.print("delete계정실행 : ");
+			System.out.println(no);
+			return ss.delete("project2.delete", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	//아이디로 회원번호 조회
 	public static int findNo(String id) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {

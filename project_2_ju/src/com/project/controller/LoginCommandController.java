@@ -26,6 +26,8 @@ import com.project.command.MemberJoinCommand;
 import com.project.command.MemberJoinOkCommand;
 import com.project.command.UpdateAccountCommand;
 import com.project.command.UpdateAccountOkCommand;
+import com.project.command.deleteAccountCommand;
+import com.project.command.deleteAccountOkCommand;
 import com.project.dao.AccountDAO;
 import com.project.vo.AccountVO;
 
@@ -45,6 +47,8 @@ public class LoginCommandController extends HttpServlet {
 		commands.put("memberJoinOk", new MemberJoinOkCommand());
 		commands.put("updateAccount", new UpdateAccountCommand());
 		commands.put("updateAccountOk", new UpdateAccountOkCommand());
+		commands.put("deleteAccount", new deleteAccountCommand());
+		commands.put("deleteAccountOk", new deleteAccountOkCommand());
 	}
 	
 	@Override
@@ -164,8 +168,6 @@ public class LoginCommandController extends HttpServlet {
 		    }
 		    System.out.println("성공");
 		}
-		
-		
 		
 		Command command = null;
 		command = commands.get(type);
