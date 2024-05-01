@@ -94,6 +94,7 @@ session.getAttribute("c_list");
 	<%@ include file="include/header.jspf"%>
 	
 
+
 <div class="body">
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
