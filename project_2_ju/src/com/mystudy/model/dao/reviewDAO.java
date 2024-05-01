@@ -146,11 +146,11 @@ public class reviewDAO {
 		}
 
 	//추천수 COUNT+1(본인 리뷰가 아닌 경우 추천+1)
-	public static int recCnt(int rvNo, int no) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			Map<String, Integer> map = new HashMap<String, Integer>();
+	public static int recCnt(int rvNo, int rvRec) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			Map<String, Integer> map = new HashMap<>();
 			map.put("rvNo", rvNo);
-			map.put("no", no);
+			map.put("rvRec", rvRec);
 			
 			return ss.update("review.rec", map);
 		} catch (Exception e) {

@@ -130,9 +130,8 @@
 	<!-- 추천수 -->
  	<update id="rec" parameterType="map">
 		UPDATE REVIEW
-		SET RV_REC = RV_REC + 1
+		SET RV_REC = #{rvRec} + 1
 		WHERE RV_NO = #{rvNo}
-		AND NO != #{no}
 	</update> 
 	
 	<!-- 리뷰 RvNo 조회 -->

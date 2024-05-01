@@ -36,8 +36,6 @@
 		location.href = "rvRec.jsp?rvNo=";
 		frm.submit();
 	}
-	
-
 	function warn_push() {
 		location.href = "rvWarn.jsp";
 		frm.submit();
@@ -86,8 +84,7 @@
 	        </tr>
 	        <tr>
 	            <td colspan="2">
-<%-- 	            	<input type="button" value="추천" onclick="rec_push(this.form)">${vo.rvRec } --%>
-	            	<input type="button" value="추천" onclick="javascript:location.href='rvRec.jsp?rvNo=${vo.rvNo}'">${vo.rvRec }
+	            	<input type="button" value="추천" onclick="rec_push(this.form)">${vo.rvRec }
 	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn }
 	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">

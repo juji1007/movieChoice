@@ -41,7 +41,7 @@
 	</select>
 
 		
-	<!-- mvNo로 검색하여 movie 정보(title,poster) select -->
+	<!-- rvNo로 검색하여 movie 정보(title,poster) select -->
 	<select id="one" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT A.*, M.*,  R.*
 		FROM ACCOUNT A, MOVIE M, REVIEW R

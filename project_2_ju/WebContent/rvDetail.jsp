@@ -6,6 +6,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	if (session.getAttribute("recVo") != null) {
+		listTotVO recVo = (listTotVO)session.getAttribute("recVo");
+		session.setAttribute("listOne", recVo);
+	}
+	
 	int rvNo = Integer.parseInt(request.getParameter("rvNo"));
 	System.out.println("rvNo : " + rvNo);
 	
@@ -18,6 +23,9 @@
 	
 	session.setAttribute("listOne", listOne);
 	session.setAttribute("cPage", cPage);
+	
+	int no = (Integer)session.getAttribute("no");
+	pageContext.setAttribute("no", no);
 %>
 <!DOCTYPE html>
 <html>
@@ -28,11 +36,28 @@
 <link rel="stylesheet" href="css/rvDetail.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+	//추천수,신고수 버튼 적용
+	function rec_push(frm) {
+		//본인 리뷰가 아닌 경우 추천 가능
+		if (${no} != ${listOne.no}) {
+			//추천 클릭 처리
+			alert("추천을 눌렀습니다.");
+			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
+			
+		} else {
+			alert("본인 리뷰는 추천할 수 없습니다!!");
+			location.href= "rvDetail.jsp?rvNo=${listOne.rvNo}&cPage=${cPage}";
+		}
+	}
+	function warn_push() {
+		location.href = "rvWarn.jsp";
+		frm.submit();
+	}
+
+	//시간 여유 시, 구현 예정
 	function prev_go() {
 		
 	}
-
-	
 	function next_go() {
 		
 	}
@@ -81,7 +106,8 @@
 				<td id="rvNick">${listOne.rvNick }</td>
 				<td id="rvDate">${listOne.rvDate }</td>
 				<td id="btn">
-					<input type="button" value="추천 " onclick="recommand_push()">
+					<input type="button" value="추천 " onclick="rec_push(this.form)">
+<%-- 					<input type="button" value="추천 " onclick="javascript:location.href='rvRec.jsp?rvNo=${listOne.rvNo}'"> --%>
 					${listOne.rvRec }
 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
 					<input type="button" value="신고" onclick="warn_push()">
