@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.postVO;
 import com.project.mybatis.DBService;
 import com.project.vo.AccountVO;
@@ -109,15 +110,15 @@ public class AccountDAO {
 	
 	// 자유게시판 =====================================================
 	//아이디로 유저넘버 조회 (마이페이지에서도)
-	public static int getAccountNo(String id) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			System.out.println("id : " + id);
-			return ss.selectOne("project2.noById", id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
+//	public static int getAccountNo(String id) {
+//		try (SqlSession ss = DBService.getFactory().openSession()) {
+//			System.out.println("id : " + id);
+//			return ss.selectOne("project2.noById", id);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1;
+//	}
 	
 	// 마이페이지 =====================================================
 	//로그인시 아이디로 전체내용 조회 
@@ -152,5 +153,14 @@ public class AccountDAO {
 		return -1;
 	}
 	
+	//아이디로 회원번호 조회
+	public static int findNo(String id) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectOne("project2.findNo", id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 }

@@ -13,7 +13,7 @@ public class reviewVO {
 	private Date rvDate;
 	private int rvRate;
 	private int rvRec;
-	private int warn;
+	private int rvWarn;
 	
 	public int getRvNo() {
 		return rvNo;
@@ -69,18 +69,20 @@ public class reviewVO {
 	public void setRvRec(int rvRec) {
 		this.rvRec = rvRec;
 	}
-	public int getWarn() {
-		return warn;
+	public int getRvWarn() {
+		return rvWarn;
 	}
-	public void setWarn(int warn) {
-		this.warn = warn;
+	public void setRvWarn(int rvWarn) {
+		this.rvWarn = rvWarn;
 	}
 	
 	@Override
 	public String toString() {
 		return "reviewVO [rvNo=" + rvNo + ", mvNo=" + mvNo + ", no=" + no + ", rvNick=" + rvNick + ", rvTitle="
 				+ rvTitle + ", rvContent=" + rvContent + ", rvDate=" + rvDate + ", rvRate=" + rvRate + ", rvRec="
-				+ rvRec + ", warn=" + warn + "]";
+				+ rvRec + ", rvWarn=" + rvWarn + "]";
 	}
+	
+	
 	
 }

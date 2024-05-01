@@ -1,12 +1,18 @@
 @charset "UTF-8";
 	table {
 		width : 90%;
+		border: 1px solid black;
 	}
 	
 	.link:hover {
 		color:  #56BEC0;
 	 	font-weight: bold;
 	}
+	
+/* 	#rvTitle:hover { */
+/* 		color: #56BEC0; */
+/* 	 	font-weight: bold; */
+/* 	} */
 	
 	/* #reviewOne.tr {
 		width : 100px;

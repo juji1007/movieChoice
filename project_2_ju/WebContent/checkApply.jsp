@@ -36,6 +36,12 @@
 				
 				System.out.println("myPage 회원정보수정");
 %>	
+<<<<<<< HEAD
+<script> 
+		alert("신청이 완료되었습니다!");
+		location.href="memberJoinOk.jsp";
+</script> 
+=======
 		<script>
 			alert("신청이 완료되었습니다!");
 			location.href="loginController?type=updateAccount&location=checkApply&criticCheck=1";
@@ -50,3 +56,4 @@
 <%
 			}
 %>
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git

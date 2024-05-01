@@ -1,3 +1,4 @@
+<%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.mystudy.post.common.Paging"%>
@@ -51,6 +52,7 @@ if (p.getEndPage() > p.getTotalPage()) {
 }
 %>
 <%
+
 List<postVO> list = postDAO.getList(p.getBegin(), p.getEnd());
 System.out.println(">> 현재페이지 글목록 : " + list);
 %>
@@ -86,15 +88,25 @@ session.getAttribute("c_list");
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf"%>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 <div class="body">
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
@@ -114,7 +126,9 @@ session.getAttribute("c_list");
 			<table border>
 
 <div id="post">
+<form action="postDelete.jsp" method="get">
 <table border>
+
 
 <c:forEach var="vo" items="${list }">
 <tr>
@@ -169,6 +183,7 @@ ${vo.psTitle }
 			</tr>
 		</tfoot>
 		</table>
+		</form>
 </div>
 </div>
 
