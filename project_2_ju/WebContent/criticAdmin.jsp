@@ -16,7 +16,16 @@
    System.out.println("listc : " + listc);
    request.setAttribute("listc", listc);
    
-   String cNo = request.getParameter("critic");
+   //승인 (CRITICAPPLY)
+   List<criticVO> listca = null;
+   try (SqlSession ss = DBService.getFactory().openSession()) {
+      listca = ss.selectList("critic.allApply");
+   } catch (Exception e) {
+      e.printStackTrace();
+   }
+   System.out.println("listca : " + listca);
+   request.setAttribute("listca", listca);
+   
    
    int[] numa=new int[listc.size()]; 
    int i = 0;
@@ -45,6 +54,22 @@
 	    } else {
 	    }
 	}
+	
+	function criticApply(frm) {
+	    let cApply = confirm("정말로 승인하시겠습니까?");
+	    if (cApply) {
+	    	frm.submit();
+	    } else {
+	    }
+	}
+	
+	function criticApplyDelete(frm) {
+	    let caDelete = confirm("정말로 거절하시겠습니까?");
+	    if (caDelete) {
+	    	frm.submit();
+	    } else {
+	    }
+	}
 </script>
 <style>
 	table { border-collapse: collapse; }
@@ -55,7 +80,44 @@
 </head>
 <body>
 <%@ include file="include/headerAdmin.jspf" %>
-<h1>평론가</h1>
+<h1>승인 대기</h1>
+	<c:forEach var="vo" items="${listca }">
+		<table border>
+			<colgroup>
+				<col width="100">
+				<col width="100">
+				<col width="50">
+				<col width="100">
+				<col width="200">
+			</colgroup>
+			   <tr>
+			       <th rowspan="4"><img src="img/${vo.filename }" width="100" height="150px" alt="평론가 사진"></th>
+			       <th colspan="4">정보</th>
+			   </tr>
+			   <tr>
+			       <td rowspan="2"><strong>${vo.name }</strong></td>
+			       <td colspan="2">소속</td>
+			       <td colspan="2">경력</td>
+		    </tr>
+			   <tr>
+			   	<td colspan="2">${vo.company }</td>
+			  	<td colspan="2">${vo.career }</td>
+		    </tr>
+			   <tr>
+		    	<td colspan="4">
+			    	<form action="criticApplyOk.jsp?critic=${vo.no }"  method="post">
+				    	<input type="button" value="승인"  onclick="criticApply(this.form)">
+				    </form>
+				    <form action="criticApplyDelete.jsp?critic=${vo.no }" method="post">
+				    	<input type="button" value="거절" onclick="criticApplyDelete(this.form)"> 
+				    </form>
+		    	</td>
+		    </tr>
+		</table>
+	</c:forEach>
+	<br><br><br><br><br><br><br><br><br><br><br>
+	<hr>
+	<h1>평론가 정보</h1>
 	<c:forEach var="vo" items="${listc }" varStatus="loop">
 		<form action="criticDeleteOk.jsp?critic=${vo.no }" method="post">
 			<table border>

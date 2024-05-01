@@ -88,14 +88,25 @@ session.getAttribute("c_list");
 
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf"%>
+<<<<<<< HEAD
+	
+=======
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 <div class="body">
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>

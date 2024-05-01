@@ -182,8 +182,7 @@ function selectCategory(frm) {
 		            htmltag += "<td>" + member.criticCheck + "</td>";
 		            htmltag += "<td>" + member.email + "</td>";
 		            htmltag += "<td>" + member.warn + "</td>"; 
-		            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
-		            htmltag += "<input type='button' value='수정' onclick='updateAccount()'></td>";
+		            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
 		            htmltag += "</tr>";
 		            
 		            checkAccount--;

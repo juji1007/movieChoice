@@ -93,7 +93,13 @@ public class ReviewController extends HttpServlet {
 //			System.out.println(">> 현재페이지 글목록 : " + list);
 //			request.setAttribute("rvList", list);
 			
-			request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
+			String location = request.getParameter("location");
+			if ("admin".equals(location)) {
+				request.getRequestDispatcher("reviewMainAdmin.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
+			}
+			
 		}
 
 		

@@ -31,14 +31,6 @@
 		ORDER BY R.RV_NO DESC
 	</select>
 	
-	<select id="listOne" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
-		SELECT A.*, M.*,  R.*
-		FROM ACCOUNT A, MOVIE M, REVIEW R
-		WHERE R.NO = A.NO
-		AND R.MV_NO = M.MV_NO
-		AND R.RV_NO = #{rvNo}
-		ORDER BY R.RV_NO DESC
-	</select>
 
 		
 	<!-- rvNo로 검색하여 movie 정보(title,poster) select -->

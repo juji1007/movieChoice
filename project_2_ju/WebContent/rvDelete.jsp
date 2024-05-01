@@ -8,7 +8,20 @@
 	int result = reviewDAO.delete(rvNo);
 	System.out.println(">> delete 건수 : " + result);
 	
-	response.sendRedirect("reviewController?category=rvMain");
+	String location = request.getParameter("location");
+	
+	if ("admin".equals(location)) {
+		System.out.println(">> location : " + location);
+		response.sendRedirect("manage.jsp");
+	} else if ("reviewAdmin".equals(location)) {
+		System.out.println(">> location : " + location);
+		response.sendRedirect("reviewMainAdmin.jsp");
+	} else if ("myPage".equals(location)) {
+		System.out.println(">> location : " + location);
+		response.sendRedirect("myPage.jsp");
+	} else {
+		response.sendRedirect("reviewController?category=rvMain");
+	}
 %>
 <!DOCTYPE html>
 <html>

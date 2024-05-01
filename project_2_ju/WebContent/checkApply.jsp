@@ -28,7 +28,7 @@
 	cvo.setCareer(career);
 	cvo.setCompany(company);
 	
-	criticDAO.insert(cvo);
+	criticDAO.insertApply(cvo);
 
 			String location = request.getParameter("location");
 			if ("myPage".equals(location)) {
@@ -36,24 +36,17 @@
 				
 				System.out.println("myPage 회원정보수정");
 %>	
-<<<<<<< HEAD
-<script> 
-		alert("신청이 완료되었습니다!");
-		location.href="memberJoinOk.jsp";
-</script> 
-=======
 		<script>
-			alert("신청이 완료되었습니다!");
+			alert("평론가 신청이 완료되었습니다!");
 			location.href="loginController?type=updateAccount&location=checkApply&criticCheck=1";
 		</script>		
 <%
 			} else {
 %>			
 		<script>
-			alert("신청이 완료되었습니다!");
-			location.href="memberJoinOk.jsp";
+			alert("평론가 신청과 회원가입이 완료되었습니다!");
+			location.href="login_page.jsp";
 		</script> 
 <%
 			}
 %>
->>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
