@@ -14,6 +14,12 @@ public class postVO {
 	private int psWarn;
 	private String psNick;
 
+<<<<<<< HEAD
+	
+	
+	
+=======
+>>>>>>> branch 'master' of https://github.com/Project2Team22/ITWILL_Project2_team2.git
 	public int getPsNo() {
 		return psNo;
 	}

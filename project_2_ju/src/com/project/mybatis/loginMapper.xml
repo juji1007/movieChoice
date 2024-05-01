@@ -84,6 +84,11 @@
 		    EMAIL = #{email}
 		WHERE NO = #{no}
 	</update>
+	<!-- 회원정보삭제 -->
+	<update id="delete" parameterType="int">
+		DELETE FROM ACCOUNT
+		WHERE NO = #{no}
+	</update>
 	
 	<!-- criticcheck 1로 업데이트 -->
 	<update id="updateCriticCheck" parameterType="int">

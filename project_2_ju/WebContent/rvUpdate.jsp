@@ -5,15 +5,35 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	//reDetail.jsp에서 입력한 데이터vo 받아오기(session 저장된 vo 확인용)
-	listTotVO vo = (listTotVO)session.getAttribute("listOne");
-	System.out.println(">> reDetail.jsp 가져온 vo : " + vo);
+	String location = request.getParameter("location");
+	if ("myPage".equals(location)) {
+		int rvNo = Integer.parseInt(request.getParameter("rvNo"));
+		System.out.println("rvNo : " + rvNo);
+		
+		listTotVO listOne = listTotDAO.selectOne(rvNo);
+		listTotVO vo = listOne;
+		System.out.println(">> myPage 가져온 vo : " + vo);
+		
+		//listTotVO에서 rvNo 검색하여 mvTitle 1개 가져오기(select)
+		listTotVO totVo = listTotDAO.selectOne(vo.getRvNo());
+		System.out.println("수정할 vo : " + totVo);
+		
+		session.setAttribute("upVo", totVo);
+		
+	} else {
+		//reDetail.jsp에서 입력한 데이터vo 받아오기(session 저장된 vo 확인용)
+		listTotVO vo = (listTotVO)session.getAttribute("listOne");
+		System.out.println(">> reDetail.jsp 가져온 vo : " + vo);
+		
+		//listTotVO에서 rvNo 검색하여 mvTitle 1개 가져오기(select)
+		listTotVO totVo = listTotDAO.selectOne(vo.getRvNo());
+		System.out.println("수정할 vo : " + totVo);
+		
+		session.setAttribute("upVo", totVo);
+		
+	}
 	
-	//listTotVO에서 rvNo 검색하여 mvTitle 1개 가져오기(select)
-	listTotVO totVo = listTotDAO.selectOne(vo.getRvNo());
-	System.out.println("수정할 vo : " + totVo);
 	
-	session.setAttribute("upVo", totVo);
 %>
 <!DOCTYPE html>
 <html>

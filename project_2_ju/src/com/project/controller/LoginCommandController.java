@@ -26,6 +26,8 @@ import com.project.command.MemberJoinCommand;
 import com.project.command.MemberJoinOkCommand;
 import com.project.command.UpdateAccountCommand;
 import com.project.command.UpdateAccountOkCommand;
+import com.project.command.deleteAccountCommand;
+import com.project.command.deleteAccountOkCommand;
 import com.project.dao.AccountDAO;
 import com.project.vo.AccountVO;
 
@@ -45,6 +47,8 @@ public class LoginCommandController extends HttpServlet {
 		commands.put("memberJoinOk", new MemberJoinOkCommand());
 		commands.put("updateAccount", new UpdateAccountCommand());
 		commands.put("updateAccountOk", new UpdateAccountOkCommand());
+		commands.put("deleteAccount", new deleteAccountCommand());
+		commands.put("deleteAccountOk", new deleteAccountOkCommand());
 	}
 	
 	@Override
@@ -101,23 +105,6 @@ public class LoginCommandController extends HttpServlet {
 		}
 		
 		if ("updateAccount".equals(type)) {
-			request.setCharacterEncoding("UTF-8");
-
-			// 유저정보 받기
-		    String id = (String) session.getAttribute("id");
-		    System.out.println("upid : " + id);
-		    
-		    // 아이디 DB에서 조회
-		    AccountVO avo = AccountDAO.getAccount(id);
-		    
-		    String location = request.getParameter("location");
-		    System.out.println("location updateAccount : " + location);
-		    if ("checkApply".equals(location)) {
-		    	int criticCheck = Integer.parseInt(request.getParameter("criticCheck"));
-			    System.out.println("criticCheck updateAccount : " + criticCheck);
-		    	avo.setCriticCheck(criticCheck);
-		    }
-		    request.setAttribute("avo", avo);
 		    
 		}
 		
@@ -164,8 +151,6 @@ public class LoginCommandController extends HttpServlet {
 		    }
 		    System.out.println("성공");
 		}
-		
-		
 		
 		Command command = null;
 		command = commands.get(type);

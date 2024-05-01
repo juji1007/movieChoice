@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateAccountOkCommand implements Command{
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		return "myPage.jsp";
 	}
 }

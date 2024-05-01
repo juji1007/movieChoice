@@ -31,18 +31,29 @@
 <link rel="stylesheet" href="css/myPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	function deleteAccount(frm) {
+		console.log("회원삭제실행");
+		console.log(frm);
+		frm.action="loginController?type=deleteAccount";
+		frm.submit();
+	}
 	function updateAccount(frm) {
 		console.log("회원정보수정실행");
 		console.log(frm);
 		frm.action="loginController?type=updateAccount";
 		frm.submit();
 	}
-	function updateReview(frm) {
+	function deleteReview(frm, rvNo) {
+		console.log("리뷰정보삭제실행");
+		console.log(frm);
+		frm.action="rvDelete.jsp?location=myPage&rvNo="+rvNo;
+		frm.submit();
+	}
+	function updateReview(frm, rvNo) {
 		console.log("리뷰정보수정실행");
 		console.log(frm);
-// 		frm.action="loginController?type=updateAccount";
-// 		frm.action="mainAdmin.jsp";
-// 		frm.submit();
+		frm.action="rvUpdate.jsp?location=myPage&rvNo="+rvNo;
+		frm.submit();
 	}
 	function updatePost(frm) {
 		console.log("자유게시판정보수정실행");
@@ -59,7 +70,6 @@
 	}
 	window.onload = function() {
 		getAccountInfo();
-		getMovieInfo();
 		getReviewInfo();
 		getPostInfo();
 	};
@@ -93,8 +103,6 @@
 	 			            htmltag += "<tr><th>평론가 구분</th><td>" + member.criticCheck + "</td></tr>";
 	 			            htmltag += "<tr><th>이메일</th><td>" + member.email + "</td></tr>";
 	 			            htmltag += "<tr><th>신고 수</th><td>" + member.warn + "</td></tr>"; 
-// 	 			            htmltag += "<tr><td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
-// 	 			            htmltag += "<input type='button' value='수정' onclick='updateAccount()'></td>";
 	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -102,11 +110,16 @@
 	       	    
 	            $('#accountThead').html(htmltag);
 		            
-	            	let footerHtml = "";
-	            	
-	            	footerHtml = "<tr><td colspan='2'><input type='button' value='회원정보수정' onclick='updateAccount(this.form)'>";
-	            	footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick='updateAccount(this.form)'></td></tr>";
-	            	 $('#accountTbody').html(footerHtml);
+		            let footerHtml = "<tr>";
+		            footerHtml += "<td colspan='2'>";
+		            footerHtml += "<input type='button' value='회원탈퇴' onclick='deleteAccount(this.form)'>";
+// 		            footerHtml += "<input type='hidden' name='no' value='" + member.no + "'>";
+		            footerHtml += "<input type='button' value='회원정보수정 및 평론가신청하기' onclick='updateAccount(this.form)'>";
+		            footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick='updateAccount(this.form)'>";
+		            footerHtml += "</td>";
+		            footerHtml += "</tr>";
+
+	            	$('#accountTbody').html(footerHtml);
 			 },
 		        error: function(jqXHR, textStatus, errorThrown) {
 		            alert("Ajax 처리 실패:\n" +
@@ -118,58 +131,6 @@
 		});
 	}
 	
-	function geMovieInfo() {
-		
-		$.ajax({
-			type: "POST",
-			url: "ajaxManageController",
-			data: {
-				action: "movieMypage"
-			},
-			dataType: "json",
-			 success: function(respData) {
-	            console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
-	            
-	            let htmltag = "";
-	       	    // 데이터 처리
-	            if (respData.length === 0) {
-	                // 검색 결과가 없을 때
-	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
-	            } else {
-	                // 검색 결과가 있을 때
-	                htmltag += "<tr><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
-	                for (let member of respData.listSearch) {
-	                	 if (member.table === "review") {
-	 			            console.log("리뷰html");
-	 			            htmltag += "<tr>";
-	 			            htmltag += "<td>" + member.rvNo + "</td>";
-				            htmltag += "<td>" + member.mvNo + "</td>";
-				            htmltag += "<td>" + member.no + "</td>";
-				            htmltag += "<td>" + member.rvNick + "</td>";
-				            htmltag += "<td>" + member.rvTitle + "</td>";
-				            htmltag += "<td>" + member.rvContent + "</td>";
-				            htmltag += "<td>" + member.rvDate + "</td>";
-				            htmltag += "<td>" + member.rvRec + "</td>";
-				            htmltag += "<td>" + member.warn + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
- 	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
- 	 			            htmltag += "</tr>";
-	 			        }
-	                }
-	            }
-	       	    
-	            $('#reviewThead').html(htmltag);
-		            
-			 },
-		        error: function(jqXHR, textStatus, errorThrown) {
-		            alert("Ajax 처리 실패:\n" +
-		                "jqXHR.readyState: " + jqXHR.readyState + "\n" +
-		                "textStatus: " + textStatus + "\n" +
-		                "errorThrown: " + errorThrown);
-		        }
-
-		});
-	}
 		
 	function getReviewInfo() {
 		
@@ -187,12 +148,19 @@
 	       	    // 데이터 처리
 	            if (respData.length === 0) {
 	                // 검색 결과가 없을 때
+	                console.log("Ajax 처리 성공 - 응답받은데이터없음:", respData);
 	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	            } else {
 	                // 검색 결과가 있을 때
 	                htmltag += "<tr><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
 	                for (let member of respData.listSearch) {
 	                	 if (member.table === "review") {
+	                		 
+	                		 if (member.no === "null" || member.no.length === 0) {
+	                			 console.log("리뷰없음html");
+	                			 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	                			 break;
+	                		 }
 	 			            console.log("리뷰html");
 	 			            htmltag += "<tr>";
 	 			            htmltag += "<td>" + member.rvNo + "</td>";
@@ -204,8 +172,9 @@
 				            htmltag += "<td>" + member.rvDate + "</td>";
 				            htmltag += "<td>" + member.rvRec + "</td>";
 				            htmltag += "<td>" + member.warn + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(this.form, account)'>";
- 	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
+ 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteReview(this.form, \"" +  member.rvNo + "\")'>";
+//  	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
+ 	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form, \"" + member.rvNo + "\")'></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -240,12 +209,19 @@
 	       	    // 데이터 처리
 	            if (respData.length === 0) {
 	                // 검색 결과가 없을 때
+	                 console.log("Ajax 처리 성공 - 응답받은데이터없음:", respData);
 	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	            } else {
 	                // 검색 결과가 있을 때
 	                htmltag += "<tr><th>자유게시판 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>자유게시판 제목</th><th>자유게시판 내용</th><th>자유게시판 작성일</th><th>자유게시판 첨부파일</th><th>신고 수</th><th>관리</th></tr>";
 	                for (let member of respData.listSearch) {
 	                	 if (member.table === "post") {
+	                		 
+	                		if (member.no === "null" || member.no.length === 0) {
+	                			 console.log("포스트없음html");
+	                			 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	                			 break;
+	                		}
 	 			            console.log("포스트html");
 	 			            htmltag += "<tr>";
 	 			            htmltag += "<td>" + member.psNo + "</td>";
@@ -333,70 +309,24 @@
 	<table id="movieTable">
 		<caption>나의 영화정보</caption>
 		<thead id="accountThead">
-			<tr>
-				<th>이름</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>아이디</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>평론가 구분</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>신고 수</th>
-				<td></td>
-			</tr>
+			<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
 		</thead>
 	</table>
 </div>
 <hr>
 <div id="frame">
-	<from method="post">
+	<form method="post">
 		<table id="reviewTable">
 			<caption>나의 리뷰정보</caption>
 			<thead id="reviewThead">
-				<tr>
-					<th>이름</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>아이디</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>닉네임</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>평론가 구분</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>신고 수</th>
-					<td></td>
-				</tr>
+				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
 			</thead>
 			<tbody id="reviewTbody">
 				<tr>
 				</tr>
 			</tbody>
 		</table>
-	</from>
+	</form>
 </div>
 <hr>
 <div id="frame">
@@ -404,30 +334,7 @@
 		<table id="postTable">
 			<caption>나의 자유게시판정보</caption>
 			<thead id="postThead">
-				<tr>
-					<th>이름</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>아이디</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>닉네임</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>평론가 구분</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td></td>
-				</tr>
-				<tr>
-					<th>신고 수</th>
-					<td></td>
-				</tr>
+				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
 			</thead>
 		</table>
 	</form>
