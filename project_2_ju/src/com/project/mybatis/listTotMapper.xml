@@ -15,6 +15,8 @@
 	
 	<select id="listOne" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT R.*
+	</select>
+	 
 	<!-- mvNo로 검색하여 movie 정보(title,poster) select -->
 	<select id="one" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT A.*, M.*,  R.*
@@ -22,7 +24,6 @@
 		WHERE R.NO = A.NO
 		AND R.MV_NO = M.MV_NO
 		AND R.RV_NO = #{rvNo}
-	</select>
 	
 		ORDER BY R.RV_NO DESC
 	</select>

@@ -173,4 +173,14 @@ public class AccountDAO {
 		return -1;
 	}
 	
+	public static int updateCriticCheck(int no) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			System.out.print("updateCriticCheck실행");
+			return ss.update("project2.updateCriticCheck", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 }

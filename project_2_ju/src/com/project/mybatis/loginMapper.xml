@@ -85,6 +85,13 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<!-- criticcheck 1로 업데이트 -->
+	<update id="updateCriticCheck" parameterType="int">
+		UPDATE ACCOUNT
+		SET CRITIC_CHECK = 1
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>
 
 
