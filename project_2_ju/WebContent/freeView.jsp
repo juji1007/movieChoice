@@ -71,7 +71,7 @@ function ps_update(frm) {
 // 댓글 삭제 확인
 	function pc_delete(frm) {
 		let isDelete = confirm(${no});
-// 		if(isDelete) {  
+// 		if(isDelete) {
 // 			if(${no} == ${pcvo.no}) {
 // 			frm.submit();
 // 			}
