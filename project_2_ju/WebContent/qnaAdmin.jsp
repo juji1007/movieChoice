@@ -141,6 +141,7 @@ session.setAttribute("list", list);
 	<div class="body">
 	    <h2>QnA 관리자</h2>
 		<hr>
+		
 	    <form action="qnaAdminController?search=qnaAdminList" method="get" onsubmit="return checkSearchCondition(this);">
 	        <select class="select" name="idx">
 				<option value="0">내용</option>
