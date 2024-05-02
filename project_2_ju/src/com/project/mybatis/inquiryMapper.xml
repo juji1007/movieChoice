@@ -10,4 +10,11 @@
 			WHERE QA_NO = #{qaNo}
 	</select>
 	
+	<!-- INQUIRY 입력 -->
+	<insert id="insert" parameterType="com.mystudy.model.vo.inquiryVO">
+		INSERT INTO INQUIRY
+			       (IQ_NO, QA_NO, IQ_CONTENT, IQ_DATE)
+			VALUES (INQUIRY_SEQ.NEXTVAL, #{qaNo}, #{iqContent}, SYSDATE) 
+	</insert>
+	
 </mapper>

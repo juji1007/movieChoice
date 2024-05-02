@@ -29,30 +29,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 상세</title>
+<title>QnA 관리자 상세</title>
 <script>
 	
 //	게시물 삭제 확인 및 권한
 	function qa_delete(frm) {
 			let isDelete = confirm("삭제하시겠습니까?");
-//	 	let isDelete = confirm(${no});
 		if(isDelete) {
-				if(${no} == ${qvo.no}) {
-				frm.submit();
-				}
-				else {
-				alert("삭제권한이 없습니다");
-//	 			history.back();
-				}
-		
-		}
-	}
-	// 게시물 수정 권한
-	function qa_update(frm) {
-		if(${no} == ${qvo.no}) {
 			frm.submit();
-		}else {
-			alert("수정권한이 없습니다.")
+		} else{
+			
 		}
 	}
 
@@ -75,15 +61,9 @@
 		</tr>
 		<tr>
 			<td>
-				<form action="qnaDeleteOk.jsp?qaNo=${qvo.qaNo }" method="post">
+				<form action="qnaAdminDeleteOk.jsp?qaNo=${qvo.qaNo }" method="post">
 						<input class="h_button" type="button" value="삭제" onclick="qa_delete(this.form)">
 						<input type="hidden" name="qaNo" value="${qvo.qaNo }">
-				</form>
-			</td>
-			<td>
-				<form action="qnaUpdate.jsp" method="get">
-					<input type="button" value="수정" onclick="qa_update(this.form)">
-					<input type="hidden" name="qaNo" value="${qvo.qaNo }">
 				</form>
 			</td>
 			<td>
@@ -92,6 +72,7 @@
 		</tr>
 	</table>
 	<h2>QnA ${qvo.qaNo }번에 대한 관리자 답변</h2>
+	<input class="write" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
   	<hr>
   	<p>${ivo.iqContent }</p> 
 </body>
