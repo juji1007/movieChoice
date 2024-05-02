@@ -159,6 +159,15 @@ public class postDAO {
 			return -1;
 		}
 		
+		//댓글 전체 건수 조회
+		public static int getPostCommentTotalCount() {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("post.PostCommentTotalCnt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 		
 		
 		//마이페이지 ============================================ 

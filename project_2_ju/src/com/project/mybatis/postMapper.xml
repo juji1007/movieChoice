@@ -108,6 +108,11 @@
 		DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
 	</delete>
 	
+	<!-- 댓글 전체 건수 -->
+	<select id="PostCommentTotalCnt" resultType="int">
+		SELECT COUNT(*) AS CNT FROM PS_COMMENT
+	</select>
+	
 	<!-- 마이페이지 -->
 	<!-- 나의 자유게시판조회 -->
 	<select id="getPostByNo" parameterType="int" resultType="com.mystudy.model.vo.postVO">

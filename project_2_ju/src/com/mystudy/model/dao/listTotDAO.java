@@ -54,4 +54,18 @@ public class listTotDAO {
 		return null;
 	}
 	
+	//관리자, 마이페이지 메인(전체목록 페이징) 전체조회
+	public static List<listTotVO> listTotAll(int begin, int end) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("begin", begin);
+			map.put("end", end);
+			
+			return ss.selectList("listTotal.totAll", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
