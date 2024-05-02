@@ -312,8 +312,8 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"rvTitle\": \"" + rvo.getRvTitle() + "\", ");
 		            result.append("\"rvContent\": \"" + rvo.getRvContent() + "\", ");
 		            result.append("\"rvDate\": \"" + rvo.getRvDate() + "\", ");
-		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
-		            result.append("\"warn\": \"" + rvo.getRvWarn() + "\"");
+//		            result.append("\"rvRec\": \"" + rvo.getRvRec() + "\", ");
+//		            result.append("\"warn\": \"" + rvo.getRvWarn() + "\"");
 		            result.append("},");
 		        }
 		        

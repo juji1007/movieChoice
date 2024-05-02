@@ -97,6 +97,13 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<!-- criticcheck 0로 업데이트 -->
+	<update id="updatedeleteCriticCheck" parameterType="int">
+		UPDATE ACCOUNT
+		SET CRITIC_CHECK = 0
+		WHERE NO = #{no}
+	</update>
+	
 </mapper>
 
 

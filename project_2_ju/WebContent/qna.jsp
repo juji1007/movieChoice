@@ -10,7 +10,7 @@
 <%
 //페이징 처리를 위한 객체(Paging) 생성
 Paging p = new Paging();
-
+ 
 //1. 전체 게시물 수량 구하기
 p.setTotalRecord(qnaDAO.getTotalCount());
 p.setTotalPage();
@@ -85,78 +85,70 @@ session.getAttribute("c_list");
 		frm.submit();
 	}
 
+	// 검색 조건 확인 함수
+    function checkSearchCondition(form) {
+        var selectedValue = form.elements["idx"].value;
+        var keyword = form.elements["keyword"].value.trim();
+        if (selectedValue === "" || keyword === "") {
+            alert("검색 조건과 키워드를 모두 선택해주세요.");
+            return false;
+        }
+        return true;
+    }
+	
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
 <body>
 	<%@ include file="include/header.jspf"%>
-<div class="body">
-<h2>QnA</h2>
-	<form action="qnaController?search=qnaList" method="get">
-		<select name="idx">
-			<option selected disabled>::선택</option>
-			<option value="0">작성일</option>
-		</select> 
-		<input type="text" name="keyword"> 
-		<input type="submit" value="검색">
-		<input type="hidden" name="search"	value="qnaList">
-	</form>
+    <div class="body">
+        <h2>QnA</h2>
+        <form action="qnaController" method="get" onsubmit="return checkSearchCondition(this);">
+            <select name="idx">
+                <option selected disabled>::선택</option>
+                <option value="0">작성일</option>
+            </select>
+            <input type="text" name="keyword">
+            <input type="submit" value="검색">
+            <input type="hidden" name="search" value="qnaList">
+        </form>
 
-<table border>
-	<c:forEach var="vo" items="${list }">
-	<tr>
-		<td>${vo.qaNo }</td>
-		<td>${vo.qaDate }</td>
-		<td>
-			<a href="qnaView.jsp?qaNo=${vo.qaNo }&cPage=${pvo.nowPage}">${vo.qaContent }</a>
-		</td>
-	</tr>
-	</c:forEach>
-<tfoot>
-	<tr>
-		<td colspan="4">
-			<ol class="paging">
-			<%--[이전]에 대한 사용여부 처리 --%>
-			<c:if test="${pvo.beginPage == 1 }">
-				<li class="disable">이전</li> 
-			</c:if>
-			<c:if test="${pvo.beginPage != 1 }">
-				<li>
-					<a href="qna.jsp?cPage=${pvo.endPage - 1 }">이전</a>
-				</li> 
-			</c:if>
-					
-			<%--블록내에 표시할 페이지 태그 작성(시작~끝) --%>
-			<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
-				<c:choose>
-				<c:when test="${pageNo == pvo.nowPage }">
-					<li class="now">${pageNo }</li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="qna.jsp?cPage=${pageNo }">${pageNo }</a></li>
-				</c:otherwise>
-				</c:choose>
-			</c:forEach>
-						
-			<%--[다음]에 대한 사용여부 처리 --%>	
-			<c:if test="${pvo.endPage < pvo.totalPage }">
-				<li>
-					<a href="qna.jsp?cPage=${pvo.endPage + 1 }">다음</a>
-				</li> 
-			</c:if>
-			<c:if test="${pvo.endPage >= pvo.totalPage }">
-				<li class="disable">다음</li> 
-			</c:if>
-			</ol>
-		</td>		
-	</tr>
-</tfoot>
-</table>
+        <table border>
+            <c:forEach var="vo" items="${list}">
+                <tr>
+                    <td>${vo.qaNo}</td>
+                    <td>${vo.qaDate}</td>
+                    <td>
+                        <a href="qnaView.jsp?qaNo=${vo.qaNo}">${vo.qaContent}</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <ol class="paging">
+                            <!-- 페이징 처리 부분 -->
+                            <c:forEach var="pageNo" begin="${pvo.beginPage}" end="${pvo.endPage}">
+                                <c:choose>
+                                    <c:when test="${pageNo == pvo.nowPage}">
+                                        <li class="now">${pageNo}</li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="qnaController?cPage=${pageNo}&search=qnaList&idx=${param.idx}&keyword=${param.keyword}">${pageNo}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </ol>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+		
+		<br>
+        <form action="qnaWrite.jsp" method="get">
+            <input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
+        </form>
 
-	<form  action="qnaWrite.jsp" method="get">
-		<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
-	</form>
-	
-</div>
+    </div>
 </body>
 </html>

@@ -65,9 +65,9 @@ public class criticDAO {
 	}
 	
 	//전문가 정보 삭제(DELETE)
-	public static int delete(criticVO cvo) {
+	public static int delete(int no) {
 		try (SqlSession ss = DBService.getFactory().openSession(true)) {
-			return ss.delete("critic.delete", cvo);
+			return ss.delete("critic.delete", no);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

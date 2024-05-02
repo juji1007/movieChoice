@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.vo.movieVO;
+import com.mystudy.model.vo.postVO;
 import com.project.mybatis.DBService;
 import com.project.vo.AccountVO;
 
@@ -191,5 +193,17 @@ public class AccountDAO {
       }
       return -1;
    }
+   
+   public static int updatedeleteCriticCheck(int no) {
+      try (SqlSession ss = DBService.getFactory().openSession(true)) {
+         System.out.print("updatedeleteCriticCheck실행");
+         return ss.update("project2.updatedeleteCriticCheck", no);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return -1;
+   }
+   
+   
    
 }

@@ -4,11 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="listTotal">
 	   <!-- 리뷰 메인(전체목록 페이징) -->
-   <select id="tot" parameterType="map" resultType="com.mystudy.model.vo.listTotVO">
+   <select id="tot" parameterType="map" resultType="listTotVO">
    <![CDATA[
       SELECT RV_NO, NO, MV_TITLE, MV_POSTER
            , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT
-           , RV_CONTENT, RV_DATE, RV_REC
+           , RV_CONTENT, RV_DATE
       FROM (SELECT ROWNUM R_NUM, R.*, M.*
             FROM (SELECT *
                   FROM REVIEW
@@ -22,7 +22,7 @@
    </select>
 
    <!-- 회원,영화,리뷰 테이블 전체조회 -->
-   <select id="listAll" resultType="com.mystudy.model.vo.listTotVO">
+   <select id="listAll" resultType="listTotVO">
       SELECT A.*, M.*,  R.*
       FROM ACCOUNT A, MOVIE M, REVIEW R
       WHERE R.NO = A.NO
@@ -30,7 +30,7 @@
       ORDER BY R.RV_NO DESC
    </select>
    
-   <select id="listOne" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
+   <select id="listOne" parameterType="int" resultType="listTotVO">
       SELECT A.*, M.*,  R.*
       FROM ACCOUNT A, MOVIE M, REVIEW R
       WHERE R.NO = A.NO
@@ -41,7 +41,7 @@
 
       
    <!-- rvNo로 검색하여 movie 정보(title,poster) select -->
-   <select id="one" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
+   <select id="one" parameterType="int" resultType="listTotVO">
       SELECT A.*, M.*,  R.*
       FROM ACCOUNT A, MOVIE M, REVIEW R
       WHERE R.NO = A.NO

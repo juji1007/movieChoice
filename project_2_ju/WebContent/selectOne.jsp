@@ -22,17 +22,6 @@
 		<%} else%>
 			frm.submit();
 	}
-	
-	function rec_push(frm) {
-		location.href = "rvRec.jsp?rvNo=";
-		frm.submit();
-	}
-	
-
-	function warn_push() {
-		location.href = "rvWarn.jsp";
-		frm.submit();
-	}
 
 </script>
 </head>
@@ -66,15 +55,16 @@
 	<c:forEach var="vo" items="${listOne }">
 		<tbody id="reviewOne">
 	        <tr>
+	            <td rowspan="2">${vo.rvNo }</td>
 	            <td>${vo.mvTitle }</td>
-	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
+	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${selPvo.nowPage}">${vo.rvTitle }</a></td>
 	        </tr>
 	        <tr>
 	            <td>${vo.rvNick }</td>
 	            <td>${vo.rvDate }</td>
 	        </tr>
 	        <tr>
-	            <td colspan="2">
+	            <td rowspan="2" colspan="2">
 	            	<input type="button" value="추천" onclick="javascript:location.href='rvRec.jsp?rvNo=${vo.rvNo}'">${vo.rvRec }
 	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn }
 	            	
@@ -87,7 +77,7 @@
 		
 		<tfoot id="page">
 	        <tr>
-	        	<td colspan="2">
+	        	<td colspan="3">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${selPvo.nowPage == 1 }">

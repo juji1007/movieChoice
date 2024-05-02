@@ -54,8 +54,8 @@
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
 		INSERT INTO POST
-			       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE, PS_FILE, PS_NICK)
-			VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE, #{psFile}, #{psNick}) 
+			       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE, PS_FILE, PS_ORIFILE, PS_NICK)
+			VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE, #{psFile}, #{psOrifile}, #{psNick}) 
 	</insert>
 
 	<!-- 게시글 수정 -->
@@ -65,6 +65,7 @@
 				, PS_CONTENT = #{psContent}
 				, PS_DATE = SYSDATE
 				, PS_FILE = #{psFile}
+				, PS_ORIFILE = #{psOrifile}
 			WHERE PS_NO = #{psNo}
 	</update>
 	

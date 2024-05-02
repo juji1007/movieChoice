@@ -11,6 +11,7 @@ public class listTotVO {
 	private String nick;
 	private int critic_check;
 	private String email;
+	private int warn;
 	
 	private int mvNo;
 	private String mvTitle;
@@ -73,6 +74,12 @@ public class listTotVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
 	}
 	public int getMvNo() {
 		return mvNo;
@@ -164,17 +171,17 @@ public class listTotVO {
 	public void setRvDate(Date rvDate) {
 		this.rvDate = rvDate;
 	}
-	public int getRvRec() {
-		return rvRec;
-	}
-	public void setRvRec(int rvRec) {
-		this.rvRec = rvRec;
-	}
 	public int getRvRate() {
 		return rvRate;
 	}
 	public void setRvRate(int rvRate) {
 		this.rvRate = rvRate;
+	}
+	public int getRvRec() {
+		return rvRec;
+	}
+	public void setRvRec(int rvRec) {
+		this.rvRec = rvRec;
 	}
 	public int getRvWarn() {
 		return rvWarn;
@@ -186,12 +193,12 @@ public class listTotVO {
 	@Override
 	public String toString() {
 		return "listTotVO [no=" + no + ", name=" + name + ", id=" + id + ", pwd=" + pwd + ", nick=" + nick
-				+ ", critic_check=" + critic_check + ", email=" + email + ", mvNo=" + mvNo + ", mvTitle=" + mvTitle
-				+ ", mvDirect=" + mvDirect + ", mvActor=" + mvActor + ", mvGenre=" + mvGenre + ", mvRate=" + mvRate
-				+ ", mvAudience=" + mvAudience + ", mvGrade=" + mvGrade + ", mvDate=" + mvDate + ", mvPoster="
-				+ mvPoster + ", rvNo=" + rvNo + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle + ", rvContent="
-				+ rvContent + ", rvDate=" + rvDate + ", rvRate=" + rvRate + ", rvRec=" + rvRec + ", rvWarn=" + rvWarn
-				+ "]";
+				+ ", critic_check=" + critic_check + ", email=" + email + ", warn=" + warn + ", mvNo=" + mvNo
+				+ ", mvTitle=" + mvTitle + ", mvDirect=" + mvDirect + ", mvActor=" + mvActor + ", mvGenre=" + mvGenre
+				+ ", mvRate=" + mvRate + ", mvAudience=" + mvAudience + ", mvGrade=" + mvGrade + ", mvDate=" + mvDate
+				+ ", mvPoster=" + mvPoster + ", rvNo=" + rvNo + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle
+				+ ", rvContent=" + rvContent + ", rvDate=" + rvDate + ", rvRate=" + rvRate + ", rvRec=" + rvRec
+				+ ", rvWarn=" + rvWarn + "]";
 	}
 	
 }
