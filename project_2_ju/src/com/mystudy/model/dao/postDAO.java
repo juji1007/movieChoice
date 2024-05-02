@@ -159,6 +159,15 @@ public class postDAO {
 			return -1;
 		}
 		
+		//댓글 전체 건수 조회
+		public static int getPostCommentTotalCount() {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("post.PostCommentTotalCnt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 		
 		
 		//마이페이지 ============================================ 
@@ -183,6 +192,16 @@ public class postDAO {
 		        e.printStackTrace();
 		    }
 		    return -1;
+		}
+		
+		//나의 댓글정보 조회
+		public static List<postCommentVO> getCommListMy(int no) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {		
+				return ss.selectList("post.commListMy", no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 		
 }
