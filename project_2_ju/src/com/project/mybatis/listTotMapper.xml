@@ -49,4 +49,22 @@
       AND R.RV_NO = #{rvNo}
       ORDER BY R.RV_NO DESC
    </select>
+   
+      <!-- 전체 메인(전체목록 페이징) -->
+   <select id="totAll" parameterType="map" resultType="com.mystudy.model.vo.listTotVO">
+   <![CDATA[
+      SELECT RV_NO, NO, MV_TITLE, MV_POSTER
+           , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT
+           , RV_CONTENT, RV_DATE, RV_REC, RV_WARN
+      FROM (SELECT ROWNUM R_NUM, R.*, M.*
+            FROM (SELECT *
+                  FROM REVIEW
+                  ORDER BY RV_NO DESC
+                  ) R, MOVIE M
+            WHERE R.MV_NO = M.MV_NO
+            AND ROWNUM <= #{end}
+      )
+       WHERE R_NUM >= #{begin}
+   ]]>
+   </select>
 </mapper>

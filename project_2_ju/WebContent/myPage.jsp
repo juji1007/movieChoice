@@ -64,14 +64,18 @@
 	function deletePost(frm) {
 		console.log("자유게시판정보삭제실행");
 		console.log(frm);
-// 		console.log(frm.psNo.value);
-		frm.action="postDelete.jsp?location=myPage";
-		frm.submit();
+		let cDelete = confirm("해당 댓글내역도 모두 삭제됩니다.\n 정말로 삭제하시겠습니까?");
+	    if (cDelete) {
+	    	frm.action="postDelete.jsp?location=myPage";
+			frm.submit();
+	    } else {
+	    }
 	}
 	window.onload = function() {
 		getAccountInfo();
 		getReviewInfo();
 		getPostInfo();
+		getPostCommentInfo();
 	};
 	
 	function getAccountInfo() {
@@ -93,9 +97,9 @@
 	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	            } else {
 	                // 검색 결과가 있을 때
+	                console.log("유저html");
 	                for (let member of respData.listSearch) {
 	                	 if (member.table === "account") {
-	 			            console.log("유저html");
 	 			            htmltag += "<tr><th>회원번호</th><td>" + member.no + "</td></tr>";
 	 			            htmltag += "<tr><th>이름</th><td>" + member.name + "</td></tr>";
 	 			            htmltag += "<tr><th>아이디</th><td>" + member.id + "</td></tr>";
@@ -113,7 +117,6 @@
 		            let footerHtml = "<tr>";
 		            footerHtml += "<td colspan='2'>";
 		            footerHtml += "<input type='button' value='회원탈퇴' onclick='deleteAccount(this.form)'>";
-// 		            footerHtml += "<input type='hidden' name='no' value='" + member.no + "'>";
 		            footerHtml += "<input type='button' value='회원정보수정 및 평론가신청하기' onclick='updateAccount(this.form)'>";
 		            footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick='updateAccount(this.form)'>";
 		            footerHtml += "</td>";
@@ -148,10 +151,10 @@
 	       	    // 데이터 처리
 	            if (respData.length === 0) {
 	                // 검색 결과가 없을 때
-	                console.log("Ajax 처리 성공 - 응답받은데이터없음:", respData);
 	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	            } else {
 	                // 검색 결과가 있을 때
+	                 console.log("리뷰html");
 	                htmltag += "<tr><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
 	                for (let member of respData.listSearch) {
 	                	 if (member.table === "review") {
@@ -161,7 +164,6 @@
 	                			 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	                			 break;
 	                		 }
-	 			            console.log("리뷰html");
 	 			            htmltag += "<tr>";
 	 			            htmltag += "<td>" + member.rvNo + "</td>";
 				            htmltag += "<td>" + member.mvNo + "</td>";
@@ -213,6 +215,7 @@
 	                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	            } else {
 	                // 검색 결과가 있을 때
+	                console.log("포스트html");
 	                htmltag += "<tr><th>자유게시판 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>자유게시판 제목</th><th>자유게시판 내용</th><th>자유게시판 작성일</th><th>자유게시판 첨부파일</th><th>신고 수</th><th>관리</th></tr>";
 	                for (let member of respData.listSearch) {
 	                	 if (member.table === "post") {
@@ -222,9 +225,8 @@
 	                			 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
 	                			 break;
 	                		}
-	 			            console.log("포스트html");
 	 			            htmltag += "<tr>";
-	 			            htmltag += "<td>" + member.psNo + "</td>";
+	 			           htmltag += "<td><a href='freeView.jsp?psNo=" + member.psNo + "'>" + member.psNo + "</a></td>";
 				            htmltag += "<td>" + member.no + "</td>";
 				            htmltag += "<td>" + member.psNick + "</td>";
 				            htmltag += "<td>" + member.psTitle + "</td>";
@@ -244,6 +246,58 @@
 	            }
 	       	    
 	            $('#postThead').html(htmltag);
+		            
+			 },
+		        error: function(jqXHR, textStatus, errorThrown) {
+		            alert("Ajax 처리 실패:\n" +
+		                "jqXHR.readyState: " + jqXHR.readyState + "\n" +
+		                "textStatus: " + textStatus + "\n" +
+		                "errorThrown: " + errorThrown);
+		        }
+
+		});
+	}
+	
+	function getPostCommentInfo() {
+		
+		$.ajax({
+			type: "POST",
+			url: "ajaxManageController",
+			data: {
+				action: "postCommentMypage"
+			},
+			dataType: "json",
+			 success: function(respData) {
+				console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+	            let htmltag = "";
+	       	    // 데이터 처리
+	            if (respData.length === 0) {
+	                // 검색 결과가 없을 때
+	                 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	            } else {
+	                // 검색 결과가 있을 때
+	                console.log("포스트댓글html");
+	                htmltag += "<tr><th>댓글 번호</th><th>자유게시판 번호</th><th>유저 닉네임</th><th>댓글 작성일</th><th>댓글 내용</th><th>관리</th></tr>";
+	                for (let member of respData.listSearch) {
+	                	 if (member.table === "postComment") {
+	                		if (member.no === "null" || member.no.length === 0) {
+	                			 console.log("댓글없음html");
+	                			 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	                			 break;
+	                		}
+	 			            htmltag += "<tr>";
+	 			            htmltag += "<td>" + member.pcNo + "</td>";
+	 			            htmltag += "<td><a href='freeView.jsp?psNo=" + member.psNo + "'>" + member.psNo + "</a></td>";
+				            htmltag += "<td>" + member.pcNick + "</td>";
+				            htmltag += "<td>" + member.pcDate + "</td>";
+				            htmltag += "<td>" + member.pcContent + "</td>";
+ 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='freeView.jsp?psNo=" + member.psNo + "'\"></td>";
+ 	 			            htmltag += "</tr>";
+	 			        }
+	                }
+	            }
+	       	    
+	            $('#postCommentThead').html(htmltag);
 		            
 			 },
 		        error: function(jqXHR, textStatus, errorThrown) {
@@ -306,15 +360,6 @@
 </div>
 <hr>
 <div id="frame">
-	<table id="movieTable">
-		<caption>나의 영화정보</caption>
-		<thead id="accountThead">
-			<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
-		</thead>
-	</table>
-</div>
-<hr>
-<div id="frame">
 	<form method="post">
 		<table id="reviewTable">
 			<caption>나의 리뷰정보</caption>
@@ -334,6 +379,17 @@
 		<table id="postTable">
 			<caption>나의 자유게시판정보</caption>
 			<thead id="postThead">
+				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
+			</thead>
+		</table>
+	</form>
+</div>
+<hr>
+<div id="frame">
+	<form method="post">
+		<table id="postComment">
+			<caption>나의 댓글정보</caption>
+			<thead id="postCommentThead">
 				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
 			</thead>
 		</table>
