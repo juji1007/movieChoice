@@ -56,7 +56,7 @@ public class AjaxManageController extends HttpServlet {
 				return;
 			}
 			
-			//검색DB처리
+			//검색DB처리 sql로 warn테이블에 따오기
 			Map<String, List<?>> listSearch = AdminDAO.selectData(idx, keyword);
 			System.out.println("ajaxlistSearch : " + listSearch);
 			//listSearch없으면 다시 처음화면으로
