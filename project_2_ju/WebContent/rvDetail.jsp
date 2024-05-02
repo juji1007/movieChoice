@@ -8,40 +8,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	if (session.getAttribute("recVo") != null) {
-		listTotVO recVo = (listTotVO)session.getAttribute("recVo");
-		session.setAttribute("listOne", recVo);
-	}
+	int cPage = 0;
+	try {
+		if (session.getAttribute("recVo") != null) {
+			listTotVO recVo = (listTotVO)session.getAttribute("recVo");
+			session.setAttribute("listOne", recVo);
+		}
+		
+		int rvNo = Integer.parseInt(request.getParameter("rvNo"));
+		System.out.println("rvNo : " + rvNo);
+		
+		cPage = Integer.parseInt(request.getParameter("cPage"));
+		System.out.println("cPage : " + cPage);
+		
+		//리뷰 전체(영화,회원) 목록 조회 - mapper에서 3개 테이블 조인
+		listTotVO listOne = listTotDAO.selectOne(rvNo);
+		System.out.println(">> 리뷰 상세 listOne : " + listOne);
+		
+		session.setAttribute("listOne", listOne);
+		session.setAttribute("cPage", cPage);
+		
+		int no = (Integer)session.getAttribute("no");
+		pageContext.setAttribute("no", no);
+		
+		//추천수 sum 보여주기 계산
+		int rvRec = recDAO.recSum(rvNo);
+		System.out.println("rvRec : " + rvRec);
+		
+		listOne.setRvRec(rvRec);
+		System.out.println("<추천수> listOne : " + listOne);
+		
+		//신고수 sum 보여주기 계산
+		int rvWarn = warnDAO.warnSum(rvNo);
+		System.out.println("rvwarn : " + rvWarn);
+		
+		listOne.setRvWarn(rvWarn);
+		System.out.println("<신고수> listOne : " + listOne);
+		
+	} catch (Exception e) {
+%>
+		alert("로그인 후 열람 가능합니다.");
+<%
+		//rvMain에서 클릭
+		response.sendRedirect("reviewController?category=rvMain&cPage=" + cPage);
+		//selectOne에서 클릭
+// 		response.sendRedirect("reviewController?category=selectOne&cPage=" + cPage);
+		
+	} 
 	
-	int rvNo = Integer.parseInt(request.getParameter("rvNo"));
-	System.out.println("rvNo : " + rvNo);
-	
-	int cPage = Integer.parseInt(request.getParameter("cPage"));
-	System.out.println("cPage : " + cPage);
-	
-	//리뷰 전체(영화,회원) 목록 조회 - mapper에서 3개 테이블 조인
-	listTotVO listOne = listTotDAO.selectOne(rvNo);
-	System.out.println(">> 리뷰 상세 listOne : " + listOne);
-	
-	session.setAttribute("listOne", listOne);
-	session.setAttribute("cPage", cPage);
-	
-	int no = (Integer)session.getAttribute("no");
-	pageContext.setAttribute("no", no);
-	
-	//추천수 sum 보여주기 계산
-	int rvRec = recDAO.recSum(rvNo);
-	System.out.println("rvRec : " + rvRec);
-	
-	listOne.setRvRec(rvRec);
-	System.out.println("<추천수> listOne : " + listOne);
-	
-	//신고수 sum 보여주기 계산
-	int rvWarn = warnDAO.warnSum(rvNo);
-	System.out.println("rvwarn : " + rvWarn);
-	
-	listOne.setRvWarn(rvWarn);
-	System.out.println("<신고수> listOne : " + listOne);
 %>
 <!DOCTYPE html>
 <html>
@@ -168,7 +182,7 @@
 			<tr>
 				<td colspan="3">
 					<input type="button" value="이전" onclick="prev_go()">
-<!-- 					<input type="button" value="목록" onclick="javascript:history.back()"> -->
+<!-- 					<input type="button" value="목록" onclick="javascript:history.go(-1)"> -->
 					<input type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
 					<input type="button" value="다음" onclick="next_go()">
 				</td>
