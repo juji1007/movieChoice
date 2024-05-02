@@ -31,19 +31,19 @@
 	]]>
 	</select>
 	
-	<!-- 	카테고리별 QA 동적 검색 -->
-	<select id="search" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
-		SELECT *
-		FROM QA
-		<choose>
-			<when test="idx == 0">
-				WHERE TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
-			</when>
-			<otherwise>
-				AND 1 = 2
-			</otherwise>
-		</choose>
-		
+    <select id="search" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
+	    SELECT *
+	    FROM QA
+	    <where>
+	        <choose>
+	            <when test="idx != null and idx == 0">
+	                TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
+	            </when>
+	            <otherwise>
+	                QA_CONTENT LIKE '%' || #{keyword} || '%'
+	            </otherwise>
+	        </choose>
+	    </where>
 	</select>
 	
 	<!-- QA 입력 -->
