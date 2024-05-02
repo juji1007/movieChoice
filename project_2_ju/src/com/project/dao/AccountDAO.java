@@ -120,15 +120,15 @@ public class AccountDAO {
 	
 	// 자유게시판 =====================================================
 	//아이디로 유저넘버 조회 (마이페이지에서도)
-	public static int getAccountNo(String id) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {
-			System.out.println("id : " + id);
-			return ss.selectOne("project2.noById", id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
+//	public static int getAccountNo(String id) {
+//		try (SqlSession ss = DBService.getFactory().openSession()) {
+//			System.out.println("id : " + id);
+//			return ss.selectOne("project2.noById", id);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return -1;
+//	}
 	
 	// 마이페이지 =====================================================
 	//로그인시 아이디로 전체내용 조회 
@@ -193,5 +193,17 @@ public class AccountDAO {
 		}
 		return -1;
 	}
+	
+	public static int updatedeleteCriticCheck(int no) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			System.out.print("updatedeleteCriticCheck실행");
+			return ss.update("project2.updatedeleteCriticCheck", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	
 	
 }

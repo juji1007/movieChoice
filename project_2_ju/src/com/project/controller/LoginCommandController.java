@@ -82,12 +82,14 @@ public class LoginCommandController extends HttpServlet {
 				System.out.println("avo : " + avo);
 				
 				if (avo == null) {
-					
+					System.out.println("avo는 널");
+					session.setAttribute("id", "null");
 				}
-				
-				session.setAttribute("no", avo.getNo());
-				session.setAttribute("id", avo.getId());
-				session.setAttribute("nick", avo.getNick());
+				else {
+					session.setAttribute("no", avo.getNo());
+					session.setAttribute("id", avo.getId());
+					session.setAttribute("nick", avo.getNick());
+				}
 				
 		}
 		

@@ -247,7 +247,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.criticCheck + "</td>";
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=admin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=admin&criticCheck="+ member.criticCheck + "&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
