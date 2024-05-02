@@ -31,6 +31,11 @@
 <link rel="stylesheet" href="css/myPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	window.onpopstate = function(event) {
+	    // 뒤로가기 이벤트 감지
+	    location.reload(); // 페이지 새로고침
+	};
+
 	function deleteAccount(frm) {
 		console.log("회원삭제실행");
 		console.log(frm);
@@ -291,7 +296,7 @@
 				            htmltag += "<td>" + member.pcNick + "</td>";
 				            htmltag += "<td>" + member.pcDate + "</td>";
 				            htmltag += "<td>" + member.pcContent + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='freeView.jsp?psNo=" + member.psNo + "'\"></td>";
+ 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
