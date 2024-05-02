@@ -1,6 +1,11 @@
+<%@page import="com.mystudy.model.vo.postVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+request.getAttribute("listOne");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -24,13 +29,21 @@
 		</a>
 		</td>
 	</tr>
+<%-- <% --%>
+// List list = (List<postVO>)request.getAttribute("listOne");
+// if (list.size() == 0) {
+<%-- 	System.out.println("aa");}%> --%>
+
+<!-- <script> -->
+// alert("검색결과가 없습니다.")
+// history.back();
+<!-- </script> -->
+
 	</c:forEach>
+
+
 	</table>
-	<c:if test="${empty listOne }">
-			<tr>
-				<td colspan="3">검색 결과가 없습니다.</td>
-			</tr>
-		</c:if>
+	
 	
 </body>
 </html>

@@ -38,9 +38,8 @@ public class PostController extends HttpServlet {
 			String keyword = request.getParameter("keyword");
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
-			if (keyword == null || keyword.trim().length() == 0) {
+			if (idx == null || keyword == null || keyword.trim().length() == 0) {
 				request.getRequestDispatcher("free.jsp").forward(request, response);
-				return;
 			}
 			
 			List<postVO> listOne = postDAO.freeList(idx, keyword);
@@ -50,6 +49,11 @@ public class PostController extends HttpServlet {
 			switch(idx) {
 			case "0" : sort="제목"; break;
 			case "1" : sort="작성일"; break;
+			}
+			
+			if (listOne.size() == 0) {
+				request.getRequestDispatcher("free.jsp").forward(request, response);
+				return;
 			}
 			
 			request.setAttribute("listOne", listOne);

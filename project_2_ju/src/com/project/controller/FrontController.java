@@ -48,8 +48,15 @@ public class FrontController extends HttpServlet {
 			String mvTitle = request.getParameter("mvTitle");
 			System.out.println("mvTitle : " + mvTitle);
 
+			if(mvTitle == null || mvTitle.trim().length() == 0)
+				request.getRequestDispatcher("main.jsp").forward(request, response);
+			
 			movieVO list = movieDAO.getmvTitleList(mvTitle);
 			System.out.println(list);
+			
+//			if(list == null) {
+//				request.getRequestDispatcher("main.jsp").forward(request, response);
+//			}
 			
 			request.setAttribute("list", list);
 			
@@ -183,7 +190,10 @@ public class FrontController extends HttpServlet {
 			String idx = request.getParameter("idx");
 			System.out.println("idx: "+ idx );
 			
-			//단순 페이지 전환인지 DB데이터 조회(검색)처리를 해야 하는지 결정 처리 
+			if (idx == null) {
+				request.getRequestDispatcher("main.jsp").forward(request, response);
+			}
+			
 			
 			// 동적검색 처리 작업 진행
 			System.out.println(">>>> 동적검색 처리 작업 진행");

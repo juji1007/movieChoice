@@ -27,14 +27,8 @@
 	session.setAttribute("c_list", commList);//댓글목록
 // 	System.out.println("댓글작성자번호 : " + commList.get(0).getNo());
 	
-// int i = 0;
-// for (  i = 0; i < commList.size(); i++){
-	 
-// 		System.out.println("commListNo : " + commList.get(i).getNo());
-// 	}
-// 		session.setAttribute("coo", commList.get(i).getNo());
-// 	session.getAttribute("coo");
 
+	session.getAttribute("coo");
 
 
 %> 
@@ -72,37 +66,20 @@ function ps_update(frm) {
 }
 
 // 댓글 삭제 확인
-	function pc_delete(frm) {
-
-		<%
-		for(int i = 0; i <commList.size(); i++) {
-		System.out.println(commList.get(i).getNo()); 
+	function pc_delete(frm, commNo) {
+		let isDelete = confirm("삭제하시겠습니까?");
+// 		alert(commNo);
+		if(isDelete) {
+			if(${no} == commNo) {
+			frm.submit();
+			alert("삭제가 완료되었습니다.")
+			}
+			else {
+			alert("삭제권한이 없습니다");
+// 			history.back();
+			}
+	
 		}
-		%>
-
-
-// 		if(isDelete) {
-<%-- <% --%>
-// 			for(int i = 0; i <commList.size(); i++) {
-// 				if((Integer)session.getAttribute("no") == commList.get(i).getNo()) {
-<%-- %> --%>
-// 				frm.submit();
-// 	 			alert("삭제가 완료되었습니다.")
-<%-- <% --%>
-// 			}
-<%-- %> --%>
-// // 				else {
-// // 					alert("삭제권한이 없습니다");
-// // 				}
-<%-- <% --%>
-// 			}
-<%-- %> --%>
-// }
-}
-
-	//댓글수정
-	function pc_update(frm) {
-		
 	}
 
 	//목록보기
@@ -126,13 +103,7 @@ function ps_update(frm) {
 	
 	function warn_push() {
 	let isWarn = alert("신고하시겠습니까?")
-	if (isWarn) {
-	
-		<%
-		pvo.setPsWarn(1);
-		System.out.println(pvo.getPsWarn());
-		%>
-	}
+
 	}
 
 </script>
@@ -166,7 +137,6 @@ function ps_update(frm) {
 	<td>
 	<input type="button" value="목록보기" onclick="list_go()">
 	<input type="button" value="신고" onclick="warn_push()">
-	${pvo.psWarn }
 	</td>
 	</tr>
 </table>
@@ -182,8 +152,8 @@ function ps_update(frm) {
 		</c:if>
 		<c:if test="${not empty pvo.psFile }">
 						
-		<img src="img/${pvo.psFile }" width="200">
-					</c:if>
+		<img src="img/${pvo. psOrifile }" width="200">
+		</c:if>
 	</td>
 </tr>
 
@@ -204,7 +174,7 @@ function ps_update(frm) {
 		<form action="postComment_del_ok.jsp" method="get">
 			<p>${commVO.pcNick } ${commVO.no } ${commVO.pcDate }</p>
 			<p>${commVO.pcContent }</p>
-			<input type="button" value="댓글삭제" onclick="pc_delete(this.form)">
+			<input type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
 			<input type="hidden" name="pcNo" value="${commVO.pcNo }">
 			<input type="hidden" name="no" value="${commVO.no }">
 		</form>

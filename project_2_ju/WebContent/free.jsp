@@ -96,20 +96,26 @@ session.getAttribute("c_list");
 }
 .write {
 	position: absolute;
-	top: 240px;
+	top: 230px;
 	right: 430px;
 	background-color:#56BEC0;
 	color: white;
 	border: none;
 	 width: 100px;
-  height: 30px;
+  height: 40px;
+}
+.box{
+	width: 1060px;
+  height: 80px;
+  background-color: #F1F1F1;
 }
 .search {
 position: relative;
+	margin-top: 16px;
   width: 500px;
   height: 25px;
   border: 1px solid #bbb;
-  border-radius: 8px;
+/*   border-radius: 8px; */
   padding: 10px 12px;
   font-size: 14px;
 }
@@ -119,12 +125,23 @@ position: relative;
   top: 300px;
   right: 880px;
   margin: 0;
+  
+}
+.searchbtn {
+position: absolute;
+	margin-left: 5px;
+	background-color: gray;
+	border:  none;
+/* 	border-radius: 8px; */
+	color: white;
+	 width: 100px;
+  height: 46px;
 }
 .select {
 width: 100px;
 height: 46px;
  border: 1px solid #bbb;
-  border-radius: 8px;
+/*   border-radius: 8px; */
   padding: 10px 12px;
   font-size: 14px;
 }
@@ -146,17 +163,19 @@ table {
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
 <hr>
+		<div class="box">
 		<form action="postController?search=freeList" method="get">
 			<select class="select" name="idx">
 				<option selected disabled>구분</option>
 				<option value="0">제목</option>
 				<option value="1">작성일</option>
 			</select> 
-			<input class="search" type="text" name="keyword" placeholder="검색어 입력"> 
+			<input class="search" type="text" name="keyword" placeholder="검색어를 입력하세요."> 
 			<input class="searchbtn" type="submit" value="검색"> 
 			<img class="searchimg" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" >
 			<input type="hidden" name="search" value="freeList">
 		</form>
+		</div>
 
 
 <div id="post">
