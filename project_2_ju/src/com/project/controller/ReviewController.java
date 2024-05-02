@@ -130,6 +130,8 @@ public class ReviewController extends HttpServlet {
 			String location = request.getParameter("location");
 			if ("admin".equals(location)) {
 				request.getRequestDispatcher("reviewMainAdmin.jsp").forward(request, response);
+			} else if ("reviewMainAdmin".equals(location)) {
+				request.getRequestDispatcher("reviewMainAdmin.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);
 			}
