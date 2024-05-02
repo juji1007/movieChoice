@@ -28,7 +28,6 @@
 	<select id="mvTitleDetail"  parameterType="string" resultType="com.mystudy.model.vo.movieVO">
 		SELECT *
 		FROM MOVIE
-<!-- 		WHERE MV_TITLE = (SELECT MV_TITLE FROM MOVIE WHERE MV_NO = #{mvNo}) -->
 		WHERE MV_TITLE LIKE '%'||#{mvTitle}||'%'
 	</select>
 	

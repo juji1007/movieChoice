@@ -54,4 +54,9 @@
 		AND M.MV_NO = #{mvNo}
 	</select>
 	
+	<!-- 영화 전체 건수 -->
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(*) AS CNT FROM MOVIE
+	</select>
+	
 </mapper>

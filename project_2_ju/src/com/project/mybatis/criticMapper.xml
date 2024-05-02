@@ -47,7 +47,7 @@
 	</update>
 	
 	<!-- 전문가 정보 삭제 -->
-	<delete id="delete" parameterType="com.mystudy.model.vo.criticVO">
+	<delete id="delete" parameterType="int">
 		DELETE FROM CRITIC
 		WHERE NO = #{no}
 	</delete>

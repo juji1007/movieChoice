@@ -118,6 +118,7 @@ public class AccountDAO {
          return -1;
       }
    
+
    // 자유게시판 =====================================================
    //아이디로 유저넘버 조회 (마이페이지에서도)
 //   public static int getAccountNo(String id) {
@@ -130,6 +131,7 @@ public class AccountDAO {
 //      return -1;
 //   }
    
+
    // 마이페이지 =====================================================
    //로그인시 아이디로 전체내용 조회 
    public static List<AccountVO> getAccountList(String id) {
@@ -194,4 +196,27 @@ public class AccountDAO {
       return -1;
    }
    
+
+   public static int updatedeleteCriticCheck(int no) {
+      try (SqlSession ss = DBService.getFactory().openSession(true)) {
+         System.out.print("updatedeleteCriticCheck실행");
+         return ss.update("project2.updatedeleteCriticCheck", no);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return -1;
+   }
+   
+   //계정 전체 건수 조회
+   public static int getTotalCount() {
+      try (SqlSession ss = DBService.getFactory().openSession()) {
+         return ss.selectOne("project2.totalCnt");
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return -1;
+   }
+   
+   
+
 }

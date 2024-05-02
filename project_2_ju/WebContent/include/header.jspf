@@ -8,7 +8,7 @@
 	  <li><a href="main.jsp">영화목록</a></li>
 	  <li><a href="reviewController?category=rvMain">리뷰모음</a></li>
 	  <li><a href="free.jsp">자유게시판</a></li>
-	  <li><a href="about.asp">Q & A</a></li>
+	  <li><a href="qna.jsp">Q & A</a></li>
 	  <li><a href="rewardMain.jsp">Review Of The Month</a></li> 
 	  <li><a href="controller?type=critic">평론가</a></li>
 <% 
