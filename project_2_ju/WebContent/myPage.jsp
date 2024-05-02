@@ -39,33 +39,53 @@
 	function deleteAccount(frm) {
 		console.log("회원삭제실행");
 		console.log(frm);
-		frm.action="loginController?type=deleteAccount";
-		frm.submit();
+		let check = confirm("회원 탈퇴하시겠습니까?");
+	    if (check) {
+	    	frm.action="loginController?type=deleteAccount";
+			frm.submit();
+	    } else {
+	    }
 	}
 	function updateAccount(frm) {
 		console.log("회원정보수정실행");
 		console.log(frm);
-		frm.action="loginController?type=updateAccount";
-		frm.submit();
+		let check = confirm("회원 정보를 수정하시겠습니까?");
+	    if (check) {
+	    	frm.action="loginController?type=updateAccount";
+			frm.submit();
+	    } else {
+	    }
 	}
 	function deleteReview(frm, rvNo) {
 		console.log("리뷰정보삭제실행");
 		console.log(frm);
-		frm.action="rvDelete.jsp?location=myPage&rvNo="+rvNo;
-		frm.submit();
+		let check = confirm("리뷰 정보를 삭제하시겠습니까?");
+	    if (check) {
+	    	frm.action="rvDelete.jsp?location=myPage&rvNo="+rvNo;
+			frm.submit();
+	    } else {
+	    }
 	}
 	function updateReview(frm, rvNo) {
 		console.log("리뷰정보수정실행");
 		console.log(frm);
-		frm.action="rvUpdate.jsp?location=myPage&rvNo="+rvNo;
-		frm.submit();
+		let check = confirm("리뷰 정보를 수정하시겠습니까?");
+	    if (check) {
+	    	frm.action="rvUpdate.jsp?location=myPage&rvNo="+rvNo;
+			frm.submit();
+	    } else {
+	    }
 	}
 	function updatePost(frm) {
 		console.log("자유게시판정보수정실행");
 		console.log(frm);
-		frm.action="freeView.jsp?";
-		frm.submit();
-	}
+		let check = confirm("자유게시판 정보를 수정하시겠습니까?");
+	    if (check) {
+	    	frm.action="freeView.jsp?";
+			frm.submit();
+	    } else {
+	    }
+ 	}
 	function deletePost(frm) {
 		console.log("자유게시판정보삭제실행");
 		console.log(frm);
