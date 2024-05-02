@@ -12,6 +12,7 @@ public class listTotVO {
 	private String nick;
 	private int critic_check;
 	private String email;
+	private int warn;
 
 	// movie
 	private int mvNo;
@@ -103,6 +104,12 @@ public class listTotVO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getWarn() {
+		return warn;
+	}
+	public void setWarn(int warn) {
+		this.warn = warn;
 	}
 
 	public int getMvNo() {
@@ -231,6 +238,12 @@ public class listTotVO {
 
 	public void setRvRate(int rvRate) {
 		this.rvRate = rvRate;
+	}
+	public int getRvRec() {
+		return rvRec;
+	}
+	public void setRvRec(int rvRec) {
+		this.rvRec = rvRec;
 	}
 
 	public int getRvRec() {
