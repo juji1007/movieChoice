@@ -108,7 +108,8 @@
 		DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
 	</delete>
 	
-	<!-- 마이페이지 나의 자유게시판조회 -->
+	<!-- 마이페이지 -->
+	<!-- 나의 자유게시판조회 -->
 	<select id="getPostByNo" parameterType="int" resultType="com.mystudy.model.vo.postVO">
 		SELECT *
 		FROM POST
@@ -121,5 +122,12 @@
 		SET PS_NICK = #{nick}
 		WHERE NO = #{no}
 	</update>
+	
+	<select id="commListMy" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
+		SELECT *
+		FROM PS_COMMENT
+		WHERE NO = #{no}
+		ORDER BY PC_NO DESC
+	</select>
 	
 </mapper>

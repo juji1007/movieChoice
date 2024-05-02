@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import com.mystudy.model.dao.postDAO;
 import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.vo.movieVO;
+import com.mystudy.model.vo.postCommentVO;
 import com.mystudy.model.vo.postVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.dao.AccountDAO;
@@ -238,6 +239,36 @@ public class AjaxManageController extends HttpServlet {
 			out.print(result);
 					
 		}
+		//나의 댓글 정보
+		if ("postCommentMypage".equals(action)) {
+			System.out.println("마이페이지postComment처리");
+			
+			//로그인 아이디로 검색처리
+			HttpSession session = req.getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id : " + id);
+			
+			//없으면 다시 처음화면으로
+			if (id == null || id.trim().length() == 0) {
+				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
+				return;
+			}
+			
+			int no = AccountDAO.getAccountNo(id);
+			System.out.println("avoNo : " + no);
+
+			List<postCommentVO> pcoList = postDAO.getCommListMy(no);
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("postComment", pcoList);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+		}
 		
 	}
 	
@@ -298,6 +329,17 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"psNick\": \"" + null + "\"");
 		            result.append("},");
 		    	}
+		    	if ("postComment".equals(key)) {
+		        	result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"pcNo\": \"" + null + "\", ");
+		            result.append("\"psNo\": \"" + null + "\", ");
+		            result.append("\"no\": \"" + null + "\", ");
+		            result.append("\"pcDate\": \"" + null + "\", ");
+		            result.append("\"pcContent\": \"" + null + "\", ");
+		            result.append("\"pcNick\": \"" + null + "\"");
+		            result.append("},");
+		        }
 		    }
 		    for (Object item : value) {
 		        if ("review".equals(key)) {
@@ -361,6 +403,34 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"psFile\": \"" + pvo.getPsFile() + "\", ");
 		            result.append("\"psWarn\": \"" + pvo.getPsWarn() + "\", ");
 		            result.append("\"psNick\": \"" + pvo.getPsNick() + "\"");
+		            result.append("},");
+		        }
+		        
+		        if ("post".equals(key)) {
+		        	postVO pvo = (postVO) item;
+		        	result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"psNo\": \"" + pvo.getPsNo() + "\", ");
+		            result.append("\"no\": \"" + pvo.getNo() + "\", ");
+		            result.append("\"psTitle\": \"" + pvo.getPsTitle() + "\", ");
+		            result.append("\"psContent\": \"" + pvo.getPsContent() + "\", ");
+		            result.append("\"psDate\": \"" + pvo.getPsDate() + "\", ");
+		            result.append("\"psFile\": \"" + pvo.getPsFile() + "\", ");
+		            result.append("\"psWarn\": \"" + pvo.getPsWarn() + "\", ");
+		            result.append("\"psNick\": \"" + pvo.getPsNick() + "\"");
+		            result.append("},");
+		        }
+		        
+		        if ("postComment".equals(key)) {
+		        	postCommentVO pco = (postCommentVO) item;
+		        	result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"pcNo\": \"" + pco.getPcNo() + "\", ");
+		            result.append("\"psNo\": \"" + pco.getPsNo() + "\", ");
+		            result.append("\"no\": \"" + pco.getNo() + "\", ");
+		            result.append("\"pcDate\": \"" + pco.getPcDate() + "\", ");
+		            result.append("\"pcContent\": \"" + pco.getPcContent() + "\", ");
+		            result.append("\"pcNick\": \"" + pco.getPcNick() + "\"");
 		            result.append("},");
 		        }
 		    }

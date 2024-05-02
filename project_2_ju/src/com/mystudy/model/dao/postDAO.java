@@ -185,5 +185,15 @@ public class postDAO {
 		    return -1;
 		}
 		
+		//나의 댓글정보 조회
+		public static List<postCommentVO> getCommListMy(int no) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {		
+				return ss.selectList("post.commListMy", no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 }
 
