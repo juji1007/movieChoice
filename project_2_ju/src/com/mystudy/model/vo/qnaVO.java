@@ -7,7 +7,14 @@ public class qnaVO {
 	private int no;
 	private String qaContent;
 	private Date qaDate;
+	private String id;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getQaNo() {
 		return qaNo;
 	}
@@ -35,7 +42,8 @@ public class qnaVO {
 	
 	@Override
 	public String toString() {
-		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + "]";
+		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", id=" + id
+				+ "]";
 	}
 	
 }

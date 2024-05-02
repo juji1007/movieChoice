@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.dao.recDAO"%>
 <%@page import="com.mystudy.model.dao.listTotDAO"%>
 <%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.project.review.paging.Paging"%>
@@ -21,9 +22,9 @@
 <link rel="stylesheet" href="css/rvMain.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+	
 <script>
-//로그인 후 작성가능
+	//로그인 후 작성가능
 	function login_confirm(frm) {
 		<%if (session.getAttribute("no") == null) {%>
 			alert("로그인 후 작성 가능합니다.");
@@ -32,16 +33,8 @@
 			frm.submit();
 	}
 	
-	function rec_push(frm) {
-		location.href = "rvRec.jsp?rvNo=";
-		frm.submit();
-	}
-	function warn_push() {
-		location.href = "rvWarn.jsp";
-		frm.submit();
-	}
-
 </script>
+
 </head>
 <body>
 	<!-- header.jspf -->
@@ -75,6 +68,7 @@
 	<c:forEach var="vo" items="${listAll}">
 		<tbody id="reviewOne">
 	        <tr>
+	        	<td rowspan="2">${vo.rvNo }</td>
 	            <td>${vo.mvTitle }</td>
 	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
 	        </tr>
@@ -83,12 +77,14 @@
 	            <td>${vo.rvDate }</td>
 	        </tr>
 	        <tr>
-	            <td colspan="2">
-	            	<input type="button" value="추천" onclick="rec_push(this.form)">${vo.rvRec }
-	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn }
+	            <td rowspan="2" colspan="3">
+	            	<input type="button" value="추천">${vo.rvRec}
+	            	<input type="button" value="신고">${vo.rvWarn}
 	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
+	            	<input type="hidden" name ="vo" value="${vo }">
+	            	<input type="hidden" name ="recNo" value="${vo.no }">
 	            </td>
 	        </tr>
 	    </tbody>
@@ -96,7 +92,7 @@
 	
 	    <tfoot id="page">
 	        <tr>
-	        	<td colspan="2">
+	        	<td colspan="3">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${rvPvo.nowPage == 1 }">
@@ -135,7 +131,7 @@
 	    </tfoot>
 	</table>
 </form>
-	
+
 </body>
 </html>
 

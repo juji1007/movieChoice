@@ -36,6 +36,22 @@
 	
 	function deleteAccount(frm) {
 		
+		var criticCheck = frm.criticCheck.value;
+		console.log("criticCheck : " + criticCheck);
+		var id = frm.id.value;
+		var checkId = frm.checkId.value;
+		
+		if("1" === criticCheck) {
+			alert("평론가 입니다 평론가 탈퇴 후 진행해 주세요.");     
+			return;
+		}
+		
+		if(id != checkId) {
+			alert("아이디가 맞지않습니다");   
+			frm.id.value="";
+			return;
+		}
+		
 		if(!check) {
 			alert("비밀번호인증 값이 다릅니다!");     
 			frm.pwdCheck.value="";
@@ -97,6 +113,8 @@
 						<td colspan="4">
 							<input type="button" value="삭제하기" onclick="deleteAccount(this.form)"/>
 							<input type="hidden" name="no" value="<%= avo.getNo()%>" />
+							<input type="hidden" name="checkId" value="<%= avo.getId()%>" />
+							<input type="hidden" name="criticCheck" value="<%= avo.getCriticCheck()%>" />
 						</td>
 					</tr>
 				</tbody>

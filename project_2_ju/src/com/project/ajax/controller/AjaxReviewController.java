@@ -150,7 +150,7 @@ public class AjaxReviewController extends HttpServlet {
             result.append("\"rvTitle\": \"" + vo.getRvTitle() + "\", ");
             result.append("\"rvContent\": \"" + vo.getRvContent() + "\", ");
             result.append("\"rvDate\": \"" + vo.getRvDate() + "\", ");
-            result.append("\"rvRec\": \"" + vo.getRvRec() + "\"");
+//            result.append("\"rvRec\": \"" + vo.getRvRec() + "\"");
 			result.append("},");
 		}
 		result.deleteCharAt(result.length() - 1);

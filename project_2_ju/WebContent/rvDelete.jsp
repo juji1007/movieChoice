@@ -15,7 +15,7 @@
 		response.sendRedirect("manage.jsp");
 	} else if ("reviewAdmin".equals(location)) {
 		System.out.println(">> location : " + location);
-		response.sendRedirect("reviewMainAdmin.jsp");
+		response.sendRedirect("reviewController?category=rvMain&location=reviewMainAdmin");
 	} else if ("myPage".equals(location)) {
 		System.out.println(">> location : " + location);
 		response.sendRedirect("myPage.jsp");

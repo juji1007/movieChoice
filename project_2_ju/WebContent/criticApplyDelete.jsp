@@ -7,11 +7,8 @@
  	
  	int no = Integer.parseInt(request.getParameter("critic"));
  
-	criticVO cvo = new criticVO();
-	cvo.setNo(no);
-	 
 	int deleted = criticDAO.deleteApply(no);  
-	System.out.println("criticDAO.deleteApply : " + criticDAO.deleteApply(no));
+	System.out.println("criticDAO.deleteApply : " + deleted);
 
 	if (deleted > 0) {
 %>

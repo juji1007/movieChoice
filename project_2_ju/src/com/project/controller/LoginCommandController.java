@@ -70,27 +70,6 @@ public class LoginCommandController extends HttpServlet {
 //	 	    // 일반 사용자 또는 다른 역할에 대한 처리
 //	 	    // 예: 일반 사용자에게 보여주는 코드
 //	 	}
-		if ("login".equals(type)) {
-
-				//아이디, 비번 받기
-				String id = request.getParameter("id");
-				String pwd = request.getParameter("pwd");
-//			 	System.out.println("id : " + id);
-				
-				//아이디, 비번 DB에서 조회
-				AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
-				System.out.println("avo : " + avo);
-				
-				if (avo == null) {
-					
-				}
-				
-				session.setAttribute("no", avo.getNo());
-				session.setAttribute("id", avo.getId());
-				session.setAttribute("nick", avo.getNick());
-				
-		}
-		
 		if ("findIdOk".equals(type)) {
 			request.setCharacterEncoding("UTF-8");
 

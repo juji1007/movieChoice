@@ -1,3 +1,4 @@
+<%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.criticVO"%>
 <%@page import="com.mystudy.model.dao.criticDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,11 +8,11 @@
  	
  	int no = Integer.parseInt(request.getParameter("critic"));
  
-	criticVO cvo = new criticVO();
-	cvo.setNo(no);
 	 
-	int deleted = criticDAO.delete(cvo); 
-	System.out.println("criticDAO.delete : " + criticDAO.delete(cvo));
+	int deleted = criticDAO.delete(no); 
+	AccountDAO.updatedeleteCriticCheck(no);
+	
+	System.out.println("criticDAO.delete : " + deleted);
 
 	if (deleted > 0) {
 %>

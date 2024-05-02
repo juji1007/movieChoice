@@ -12,18 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.mystudy.model.dao.qnaDAO;
 import com.mystudy.model.vo.qnaVO;
 
-
 @WebServlet("/qnaController")
-public class QnaController extends HttpServlet { 
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("QnaController doGet() 실행");
-		
-		String type = request.getParameter("type");
+public class QnaController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("QnaController doGet() 실행");
+
+        String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
 		
+		// 게시판
 		String search = request.getParameter("search");
 		System.out.println("search : " + search);
 		
@@ -36,7 +37,7 @@ public class QnaController extends HttpServlet {
 			String keyword = request.getParameter("keyword");
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
-			if (keyword == null || keyword.trim().length() == 0) {
+			if (idx == null || keyword == null || keyword.trim().length() == 0) {
 				request.getRequestDispatcher("qna.jsp").forward(request, response);
 				return;
 			}
@@ -46,7 +47,8 @@ public class QnaController extends HttpServlet {
 			
 			String sort = "";
 			switch(idx) {
-			case "0" : sort="작성일"; break;
+			case "0" : sort="제목"; break;
+			case "1" : sort="작성일"; break;
 			}
 			
 			request.setAttribute("listOne", listOne);
@@ -56,11 +58,11 @@ public class QnaController extends HttpServlet {
 		
 		}
 	}
-		
-		
-		@Override
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			System.out.println("QnaController doPost() 실행");
-			doGet(request, response);
-}
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("QnaController doPost() 실행");
+        doGet(request, response);
+    }
 }

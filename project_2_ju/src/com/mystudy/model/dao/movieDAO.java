@@ -148,6 +148,16 @@ public class movieDAO {
 			return null;
 		}
 		
+		//영화 전체 건수 조회
+		public static int getTotalCount() {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("movie.totalCnt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
 		//마이페이지 ====================================
 		//영화 테이블에 추천 수, 회원 번호
 		//회원 번호로 조회

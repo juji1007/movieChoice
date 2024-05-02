@@ -14,6 +14,9 @@
 		<typeAlias alias="movieVO" type="com.mystudy.model.vo.movieVO"/>
 		<typeAlias alias="accountVO" type="com.project.vo.AccountVO"/>
 		<typeAlias alias="criticVO" type="com.project.vo.CriticVO"/>
+		<typeAlias alias="listTotVO" type="com.mystudy.model.vo.listTotVO"/>
+		<typeAlias alias="recVO" type="com.mystudy.model.vo.recVO"/>
+		<typeAlias alias="warnVO" type="com.mystudy.model.vo.warnVO"/>
 	</typeAliases>
 
   <environments default="development">
@@ -30,17 +33,19 @@
   
   <mappers>
     <mapper resource="com/project/mybatis/mapper.xml" />
+    <mapper resource="com/project/mybatis/adminMapper.xml" />
+    <mapper resource="com/project/mybatis/criticMapper.xml" />
+    <mapper resource="com/project/mybatis/listTotMapper.xml" />
     <mapper resource="com/project/mybatis/loginMapper.xml" />
     <mapper resource="com/project/mybatis/movieMapper.xml" />
-    <mapper resource="com/project/mybatis/reviewMapper.xml" />
-    <mapper resource="com/project/mybatis/criticMapper.xml" />
     <mapper resource="com/project/mybatis/postMapper.xml" />
-    <mapper resource="com/project/mybatis/adminMapper.xml" />
-    <mapper resource="com/project/mybatis/listTotMapper.xml" />
     <mapper resource="com/project/mybatis/qnaMapper.xml" />
-
+	<mapper resource="com/project/mybatis/inquiryMapper.xml" />
+    <mapper resource="com/project/mybatis/recMapper.xml" />
+    <mapper resource="com/project/mybatis/reviewMapper.xml" />
+    <mapper resource="com/project/mybatis/warnMapper.xml" />
   </mappers>
-  
+ 
 </configuration>
 
 

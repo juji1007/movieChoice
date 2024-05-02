@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mystudy.model.dao.criticDAO;
 import com.project.dao.AccountDAO;
 import com.project.vo.AccountVO;
 
@@ -22,14 +23,27 @@ public class deleteAccountOkCommand implements Command{
 	    
 	    String location = request.getParameter("location");
 	    System.out.println("location : " + location);
+	    if ("admin".equals(location)) {
+	    	// 아이디 DB에서 조회
+		    AccountVO avoAdmin = AccountDAO.getAccount(id);
+		    pwd = avoAdmin.getPwd();
+	    	System.out.println("delpw11 : " + avoAdmin);
+	    }
+	    
 	    // 아이디 DB에서 조회
 	    AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
 	    if (avo == null) {
 	    	System.out.println("avo는 널");
-	    	//인증안됬으므로 myPage로
-	    	return "myPage.jsp";
+	    	if ("admin".equals(location)) {
+	    		//인증안됬으므로 manage로
+			    return "manage.jsp";
+		    } else {
+		    	//인증안됬으므로 myPage로
+		    	return "myPage.jsp";
+		    }
 	    } else {
 		    int delNo = avo.getNo();
+		    criticDAO.delete(delNo);
 		    AccountDAO.delete(delNo);
 		    if ("admin".equals(location)) {
 			    return "manage.jsp";
