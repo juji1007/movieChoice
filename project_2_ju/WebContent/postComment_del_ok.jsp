@@ -14,11 +14,15 @@
  	System.out.println("cvoNo : " + cvo.getNo());
 	session.setAttribute("coo", cvo);
  	
- 	postVO pvo = (postVO)session.getAttribute("pvo");
- 	String cPage = (String)session.getAttribute("cPage");
-
 	int result = postDAO.deleteComment(pcNo);
 	pageContext.setAttribute("result", result);
 
-	response.sendRedirect("freeView.jsp?psNo=" + pvo.getPsNo() + "&cPage=" + cPage);
+	String location = request.getParameter("location");
+	if ("myPage".equals(location)) {
+		response.sendRedirect("myPage.jsp");
+	} else {
+		postVO pvo = (postVO)session.getAttribute("pvo");
+	 	String cPage = (String)session.getAttribute("cPage");
+		response.sendRedirect("freeView.jsp?psNo=" + pvo.getPsNo() + "&cPage=" + cPage);
+	}
 %>

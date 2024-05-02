@@ -31,36 +31,61 @@
 <link rel="stylesheet" href="css/myPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	window.onpopstate = function(event) {
+	    // 뒤로가기 이벤트 감지
+	    location.reload(); // 페이지 새로고침
+	};
+
 	function deleteAccount(frm) {
 		console.log("회원삭제실행");
 		console.log(frm);
-		frm.action="loginController?type=deleteAccount";
-		frm.submit();
+		let check = confirm("회원 탈퇴하시겠습니까?");
+	    if (check) {
+	    	frm.action="loginController?type=deleteAccount";
+			frm.submit();
+	    } else {
+	    }
 	}
 	function updateAccount(frm) {
 		console.log("회원정보수정실행");
 		console.log(frm);
-		frm.action="loginController?type=updateAccount";
-		frm.submit();
+		let check = confirm("회원 정보를 수정하시겠습니까?");
+	    if (check) {
+	    	frm.action="loginController?type=updateAccount";
+			frm.submit();
+	    } else {
+	    }
 	}
 	function deleteReview(frm, rvNo) {
 		console.log("리뷰정보삭제실행");
 		console.log(frm);
-		frm.action="rvDelete.jsp?location=myPage&rvNo="+rvNo;
-		frm.submit();
+		let check = confirm("리뷰 정보를 삭제하시겠습니까?");
+	    if (check) {
+	    	frm.action="rvDelete.jsp?location=myPage&rvNo="+rvNo;
+			frm.submit();
+	    } else {
+	    }
 	}
 	function updateReview(frm, rvNo) {
 		console.log("리뷰정보수정실행");
 		console.log(frm);
-		frm.action="rvUpdate.jsp?location=myPage&rvNo="+rvNo;
-		frm.submit();
+		let check = confirm("리뷰 정보를 수정하시겠습니까?");
+	    if (check) {
+	    	frm.action="rvUpdate.jsp?location=myPage&rvNo="+rvNo;
+			frm.submit();
+	    } else {
+	    }
 	}
 	function updatePost(frm) {
 		console.log("자유게시판정보수정실행");
 		console.log(frm);
-		frm.action="freeView.jsp?";
-		frm.submit();
-	}
+		let check = confirm("자유게시판 정보를 수정하시겠습니까?");
+	    if (check) {
+	    	frm.action="freeView.jsp?";
+			frm.submit();
+	    } else {
+	    }
+ 	}
 	function deletePost(frm) {
 		console.log("자유게시판정보삭제실행");
 		console.log(frm);
@@ -291,7 +316,7 @@
 				            htmltag += "<td>" + member.pcNick + "</td>";
 				            htmltag += "<td>" + member.pcDate + "</td>";
 				            htmltag += "<td>" + member.pcContent + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='freeView.jsp?psNo=" + member.psNo + "'\"></td>";
+ 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
