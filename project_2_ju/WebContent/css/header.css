@@ -1,5 +1,5 @@
 @charset "UTF-8";
-	img.icon {
+	.icon {
 		position: absolute;
 		left: 200px;
 		top: 60px;
@@ -30,6 +30,7 @@
 	hr.mint {
 		background-color: #56BEC0;
 		height: 3px;
+		border: 0;
 		margin-top: 120px;
 	}
 	ul.login {
