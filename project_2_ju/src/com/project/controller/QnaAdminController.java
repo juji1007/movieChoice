@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.mystudy.model.dao.qnaDAO;
 import com.mystudy.model.vo.qnaVO;
 
-@WebServlet("/qnaController")
-public class QnaController extends HttpServlet {
+@WebServlet("/qnaAdminController")
+public class QnaAdminController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("QnaController doGet() 실행");
+        System.out.println("QnaAdminController doGet() 실행");
 
         String type = request.getParameter("type");
 		System.out.println("작업형태 type : " + type);
@@ -30,15 +30,15 @@ public class QnaController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		if ("qnaList".equals(search)) {
-			System.out.println(">> qnaList 요청 처리");
+		if ("qnaAdminList".equals(search)) {
+			System.out.println(">> qnaAdminList 요청 처리");
 			
 			String idx = request.getParameter("idx");
 			String keyword = request.getParameter("keyword");
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
 			if (idx == null || keyword == null || keyword.trim().length() == 0) {
-				request.getRequestDispatcher("qna.jsp").forward(request, response);
+				request.getRequestDispatcher("qnaAdmin.jsp").forward(request, response);
 				return;
 			}
 			
@@ -54,7 +54,7 @@ public class QnaController extends HttpServlet {
 			request.setAttribute("listOne", listOne);
 			request.setAttribute("sort", sort);
 			
-			request.getRequestDispatcher("qnaList.jsp").forward(request, response);
+			request.getRequestDispatcher("qnaAdminList.jsp").forward(request, response);
 		
 		}
     }
@@ -62,7 +62,7 @@ public class QnaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("QnaController doPost() 실행");
+        System.out.println("QnaAdminController doPost() 실행");
         doGet(request, response);
     }
 }

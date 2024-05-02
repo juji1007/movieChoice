@@ -3,6 +3,7 @@ package com.mystudy.model.dao;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.model.vo.inquiryVO;
+import com.mystudy.model.vo.qnaVO;
 import com.project.mybatis.DBService;
 
 public class inquiryDAO {
@@ -16,4 +17,14 @@ public class inquiryDAO {
   		}
   		return null;
   	}
+  	
+  	// INQUIRY 입력(INSERT) 
+    public static int insert(inquiryVO ivo) {
+        try (SqlSession ss = DBService.getFactory().openSession(true)) {
+            return ss.insert("inquiry.insert", ivo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }

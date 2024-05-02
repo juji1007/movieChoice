@@ -8,7 +8,7 @@
 	  <li><a href="mainAdmin.jsp">영화목록 관리</a></li>
 	  <li><a href="reviewController?category=rvMain&location=admin">리뷰모음 관리</a></li>
 	  <li><a href="freeAdmin.jsp">자유게시판 관리</a></li>
-	  <li><a href="about.asp">Q & A 관리자</a></li>
+	  <li><a href="qnaAdmin.jsp">Q & A 관리자</a></li>
 	  <li><a href="about.asp">Review Of The Month 관리</a></li> 
 	  <li><a href="criticAdmin.jsp">평론가 관리</a></li>
 	  <li><a href="accountManage.jsp">유저 관리 페이지</a></li>
