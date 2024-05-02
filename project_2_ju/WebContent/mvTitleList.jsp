@@ -13,6 +13,9 @@ request.getAttribute("list");
 <title>영화제목으로 검색</title>
 <link rel="stylesheet" href="css/header.css">
 </head>
+
+
+
 <body>
 <%@ include file="include/header.jspf" %>
 
@@ -27,8 +30,16 @@ request.getAttribute("list");
 			<tr>
 			<td >${list.mvTitle }</td>
 			</tr>
-			
-			
+<%
+	if(request.getAttribute("list") == null) {
+%>
+<script>
+alert("검색결과가 없습니다.")
+history.back();
+</script>
+<%
+	};
+%>
 	</table>
 	</a>
 

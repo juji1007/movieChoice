@@ -11,6 +11,17 @@ import com.mystudy.model.vo.movieVO;
 import com.project.mybatis.DBService;
 
 public class movieDAO {
+	//영화 탑텐
+	public static List<movieVO> getmvTop() {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			return ss.selectList("PROJECT2.mvTop");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return null;
+	}
+	
+		//전체 영화목록
 		public static List<movieVO> getmvTitle() {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
 				return ss.selectList("PROJECT2.mvTitle");
@@ -135,6 +146,16 @@ public class movieDAO {
 				e.printStackTrace();
 			}
 			return null;
+		}
+		
+		//영화 전체 건수 조회
+		public static int getTotalCount() {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("movie.totalCnt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
 		}
 		
 		//마이페이지 ====================================

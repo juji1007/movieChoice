@@ -7,25 +7,33 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%
+//영화 탑텐 불러오기
+List<movieVO> top = null;
+try (SqlSession ss = DBService.getFactory().openSession()) {
+	top =  ss.selectList("PROJECT2.mvTop");
+} catch (Exception e) {
+	e.printStackTrace(); 
+}  
+System.out.println("top : " + top);
+System.out.println("top.size : " + top.size());
+session.setAttribute("top", top);
+
+//영화 전체 목록 불러오기
 List<movieVO> list = null; 
 try (SqlSession ss = DBService.getFactory().openSession()) {
 	list =  ss.selectList("PROJECT2.mvTitle");
 } catch (Exception e) {
 	e.printStackTrace(); 
 }  
-
-
 System.out.println("list : " + list);
 System.out.println("list.size : " + list.size());
 session.setAttribute("attr_list", list);
-
-
 %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>main</title>
+<title>main2</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -58,10 +66,11 @@ session.setAttribute("attr_list", list);
 	<%@ include file="include/header.jspf" %>
  
 
-<%--영화검색 --%>
-<form action="movieDetail.jsp?mvNo=${mvDetail.mvNo }" method="get">
-<input type="text" name="mvNo" placeholder="영화제목을 입력하세요">
-<input type="submit" value="영화검색">
+<!-- 영화검색 -->
+<form action="controller" method="get">
+	<input type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
+	<input type="submit" value="영화검색">
+	<input type="hidden" name="type" value="mvTitleList">
 </form>
 <div>
 
@@ -71,7 +80,7 @@ session.setAttribute("attr_list", list);
 <%-- select 해서 영화목록 상위 10개 가져오기 --%>
 <div id="frame">
 	<div id="banner">
-	<c:forEach var="vo" items="${attr_list }">
+	<c:forEach var="vo" items="${top }">
 	<a href="movieDetail.jsp?mvNo=${vo.mvNo }">
 	<table>
 			<tr>
@@ -105,7 +114,7 @@ session.setAttribute("attr_list", list);
   <input type="submit" value="동적검색">
 </form>
 <hr class="gray">
-
+<!-- 영화 정렬 후 목록 보기 -->
 <c:forEach var="vo" items="${list2 }">
 <a href="movieDetail.jsp?mvNo=${vo.mvNo }">
 	<table>

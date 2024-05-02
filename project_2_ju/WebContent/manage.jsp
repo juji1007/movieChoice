@@ -247,7 +247,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.criticCheck + "</td>";
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=admin&criticCheck="+ member.criticCheck + "&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=admin&id="+ member.id + "'\">";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
@@ -256,7 +256,6 @@ function selectCategory(frm) {
 			        }
 				}
             }
-//             htmltag += "</tbody>";
 
             // 테이블을 #jsonData 엘리먼트에 추가
             $('#jsonData').html(htmltag);
@@ -274,7 +273,9 @@ function selectCategory(frm) {
 <body>
     <!-- header.jspf -->
 	<%@ include file="include/headerAdmin.jspf" %>
-	
+	<div class="head">
+		<h2>관리자페이지에서는 모두 강제 삭제됩니다.</h2>
+	</div>
     <div class="body">
         <form method="post"> 
             <table>

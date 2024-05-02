@@ -7,20 +7,27 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%
+//영화 탑텐 불러오기
+List<movieVO> top = null;
+try (SqlSession ss = DBService.getFactory().openSession()) {
+	top =  ss.selectList("PROJECT2.mvTop");
+} catch (Exception e) {
+	e.printStackTrace(); 
+}  
+System.out.println("top : " + top);
+System.out.println("top.size : " + top.size());
+session.setAttribute("top", top);
+
+//영화 전체 목록 불러오기
 List<movieVO> list = null; 
 try (SqlSession ss = DBService.getFactory().openSession()) {
 	list =  ss.selectList("PROJECT2.mvTitle");
 } catch (Exception e) {
 	e.printStackTrace(); 
 }  
-
-
-
 System.out.println("list : " + list);
 System.out.println("list.size : " + list.size());
 session.setAttribute("attr_list", list);
-
-
 %>  
 <!DOCTYPE html>
 <html>
@@ -77,7 +84,7 @@ session.setAttribute("attr_list", list);
 <%-- select 해서 영화목록 상위 10개 가져오기 --%>
 <div id="frame">
 	<div id="banner">
-	<c:forEach var="vo" items="${attr_list }">
+	<c:forEach var="vo" items="${top }">
 	<a href="movieDetail.jsp?mvNo=${vo.mvNo }">
 	<table>
 			<tr>
@@ -129,20 +136,20 @@ session.setAttribute("attr_list", list);
 	</a>
 	</c:forEach>
 
-<c:forEach var="vo" items="${list2 }">
-<a href="movieDetail.jsp?mvNo=${vo.mvNo }">
-	<table>
-			<tr>
-			<td>
-			<img src="img/${vo.mvPoster }" alt="제품이미지" width="200">
-			</td>
-			</tr>
-			<tr>
-			<td >${vo.mvTitle }</td>
-			</tr>
-	</table>
-</a>
-</c:forEach>
+<%-- <c:forEach var="vo" items="${list2 }"> --%>
+<%-- <a href="movieDetail.jsp?mvNo=${vo.mvNo }"> --%>
+<!-- 	<table> -->
+<!-- 			<tr> -->
+<!-- 			<td> -->
+<%-- 			<img src="img/${vo.mvPoster }" alt="제품이미지" width="200"> --%>
+<!-- 			</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<%-- 			<td >${vo.mvTitle }</td> --%>
+<!-- 			</tr> -->
+<!-- 	</table> -->
+<!-- </a> -->
+<%-- </c:forEach> --%>
 
 
 </div>

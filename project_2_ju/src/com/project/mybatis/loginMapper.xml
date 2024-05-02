@@ -104,6 +104,11 @@
 		WHERE NO = #{no}
 	</update>
 	
+	<!-- 계정 전체 건수 -->
+	<select id="totalCnt" resultType="int">
+		SELECT COUNT(*) AS CNT FROM ACCOUNT
+	</select>
+	
 </mapper>
 
 

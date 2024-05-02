@@ -12,7 +12,8 @@
  	postCommentVO cvo = postDAO.getComment(pcNo);
  	System.out.println("cvo : " + cvo);
  	System.out.println("cvoNo : " + cvo.getNo());
-
+	session.setAttribute("coo", cvo);
+ 	
  	postVO pvo = (postVO)session.getAttribute("pvo");
  	String cPage = (String)session.getAttribute("cPage");
 
@@ -20,5 +21,4 @@
 	pageContext.setAttribute("result", result);
 
 	response.sendRedirect("freeView.jsp?psNo=" + pvo.getPsNo() + "&cPage=" + cPage);
-// 	response.sendRedirect("free.jsp");
 %>

@@ -3,7 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PROJECT2">
-	
+<!-- 상위 10개 영화 목록 -->
+	<select id="mvTop" resultType="com.mystudy.model.vo.movieVO">
+		<![CDATA[
+		SELECT *
+    	FROM (
+	        SELECT *
+	        FROM MOVIE
+	        ORDER BY MV_RATE DESC
+    	)
+    	WHERE ROWNUM <= 10
+    	]]>
+	</select>
+
+
+<!-- 	전체 영화 목록 검색 -->
 	<select id="mvTitle" resultType="com.mystudy.model.vo.movieVO">
 		SELECT *
 		FROM MOVIE
@@ -14,7 +28,6 @@
 	<select id="mvTitleDetail"  parameterType="string" resultType="com.mystudy.model.vo.movieVO">
 		SELECT *
 		FROM MOVIE
-<!-- 		WHERE MV_TITLE = (SELECT MV_TITLE FROM MOVIE WHERE MV_NO = #{mvNo}) -->
 		WHERE MV_TITLE LIKE '%'||#{mvTitle}||'%'
 	</select>
 	
