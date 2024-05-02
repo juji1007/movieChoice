@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.model.dao.listTotDAO;
+import com.mystudy.model.dao.recDAO;
 import com.mystudy.model.dao.reviewDAO;
+import com.mystudy.model.dao.warnDAO;
 import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.movieVO;
+import com.mystudy.model.vo.recVO;
 import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 import com.project.review.paging.Paging;
@@ -84,8 +87,39 @@ public class ReviewController extends HttpServlet {
 			List<listTotVO> listAll = listTotDAO.listTot(p.getBegin(), p.getEnd());
 			System.out.println(">> 리뷰 메인 listAll : " + listAll);
 			
-			request.setAttribute("listAll", listAll);
+			//추천수 클릭할 경우 - clickOn
+			if ("clickOn".equals(category)) {
+				System.out.println(">> clickOn 실행 중~");
+			}
 			
+			//추천수 sum 보여주기 계산
+			int i = 0;
+			for (i = 0; i < listAll.size(); i++) {
+				int rvNo = listAll.get(i).getRvNo();
+				System.out.println("rvNo : " + rvNo);
+				int rvRec = recDAO.recSum(rvNo);
+				System.out.println("::recDAO.recSum rvRec : " + rvRec);
+			
+				if (rvRec == -1) {
+					rvRec = 0;
+				}
+				listAll.get(i).setRvRec(rvRec);
+			}
+			//신고수 sum 보여주기 계산
+			for (i = 0; i < listAll.size(); i++) {
+				int rvNo = listAll.get(i).getRvNo();
+				System.out.println("rvNo : " + rvNo);
+				int rvWarn = warnDAO.warnSum(rvNo);
+				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+			
+				if (rvWarn == -1) {
+					rvWarn = 0;
+				}
+				listAll.get(i).setRvWarn(rvWarn);
+			}
+			System.out.println("<추천/신고수> listAll : " + listAll);
+			
+			request.setAttribute("listAll", listAll);
 			request.setAttribute("rvPvo", p);
 			
 			//페이징 처리 위한 리뷰 전체 목록
@@ -95,6 +129,8 @@ public class ReviewController extends HttpServlet {
 			
 			String location = request.getParameter("location");
 			if ("admin".equals(location)) {
+				request.getRequestDispatcher("reviewMainAdmin.jsp").forward(request, response);
+			} else if ("reviewMainAdmin".equals(location)) {
 				request.getRequestDispatcher("reviewMainAdmin.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("reviewMain.jsp").forward(request, response);

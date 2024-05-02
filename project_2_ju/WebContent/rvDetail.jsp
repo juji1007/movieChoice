@@ -1,3 +1,5 @@
+<%@page import="com.mystudy.model.dao.warnDAO"%>
+<%@page import="com.mystudy.model.dao.recDAO"%>
 <%@page import="com.mystudy.model.dao.listTotDAO"%>
 <%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
@@ -17,7 +19,7 @@
 	int cPage = Integer.parseInt(request.getParameter("cPage"));
 	System.out.println("cPage : " + cPage);
 	
-	//리뷰 전체(영화,회원) 목록 - mapper에서 3개 테이블 조인
+	//리뷰 전체(영화,회원) 목록 조회 - mapper에서 3개 테이블 조인
 	listTotVO listOne = listTotDAO.selectOne(rvNo);
 	System.out.println(">> 리뷰 상세 listOne : " + listOne);
 	
@@ -26,6 +28,20 @@
 	
 	int no = (Integer)session.getAttribute("no");
 	pageContext.setAttribute("no", no);
+	
+	//추천수 sum 보여주기 계산
+	int rvRec = recDAO.recSum(rvNo);
+	System.out.println("rvRec : " + rvRec);
+	
+	listOne.setRvRec(rvRec);
+	System.out.println("<추천수> listOne : " + listOne);
+	
+	//신고수 sum 보여주기 계산
+	int rvWarn = warnDAO.warnSum(rvNo);
+	System.out.println("rvwarn : " + rvWarn);
+	
+	listOne.setRvWarn(rvWarn);
+	System.out.println("<신고수> listOne : " + listOne);
 %>
 <!DOCTYPE html>
 <html>
@@ -36,23 +52,52 @@
 <link rel="stylesheet" href="css/rvDetail.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-	//추천수,신고수 버튼 적용
-	function rec_push(frm) {
-		//본인 리뷰가 아닌 경우 추천 가능
+	//추천수, 신고수 버튼(toggle 기능 - 한번 클릭 추천, 한번 더 클릭 해제)
+	function rec_toggle(frm) {
+		//본인 리뷰가 아닌지 확인
 		if (${no} != ${listOne.no}) {
-			//추천 클릭 처리
-			alert("추천을 눌렀습니다.");
-			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
-			
+			//추천 클릭시, rvRec.jsp에서 추천 추가(+1)
+			if (${listOne.rvRec} == 0) {
+				alert("추천했습니다.");
+			//해제(-1) 처리
+			} else {
+				alert("추천을 해제합니다.");
+			}
+			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";		
 		} else {
-			alert("본인 리뷰는 추천할 수 없습니다!!");
-			location.href= "rvDetail.jsp?rvNo=${listOne.rvNo}&cPage=${cPage}";
+			alert("본인 리뷰는 추천할 수 없습니다.");
 		}
 	}
-	function warn_push() {
-		location.href = "rvWarn.jsp";
-		frm.submit();
+	
+	function warn_push(frm) {
+		//본인 리뷰가 아닌지 확인
+		if (${no} != ${listOne.no}) {
+			//신고 클릭시, rvWarn.jsp에서 신고 추가(+1)
+			if (${listOne.rvWarn} == 0) {
+				alert("신고했습니다.");
+			//해제(-1) 처리
+			} else {
+				alert("신고를 해제합니다.");
+			}
+			location.href= "rvWarn.jsp?rvNo=${listOne.rvNo}";		
+		} else {
+			alert("본인 리뷰는 신고할 수 없습니다.");
+		}
 	}
+	
+// 	//무한정 추천 가능
+// 	function rec_push(frm) {
+// 		//본인 리뷰가 아닌 경우 추천 가능
+// 		if (${no} != ${listOne.no}) {
+// 			//추천 클릭 처리
+// 			alert("추천을 눌렀습니다.");
+// 			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
+			
+// 		} else {
+// 			alert("본인 리뷰는 추천할 수 없습니다!!");
+// 			location.href= "rvDetail.jsp?rvNo=${listOne.rvNo}&cPage=${cPage}";
+// 		}
+// 	}
 
 	//시간 여유 시, 구현 예정
 	function prev_go() {
@@ -106,12 +151,12 @@
 				<td id="rvNick">${listOne.rvNick }</td>
 				<td id="rvDate">${listOne.rvDate }</td>
 				<td id="btn">
-					<input type="button" value="추천 " onclick="rec_push(this.form)">
-<%-- 					<input type="button" value="추천 " onclick="javascript:location.href='rvRec.jsp?rvNo=${listOne.rvNo}'"> --%>
-					${listOne.rvRec }
+<!-- 					<input type="button" value="추천 " onclick="rec_push(this.form)"> -->
+					<input type="button" value="추천 " onclick="rec_toggle(this.form)">
+					${listOne.rvRec}
 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
-					<input type="button" value="신고" onclick="warn_push()">
-					${listOne.rvWarn }
+					<input type="button" value="신고" onclick="warn_push(this.form)">
+					${listOne.rvWarn}
 				</td>
 			</tr>
 			<tr>
@@ -123,6 +168,7 @@
 			<tr>
 				<td colspan="3">
 					<input type="button" value="이전" onclick="prev_go()">
+<!-- 					<input type="button" value="목록" onclick="javascript:history.back()"> -->
 					<input type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
 					<input type="button" value="다음" onclick="next_go()">
 				</td>
