@@ -8,7 +8,7 @@
 	<select id="one" parameterType="map" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT RV_NO, NO, MV_TITLE, MV_POSTER
 		     , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT
-		     , RV_CONTENT, RV_DATE, RV_REC, RV_WARN
+		     , RV_CONTENT, RV_DATE, RV_REC
 		FROM (SELECT ROWNUM R_NUM, R.*, M.*
 		      FROM (SELECT *
 		            FROM REVIEW
@@ -100,7 +100,7 @@
 	<insert id="insert" parameterType="com.mystudy.model.vo.reviewVO">
 		INSERT INTO REVIEW
 	    	(RV_NO, MV_NO, NO, RV_NICK, RV_TITLE, 
-	     	 RV_CONTENT, RV_DATE, RV_REC, RV_RATE, RV_WARN)
+	     	 RV_CONTENT, RV_DATE, RV_REC, RV_RATE)
 		VALUES (REVIEW_SEQ.NEXTVAL, #{mvNo}, #{no}, #{rvNick}, #{rvTitle}, 
 				#{rvContent}, SYSDATE, #{rvRec}, #{rvRate}, #{rvWarn})
 	</insert>
@@ -147,7 +147,6 @@
 	<!-- 리뷰번호 받아서 리뷰 삭제 -->
 
 	<delete id="deleteMypage" parameterType="com.mystudy.model.vo.reviewVO">
-
 		DELETE FROM REVIEW
 		WHERE RV_NO = #{rvNo}
 	</delete>

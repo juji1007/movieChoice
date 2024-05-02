@@ -8,7 +8,7 @@
    <![CDATA[
       SELECT RV_NO, NO, MV_TITLE, MV_POSTER
            , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT
-           , RV_CONTENT, RV_DATE, RV_REC, RV_WARN
+           , RV_CONTENT, RV_DATE, RV_REC
       FROM (SELECT ROWNUM R_NUM, R.*, M.*
             FROM (SELECT *
                   FROM REVIEW
