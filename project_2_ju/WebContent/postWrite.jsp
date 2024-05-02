@@ -23,7 +23,7 @@
 <title>게시글 작성</title>
 <script>
 function sendData() {
-	alert("sendData() 실행~~");
+	//alert("sendData() 실행~~");
 	console.log(document.forms[0]);
 	let firstForm = document.forms[0];
 	console.log(firstForm.elements);
@@ -37,7 +37,7 @@ function sendData() {
 			return;
 		}
 	}
-	alert(":: 데이터 확인 완료, 입력요청 처리~~~");
+	//alert(":: 데이터 확인 완료, 입력요청 처리~~~");
 	firstForm.submit();
 }
 
