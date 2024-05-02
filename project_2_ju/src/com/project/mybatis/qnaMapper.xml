@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	
+	<!-- QA 1개 조회 -->
+	<select id="one" resultType="com.mystudy.model.vo.qnaVO">
+		SELECT *
+		FROM QA
+		WHERE QA_NO = #{qaNo}
+	</select>
+	
+	<!-- 전체 QA 건수 조회 -->
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) AS CNT FROM QA
+	</select>
+	
+	<!-- 페이지에 해당하는 QA 조회 -->
+	<select id="list" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
+	<![CDATA[
+		SELECT *
+		FROM (SELECT ROWNUM R_NUM, Q.*
+		      FROM (SELECT *
+		            FROM QA
+		            ORDER BY QA_NO DESC
+		           ) Q
+		      WHERE ROWNUM <= #{end}
+		     )
+		WHERE R_NUM >= #{begin} 
+	]]>
+	</select>
+	
+    <select id="search" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
+	    SELECT *
+	    FROM QA
+	    <where>
+	        <choose>
+	            <when test="idx != null and idx == 0">
+	                TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
+	            </when>
+	            <otherwise>
+	                QA_CONTENT LIKE '%' || #{keyword} || '%'
+	            </otherwise>
+	        </choose>
+	    </where>
+	</select>
+	
+	<!-- QA 입력 -->
+	<insert id="insert" parameterType="com.mystudy.model.vo.qnaVO">
+		INSERT INTO QA
+			       (QA_NO, NO, QA_CONTENT, QA_DATE)
+			VALUES (QA_SEQ.NEXTVAL, #{no}, #{qaContent}, SYSDATE) 
+	</insert>
+	
+	<!-- QA 삭제 -->
+	<delete id="delete" parameterType="com.mystudy.model.vo.qnaVO">
+		DELETE FROM QA
+		WHERE QA_NO = #{qaNo}
+	</delete>
+	
+</mapper>

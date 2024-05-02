@@ -10,7 +10,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.vo.postCommentVO;
 import com.mystudy.model.vo.postVO;
+import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 
 
@@ -65,14 +67,142 @@ public class postDAO {
 			return null;
 		}
 		
+//		//게시글 작성자 닉네임 조회
+//		public static postVO selectNick(int no) {
+//			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+//				return ss.selectOne("post.nick", no);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return null;
+//		}
+		
 		// 게시글 입력(INSERT) 
-		public static int insert(postVO pvo) {
+		public static int insert(postVO po) {
 			try (SqlSession ss = DBService.getFactory().openSession(true)) {
-				return ss.insert("post.insert", pvo);
+				return ss.insert("post.insert", po);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return -1;
 		}
+		//게시글 수정(UPDATE)
+		public static int update(postVO po) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.update("post.update", po);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//게시글 삭제(DELETE)
+		public static int delete(int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("post.delete", psNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//게시글 삭제(DELETE) - 건희
+		public static int pDelete(postVO pvo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("post.delete", pvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//========= 댓글 관련 작업================
+		//게시글에 딸린 댓글 찾기/검색/조회/선택
+		public static List<postCommentVO> getCommList(int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {		
+				return ss.selectList("post.commList", psNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		// 댓글입력
+		public static int insertComment(postCommentVO cvo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.insert("post.commInsert", cvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//댓글 1개 조회
+		public static postCommentVO getComment(int pcNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.selectOne("post.commOne", pcNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		
+		
+		//댓글삭제
+		public static int deleteComment(int pcNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)) {
+				return ss.delete("post.commDelete", pcNo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//댓글 전체 건수 조회
+		public static int getPostCommentTotalCount() {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectOne("post.PostCommentTotalCnt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		
+		//마이페이지 ============================================ 
+		//나의 자유게시판 조회
+		public static List<postVO> getPostList(int no) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {
+				return ss.selectList("post.getPostByNo", no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		//닉네임 수정 시 자유게시판 닉네임 변경
+		public static int updateNickPost(int no, String nick) {
+		    try (SqlSession ss = DBService.getFactory().openSession(true)) {
+		        Map<String, Object> map = new HashMap<>();
+		        map.put("no", no);
+		        map.put("nick", nick);
+		        return ss.update("post.updateNickPost", map);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return -1;
+		}
+		
+		//나의 댓글정보 조회
+		public static List<postCommentVO> getCommListMy(int no) {
+			try (SqlSession ss = DBService.getFactory().openSession()) {		
+				return ss.selectList("post.commListMy", no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 }
 

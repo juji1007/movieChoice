@@ -1,0 +1,71 @@
+@charset "UTF-8";
+img.icon {
+    position: absolute;
+    left: 200px;
+    top: 60px;
+}
+li {
+    float: left;
+    display: block;
+    padding: 10px 26px;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+ul.menu {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    top: 60px;
+    left: 530px;
+}
+li a:hover {
+    color: #56BEC0;
+    font-weight: bold;
+}
+hr.mint {
+    background-color: #56BEC0;
+    height: 3px;
+    margin-top: 120px;
+}
+ul.login {
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    top: 60px;
+    right: 200px;
+}
+ul.login li {
+    padding: 12px 5px;
+    font-size: 14px;
+}
+hr.gray {
+    background-color: D9D9D9;
+    height: 1px;
+}
+#banner {
+    width: 5000px;
+}
+#frame {
+    width: 80%; /* 페이지의 80%만 차지하도록 설정 */
+    margin: 0 auto; /* 페이지 중앙에 배치 */
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+table {
+    width: 100%;
+    margin: 10px;
+    border-collapse: collapse; /* 테이블 셀 경계를 병합하여 선이 나오도록 설정 */
+}
+
+table th, table td {
+    border: 1px solid #ccc; /* 테이블 셀 경계선 스타일 지정 */
+    padding: 8px; /* 셀 안의 여백 설정 */
+    text-align: center; /* 가운데 정렬 */
+}

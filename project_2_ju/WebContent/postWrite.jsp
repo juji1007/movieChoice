@@ -1,5 +1,21 @@
+<%@page import="com.project.dao.AccountDAO"%>
+<%@page import="com.project.vo.AccountVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.mystudy.post.common.Paging"%>
+<%@page import="com.mystudy.model.dao.postDAO"%>
+<%@page import="com.mystudy.model.vo.postVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+// 	int psNo = Integer.parseInt(request.getParameter("psNo"));
+//	session.getAttribute("pvo");
+
+// 	AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
+// 	System.out.println("avo : " + avo);
+	session.getAttribute("no");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +53,7 @@ function list_go() {
 	<tr>
 		
 		<td>
-			<input type="hidden" name="psNo" title="번호">
+		<input type="hidden" name="no"  value="${no }">
 		</td>
 	</tr>
 	<tr>
@@ -55,7 +71,7 @@ function list_go() {
 	<tr>
 		<th>첨부파일</th>
 		<td>
-			<input type="file" name="filename">
+			<input type="file" name="psFile">
 		</td>
 	</tr>
 	<tr>

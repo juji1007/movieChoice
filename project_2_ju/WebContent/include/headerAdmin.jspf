@@ -1,0 +1,38 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<div class="header">
+	<img class= "icon" src="img/moviechoice.png">
+	
+	<ul class="menu">
+	  <li><a href="mainAdmin.jsp">영화목록 관리</a></li>
+	  <li><a href="reviewController?category=rvMain&location=admin">리뷰모음 관리</a></li>
+	  <li><a href="freeAdmin.jsp">자유게시판 관리</a></li>
+	  <li><a href="about.asp">Q & A 관리자</a></li>
+	  <li><a href="about.asp">Review Of The Month 관리</a></li> 
+	  <li><a href="criticAdmin.jsp">평론가 관리</a></li>
+	  <li><a href="accountManage.jsp">유저 관리 페이지</a></li>
+	  <li><a href="manage.jsp">관리자 페이지</a></li>
+<!-- 	  <li><a href="about">유저마이페이지 관리</a></li> -->
+	</ul>
+	
+	<ul class="login">
+<% 
+   request.setCharacterEncoding("UTF-8");
+
+   String id = (String) session.getAttribute("id");
+   if (id == null) {
+%> 	
+	<li><a href="login_page.jsp">로그인</a></li>
+<%
+   } else {
+%>  
+	<li><a href="logout.jsp">관리자 로그아웃</a></li>
+<%
+    }
+ %> 
+	</ul>
+	
+	<hr class="mint">
+</div>
+

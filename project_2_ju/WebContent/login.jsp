@@ -11,12 +11,12 @@
 // 	String role = (String) session.getAttribute("role");
 // 	String name = (String) session.getAttribute("name");
 	String id = (String) session.getAttribute("id");
-	if (id == null) {
+	if (id == "null") {
 		
 %>
 	<script>
 		alert("로그인에 실패하셨습니다.");
-		history.back();
+		location.href="logout.jsp";
 		
 	</script>
 		
@@ -38,7 +38,7 @@
 	 	
 	
 		System.out.println("id : " + id);
-// 		System.out.println("pwd : " + avo.getPwd());
+// 		System.out.println("pwd : " + avo.getPwd()); 
 %>
 		<script>
 			alert("로그인에 성공하셨습니다.");

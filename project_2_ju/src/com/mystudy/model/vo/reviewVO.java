@@ -11,15 +11,10 @@ public class reviewVO {
 	private String rvTitle;
 	private String rvContent;
 	private Date rvDate;
+	private int rvRate;
 	private int rvRec;
-	private int warn;
+	private int rvWarn;
 	
-	public int getWarn() {
-		return warn;
-	}
-	public void setWarn(int warn) {
-		this.warn = warn;
-	}
 	public int getRvNo() {
 		return rvNo;
 	}
@@ -62,16 +57,30 @@ public class reviewVO {
 	public void setRvDate(Date rvDate) {
 		this.rvDate = rvDate;
 	}
+	public int getRvRate() {
+		return rvRate;
+	}
+	public void setRvRate(int rvRate) {
+		this.rvRate = rvRate;
+	}
 	public int getRvRec() {
 		return rvRec;
 	}
 	public void setRvRec(int rvRec) {
 		this.rvRec = rvRec;
 	}
+	public int getRvWarn() {
+		return rvWarn;
+	}
+	public void setRvWarn(int rvWarn) {
+		this.rvWarn = rvWarn;
+	}
 	
 	@Override
 	public String toString() {
-		return "MovieVO [rvNo=" + rvNo + ", mvNo=" + mvNo + ", no=" + no + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle
-				+ ", rvContent=" + rvContent + ", rvDate=" + rvDate + ", rvRec=" + rvRec + "]";
+		return "reviewVO [rvNo=" + rvNo + ", mvNo=" + mvNo + ", no=" + no + ", rvNick=" + rvNick + ", rvTitle="
+				+ rvTitle + ", rvContent=" + rvContent + ", rvDate=" + rvDate + ", rvRate=" + rvRate + ", rvRec="
+				+ rvRec + ", rvWarn=" + rvWarn + "]";
 	}
+	
 }
