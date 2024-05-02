@@ -239,12 +239,6 @@ public class listTotVO {
 	public void setRvRate(int rvRate) {
 		this.rvRate = rvRate;
 	}
-	public int getRvRec() {
-		return rvRec;
-	}
-	public void setRvRec(int rvRec) {
-		this.rvRec = rvRec;
-	}
 
 	public int getRvRec() {
 		return rvRec;
