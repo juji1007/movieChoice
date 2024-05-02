@@ -110,23 +110,24 @@ function ps_update(frm) {
 	}
 </script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/freeView.css">
 <body>
-
-<table>
+<%@ include file="include/header.jspf" %>
+<div class="body">
+<table  border frame=void>
 	<tr>
-	<td colspan=3><h1>${pvo.psTitle }</h1></td>
+	<td colspan=7><h1>${pvo.psTitle }</h1></td>
 	</tr>
 	<tr>
 	<td>${pvo.psNick }</td>
 	<td>${pvo.no }</td>
 	<td>${pvo.psDate }</td>
 	<td>
-	<td>
 	<form action="postDelete.jsp" method="get">
 		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
 		<input type="hidden" name="psNo" value="${pvo.psNo }">
 		<input type="hidden" name="no" value="${vo.no }">
-		
 	</form>
 	</td>
 	<td>
@@ -138,18 +139,21 @@ function ps_update(frm) {
 	</td>
 	<td>
 	<input type="button" value="목록보기" onclick="list_go()">
+	</td>
+	<td>
 	<input type="button" value="신고" onclick="warn_push()">
 	</td>
 	</tr>
 
 </table>
 
-<hr>
+
 <tr>
-   <td colspan=3>${pvo.psContent }</td>
+
+	<td colspan=7>${pvo.psContent }</td>
 </tr>
 <tr>
-<td>
+<td colspan=7>
 
 	<c:if test="${empty pvo.psFile }">
 		첨부파일없음
@@ -161,31 +165,53 @@ function ps_update(frm) {
 	</td>
 </tr>
 
-<hr>
+
+
 <!-- 댓글작성 -->
+<div class="comment">
+
 <form action="postComment_write_ok.jsp" method="post">
-      <input type="hidden" name="no" value="${no }">
-      <textarea name="pcContent" rows="2" cols="55"></textarea>
-      <input type="button" value="댓글작성" onclick="login_confirm(this.form)">
-      <input type="hidden" name="psNo" value="${pvo.psNo }">
-      <input type="hidden" name="cPage" value="${cPage }">
-   </form>
-   <hr>
+
+<tr>
+	<td colspan=7>
+		<input type="hidden" name="no" value="${no }">
+		<textarea name="pcContent" rows="2" cols="55"></textarea>
+		<input type="button" value="댓글작성" onclick="login_confirm(this.form)">
+		<input type="hidden" name="psNo" value="${pvo.psNo }">
+		<input type="hidden" name="cPage" value="${cPage }">
+		</td>
+		</tr>
+	</form>
+
+
 
 <!-- 댓글표시 및 삭제-->
 <c:forEach var="commVO" items="${c_list }">
-	<div>
 		<form action="postComment_del_ok.jsp" method="get">
-			<p>${commVO.pcNick } ${commVO.no } ${commVO.pcDate }</p>
-			<p>${commVO.pcContent }</p>
-			<input type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
-			<input type="hidden" name="pcNo" value="${commVO.pcNo }">
-			<input type="hidden" name="no" value="${commVO.no }">
+		<tr>
+			<td colspan=7>
+				${commVO.pcNick } ${commVO.no } ${commVO.pcDate }
+			</td>
+		</tr>
+		<tr>
+			<td colspan=6>
+			${commVO.pcContent }
+			</td>
+			<td>
+				<input type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
+				<input type="hidden" name="pcNo" value="${commVO.pcNo }">
+				<input type="hidden" name="no" value="${commVO.no }">
+			</td>
+		</tr>
 		</form>
-	
+
 	</div>
-	<hr>
+
 	</c:forEach>
+
+	</div>
+	</table>
+</div>
 
 </body>
 </html>
