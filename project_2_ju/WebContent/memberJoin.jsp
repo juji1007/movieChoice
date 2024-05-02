@@ -57,14 +57,24 @@
 	}
 	
 	function check_critic(frm) {
-    var checkCritic = frm.elements["criticCheck"];
-    if (checkCritic.checked) {
-        checkCritic.value = "1";
-    } else {
-        checkCritic.value = "0";
-    }
-}
+	    var checkCritic = frm.elements["criticCheck"];
+	    if (checkCritic.checked) {
+	        checkCritic.value = "1";
+	    } else {
+	        checkCritic.value = "0";
+	    }
+	}
 
+	function check_email(frm) {
+	    var checkEmail = frm.email.value;
+	    var emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	    if (!emailReg.test(checkEmail) || checkEmail.trim() === '') {
+	        alert("이메일 형식이 맞지 않습니다!");
+	        frm.email.value = "";
+	        return false;
+	    }
+	    return true;
+	}
 	
 	function memberJoin_ok(frm) {
 		
@@ -125,16 +135,10 @@
 							<input type="text" name="nickName" title="닉네임" />
 						</td>
 					</tr>
-<!-- 					<tr> -->
-<!-- 						<th>주소</th> -->
-<!-- 						<td colspan="3"> -->
-<!-- 							<input type="text" name="address" title="주소" /> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
 					<tr>
 						<th>이메일</th>
 						<td colspan="3">
-							<input type="text" name="email" title="이메일" />
+							<input type="email" name="email" title="이메일" onblur="check_email(this.form)"/>
 						</td>
 					</tr>
 					<tr>
