@@ -33,28 +33,6 @@
 			frm.submit();
 	}
 	
-	//추천수,신고수 버튼 적용
-	//toggle 기능 - 한번 클릭 추천, 한번 더 클릭 해제
-// 	function rec_toggle(frm) {
-// 		//본인 리뷰가 아닌지 확인
-// 		if (${no} != ${recNo}) {
-// 			alert("${recNo} : " + ${recNo});
-// 			//처음 추천 클릭시, 추천(+1) 처리
-// 			location.href= "reviewController?category=rvMain&category=clickOn";
-// 			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
-			
-// 			//두번 클릭시, 추천 해제(-1) 처리
-			
-// 		} else {
-// 			alert("본인 리뷰는 추천할 수 없습니다.");
-// 		}
-// 	}
-	
-	function warn_push() {
-		location.href = "rvWarn.jsp";
-		frm.submit();
-	}
-	
 </script>
 
 </head>
@@ -100,10 +78,8 @@
 	        </tr>
 	        <tr>
 	            <td rowspan="2" colspan="3">
-	            	<input type="button" value="추천" onclick="rec_toggle(this.form)">${vo.rvRec}
-<!-- 	            	<input type="button" value="추천" -->
-<%-- 	            		data-rvVO-no="${vo.no}" onclick="rec_toggle(this.form, this.dataset.rvVONo)">${vo.rvRec} --%>
-	            	<input type="button" value="신고" onclick="warn_push(this.form)">${vo.rvWarn}
+	            	<input type="button" value="추천">${vo.rvRec}
+	            	<input type="button" value="신고">${vo.rvWarn}
 	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">

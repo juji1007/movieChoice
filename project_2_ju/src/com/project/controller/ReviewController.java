@@ -17,8 +17,6 @@ import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.dao.warnDAO;
 import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.movieVO;
-import com.mystudy.model.vo.recVO;
-import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 import com.project.review.paging.Paging;
 
@@ -86,11 +84,6 @@ public class ReviewController extends HttpServlet {
 			//페이징 + 리뷰 전체(영화,회원) 목록
 			List<listTotVO> listAll = listTotDAO.listTot(p.getBegin(), p.getEnd());
 			System.out.println(">> 리뷰 메인 listAll : " + listAll);
-			
-			//추천수 클릭할 경우 - clickOn
-			if ("clickOn".equals(category)) {
-				System.out.println(">> clickOn 실행 중~");
-			}
 			
 			//추천수 sum 보여주기 계산
 			int i = 0;
@@ -165,14 +158,13 @@ public class ReviewController extends HttpServlet {
 			
 			String idx = request.getParameter("idx");
 			String keyword = request.getParameter("keyword");
+			request.setAttribute("idx", idx);
 			request.setAttribute("keyword", keyword);
 			
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
 			if (idx == null || keyword == null || keyword.trim().length() == 0) {
 				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-				
-				return;
 			}
 			
 			//페이징 처리를 위한 객체(Paging) 생성
@@ -237,6 +229,33 @@ public class ReviewController extends HttpServlet {
 			
 			List<listTotVO> listOne = reviewDAO.selectOne(idx, keyword, p.getBegin(), p.getEnd());
 			System.out.println("::DB 연결 후, listOne : " + listOne);
+			
+			//추천수 sum 보여주기 계산
+			int i = 0;
+			for (i = 0; i < listOne.size(); i++) {
+				int rvNo = listOne.get(i).getRvNo();
+				System.out.println("rvNo : " + rvNo);
+				int rvRec = recDAO.recSum(rvNo);
+				System.out.println("::recDAO.recSum rvRec : " + rvRec);
+			
+				if (rvRec == -1) {
+					rvRec = 0;
+				}
+				listOne.get(i).setRvRec(rvRec);
+			}
+			//신고수 sum 보여주기 계산
+			for (i = 0; i < listOne.size(); i++) {
+				int rvNo = listOne.get(i).getRvNo();
+				System.out.println("rvNo : " + rvNo);
+				int rvWarn = warnDAO.warnSum(rvNo);
+				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+			
+				if (rvWarn == -1) {
+					rvWarn = 0;
+				}
+				listOne.get(i).setRvWarn(rvWarn);
+			}
+			System.out.println("<추천/신고수> listAll : " + listOne);
 			
 			request.setAttribute("selPvo", p);
 //			request.setAttribute("sort", sort);
