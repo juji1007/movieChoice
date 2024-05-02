@@ -6,9 +6,10 @@
 	
 	<!-- QA 1개 조회 -->
 	<select id="one" resultType="com.mystudy.model.vo.qnaVO">
-		SELECT *
-		FROM QA
-		WHERE QA_NO = #{qaNo}
+		SELECT Q.*, A.ID
+		FROM QA Q, ACCOUNT A
+		WHERE Q.NO = A.NO
+		AND QA_NO = #{qaNo}
 	</select>
 	
 	<!-- 전체 QA 건수 조회 -->
@@ -18,32 +19,41 @@
 	
 	<!-- 페이지에 해당하는 QA 조회 -->
 	<select id="list" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
-	<![CDATA[
-		SELECT *
-		FROM (SELECT ROWNUM R_NUM, Q.*
-		      FROM (SELECT *
+	    <![CDATA[
+		    SELECT Q.*, A.ID
+		    FROM (
+		        SELECT ROWNUM R_NUM, Q.*
+		        FROM (
+		            SELECT *
 		            FROM QA
 		            ORDER BY QA_NO DESC
-		           ) Q
-		      WHERE ROWNUM <= #{end}
-		     )
-		WHERE R_NUM >= #{begin} 
-	]]>
-	</select>
+		        ) Q
+		        WHERE ROWNUM <= #{end}
+		    ) Q
+		    INNER JOIN ACCOUNT A ON Q.NO = A.NO
+		    WHERE R_NUM >= #{begin}
+		    ORDER BY R_NUM ASC
+	    ]]>
+</select>
 	
-    <select id="search" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
+	<!-- 	카테고리별 게시글 동적 검색 -->
+	<select id="search" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
 	    SELECT *
 	    FROM QA
-	    <where>
-	        <choose>
-	            <when test="idx != null and idx == 0">
-	                TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
-	            </when>
-	            <otherwise>
-	                QA_CONTENT LIKE '%' || #{keyword} || '%'
-	            </otherwise>
-	        </choose>
-	    </where>
+	    <choose>
+	        <when test="idx == null or idx == ''">
+	            WHERE 1 = 2 <!-- 어떤 결과도 반환되지 않도록 함 -->
+	        </when>
+	        <when test="idx == 0">
+	            WHERE QA_CONTENT LIKE '%' || #{keyword} || '%'
+	        </when>
+	        <when test="idx == 1">
+	            WHERE TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
+	        </when>
+	        <otherwise>
+	            AND 1 = 2
+	        </otherwise>
+	    </choose>
 	</select>
 	
 	<!-- QA 입력 -->
@@ -53,8 +63,16 @@
 			VALUES (QA_SEQ.NEXTVAL, #{no}, #{qaContent}, SYSDATE) 
 	</insert>
 	
+	<!-- QA 수정 -->
+	<update id="update" parameterType="com.mystudy.model.vo.qnaVO">
+		UPDATE QA
+			SET QA_CONTENT = #{qaContent}
+				, QA_DATE = SYSDATE
+			WHERE QA_NO = #{qaNo}
+	</update>
+	
 	<!-- QA 삭제 -->
-	<delete id="delete" parameterType="com.mystudy.model.vo.qnaVO">
+	<delete id="delete" parameterType="int">
 		DELETE FROM QA
 		WHERE QA_NO = #{qaNo}
 	</delete>

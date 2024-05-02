@@ -40,11 +40,12 @@
     <mapper resource="com/project/mybatis/movieMapper.xml" />
     <mapper resource="com/project/mybatis/postMapper.xml" />
     <mapper resource="com/project/mybatis/qnaMapper.xml" />
+	<mapper resource="com/project/mybatis/inquiryMapper.xml" />
     <mapper resource="com/project/mybatis/recMapper.xml" />
     <mapper resource="com/project/mybatis/reviewMapper.xml" />
     <mapper resource="com/project/mybatis/warnMapper.xml" />
   </mappers>
-  
+ 
 </configuration>
 
 
