@@ -156,6 +156,13 @@ session.setAttribute("list", list);
 	    
 	<div id="qna">
 	<table border frame=void>
+		<tr>
+			<th>번호</th>
+			<th>분류</th>
+			<th>닉네임</th>
+			<th>작성일</th>
+			<th>내용</th>
+		</tr>
 		<c:forEach var="vo" items="${list }">
 		<tr>
 		<td>${vo.qaNo }</td>
