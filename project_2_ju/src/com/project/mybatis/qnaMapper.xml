@@ -12,6 +12,14 @@
 		AND QA_NO = #{qaNo}
 	</select>
 	
+	<!-- 나의 QA 조회 -->
+	<select id="getMyQa" parameterType="int" resultType="com.mystudy.model.vo.qnaVO">
+		SELECT Q.*, A.ID, A.CRITIC_CHECK
+		FROM QA Q, ACCOUNT A
+		WHERE Q.NO = A.NO
+		AND Q.NO = #{no}
+	</select>
+	
 	<!-- 전체 QA 건수 조회 -->
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(*) AS CNT FROM QA
