@@ -67,6 +67,20 @@ public class postDAO {
 			return null;
 		}
 		
+		//카테고리별 게시글 건수 조회
+				public static int getCount(String idx, String keyword) {
+					try (SqlSession ss = DBService.getFactory().openSession()) {
+						Map<String, String> map = new HashMap<String, String>();
+						map.put("idx", idx);
+						map.put("keyword", keyword);
+						
+						return ss.selectOne("post.cnt", map);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					return -1;
+				}
+		
 //		//게시글 작성자 닉네임 조회
 //		public static postVO selectNick(int no) {
 //			try (SqlSession ss = DBService.getFactory().openSession(true)) {

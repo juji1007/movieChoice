@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <title>리뷰 메인</title>
 <link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/rvMain.css">
+<link rel="stylesheet" href="css/free.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	
@@ -39,32 +39,37 @@
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
+	<div class="body">
+	<h2>리뷰모음</h2>
 	<form action="reviewController?category=rvWrite" method="post">
-	<h2>
-		리뷰모음
-		<input type="button" value="등록하기" 
+		<input class="write" type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
-	</h2>
 	</form>
-	
-	<h3>전체조회</h3>
+	<hr class="color">
+	<div class="box">
+		<div class="innerbox">
+		<div class="content">
+<!-- 	<h3>전체조회</h3> -->
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne" method="post">
-		<select name="idx">
+		<select class="select"  name="idx">
 			<option selected disabled>::선택</option>
 			<option value="0">영화명</option>
 			<option value="1">작성자</option>
 			<option value="2">작성일</option>
 		</select>
-		<input type="text" name="keyword">
-		<input type="submit" value="검색">
+		<input class="search" type="text" name="keyword">
+		<input class="searchbtn" type="submit" value="검색">
 		
 		<input type="hidden" name="category" value="selectOne">
 	</form>
+	</div>
+		</div>
+		</div>
 	 
 <!-- 리뷰 (전체)목록 -->
 <form>
-	<table>
+	<table class="rv">
 	<c:forEach var="vo" items="${listAll}">
 		<tbody id="reviewOne">
 	        <tr>
@@ -80,7 +85,7 @@
 	            <td rowspan="2" colspan="3">
 	            	<input type="button" value="추천">${vo.rvRec}
 	            	<input type="button" value="신고">${vo.rvWarn}
-	            	
+	            	<hr>
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
 	            	<input type="hidden" name ="vo" value="${vo }">
@@ -88,7 +93,9 @@
 	            </td>
 	        </tr>
 	    </tbody>
+
 	</c:forEach>
+
 	
 	    <tfoot id="page">
 	        <tr>
@@ -131,7 +138,7 @@
 	    </tfoot>
 	</table>
 </form>
-
+</div>
 </body>
 </html>
 

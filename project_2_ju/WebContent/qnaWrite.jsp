@@ -18,17 +18,34 @@
 <title>게시글 작성</title>
 <script>
 function sendData() {
-    let firstForm = document.forms[0];
-    firstForm.submit();
-    alert("작성이 저장되었습니다!");
+	console.log(document.forms[0]);
+	let firstForm = document.forms[0];
+	console.log(firstForm.elements);
+	
+	for (let htmlObj of firstForm.elements) {
+		if (htmlObj.value.trim() == "") {
+			console.log(htmlObj);
+			alert(htmlObj.title + " 입력하세요");
+			htmlObj.focus();
+			return;
+		}
+	}
+	firstForm.submit();
+	alert("작성이 완료되었습니다.");
 }
+
 
 function list_go() {
         location.href = "qna.jsp";
     }
 </script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
 <body>
+<!-- header.jspf -->
+	<%@ include file="include/header.jspf"%>
+<div class="body">
 <div>
 <form action="qnaWrite_ok.jsp" method="post">
     <table>
@@ -38,20 +55,21 @@ function list_go() {
             </td>
         </tr>
         <tr>
-            <th>내용</th>
+<!--             <th>내용</th> -->
             <td>
-                <textarea name="qaContent" rows="8" cols="50" title="내용"></textarea>
+                <textarea name="qaContent" rows="8" cols="50" title="내용" placeholder="문의사항을 입력하세요."></textarea>
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <input type="button" value="저장" onclick="sendData()">
-                <input type="reset" value="초기화">
-                <input type="button" value="목록보기" onclick="list_go()">
+            <td class="button" colspan="2">
+                <input class="commitbtn" type="button" value="저장" onclick="sendData()">
+                <input class="reset"  type="reset" value="초기화">
+                <input class="reset"  type="button" value="목록보기" onclick="list_go()">
             </td>
         </tr>
     </table>
 </form>
+</div>
 </div>
 </body>
 </html>

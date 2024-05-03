@@ -107,7 +107,7 @@ session.getAttribute("c_list");
 		<div class="content">
 		<form action="postController?search=freeList" method="get">
 			<select class="select" name="idx">
-				<option selected disabled>구분</option>
+<!-- 				<option selected disabled>구분</option> -->
 				<option value="0">제목</option>
 				<option value="1">작성일</option>
 			</select> 
@@ -128,8 +128,8 @@ session.getAttribute("c_list");
 <c:forEach var="vo" items="${list }">
 <tr>
 <td width="5%">${vo.psNo }</td>
-<td width="20%">${vo.psNick }</td>
-<td width="20%">${vo.psDate }</td>
+<td width="15%">${vo.psNick }</td>
+<td width="15%">${vo.psDate }</td>
 <td>
 <a href="freeView.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
 ${vo.psTitle }

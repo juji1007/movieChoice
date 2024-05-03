@@ -8,10 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>수정화면</title>
+<script>
+function list_go() {
+	location.href = "qna.jsp";
+}
+</script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
 <body>
+<!-- header.jspf -->
+	<%@ include file="include/header.jspf"%>
+	<div class="body">
 <div>
-<p><a href="qna.jsp">목록으로 이동</a>
 <form action="qnaUpdate_ok.jsp" method="post">
 	<table>
 	<tr>
@@ -26,15 +35,17 @@
 		</td>
 	</tr>
 	<tr>
-				<td colspan="2">
-					<input type="submit" value="수 정" >
-					<input type="reset" value="취 소">
+				<td class="button" colspan="2">
+					<input class="commitbtn" type="submit" value="수 정" >
+					<input class="reset" type="reset" value="취 소">
 					<input type="hidden" name="qaNo" value="${qvo.qaNo }">
+					<input class="reset" type="button" value="전체목록" onclick="list_go()">
 				</td>
 			</tr>
 	</table>
 </form>	
 
+</div>
 </div>
 </body>
 </html>

@@ -8,10 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>수정화면</title>
+<script>
+function list_go() {
+	location.href = "free.jsp";
+}
+</script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
 <body>
+<!-- header.jspf -->
+	<%@ include file="include/header.jspf"%>
+	<div class="body">
 <div>
-<p><a href="free.jsp">목록으로 이동</a>
 <form action="postUpdate_ok.jsp" method="post">
 	<table>
 	<tr>
@@ -22,7 +31,7 @@
 	<tr>
 		<th>제목</th>
 		<td>
-			<input type="text" name="psTitle" value="${pvo.psTitle }">
+			<input class="psTitle" type="text" name="psTitle" value="${pvo.psTitle }">
 		</td>
 	</tr>
 	<tr>
@@ -32,15 +41,17 @@
 		</td>
 	</tr>
 	<tr>
-				<td colspan="2">
-					<input type="submit" value="수 정" >
-					<input type="reset" value="취 소">
+				<td class="button" colspan="2">
+					<input class="commitbtn" type="submit" value="수 정" >
+					<input class="reset" type="reset" value="취 소">
 					<input type="hidden" name="psNo" value="${pvo.psNo }">
+					<input class="reset" type="button" value="전체목록" onclick="list_go()">
 				</td>
 			</tr>
 	</table>
 </form>	
 
+</div>
 </div>
 </body>
 </html>

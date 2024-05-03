@@ -1,3 +1,5 @@
+
+
 <%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="java.util.List"%>
@@ -7,12 +9,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	
-// 	int psNo = Integer.parseInt(request.getParameter("psNo"));
-//	session.getAttribute("pvo");
-
-// 	AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
-// 	System.out.println("avo : " + avo);
 	session.getAttribute("no");
 	
 %>
@@ -23,7 +19,6 @@
 <title>게시글 작성</title>
 <script>
 function sendData() {
-	alert("sendData() 실행~~");
 	console.log(document.forms[0]);
 	let firstForm = document.forms[0];
 	console.log(firstForm.elements);
@@ -37,7 +32,6 @@ function sendData() {
 			return;
 		}
 	}
-	alert(":: 데이터 확인 완료, 입력요청 처리~~~");
 	firstForm.submit();
 }
 
@@ -46,44 +40,49 @@ function list_go() {
 	}
 </script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
+
 <body>
+<!-- header.jspf -->
+	<%@ include file="include/header.jspf"%>
+<div class="body">
 <div>
 <form action="postWrite_ok.jsp" method="post" enctype="multipart/form-data">
 <table>
 	<tr>
-		
 		<td>
 		<input type="hidden" name="no"  value="${no }">
 		</td>
 	</tr>
 	<tr>
-		<th>제목</th>
+<!-- 		<th>제목</th> -->
 		<td>
-			<input type="text" name="psTitle" title="제목">
+			<input  class="psTitle" type="text" name="psTitle" title="제목" placeholder="제목을 입력하세요.">
 		</td>
 	</tr>
 	<tr>
-		<th>내용</th>
+<!-- 		<th>내용</th> -->
 		<td>
-			<textarea name="psContent" rows="8" cols="50" title="내용"></textarea>
+			<textarea name="psContent" rows="8" cols="50" title="내용" placeholder="내용을 입력하세요."></textarea>
 		</td>
 	</tr>
 	<tr>
-		<th>첨부파일</th>
+<!-- 		<th>첨부파일</th> -->
 		<td>
-			<input type="file" name="psFile">
+			<input  type="file" name="psFile">
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<input type="button" value="저장" onclick="sendData()">
-			<input type="reset" value="초기화">
-			
-			<input type="button" value="목록보기" onclick="list_go()">
+		<td class="button" colspan="2">
+			<input class="commitbtn" type="button" value="작성완료" onclick="sendData()">
+			<input class="reset" type="reset" value="초기화">
+			<input class="reset" type="button" value="전체목록" onclick="list_go()">
 		</td>
 	</tr>
 </table>
 </form>
+</div>
 </div>
 </body>
 </html>

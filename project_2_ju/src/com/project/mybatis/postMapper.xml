@@ -49,7 +49,21 @@
 		</choose>
 		
 	</select>
-	
+	<!-- (동적 검색)카테고리별 게시글 건수 조회 -->
+	<select id="cnt" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS CNT FROM POST
+		<choose>
+			<when test="idx == 0">
+				WHERE PS_TITLE = #{keyword}
+			</when>
+			<when test="idx == 1">
+				WHERE TO_CHAR(PS_DATE, 'YYYYMMDD') = #{keyword}
+			</when>
+			<otherwise>
+				AND 1 = 2
+			</otherwise>
+		</choose>
+	</select>
 
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
