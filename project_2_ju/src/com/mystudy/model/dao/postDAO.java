@@ -67,6 +67,21 @@ public class postDAO {
 			return null;
 		}
 		
+		 //카테고리별 게시글 건수 조회
+        public static int getCount(String idx, String keyword) {
+           try (SqlSession ss = DBService.getFactory().openSession()) {
+              Map<String, String> map = new HashMap<String, String>();
+              map.put("idx", idx);
+              map.put("keyword", keyword);
+              
+              return ss.selectOne("post.cnt", map);
+           } catch (Exception e) {
+              e.printStackTrace();
+           }
+           return -1;
+        }
+
+		
 //		//게시글 작성자 닉네임 조회
 //		public static postVO selectNick(int no) {
 //			try (SqlSession ss = DBService.getFactory().openSession(true)) {
@@ -174,7 +189,13 @@ public class postDAO {
 		//나의 자유게시판 조회
 		public static List<postVO> getPostList(int no) {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
-				return ss.selectList("post.getPostByNo", no);
+				List<postVO> postList = ss.selectList("post.getPostByNo", no);
+				for (postVO pvo : postList) {
+					int psNo = pvo.getPsNo();
+					int warn = warnDAO.warnSumBypsNo(psNo);
+					pvo.setPsWarn(warn);
+				}
+				return postList;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

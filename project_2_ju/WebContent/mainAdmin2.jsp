@@ -28,12 +28,12 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 System.out.println("list : " + list);
 System.out.println("list.size : " + list.size());
 session.setAttribute("attr_list", list);
-%>   
+%>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>mainAdmin</title>
+<title>mainAdmin2</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -64,15 +64,11 @@ session.setAttribute("attr_list", list);
 <body>
 	<!-- headerAdmin.jspf -->
 	<%@ include file="include/headerAdmin.jspf" %>
+ 
 
-
-<%--영화추가 --%>
 <div id="movieInsertArea">
     <input type="button" value="영화추가" onclick="location.href='movieInsert.jsp'">
 </div>
-
-
-<div>
 
 <h3 class="top">현재 상영 영화 TOP10</h3>
 
@@ -112,8 +108,8 @@ session.setAttribute("attr_list", list);
   <input type="submit" value="동적검색">
 </form>
 <hr class="gray">
-<!-- 영화 목록 보기 -->
-<c:forEach var="vo" items="${attr_list }">
+<!-- 영화 정렬 후 목록 보기 -->
+<c:forEach var="vo" items="${list2 }">
 	<table>
 			<tr>
 			<td>
@@ -131,7 +127,7 @@ session.setAttribute("attr_list", list);
 			</td>
 			</tr>
 	</table>
-	</c:forEach>
+</c:forEach>
 
 </div>
 </body>

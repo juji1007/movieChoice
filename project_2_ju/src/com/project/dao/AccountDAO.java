@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.dao.warnDAO;
 import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.postVO;
 import com.project.mybatis.DBService;
@@ -137,7 +138,14 @@ public class AccountDAO {
    public static List<AccountVO> getAccountList(String id) {
       try (SqlSession ss = DBService.getFactory().openSession()) {
          System.out.println("id : " + id);
-         return ss.selectList("project2.all", id);
+         List<AccountVO> accountList = ss.selectList("project2.all", id);
+         for (AccountVO avo : accountList) {
+        	 int no = avo.getNo();
+        	 int warn = warnDAO.warnSumByNo(no);
+        	 avo.setWarn(warn);
+        	 System.out.println(avo);
+         }
+         return accountList;
       } catch (Exception e) {
          e.printStackTrace();
       }

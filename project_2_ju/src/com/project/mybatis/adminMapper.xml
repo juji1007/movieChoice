@@ -5,19 +5,38 @@
 <mapper namespace="admin">
 	
     
-    <select id="searchMovieList" resultType="movieVO">
+    <select id="searchMovieList" parameterType="string" resultType="movieVO">
     	SELECT * FROM MOVIE
-    
+    	<choose>
+    		<when test="keyword == null or keyword == ''">
+    		</when>
+    		<otherwise>
+    			 WHERE MV_TITLE LIKE '%' || #{keyword} || '%'
+    		</otherwise>
+    	</choose>
     </select>  
 
-	<select id="searchReviewList" resultType="reviewVO">
-    	SELECT * FROM REVIEW ORDER BY RV_WARN DESC
+	<select id="searchReviewList" parameterType="string" resultType="reviewVO">
+    	SELECT * FROM REVIEW 
+    	<choose>
+    		<when test="keyword == null or keyword == ''">
+    		</when>
+    		<otherwise>
+    			 WHERE RV_TITLE LIKE '%' || #{keyword} || '%'
+    		</otherwise>
+    	</choose>
     
     </select>
     
-    <select id="searchAccountList" resultType="accountVO">
-    	SELECT * FROM ACCOUNT ORDER BY WARN DESC
-    
+    <select id="searchAccountList" parameterType="string" resultType="accountVO">
+    	SELECT * FROM ACCOUNT 
+    	<choose>
+    		<when test="keyword == null or keyword == ''">
+    		</when>
+    		<otherwise>
+    			 WHERE NAME LIKE '%' || #{keyword} || '%'
+    		</otherwise>
+    	</choose>
     </select>
     
     <!-- 유저 동적 검색 -->
@@ -30,7 +49,6 @@
                 <when test="idx == 0">
                 </when>
                 <when test="idx == 1">
-                    ORDER BY WARN DESC
                 </when>
                 <when test="idx == 2">
                     ORDER BY NAME
@@ -46,7 +64,7 @@
 	        </when>
 	        <when test="idx == 1">
 	            WHERE NAME LIKE '%' || #{keyword} || '%'
-	            ORDER BY WARN DESC 
+	            
 	        </when>
 	        <when test="idx == 2">
 	            WHERE NAME LIKE '%' || #{keyword} || '%'
@@ -58,7 +76,7 @@
 	            ORDER BY NAME 
 	        </when>
 	        <otherwise>
-	            ORDER BY WARN
+	            ORDER BY NO
 	        </otherwise>
 	    </choose>
 	</select>

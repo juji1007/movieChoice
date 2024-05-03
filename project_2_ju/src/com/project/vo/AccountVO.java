@@ -14,16 +14,6 @@ public class AccountVO {
 	public AccountVO() {
 	}
 
-	public AccountVO(int no, String name, String id, String pwd, String nick, int criticCheck, String email) {
-		this.no = no;
-		this.name = name;
-		this.id = id;
-		this.pwd = pwd;
-		this.nick = nick;
-		this.criticCheck = criticCheck;
-		this.email = email;
-	}
-
 	public int getWarn() {
 		return warn;
 	}
@@ -91,8 +81,9 @@ public class AccountVO {
 	@Override
 	public String toString() {
 		return "AccountVO [no=" + no + ", name=" + name + ", id=" + id + ", pwd=" + pwd + ", nick=" + nick
-				+ ", criticCheck=" + criticCheck + ", email=" + email + "]";
+				+ ", criticCheck=" + criticCheck + ", email=" + email + ", warn=" + warn + "]";
 	}
+
 	
 	
 	

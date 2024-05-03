@@ -5,134 +5,148 @@
 
   <mapper namespace="post">
   
-	<!-- 전체 게시글 건수 조회 -->
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(*) AS CNT FROM POST
-	</select>
-	
-	<!-- 페이지에 해당하는 게시글 조회 -->
-	<select id="list" parameterType="map" resultType="com.mystudy.model.vo.postVO">
-	<![CDATA[
-		SELECT *
-		FROM (SELECT ROWNUM R_NUM, P.*
-		      FROM (SELECT *
-		            FROM POST
-		            ORDER BY PS_NO DESC
-		           ) P
-		      WHERE ROWNUM <= #{end}
-		     )
-		WHERE R_NUM >= #{begin} 
-	]]>
-	</select>
-	
-	<!-- 게시글 1개 조회 -->
-	<select id="one" parameterType="int" resultType="com.mystudy.model.vo.postVO">
-		SELECT *
-		FROM POST
-		WHERE PS_NO = #{psNo}
-	</select>
-	
-<!-- 	카테고리별 게시글 동적 검색 -->
-	<select id="search" parameterType="map" resultType="com.mystudy.model.vo.postVO">
-		SELECT *
-		FROM POST
-		<choose>
-			<when test="idx == 0">
-				WHERE PS_TITLE = #{keyword}
-			</when>
-			<when test="idx == 1">
-				WHERE TO_CHAR(PS_DATE, 'YYYYMMDD') = #{keyword}
-			</when>
-			<otherwise>
-				AND 1 = 2
-			</otherwise>
-		</choose>
-		
-	</select>
-	
+   <!-- 전체 게시글 건수 조회 -->
+   <select id="totalCount" resultType="int">
+      SELECT COUNT(*) AS CNT FROM POST
+   </select>
+   
+   <!-- 페이지에 해당하는 게시글 조회 -->
+   <select id="list" parameterType="map" resultType="com.mystudy.model.vo.postVO">
+   <![CDATA[
+      SELECT *
+      FROM (SELECT ROWNUM R_NUM, P.*
+            FROM (SELECT *
+                  FROM POST
+                  ORDER BY PS_NO DESC
+                 ) P
+            WHERE ROWNUM <= #{end}
+           )
+      WHERE R_NUM >= #{begin} 
+   ]]>
+   </select>
+   
+   <!-- 게시글 1개 조회 -->
+   <select id="one" parameterType="int" resultType="com.mystudy.model.vo.postVO">
+      SELECT *
+      FROM POST
+      WHERE PS_NO = #{psNo}
+   </select>
+   
+<!--    카테고리별 게시글 동적 검색 -->
+   <select id="search" parameterType="map" resultType="com.mystudy.model.vo.postVO">
+      SELECT *
+      FROM POST
+      <choose>
+         <when test="idx == 0">
+            WHERE PS_TITLE = #{keyword}
+         </when>
+         <when test="idx == 1">
+            WHERE TO_CHAR(PS_DATE, 'YYYYMMDD') = #{keyword}
+         </when>
+         <otherwise>
+            AND 1 = 2
+         </otherwise>
+      </choose>
+      
+   </select>
+   <!-- (동적 검색)카테고리별 게시글 건수 조회 -->
+   <select id="cnt" parameterType="map" resultType="int">
+      SELECT COUNT(*) AS CNT FROM POST
+      <choose>
+         <when test="idx == 0">
+            WHERE PS_TITLE = #{keyword}
+         </when>
+         <when test="idx == 1">
+            WHERE TO_CHAR(PS_DATE, 'YYYYMMDD') = #{keyword}
+         </when>
+         <otherwise>
+            AND 1 = 2
+         </otherwise>
+      </choose>
+   </select>
 
-	<!-- 게시글 입력 -->
-	<insert id="insert" parameterType="com.mystudy.model.vo.postVO">
-		INSERT INTO POST
-			       (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE, PS_FILE, PS_ORIFILE, PS_NICK)
-			VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE, #{psFile}, #{psOrifile}, #{psNick}) 
-	</insert>
+   <!-- 게시글 입력 -->
+   <insert id="insert" parameterType="com.mystudy.model.vo.postVO">
+      INSERT INTO POST
+                (PS_NO, NO, PS_TITLE, PS_CONTENT, PS_DATE, PS_FILE, PS_ORIFILE, PS_NICK)
+         VALUES (PS_SEQ.NEXTVAL, #{no}, #{psTitle}, #{psContent}, SYSDATE, #{psFile}, #{psOrifile}, #{psNick}) 
+   </insert>
 
-	<!-- 게시글 수정 -->
-	<update id="update" parameterType="com.mystudy.model.vo.postVO">
-		UPDATE POST
-			SET PS_TITLE = #{psTitle} 
-				, PS_CONTENT = #{psContent}
-				, PS_DATE = SYSDATE
-				, PS_FILE = #{psFile}
-				, PS_ORIFILE = #{psOrifile}
-			WHERE PS_NO = #{psNo}
-	</update>
-	
-	<!-- 게시글 삭제 -->
-	<delete id="delete" parameterType="com.mystudy.model.vo.postVO">
-		DELETE FROM POST
-		WHERE PS_NO = #{psNo}
-	</delete>
-	
-	<!-- 자유게시판 목록 전체 조회 -->
-	<select id="all" resultType="com.mystudy.model.vo.postVO">
-			SELECT *
-			FROM POST
-	</select>
-	
-	<!-- ======== 댓글 데이터 처리 ======= -->
-	<!-- 게시글에 딸린 댓글 데이터 조회 -->
-	<select id="commList" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
-		SELECT *
-		FROM PS_COMMENT
-		WHERE PS_NO = #{psNo}
-		ORDER BY PC_NO DESC
-	</select>
-	
-	<!-- 댓글 1개 조회(댓글번호 사용) -->
-	<select id="commOne" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
-		SELECT *
-		FROM PS_COMMENT
-		WHERE PC_NO = #{pcNo}
-	</select>
-	
-	<!-- 댓글입력 -->
-	<insert id="commInsert" parameterType="com.mystudy.model.vo.postCommentVO">
-		INSERT INTO PS_COMMENT
-		       (PC_NO, PS_NO, NO, PC_DATE, PC_CONTENT, PC_NICK)
-		VALUES (PS_COMMENT_SEQ.NEXTVAL, #{psNo}, #{no}, SYSDATE, #{pcContent}, #{pcNick})	
-	</insert>
-	<!-- 댓글삭제 -->
-	<delete id="commDelete" parameterType="int">
-		DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
-	</delete>
-	
-	<!-- 댓글 전체 건수 -->
-	<select id="PostCommentTotalCnt" resultType="int">
-		SELECT COUNT(*) AS CNT FROM PS_COMMENT
-	</select>
-	
-	<!-- 마이페이지 -->
-	<!-- 나의 자유게시판조회 -->
-	<select id="getPostByNo" parameterType="int" resultType="com.mystudy.model.vo.postVO">
-		SELECT *
-		FROM POST
-		WHERE NO = #{no}
-	</select>
-	
-	<!-- 자유게시판 닉네임 업데이트 -->
-	<update id="updateNickPost" parameterType="map">
-		UPDATE POST
-		SET PS_NICK = #{nick}
-		WHERE NO = #{no}
-	</update>
-	
-	<select id="commListMy" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
-		SELECT *
-		FROM PS_COMMENT
-		WHERE NO = #{no}
-		ORDER BY PC_NO DESC
-	</select>
-	
+   <!-- 게시글 수정 -->
+   <update id="update" parameterType="com.mystudy.model.vo.postVO">
+      UPDATE POST
+         SET PS_TITLE = #{psTitle} 
+            , PS_CONTENT = #{psContent}
+            , PS_DATE = SYSDATE
+            , PS_FILE = #{psFile}
+            , PS_ORIFILE = #{psOrifile}
+         WHERE PS_NO = #{psNo}
+   </update>
+   
+   <!-- 게시글 삭제 -->
+   <delete id="delete" parameterType="com.mystudy.model.vo.postVO">
+      DELETE FROM POST
+      WHERE PS_NO = #{psNo}
+   </delete>
+   
+   <!-- 자유게시판 목록 전체 조회 -->
+   <select id="all" resultType="com.mystudy.model.vo.postVO">
+         SELECT *
+         FROM POST
+   </select>
+   
+   <!-- ======== 댓글 데이터 처리 ======= -->
+   <!-- 게시글에 딸린 댓글 데이터 조회 -->
+   <select id="commList" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
+      SELECT *
+      FROM PS_COMMENT
+      WHERE PS_NO = #{psNo}
+      ORDER BY PC_NO DESC
+   </select>
+   
+   <!-- 댓글 1개 조회(댓글번호 사용) -->
+   <select id="commOne" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
+      SELECT *
+      FROM PS_COMMENT
+      WHERE PC_NO = #{pcNo}
+   </select>
+   
+   <!-- 댓글입력 -->
+   <insert id="commInsert" parameterType="com.mystudy.model.vo.postCommentVO">
+      INSERT INTO PS_COMMENT
+             (PC_NO, PS_NO, NO, PC_DATE, PC_CONTENT, PC_NICK)
+      VALUES (PS_COMMENT_SEQ.NEXTVAL, #{psNo}, #{no}, SYSDATE, #{pcContent}, #{pcNick})   
+   </insert>
+   <!-- 댓글삭제 -->
+   <delete id="commDelete" parameterType="int">
+      DELETE FROM PS_COMMENT WHERE PC_NO = #{pcNo}
+   </delete>
+   
+   <!-- 댓글 전체 건수 -->
+   <select id="PostCommentTotalCnt" resultType="int">
+      SELECT COUNT(*) AS CNT FROM PS_COMMENT
+   </select>
+   
+   <!-- 마이페이지 -->
+   <!-- 나의 자유게시판조회 -->
+   <select id="getPostByNo" parameterType="int" resultType="com.mystudy.model.vo.postVO">
+      SELECT *
+      FROM POST
+      WHERE NO = #{no}
+   </select>
+   
+   <!-- 자유게시판 닉네임 업데이트 -->
+   <update id="updateNickPost" parameterType="map">
+      UPDATE POST
+      SET PS_NICK = #{nick}
+      WHERE NO = #{no}
+   </update>
+   
+   <select id="commListMy" parameterType="int" resultType="com.mystudy.model.vo.postCommentVO">
+      SELECT *
+      FROM PS_COMMENT
+      WHERE NO = #{no}
+      ORDER BY PC_NO DESC
+   </select>
+   
 </mapper>

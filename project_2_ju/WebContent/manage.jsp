@@ -110,6 +110,9 @@ th, td {
     text-align: center; /* 가운데 정렬 */
 }
 
+
+
+
 thead {
 /* 	position: absolute; */
 /* 	top: 50%; */
@@ -140,10 +143,24 @@ tbody th tr td{
 
 function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
-	if ("선택" == checkCategory) {
-		alert("검색종류를 선택해주세요!");
-		return;
-	}
+	var keyword = frm.querySelector('input[name="keyword"]');
+    var search = frm.querySelector('input[type="button"]');
+	if ("0" == checkCategory) {
+		keyword.style.display = "none";
+		search.style.display = "block";
+	} else if ("1" == checkCategory) {
+		keyword.style.display = "block";
+		keyword.placeholder = "리뷰 제목 검색";  //keyword 형식 지정해야함
+        search.style.display = "block";
+	} else if ("2" == checkCategory) {
+		keyword.style.display = "block";
+		keyword.placeholder = "영화 제목 검색";
+        search.style.display = "block";
+	} else { 
+		keyword.style.display = "block";
+		keyword.placeholder = "유저 이름 검색";
+        search.style.display = "block";
+    }
 	
 	var idx = frm.idx.value;
     var keyword = frm.keyword.value;
@@ -165,23 +182,18 @@ function selectCategory(frm) {
             var checkMovie = 1;
             var checkReview = 1;
             var checkAccount = 1;
-//             if (check of respData.listSearch) {
-//             htmltag += "<table border='1'><thead><tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th></tr></thead><tbody>";
-//             }
-//             if ()
-            // 영화 데이터 반복 처리
+            // 데이터 반복 처리
             if (respData.listSearch.length === 0) {
                 // 검색 결과가 없을 때
                 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
             } else {
                 // 검색 결과가 있을 때
-                for (let member of respData.listSearch) {
-                	respData.listSearch.sort((a, b) => {
+                respData.listSearch.sort((a, b) => {
                 	    if (a.warn > b.warn) return -1; // 내림차순으로 정렬
                 	    if (a.warn < b.warn) return 1;  // 오름차순으로 정렬
                 	    return 0; // 같은 경우
-                	});
-
+                });
+                for (let member of respData.listSearch) {
                 	console.log("sort : ", respData);
 					if (member.table === "review") {
 						console.log("리뷰html");
@@ -284,15 +296,14 @@ function selectCategory(frm) {
                     <tr>
                         <td>
                             <select name="idx">
-                                <option selected disabled>선택</option>
                                 <option value="0">전체</option>
                                 <option value="1">리뷰</option>
                                 <option value="2">영화</option>
                                 <option value="3">유저</option>
                             </select>
                         </td>
-                        <td><input type="text" name="keyword"/></td>
-                        <td><input type="button" value="검색" onclick="selectCategory(this.form)"/></td>
+                        <td><input type="text" name="keyword" placeholder="." style="display:none;"/></td>
+                        <td><input type="button" value="검색" style="display:block;" onclick="selectCategory(this.form)"/></td>
                     </tr>
                 </thead>
                 <tbody id="jsonData">
@@ -301,7 +312,6 @@ function selectCategory(frm) {
                 	</tr>
                 </tbody>
                 <tfoot id="pageData">
-             		
                 </tfoot>
             </table>
         </form>

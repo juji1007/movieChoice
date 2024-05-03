@@ -164,7 +164,15 @@ public class reviewDAO {
 	//나의 리뷰목록 조회
 	public static List<reviewVO> getReviewList(int no) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
-			return ss.selectList("review.getReviewByNo", no);
+			List<reviewVO> reviewList = ss.selectList("review.getReviewByNo", no);
+			for (reviewVO rvo : reviewList) {
+				int rvNo = rvo.getRvNo();
+				int warn = warnDAO.warnSum(rvNo);
+				rvo.setRvWarn(warn);
+				int rec = recDAO.recSum(rvNo);
+				rvo.setRvRec(rec);
+			}
+			return reviewList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
