@@ -198,7 +198,7 @@
 					onclick="warn_push(this.form, this.dataset.warnNum)">
 					${listOne.rvWarn}
 				</td>
-			</tr>
+			</tr> 
 			<tr>
 				<td id="rvContent" colspan="3">${listOne.rvContent }</td>
 			</tr>
