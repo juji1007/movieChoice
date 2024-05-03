@@ -19,6 +19,16 @@ public class warnDAO {
 		return -1;
 	}
 	
+	//회원 번호로 신고수 sum
+	public static int warnSumByNo(int no) {
+		try (SqlSession ss = DBService.getFactory().openSession()){
+			return ss.selectOne("warn.cntByNo", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	//회원no, 리뷰rvNo에 맞는 신고수 확인(select)
 	public static int warnSearch(int no, int rvNo) {
 		try (SqlSession ss = DBService.getFactory().openSession()){

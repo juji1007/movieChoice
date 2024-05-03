@@ -1,3 +1,5 @@
+<%@page import="com.mystudy.model.dao.warnDAO"%>
+<%@page import="com.mystudy.model.dao.recDAO"%>
 <%@page import="com.mystudy.model.dao.listTotDAO"%>
 <%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.mystudy.model.dao.reviewDAO"%>
@@ -20,6 +22,23 @@
 	
 	session.setAttribute("listOne", listOne);
 	session.setAttribute("cPage", cPage);
+	
+	int no = (Integer)session.getAttribute("no");
+	pageContext.setAttribute("no", no);
+	
+	//추천수 sum 보여주기 계산
+	int rvRec = recDAO.recSum(rvNo);
+	System.out.println("rvRec : " + rvRec);
+	
+	listOne.setRvRec(rvRec);
+	System.out.println("<추천수> listOne : " + listOne);
+	
+	//신고수 sum 보여주기 계산
+	int rvWarn = warnDAO.warnSum(rvNo);
+	System.out.println("rvwarn : " + rvWarn);
+	
+	listOne.setRvWarn(rvWarn);
+	System.out.println("<신고수> listOne : " + listOne);
 %>
 <!DOCTYPE html>
 <html>

@@ -47,7 +47,9 @@
 		
 	} catch (Exception e) {
 %>
+	<script>
 		alert("로그인 후 열람 가능합니다.");
+	</script>
 <%
 		//rvMain에서 클릭
 		response.sendRedirect("reviewController?category=rvMain&cPage=" + cPage);

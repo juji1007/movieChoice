@@ -11,6 +11,13 @@
 		WHERE RV_NO = #{rvNo}
 	</select>
 	
+	<!-- 회원번호에 해당하는 신고수 sum -->
+	<select id="cntByNo" parameterType="int" resultType="int">
+		SELECT COUNT(*) AS SUM
+		FROM WARN
+		WHERE NO = #{no}
+	</select>
+	
 	<!-- 회원no, 리뷰rvNo에 맞는 신고수 확인 -->
 	<select id="search" parameterType="map" resultType="int">
 		SELECT COUNT(*) AS CNT
