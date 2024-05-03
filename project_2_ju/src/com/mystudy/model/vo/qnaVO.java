@@ -8,7 +8,21 @@ public class qnaVO {
 	private String qaContent;
 	private Date qaDate;
 	private String id;
+	private String qaCategory;
+	private int criticCheck;
 	
+	public int getCriticCheck() {
+		return criticCheck;
+	}
+	public void setCriticCheck(int criticCheck) {
+		this.criticCheck = criticCheck;
+	}
+	public String getQaCategory() {
+		return qaCategory;
+	}
+	public void setQaCategory(String qaCategory) {
+		this.qaCategory = qaCategory;
+	}
 	public String getId() {
 		return id;
 	}
@@ -43,7 +57,7 @@ public class qnaVO {
 	@Override
 	public String toString() {
 		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", id=" + id
-				+ "]";
+				+ ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + "]";
 	}
 	
 }

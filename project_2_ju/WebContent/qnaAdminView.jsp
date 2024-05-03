@@ -32,13 +32,21 @@
 <title>QnA 관리자 상세</title>
 <script>
 	
-//	게시물 삭제 확인 및 권한
+	//	QnA 삭제 확인
 	function qa_delete(frm) {
-			let isDelete = confirm("삭제하시겠습니까?");
-		if(isDelete) {
+		let qaDelete = confirm("삭제하시겠습니까?");
+		if(qaDelete) {
 			frm.submit();
 		} else{
-			
+		}
+	}
+	
+	// INQUIRY 삭제 확인
+	function iq_delete(frm) {
+		let iqDelete = confirm("삭제하시겠습니까?");
+		if(iqDelete) {
+			frm.submit();
+		} else{
 		}
 	}
 
@@ -75,5 +83,11 @@
 	<input class="write" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
   	<hr>
   	<p>${ivo.iqContent }</p> 
+  	<div>
+  		<form action="inquiryAdminDeleteOk.jsp?iqNo=${ivo.iqNo }" method="post">
+				<input class="h_button" type="button" value="삭제" onclick="iq_delete(this.form)">
+				<input type="hidden" name="iqNo" value="${ivo.iqNo }">
+		</form>
+  	</div>
 </body>
 </html>

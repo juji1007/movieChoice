@@ -163,9 +163,9 @@ public class ReviewController extends HttpServlet {
 			
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
-			if (idx == null || keyword == null || keyword.trim().length() == 0) {
-				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-			}
+//			if (idx == null || keyword == null || keyword.trim().length() == 0) {
+//				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+//			}
 			
 			//페이징 처리를 위한 객체(Paging) 생성
 			Paging p = new Paging();
@@ -214,7 +214,7 @@ public class ReviewController extends HttpServlet {
 			}
 			
 			//동적 검색 및 페이징 처리
-			System.out.println("id : " + idx);
+			System.out.println("idx : " + idx);
 			System.out.println("keyword : " + keyword);
 			System.out.println("p.getBegin() : " + p.getBegin());
 			System.out.println("p.getEnd() : " + p.getEnd());
@@ -225,7 +225,6 @@ public class ReviewController extends HttpServlet {
 				case "1" : sort="작성자"; break;
 				case "2" : sort="작성일"; break;
 			}
-			System.out.println("keyword 타입 : " + keyword.getClass().getName());
 			
 			List<listTotVO> listOne = reviewDAO.selectOne(idx, keyword, p.getBegin(), p.getEnd());
 			System.out.println("::DB 연결 후, listOne : " + listOne);
@@ -258,16 +257,32 @@ public class ReviewController extends HttpServlet {
 			System.out.println("<추천/신고수> listAll : " + listOne);
 			
 			request.setAttribute("selPvo", p);
-//			request.setAttribute("sort", sort);
-			
+			request.setAttribute("sort", sort);
 			request.setAttribute("listOne", listOne);
 			
+
 			String location = request.getParameter("location"); 
 			if ("reviewMainAdmin".equals(location)) {
-				request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
+        if (idx.equals("null") || keyword.trim().length() == 0) {
+			  	request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
+		  	} else if (listOne.size() == 0) {
+		  		//idx-keyword 내용 일치하지 않을 때
+	  			request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
+	  		} else {
+	  			request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
+	  		}
+		
 			} else {
-				request.getRequestDispatcher("selectOne.jsp").forward(request, response);
+				if (idx.equals("null") || keyword.trim().length() == 0) {
+				  request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+		  	} else if (listOne.size() == 0) {
+		  		//idx-keyword 내용 일치하지 않을 때
+		  		request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+	  		} else {
+		  		request.getRequestDispatcher("selectOne.jsp").forward(request, response);
+	  		}
 			}
+
 			
 		}
 			

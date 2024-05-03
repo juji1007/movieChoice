@@ -9,13 +9,14 @@
 <%
 	
     session.getAttribute("no");
-    
+	int no = (int) session.getAttribute("no");    
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 작성</title>
+<title>평론가 취소 작성</title>
 <script>
 function sendData() {
     let firstForm = document.forms[0];
@@ -24,7 +25,7 @@ function sendData() {
 }
 
 function list_go() {
-        location.href = "qna.jsp";
+        location.href = "myPage.jsp";
     }
 </script>
 </head>
@@ -41,10 +42,8 @@ function list_go() {
             <th>카테고리</th>
             <td>
                 <select name="qaCategory">
-                	<option value="선택" selected="selected">선택</option>
-                    <option value="영화추가">영화추가</option>
-                    <option value="평론가탈퇴">평론가탈퇴</option>
-                </select>
+   			   		<option value="평론가탈퇴">평론가탈퇴</option>
+				</select>
             </td>
         </tr>
         <tr>
@@ -57,7 +56,7 @@ function list_go() {
             <td colspan="2">
                 <input type="button" value="저장" onclick="sendData()">
                 <input type="reset" value="초기화">
-                <input type="button" value="목록보기" onclick="list_go()">
+                <input type="button" value="마이페이지" onclick="list_go()">
             </td>
         </tr>
     </table>

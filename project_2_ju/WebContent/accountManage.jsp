@@ -171,10 +171,10 @@ function selectCategory(frm) {
                 for (let member of respData.listSearch) {
                 	console.log("유저html");
                 	if (checkAccount > 0) {
-		                htmltag += "<tr><th>테이블</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>관리</th></tr>";
+		                htmltag += "<tr><th>관리</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>테이블</th></tr>";
 		            }
 		            htmltag += "<tr class='" + member.table + "'>";
-		            htmltag += "<td>" + member.table + "</td>";
+		            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
 		            htmltag += "<td>" + member.no + "</td>";
 		            htmltag += "<td>" + member.name + "</td>";
 		            htmltag += "<td>" + member.id + "</td>";
@@ -182,7 +182,7 @@ function selectCategory(frm) {
 		            htmltag += "<td>" + member.criticCheck + "</td>";
 		            htmltag += "<td>" + member.email + "</td>";
 		            htmltag += "<td>" + member.warn + "</td>"; 
-		            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
+		            htmltag += "<td colspan='2'>" + member.table + "</td>";
 		            htmltag += "</tr>";
 		            
 		            checkAccount--;

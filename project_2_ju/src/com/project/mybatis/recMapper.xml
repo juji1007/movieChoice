@@ -11,7 +11,7 @@
 		WHERE RV_NO = #{rvNo}
 	</select>
 	
-	<!-- 회원no, 리뷰rvNo에 맞는 추천수 확인 -->
+	<!-- 회원no, 리뷰rvNo에 맞는 추천 선택여부 확인 -->
 	<select id="search" parameterType="map" resultType="int">
 		SELECT COUNT(*) AS CNT
 		FROM REC

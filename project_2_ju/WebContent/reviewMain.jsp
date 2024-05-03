@@ -44,6 +44,8 @@
 		리뷰모음
 		<input type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
+		<input type="button" value="전체조회"
+			onclick="javascript:location.href='reviewController?category=rvMain'">
 	</h2>
 	</form>
 	
@@ -56,7 +58,7 @@
 			<option value="1">작성자</option>
 			<option value="2">작성일</option>
 		</select>
-		<input type="text" name="keyword">
+		<input type="text" name="keyword" placeholder="작성일 ex: 20240507">
 		<input type="submit" value="검색">
 		
 		<input type="hidden" name="category" value="selectOne">
