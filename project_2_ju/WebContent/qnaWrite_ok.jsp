@@ -13,12 +13,16 @@
     String id = (String) session.getAttribute("id");
     int no = (Integer) session.getAttribute("no");
     String qaContent = request.getParameter("qaContent");
-
+    String qaCategory = request.getParameter("qaCategory");
+	
     // qnaVO 객체 생성 및 값 설정
     qnaVO qo = new qnaVO();
     qo.setId(id);
     qo.setNo(no);
     qo.setQaContent(qaContent);
+    if (!qaCategory.equals("선택")) {
+    	qo.setQaCategory(qaCategory);
+    }
 
     // qnaDAO를 사용하여 데이터베이스에 저장
     int result = qnaDAO.insert(qo);

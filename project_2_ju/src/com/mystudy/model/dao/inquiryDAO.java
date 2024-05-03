@@ -27,4 +27,15 @@ public class inquiryDAO {
         }
         return -1;
     }
+    
+    // INQUIRY 삭제(DELETE)
+    public static int delete(int iqNo) {
+        try (SqlSession ss = DBService.getFactory().openSession(true)) {
+            return ss.delete("inquiry.delete", iqNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+    
 }

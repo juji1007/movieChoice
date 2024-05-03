@@ -17,4 +17,10 @@
 			VALUES (INQUIRY_SEQ.NEXTVAL, #{qaNo}, #{iqContent}, SYSDATE) 
 	</insert>
 	
+	<!-- INQUIRY 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM INQUIRY
+		WHERE IQ_NO = #{iqNo}
+	</delete>
+	
 </mapper>
