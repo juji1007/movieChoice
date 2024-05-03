@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
+	
     session.getAttribute("no");
     
 %>
@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성</title>
+<title>QnA 작성</title>
 <script>
 function sendData() {
 	console.log(document.forms[0]);
@@ -55,7 +55,19 @@ function list_go() {
             </td>
         </tr>
         <tr>
-<!--             <th>내용</th> -->
+
+            <th>카테고리</th>
+            <td>
+                <select name="qaCategory">
+                	<option value="선택" selected="selected">선택</option>
+                    <option value="영화추가">영화추가</option>
+                    <option value="평론가탈퇴">평론가탈퇴</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>내용</th>
+
             <td>
                 <textarea name="qaContent" rows="8" cols="50" title="내용" placeholder="문의사항을 입력하세요."></textarea>
             </td>

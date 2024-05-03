@@ -17,10 +17,10 @@
 		      WHERE R.MV_NO = M.MV_NO
 		<choose>
      		<when test = "idx == 0">
-		      AND MV_TITLE = #{keyword}
+		      AND MV_TITLE LIKE '%'|| #{keyword} ||'%'
      		</when>
      		<when test = "idx == 1">
-		      AND RV_NICK = #{keyword}
+		      AND RV_NICK LIKE '%'|| #{keyword} ||'%'
      		</when>
      		<when test = "idx == 2">
 		      AND TO_CHAR(RV_DATE, 'YYYYMMDD') = #{keyword}
@@ -127,10 +127,13 @@
 		WHERE RV_NO = #{rvNo}
 	</select>
 	
-	<!-- 추천수 토글 선택 +1 -->
-	
-	<!-- 추천수 토글 해제 -1 -->
-	
+	<!-- [REVIEW]테이블에서 월별 선택하여 rvVO(rvNo) 추출 -->
+	<select id="yymm" parameterType="string" resultType="reviewVO">
+		SELECT *
+		FROM REVIEW
+		WHERE TO_CHAR(RV_DATE, 'YYYY') = SUBSTR(#{rvDate}, 1, 4)
+		AND TO_CHAR(RV_DATE, 'MM') = SUBSTR(#{rvDate}, 5)
+	</select>
 	
 	<!-- 추천수 무한정 클릭 -->
 <!--  	<update id="rec" parameterType="map"> -->
@@ -148,7 +151,6 @@
 	</select>
 	
 	<!-- 리뷰번호 받아서 리뷰 삭제 -->
-
 	<delete id="deleteMypage" parameterType="reviewVO">
 		DELETE FROM REVIEW
 		WHERE RV_NO = #{rvNo}

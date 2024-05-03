@@ -6,10 +6,18 @@
 	
 	<!-- QA 1개 조회 -->
 	<select id="one" resultType="com.mystudy.model.vo.qnaVO">
-		SELECT Q.*, A.ID
+		SELECT Q.*, A.ID, A.CRITIC_CHECK
 		FROM QA Q, ACCOUNT A
 		WHERE Q.NO = A.NO
 		AND QA_NO = #{qaNo}
+	</select>
+	
+	<!-- 나의 QA 조회 -->
+	<select id="getMyQa" parameterType="int" resultType="com.mystudy.model.vo.qnaVO">
+		SELECT Q.*, A.ID, A.CRITIC_CHECK
+		FROM QA Q, ACCOUNT A
+		WHERE Q.NO = A.NO
+		AND Q.NO = #{no}
 	</select>
 	
 	<!-- 전체 QA 건수 조회 -->
@@ -20,7 +28,7 @@
 	<!-- 페이지에 해당하는 QA 조회 -->
 	<select id="list" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
 	    <![CDATA[
-		    SELECT Q.*, A.ID
+		    SELECT Q.*, A.ID, A.CRITIC_CHECK
 		    FROM (
 		        SELECT ROWNUM R_NUM, Q.*
 		        FROM (
@@ -50,17 +58,42 @@
 	        <when test="idx == 1">
 	            WHERE TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
 	        </when>
+	        <when test="idx == 2">
+	            <!-- 수정된 부분: keyword가 없는 경우 해당 카테고리의 모든 데이터 반환 -->
+	            <choose>
+	                <when test="checkQaCategory == '1' ">
+	                    WHERE QA_CATEGORY = #{keyword}
+	                </when>
+	                <otherwise>
+	                    WHERE QA_CATEGORY = #{qaCategory} AND QA_CONTENT LIKE '%' || #{keyword} || '%'
+	                </otherwise>
+	            </choose>
+	        </when>
+	        <when test="idx == 3">
+	            <!-- 수정된 부분: keyword가 없는 경우 해당 카테고리의 모든 데이터 반환 -->
+	            <choose>
+	                <when test="checkQaCategory == '1' ">
+	                     WHERE QA_CATEGORY = #{keyword}
+	                </when>
+	                <otherwise>
+	                    WHERE QA_CATEGORY = #{qaCategory} AND QA_CONTENT LIKE '%' || #{keyword} || '%'
+	                </otherwise>
+	            </choose>
+	        </when>
 	        <otherwise>
 	            AND 1 = 2
 	        </otherwise>
 	    </choose>
+	    ORDER BY QA_NO DESC
 	</select>
+
+
 	
 	<!-- QA 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.qnaVO">
 		INSERT INTO QA
-			       (QA_NO, NO, QA_CONTENT, QA_DATE)
-			VALUES (QA_SEQ.NEXTVAL, #{no}, #{qaContent}, SYSDATE) 
+			       (QA_NO, NO, QA_CONTENT, QA_DATE, QA_CATEGORY)
+			VALUES (QA_SEQ.NEXTVAL, #{no}, #{qaContent}, SYSDATE, #{qaCategory}) 
 	</insert>
 	
 	<!-- QA 수정 -->

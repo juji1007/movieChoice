@@ -6,7 +6,8 @@
  	request.setCharacterEncoding("UTF-8");
  	
  	int qaNo = Integer.parseInt(request.getParameter("qaNo"));
-	 
+	System.out.println("qaNo : " + qaNo);
+ 	
 	int deleted = qnaDAO.delete(qaNo); 
 	
 	System.out.println("qnaDAO.delete : " + deleted);

@@ -19,6 +19,8 @@
 <title>게시글 작성</title>
 <script>
 function sendData() {
+
+
 	console.log(document.forms[0]);
 	let firstForm = document.forms[0];
 	console.log(firstForm.elements);
@@ -32,6 +34,7 @@ function sendData() {
 			return;
 		}
 	}
+
 	firstForm.submit();
 }
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.model.vo.criticVO;
+import com.mystudy.model.vo.inquiryVO;
 import com.mystudy.model.vo.postVO;
 import com.mystudy.model.vo.qnaVO;
 import com.project.mybatis.DBService;
@@ -47,13 +48,40 @@ public class qnaDAO {
         }
         return null;
     }
+    
+    // 나의 QA 조회
+    public static List<qnaVO> getMyQa(int no) {
+        try (SqlSession ss = DBService.getFactory().openSession()) {
+        	List<qnaVO> qnaList = ss.selectList("qna.getMyQa", no);
+        	boolean checkInquiry = false;
+        	for (qnaVO qvo : qnaList) {
+        		int qaNo = qvo.getQaNo();
+        		inquiryVO ivo = inquiryDAO.ione(qaNo);
+        		System.out.println("ivo : " + ivo);
+        		if (ivo != null) {
+        			checkInquiry = true;
+        		}
+        		System.out.println("checkin : " + checkInquiry);
+        		qvo.setInquiryCheck(checkInquiry);
+        		System.out.println("qna : " + qvo);
+        	}
+            return qnaList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     // 카테고리별 QA 동적 검색
-    public static List<qnaVO> qnaList(String idx, String keyword) {
+    public static List<qnaVO> qnaList(String idx, String keyword, String checkQaCategory, String qaCategory) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("idx", idx);
+			map.put("idx", idx); 
 			map.put("keyword", keyword);
+			map.put("checkQaCategory", checkQaCategory);
+			map.put("qaCategory", qaCategory);
+			
+			System.out.println("map : " + map);
 			
 			return ss.selectList("qna.search", map);
 		} catch (Exception e) {

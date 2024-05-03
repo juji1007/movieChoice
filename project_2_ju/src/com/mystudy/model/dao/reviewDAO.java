@@ -136,14 +136,24 @@ public class reviewDAO {
 	}
 	
 	//리뷰 정보 삭제(DELETE)
-		public static int delete(reviewVO rvo) {
-			try (SqlSession ss = DBService.getFactory().openSession(true)) {
-				return ss.delete("review.delete", rvo);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return -1;
+	public static int delete(reviewVO rvo) {
+		try (SqlSession ss = DBService.getFactory().openSession(true)) {
+			return ss.delete("review.delete", rvo);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return -1;
+	}
+	
+	//[REVIEW]테이블에서 월별 선택하여 rvVO(rvNo) 추출
+	public static List<reviewVO> selectVO(String rvDate) {
+		try (SqlSession ss = DBService.getFactory().openSession()){
+			return ss.selectList("review.yymm", rvDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	} 
 
 //	//추천수 COUNT+1(본인 리뷰가 아닌 경우 추천+1)
 //	public static int recCnt(int rvNo, int rvRec) {
@@ -164,7 +174,15 @@ public class reviewDAO {
 	//나의 리뷰목록 조회
 	public static List<reviewVO> getReviewList(int no) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
-			return ss.selectList("review.getReviewByNo", no);
+			List<reviewVO> reviewList = ss.selectList("review.getReviewByNo", no);
+			for (reviewVO rvo : reviewList) {
+				int rvNo = rvo.getRvNo();
+				int warn = warnDAO.warnSum(rvNo);
+				rvo.setRvWarn(warn);
+				int rec = recDAO.recSum(rvNo);
+				rvo.setRvRec(rec);
+			}
+			return reviewList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

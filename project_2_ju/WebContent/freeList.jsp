@@ -16,13 +16,16 @@ request.getAttribute("keyword");
 <script>
 //목록보기
 function list_go() {
+
 	location.href = "free.jsp";
+
 }
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/free.css">
 <body>
+
 	<%@ include file="include/header.jspf"%>
 	<div class="body">
 	<h2>자유게시판 [${keyword}]검색</h2>
@@ -105,5 +108,6 @@ function list_go() {
 	</table>
 	</form>
 	</div>
+
 </body>
 </html>

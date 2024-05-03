@@ -19,11 +19,13 @@ import javax.servlet.http.HttpSession;
 import com.mystudy.model.dao.listTotDAO;
 import com.mystudy.model.dao.movieDAO;
 import com.mystudy.model.dao.postDAO;
+import com.mystudy.model.dao.qnaDAO;
 import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.movieVO;
 import com.mystudy.model.vo.postCommentVO;
 import com.mystudy.model.vo.postVO;
+import com.mystudy.model.vo.qnaVO;
 import com.mystudy.model.vo.reviewVO;
 import com.mystudy.post.common.Paging;
 import com.project.dao.AccountDAO;
@@ -147,37 +149,6 @@ public class AjaxManageController extends HttpServlet {
 			out.print(result);
 			
 		}
-		//나의 영화목록
-		if ("movieMypage".equals(action)) {
-			System.out.println("마이페이지영화처리");
-			
-			//로그인 아이디로 검색처리
-			HttpSession session = req.getSession();
-			String id = (String) session.getAttribute("id");
-			System.out.println("id : " + id);
-			
-			//없으면 다시 처음화면으로
-			if (id == null || id.trim().length() == 0) {
-				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
-				return;
-			}
-			
-			int no = AccountDAO.getAccountNo(id);
-			System.out.println("avoNo : " + no);
-			
-		    List<reviewVO> rvoList = reviewDAO.getReviewList(no);
-			Map<String, List<?>> listSearch = new HashMap<>();
-			listSearch.put("review", rvoList);
-			String result = makeJson(listSearch);
-			
-			System.out.println("result : \n" + result);
-			
-			// 응답
-			resp.setContentType("application/json; charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.print(result);
-			
-		}
 		//나의 리뷰목록
 		if ("reviewMypage".equals(action)) {
 			System.out.println("마이페이지리뷰처리");
@@ -272,6 +243,36 @@ public class AjaxManageController extends HttpServlet {
 			PrintWriter out = resp.getWriter();
 			out.print(result);
 		}
+		//나의 qna 정보
+		if ("qnaMypage".equals(action)) {
+			System.out.println("마이페이지qna처리");
+			
+			//로그인 아이디로 검색처리
+			HttpSession session = req.getSession();
+			String id = (String) session.getAttribute("id");
+			System.out.println("id : " + id);
+			
+			//없으면 다시 처음화면으로
+			if (id == null || id.trim().length() == 0) {
+				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
+				return;
+			}
+			
+			int no = AccountDAO.getAccountNo(id);
+			System.out.println("avoNo : " + no);
+
+			List<qnaVO> qnaList = qnaDAO.getMyQa(no);
+			Map<String, List<?>> listSearch = new HashMap<>();
+			listSearch.put("qna", qnaList);
+			String result = makeJson(listSearch);
+			
+			System.out.println("result : \n" + result);
+			
+			// 응답
+			resp.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			out.print(result);
+		}
 		
 	}
 	
@@ -341,6 +342,19 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"pcDate\": \"" + null + "\", ");
 		            result.append("\"pcContent\": \"" + null + "\", ");
 		            result.append("\"pcNick\": \"" + null + "\"");
+		            result.append("},");
+		        }
+		    	if ("qna".equals(key)) {
+		        	result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"qaNo\": \"" + null + "\", ");
+		            result.append("\"no\": \"" + null + "\", ");
+		            result.append("\"qaContent\": \"" + null + "\", ");
+		            result.append("\"qaDate\": \"" + null + "\", ");
+		            result.append("\"id\": \"" + null + "\", ");
+		            result.append("\"qaCategory\": \"" + null + "\", ");
+		            result.append("\"criticCheck\": \"" + null + "\", ");
+		            result.append("\"inquiryCheck\": \"" + null + "\"");
 		            result.append("},");
 		        }
 		    }
@@ -419,6 +433,21 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"pcDate\": \"" + pco.getPcDate() + "\", ");
 		            result.append("\"pcContent\": \"" + pco.getPcContent() + "\", ");
 		            result.append("\"pcNick\": \"" + pco.getPcNick() + "\"");
+		            result.append("},");
+		        }
+		        
+		        if ("qna".equals(key)) {
+		        	qnaVO qvo = (qnaVO) item;
+		        	result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"qaNo\": \"" + qvo.getQaNo() + "\", ");
+		            result.append("\"no\": \"" + qvo.getNo() + "\", ");
+		            result.append("\"qaContent\": \"" + qvo.getQaContent() + "\", ");
+		            result.append("\"qaDate\": \"" + qvo.getQaDate() + "\", ");
+		            result.append("\"id\": \"" + qvo.getId() + "\", ");
+		            result.append("\"qaCategory\": \"" + qvo.getQaCategory() + "\", ");
+		            result.append("\"criticCheck\": \"" + qvo.getCriticCheck() + "\", ");
+		            result.append("\"inquiryCheck\": \"" + qvo.getisInquiryCheck() + "\"");
 		            result.append("},");
 		        }
 		    }
