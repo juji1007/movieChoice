@@ -115,7 +115,7 @@
 		            footerHtml += "<input type='button' value='회원탈퇴' onclick='deleteAccount(this.form)'>";
 // 		            footerHtml += "<input type='hidden' name='no' value='" + member.no + "'>";
 		            footerHtml += "<input type='button' value='회원정보수정 및 평론가신청하기' onclick='updateAccount(this.form)'>";
-		            footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick='updateAccount(this.form)'>";
+		            footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick=\"location.href='criticCancelWrite.jsp'\">";
 		            footerHtml += "</td>";
 		            footerHtml += "</tr>";
 
