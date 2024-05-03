@@ -301,9 +301,6 @@ function selectCategory(frm) {
                 	</tr>
                 </tbody>
                 <tfoot id="pageData">
-                	<tr>
-                		<td>검색 결과가 없습니다.</td>
-                	</tr>
                 </tfoot>
             </table>
         </form>

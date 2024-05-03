@@ -29,15 +29,6 @@ request.getAttribute("listOne");
 		</a>
 		</td>
 	</tr>
-<%-- <% --%>
-// List list = (List<postVO>)request.getAttribute("listOne");
-// if (list.size() == 0) {
-<%-- 	System.out.println("aa");}%> --%>
-
-<!-- <script> -->
-// alert("검색결과가 없습니다.")
-// history.back();
-<!-- </script> -->
 
 	</c:forEach>
 
