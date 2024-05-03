@@ -163,9 +163,9 @@ public class ReviewController extends HttpServlet {
 			
 			System.out.println("idx, keyword : " + idx + ", " + keyword);
 			
-//			if (idx == null || keyword == null || keyword.trim().length() == 0) {
-//				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-//			}
+			if (idx == null || keyword == null || keyword.trim().length() == 0) {
+				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+			}
 			
 			//페이징 처리를 위한 객체(Paging) 생성
 			Paging p = new Paging();
@@ -260,18 +260,14 @@ public class ReviewController extends HttpServlet {
 			request.setAttribute("sort", sort);
 			request.setAttribute("listOne", listOne);
 			
-			if (idx.equals("null") || keyword.trim().length() == 0) {
-				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-			} else if (listOne.size() == 0) {
+			if (listOne.size() == 0) {
 				//idx-keyword 내용 일치하지 않을 때
 				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
 			} else {
 				request.getRequestDispatcher("selectOne.jsp").forward(request, response);
 			}
 			
-			
 		}
-			
 		
 	}
 
