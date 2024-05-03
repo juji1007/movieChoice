@@ -105,7 +105,7 @@ session.getAttribute("c_list");
 		<div class="box">
 		<div class="innerbox">
 		<div class="content">
-		<form action="postController?search=freeList" method="get">
+		<form action="postController?search=freeList&location=freeAdmin" method="get">
 			<select class="select" name="idx">
 				<option selected disabled>구분</option>
 				<option value="0">제목</option>

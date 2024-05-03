@@ -59,6 +59,10 @@ public class PostController extends HttpServlet {
 			request.setAttribute("listOne", listOne);
 			request.setAttribute("sort", sort);
 			
+			String location = request.getParameter("location");
+			if ("freeAdmin".equals(location)) {
+				request.getRequestDispatcher("freeListAdmin.jsp").forward(request, response);
+			}
 			request.getRequestDispatcher("freeList.jsp").forward(request, response);
 		
 		}

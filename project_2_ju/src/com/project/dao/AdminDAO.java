@@ -20,7 +20,7 @@ public class AdminDAO {
 	public static Map<String, List<?>> selectData(String idx, String keyword) {
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			Map<String, List<?>> resultMap = new HashMap<>();
-			List<reviewVO> reviewList = ss.selectList("admin.searchReviewList");
+			List<reviewVO> reviewList = ss.selectList("admin.searchReviewList", keyword);
 			for (reviewVO rvo : reviewList) {
 				int rvNo = rvo.getRvNo();
 				int warn = warnDAO.warnSum(rvNo);
@@ -28,7 +28,7 @@ public class AdminDAO {
 				int rec = recDAO.recSum(rvNo);
 				rvo.setRvRec(rec);
 			}
-			List<AccountVO> accountList = ss.selectList("admin.searchAccountList");
+			List<AccountVO> accountList = ss.selectList("admin.searchAccountList", keyword);
 			for (AccountVO avo : accountList) {
 				int no = avo.getNo();
 				int warn = warnDAO.warnSumByNo(no);
@@ -39,7 +39,7 @@ public class AdminDAO {
 			if ("0".equals(idx)) {
 				System.out.println("전체검색선택");
 				resultMap.put("review", reviewList);
-				resultMap.put("movie", ss.selectList("admin.searchMovieList"));
+				resultMap.put("movie", ss.selectList("admin.searchMovieList", keyword));
 				resultMap.put("account", accountList);
 				return resultMap;
 			} else if ("1".equals(idx)) {
@@ -48,7 +48,7 @@ public class AdminDAO {
 				return resultMap;
 			} else if ("2".equals(idx)) {
 				System.out.println("영화검색선택");
-				resultMap.put("movie", ss.selectList("admin.searchMovieList"));
+				resultMap.put("movie", ss.selectList("admin.searchMovieList", keyword));
 				return resultMap;
 			} else if ("3".equals(idx)) {
 				resultMap.put("account", accountList);

@@ -5,19 +5,38 @@
 <mapper namespace="admin">
 	
     
-    <select id="searchMovieList" resultType="movieVO">
+    <select id="searchMovieList" parameterType="string" resultType="movieVO">
     	SELECT * FROM MOVIE
-    
+    	<choose>
+    		<when test="keyword == null or keyword == ''">
+    		</when>
+    		<otherwise>
+    			 WHERE MV_TITLE LIKE '%' || #{keyword} || '%'
+    		</otherwise>
+    	</choose>
     </select>  
 
-	<select id="searchReviewList" resultType="reviewVO">
+	<select id="searchReviewList" parameterType="string" resultType="reviewVO">
     	SELECT * FROM REVIEW 
+    	<choose>
+    		<when test="keyword == null or keyword == ''">
+    		</when>
+    		<otherwise>
+    			 WHERE RV_TITLE LIKE '%' || #{keyword} || '%'
+    		</otherwise>
+    	</choose>
     
     </select>
     
-    <select id="searchAccountList" resultType="accountVO">
+    <select id="searchAccountList" parameterType="string" resultType="accountVO">
     	SELECT * FROM ACCOUNT 
-    
+    	<choose>
+    		<when test="keyword == null or keyword == ''">
+    		</when>
+    		<otherwise>
+    			 WHERE NAME LIKE '%' || #{keyword} || '%'
+    		</otherwise>
+    	</choose>
     </select>
     
     <!-- 유저 동적 검색 -->

@@ -12,11 +12,11 @@ request.getAttribute("keyword");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 검색[freeList.jsp]</title>
+<title>게시물 검색[freeListAdmin.jsp]</title>
 <script>
 //목록보기
 function list_go() {
-   location.href = "free.jsp";
+   location.href = "freeAdmin.jsp";
 }
 </script>
 </head>

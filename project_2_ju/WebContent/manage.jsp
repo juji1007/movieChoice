@@ -110,6 +110,9 @@ th, td {
     text-align: center; /* 가운데 정렬 */
 }
 
+
+
+
 thead {
 /* 	position: absolute; */
 /* 	top: 50%; */
@@ -145,8 +148,17 @@ function selectCategory(frm) {
 	if ("0" == checkCategory) {
 		keyword.style.display = "none";
 		search.style.display = "block";
+	} else if ("1" == checkCategory) {
+		keyword.style.display = "block";
+		keyword.placeholder = "리뷰 제목 검색";  //keyword 형식 지정해야함
+        search.style.display = "block";
+	} else if ("2" == checkCategory) {
+		keyword.style.display = "block";
+		keyword.placeholder = "영화 제목 검색";
+        search.style.display = "block";
 	} else { 
 		keyword.style.display = "block";
+		keyword.placeholder = "유저 이름 검색";
         search.style.display = "block";
     }
 	
@@ -290,7 +302,7 @@ function selectCategory(frm) {
                                 <option value="3">유저</option>
                             </select>
                         </td>
-                        <td><input type="text" name="keyword" style="display:none;"/></td>
+                        <td><input type="text" name="keyword" placeholder="." style="display:none;"/></td>
                         <td><input type="button" value="검색" style="display:block;" onclick="selectCategory(this.form)"/></td>
                     </tr>
                 </thead>
