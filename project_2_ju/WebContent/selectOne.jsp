@@ -22,6 +22,16 @@
 		<%} else%>
 			frm.submit();
 	}
+	
+// 	function checkSearchCondition(frm) {
+// 		var selValue = form.elements["idx"].value;
+// 		var keyword = form.elements["keyword"].value.trim();
+// 		if (selValue === "" || keyword === "") {
+// 			alert("검색 조건과 키워드를 모두 선택해주세요.");
+// 			return false;
+// 		}
+// 		return true;
+// 	}
 
 </script>
 </head>
@@ -32,9 +42,11 @@
 		리뷰모음
 		<input type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
+		<input type="button" value="전체조회" 
+			onclick="javascript:location.href='reviewController?category=rvMain'">
 	</h2>
 	
-	<h3>[${keyword }] 조회</h3>
+	<h3>[${sort} - ${keyword }] 조회</h3>
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne" method="post">
 		<select name="idx">
@@ -43,7 +55,7 @@
 			<option value="1">작성자</option>
 			<option value="2">작성일</option>
 		</select>
-		<input type="text" name="keyword">
+		<input type="text" name="keyword" placeholder="작성일 ex: 20240507">
 		<input type="submit" value="검색">
 		
 		<input type="hidden" name="category" value="selectOne">
