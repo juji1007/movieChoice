@@ -99,15 +99,13 @@ session.getAttribute("c_list");
 	<%@ include file="include/headerAdmin.jspf"%>
 
 <div class="body">
-<h2>자유게시판</h2>
-<!-- <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form> -->
+<h2>자유게시판 관리</h2>
 <hr class="color">
 		<div class="box">
 		<div class="innerbox">
 		<div class="content">
-		<form action="postController?search=freeList&location=freeAdmin" method="get">
+		<form action="postController?search=freeList" method="get">
 			<select class="select" name="idx">
-				<option selected disabled>구분</option>
 				<option value="0">제목</option>
 				<option value="1">작성일</option>
 			</select> 
@@ -115,6 +113,7 @@ session.getAttribute("c_list");
 			<input class="search" type="text" name="keyword" placeholder="검색어를 입력하세요."> 
 			<input class="searchbtn" type="submit" value="검색"> 
 			<input type="hidden" name="search" value="freeList">
+			<input type="hidden" name="location" value="freeAdmin">
 			
 		</form>
 		</div>

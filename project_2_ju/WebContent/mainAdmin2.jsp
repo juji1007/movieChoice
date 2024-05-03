@@ -98,7 +98,7 @@ session.setAttribute("attr_list", list);
 <br>
 
 <div>
-<h2>영화목록</h2> 
+<h2>영화목록 관리</h2> 
 <form action="controller?type=movieAdmin" method="post">
   <select name="idx">
   <option value="0" disabled selected>정렬</option>
