@@ -135,6 +135,10 @@ public class RewardController extends HttpServlet {
 			String year = search.substring(0, 4);
 			String month = search.substring(5);
 			
+			if (search.trim().length() == 0) {
+				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+			}
+			
 			//search(=날짜) 조건으로 List<listTotVO>에서 최고 추천수의 rvNo 추출
 			List<listTotVO> dateVO = listTotDAO.dateVO(year, month);
 			System.out.println("::DB 연결 후, dateVO : " + dateVO);
