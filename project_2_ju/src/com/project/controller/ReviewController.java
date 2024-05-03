@@ -260,12 +260,25 @@ public class ReviewController extends HttpServlet {
 			request.setAttribute("sort", sort);
 			request.setAttribute("listOne", listOne);
 			
-			if (listOne.size() == 0) {
+      if (listOne.size() == 0) {
 				//idx-keyword 내용 일치하지 않을 때
 				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
 			} else {
 				request.getRequestDispatcher("selectOne.jsp").forward(request, response);
 			}
+
+			String location = request.getParameter("location"); 
+			if ("reviewMainAdmin".equals(location)) {
+        if (idx.equals("null") || keyword.trim().length() == 0) {
+			  	request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
+		  	} else if (listOne.size() == 0) {
+		  		//idx-keyword 내용 일치하지 않을 때
+	  			request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
+	  		} else {
+	  			request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
+	  		}
+		
+
 			
 		}
 		

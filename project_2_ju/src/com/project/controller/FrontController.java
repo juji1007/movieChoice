@@ -223,7 +223,9 @@ public class FrontController extends HttpServlet {
 			String idx = request.getParameter("idx");
 			System.out.println("idx: "+ idx );
 			
-			//단순 페이지 전환인지 DB데이터 조회(검색)처리를 해야 하는지 결정 처리 
+			if (idx == null) {
+				request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
+			}
 			
 			// 동적검색 처리 작업 진행
 			System.out.println(">>>> 동적검색 처리 작업 진행");
@@ -246,7 +248,7 @@ public class FrontController extends HttpServlet {
 			
 			
 			//페이지 전환(searchList.jsp 페이지에 위임)
-			request.getRequestDispatcher("mainAdmin.jsp").forward(request, response);
+			request.getRequestDispatcher("mainAdmin2.jsp").forward(request, response);
 		}
 		
 		

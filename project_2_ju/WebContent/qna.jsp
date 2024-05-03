@@ -78,17 +78,6 @@ session.setAttribute("list", list);
             frm.submit();
             <% } %>
         }
-
-        // 검색 조건 확인 함수
-        function checkSearchCondition(form) {
-            var selectedValue = form.elements["idx"].value;
-            var keyword = form.elements["keyword"].value.trim();
-            if (selectedValue === "" || keyword === "") {
-                alert("검색 조건과 키워드를 모두 선택해주세요.");
-                return false;
-            }
-            return true;
-        }
     </script>
     <style>
         .body {
@@ -153,10 +142,12 @@ session.setAttribute("list", list);
 	    	<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
 	    </form>
 		<hr>
-	    <form action="qnaController?search=qnaList" method="get" onsubmit="return checkSearchCondition(this);">
+	    <form action="qnaController?search=qnaList" method="get">
 	        <select class="select" name="idx">
 				<option value="0">내용</option>
 				<option value="1">작성일</option>
+				<option value="2">영화추가</option>
+				<option value="3">평론가탈퇴</option>
 			</select> 
 			<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)"> 
 			<input class="searchbtn" type="submit" value="검색"> 
@@ -165,9 +156,17 @@ session.setAttribute("list", list);
 	    
 	<div id="qna">
 	<table border frame=void>
+		<tr>
+			<th>번호</th>
+			<th>분류</th>
+			<th>아이디</th>
+			<th>작성일</th>
+			<th>내용</th>
+		</tr>
 		<c:forEach var="vo" items="${list }">
 		<tr>
 		<td>${vo.qaNo }</td>
+		<td>${vo.qaCategory }</td> 
 		<td>${vo.id }</td>
 		<td>${vo.qaDate }</td>
 		<td>
