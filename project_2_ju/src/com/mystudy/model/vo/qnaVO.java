@@ -10,7 +10,15 @@ public class qnaVO {
 	private String id;
 	private String qaCategory;
 	private int criticCheck;
+	private boolean inquiryCheck;
 	
+	
+	public boolean getisInquiryCheck() {
+		return inquiryCheck;
+	}
+	public void setInquiryCheck(boolean inquiryCheck) {
+		this.inquiryCheck = inquiryCheck;
+	}
 	public int getCriticCheck() {
 		return criticCheck;
 	}
@@ -57,7 +65,10 @@ public class qnaVO {
 	@Override
 	public String toString() {
 		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", id=" + id
-				+ ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + "]";
+				+ ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + ", inquiryCheck=" + inquiryCheck
+				+ "]";
 	}
+	
+	
 	
 }
