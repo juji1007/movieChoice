@@ -33,4 +33,16 @@
 		AND RV_NO = #{rvNo}
 	</delete>
 	
+	<!-- review 테이블에서 월별/추천수 검색 -->
+	
+	
+	<!-- [리뷰]월별 조회된 rvNo에 해당하는 [추천]추천수 count값 추출 -->
+	<select id="recNum" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM REC
+		WHERE RV_NO = #{rvNo}
+		GROUP BY RV_NO
+	</select>
+	
+	
 </mapper>
