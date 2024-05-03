@@ -49,6 +49,7 @@ public class PostController extends HttpServlet {
 			}
 			
 			//페이징 처리를 위한 객체(Paging) 생성
+
 	         Paging p = new Paging();
 	         
 	         //numPerPage=5, pagePerBlock=5 설정 먼저
@@ -100,6 +101,7 @@ public class PostController extends HttpServlet {
 	         System.out.println("p.getBegin() : " + p.getBegin());
 	         System.out.println("p.getEnd() : " + p.getEnd());
 
+
 			
 			List<postVO> listOne = postDAO.freeList(idx, keyword);
 			System.out.println("listOne : " + listOne);
@@ -119,10 +121,12 @@ public class PostController extends HttpServlet {
 				return;
 			}
 			
+
 			 request.setAttribute("selPvo", p);
 	         request.setAttribute("listOne", listOne);
 	         request.setAttribute("sort", sort);
 	         request.setAttribute("keyword", keyword);
+
 
 			
 	         if ("freeAdmin".equals(location)) {

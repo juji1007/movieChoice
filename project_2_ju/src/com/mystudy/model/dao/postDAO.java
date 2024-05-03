@@ -67,6 +67,7 @@ public class postDAO {
 			return null;
 		}
 		
+
 		 //카테고리별 게시글 건수 조회
         public static int getCount(String idx, String keyword) {
            try (SqlSession ss = DBService.getFactory().openSession()) {
@@ -80,6 +81,7 @@ public class postDAO {
            }
            return -1;
         }
+
 
 		
 //		//게시글 작성자 닉네임 조회

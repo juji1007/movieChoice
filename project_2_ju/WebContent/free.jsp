@@ -102,24 +102,26 @@ session.getAttribute("c_list");
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
 <hr class="color">
-      <div class="box">
-      <div class="innerbox">
-      <div class="content">
-      <form action="postController?search=freeList" method="get">
-         <select class="select" name="idx">
-<!--             <option selected disabled>구분</option> -->
-            <option value="0">제목</option>
-            <option value="1">작성일</option>
-         </select> 
-         
-         <input class="search" type="text" name="keyword" placeholder="검색어를 입력하세요."> 
-         <input class="searchbtn" type="submit" value="검색"> 
-         <input type="hidden" name="search" value="freeList">
-         
-      </form>
-      </div>
-      </div>
-      </div>
+
+		<div class="box">
+		<div class="innerbox">
+		<div class="content">
+		<form action="postController?search=freeList" method="get">
+			<select class="select" name="idx">
+<!-- 				<option selected disabled>구분</option> -->
+				<option value="0">제목</option>
+				<option value="1">작성일</option>
+			</select> 
+			
+			<input class="search" type="text" name="keyword" placeholder="검색어를 입력하세요."> 
+			<input class="searchbtn" type="submit" value="검색"> 
+			<input type="hidden" name="search" value="freeList">
+			
+		</form>
+		</div>
+		</div>
+		</div>
+
 
 
 <div id="post">
@@ -128,8 +130,8 @@ session.getAttribute("c_list");
 <c:forEach var="vo" items="${list }">
 <tr>
 <td width="5%">${vo.psNo }</td>
-<td width="20%">${vo.psNick }</td>
-<td width="20%">${vo.psDate }</td>
+<td width="15%">${vo.psNick }</td>
+<td width="15%">${vo.psDate }</td>
 <td>
 <a href="freeView.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
 ${vo.psTitle }
