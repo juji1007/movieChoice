@@ -189,7 +189,13 @@ public class postDAO {
 		//나의 자유게시판 조회
 		public static List<postVO> getPostList(int no) {
 			try (SqlSession ss = DBService.getFactory().openSession()) {
-				return ss.selectList("post.getPostByNo", no);
+				List<postVO> postList = ss.selectList("post.getPostByNo", no);
+				for (postVO pvo : postList) {
+					int psNo = pvo.getPsNo();
+					int warn = warnDAO.warnSumBypsNo(psNo);
+					pvo.setPsWarn(warn);
+				}
+				return postList;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

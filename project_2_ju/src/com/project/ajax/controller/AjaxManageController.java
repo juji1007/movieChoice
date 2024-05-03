@@ -147,37 +147,6 @@ public class AjaxManageController extends HttpServlet {
 			out.print(result);
 			
 		}
-		//나의 영화목록
-		if ("movieMypage".equals(action)) {
-			System.out.println("마이페이지영화처리");
-			
-			//로그인 아이디로 검색처리
-			HttpSession session = req.getSession();
-			String id = (String) session.getAttribute("id");
-			System.out.println("id : " + id);
-			
-			//없으면 다시 처음화면으로
-			if (id == null || id.trim().length() == 0) {
-				req.getRequestDispatcher("myPage.jsp").forward(req, resp);
-				return;
-			}
-			
-			int no = AccountDAO.getAccountNo(id);
-			System.out.println("avoNo : " + no);
-			
-		    List<reviewVO> rvoList = reviewDAO.getReviewList(no);
-			Map<String, List<?>> listSearch = new HashMap<>();
-			listSearch.put("review", rvoList);
-			String result = makeJson(listSearch);
-			
-			System.out.println("result : \n" + result);
-			
-			// 응답
-			resp.setContentType("application/json; charset=UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.print(result);
-			
-		}
 		//나의 리뷰목록
 		if ("reviewMypage".equals(action)) {
 			System.out.println("마이페이지리뷰처리");
