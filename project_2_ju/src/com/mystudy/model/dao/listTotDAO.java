@@ -68,4 +68,33 @@ public class listTotDAO {
 		return null;
 	}
 	
+	//Reward : listTot에서 날짜로 조회
+	public static List<listTotVO> dateVO(String year, String month) {
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			Map<String, String> map = new HashMap<>();
+			map.put("year", year);
+			map.put("month", month);
+			
+			return ss.selectList("listTotal.dateOne", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+//	//Reward : 날짜 + 페이징 처리
+//	public static List<listTotVO> rwSearch(String date, int begin, int end) {
+//		try (SqlSession ss = DBService.getFactory().openSession()) {
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("year", date);
+//			map.put("begin", begin);
+//			map.put("end", end);
+//			
+//			return ss.selectList("listTotal.reward", map);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+	
 }

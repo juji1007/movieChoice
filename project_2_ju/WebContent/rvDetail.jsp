@@ -193,7 +193,7 @@
 					<input type="button" value="추천" data-rec-num="${recNum}" 
 					onclick="rec_toggle(this.form, this.dataset.recNum)">
 					${listOne.rvRec}
-					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
+<!-- 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">  -->
 					<input type="button" value="신고" data-warn-num="${warnNum}" 
 					onclick="warn_push(this.form, this.dataset.warnNum)">
 					${listOne.rvWarn}
@@ -206,13 +206,11 @@
 	
 		<tfoot class="tfoot">
 			<tr>
-				<td colspan="3">
-					<input type="button" value="이전" onclick="prev_go()">
+				<td colspan="4">
+<!-- 					<input type="button" value="이전" onclick="prev_go()"> -->
 <!-- 					<input type="button" value="목록" onclick="javascript:history.go(-1)"> -->
 					<input type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
-					<input type="button" value="다음" onclick="next_go()">
-				</td>
-				<td>
+<!-- 					<input type="button" value="다음" onclick="next_go()"> -->
 					<input type="button" value="수정" onclick="update_go(this.form)">
 					<input type="button" value="삭제" onclick="delete_go(this.form)">
 					
