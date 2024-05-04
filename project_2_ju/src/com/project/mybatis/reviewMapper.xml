@@ -43,10 +43,10 @@
 		WHERE R.MV_NO = M.MV_NO
 		<choose>
      		<when test = "idx == 0">
-		     	AND M.MV_TITLE = #{keyword}
+		     	AND M.MV_TITLE LIKE '%'|| #{keyword} ||'%'
      		</when>
      		<when test = "idx == 1">
-		     	AND R.RV_NICK = #{keyword}
+		     	AND R.RV_NICK LIKE '%'|| #{keyword} ||'%'
      		</when>
      		<when test = "idx == 2">
 		     	AND TO_CHAR(R.RV_DATE, 'YYYYMMDD') = #{keyword}

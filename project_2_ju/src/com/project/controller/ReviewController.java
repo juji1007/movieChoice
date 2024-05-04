@@ -90,9 +90,9 @@ public class ReviewController extends HttpServlet {
 			int i = 0;
 			for (i = 0; i < listAll.size(); i++) {
 				int rvNo = listAll.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvRec = recDAO.recSum(rvNo);
-				System.out.println("::recDAO.recSum rvRec : " + rvRec);
+//				System.out.println("::recDAO.recSum rvRec : " + rvRec);
 			
 				if (rvRec == -1) {
 					rvRec = 0;
@@ -102,9 +102,9 @@ public class ReviewController extends HttpServlet {
 			//신고수 sum 보여주기 계산
 			for (i = 0; i < listAll.size(); i++) {
 				int rvNo = listAll.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvWarn = warnDAO.warnSum(rvNo);
-				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+//				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
 			
 				if (rvWarn == -1) {
 					rvWarn = 0;
@@ -234,9 +234,9 @@ public class ReviewController extends HttpServlet {
 			int i = 0;
 			for (i = 0; i < listOne.size(); i++) {
 				int rvNo = listOne.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvRec = recDAO.recSum(rvNo);
-				System.out.println("::recDAO.recSum rvRec : " + rvRec);
+//				System.out.println("::recDAO.recSum rvRec : " + rvRec);
 			
 				if (rvRec == -1) {
 					rvRec = 0;
@@ -246,9 +246,9 @@ public class ReviewController extends HttpServlet {
 			//신고수 sum 보여주기 계산
 			for (i = 0; i < listOne.size(); i++) {
 				int rvNo = listOne.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvWarn = warnDAO.warnSum(rvNo);
-				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+//				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
 			
 				if (rvWarn == -1) {
 					rvWarn = 0;

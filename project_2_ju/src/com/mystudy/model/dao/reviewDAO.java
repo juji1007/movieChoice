@@ -35,7 +35,7 @@ public class reviewDAO {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("idx", idx);
 			map.put("keyword", keyword);
-			
+			System.out.println("map : " + map);
 			return ss.selectOne("review.cnt", map);
 		} catch (Exception e) {
 			e.printStackTrace();
