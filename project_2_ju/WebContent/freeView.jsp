@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.dao.warnDAO"%>
 <%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.sun.nio.sctp.PeerAddressChangeNotification"%>
@@ -12,11 +13,27 @@
 
 	int psNo = Integer.parseInt(request.getParameter("psNo"));
 //  	int pcNo = Integer.parseInt(request.getParameter("pcNo"));
-//	int no = Integer.parseInt(request.getParameter("no"));
+// 	int no = (int)session.getAttribute("no");
+	
 	String cPage = request.getParameter("cPage");
 	
 	postVO pvo = postDAO.selectOne(psNo);
 	System.out.println("게시글 pvo : " + pvo);
+	
+	//신고수 sum 보여주기 계산
+	int psWarn = warnDAO.warnSumBypsNo(psNo);
+	System.out.println("psWarn : " + psWarn);
+	
+	pvo.setPsWarn(psWarn);
+	System.out.println("<신고 계산> pvo : " + pvo);
+	
+	//로그인 회원NO, psNo의 신고 여부 확인
+	int no = (Integer)session.getAttribute("no");
+	pageContext.setAttribute("no", no);
+	int warnNum = warnDAO.warnSearchPost(no, psNo);
+	System.out.println("warnNum : " + warnNum);
+	pageContext.setAttribute("warnNum", warnNum);
+	
 	session.setAttribute("pvo", pvo);
 	session.setAttribute("cPage", cPage);
 	
@@ -28,7 +45,6 @@
 	session.setAttribute("c_list", commList);//댓글목록
 // 	System.out.println("댓글작성자번호 : " + commList.get(0).getNo());
 	
-
 	session.getAttribute("coo");
 
 
@@ -104,13 +120,28 @@ function ps_update(frm) {
    frm.submit();
 }
 	
-	
+	//신고 버튼(toggle 기능 - 한번 클릭 추천, 한번 더 클릭 해제)
 	//게시물 신고버튼
-	
-	function warn_push() {
-	let isWarn = alert("신고하시겠습니까?")
-
+	function warn_push(frm, warnNum) {
+		//본인 리뷰가 아닌지 확인
+		if (${no} != ${pvo.no}) {
+			//신고 클릭시, rvWarn.jsp에서 신고 추가(+1)
+			if (warnNum == 0) {
+// 				alert("-" + warnNum + "-");
+				alert("신고했습니다.");
+			//해제(-1) 처리
+			} else {
+// 				alert("-" + warnNum + "-");
+				alert("신고를 취소합니다.");
+			}
+			location.href= "psWarn.jsp?psNo=${pvo.psNo}";
+		} else if (${no} == 13) {
+			alert("관리자 계정입니다.");
+		} else {
+			alert("본인 리뷰는 신고할 수 없습니다.");
+		}
 	}
+
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
@@ -128,7 +159,9 @@ function ps_update(frm) {
 <%-- 	<td>${pvo.no }</td> --%>
 	<td width="90%">${pvo.psDate }</td>
 	<td>
-	<input class="up_button"  type="button" value="신고" onclick="warn_push()">
+	<input class="up_button" type="button" value="신고"
+		data-warn-num="${warnNum}" 
+		onclick="warn_push(this.form, this.dataset.warnNum)">${pvo.psWarn }
 	</td>
 	<td>
 	<form action="postUpdate.jsp" method="get">

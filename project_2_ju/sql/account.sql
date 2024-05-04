@@ -18,7 +18,8 @@ INSERT INTO ACCOUNT
 VALUES (ACCOUNT_SEQ.NEXTVAL, '강감찬', 'RIVER', '4444', 'river89', 0, 'kangkc@gmail.com', 0);
 INSERT INTO ACCOUNT
 VALUES (ACCOUNT_SEQ.NEXTVAL, '강만수', 'DUMP', '7777', 'dump17', 1, 'kangdp@naver.com', 0);
-
+INSERT INTO ACCOUNT
+VALUES (ACCOUNT_SEQ.NEXTVAL, '관리자', 'ju123', 'ju123', 'admin', 0, 'moviechoice@naver.com', 0);
 SELECT *
 FROM ACCOUNT
 ORDER BY NO ASC;
