@@ -79,69 +79,22 @@ session.setAttribute("list", list);
             <% } %>
         }
     </script>
-    <style>
-        .body {
-            margin-left: 420px;
-            margin-top: 100px;
-            margin-right: 420px;
-        }
 
-        .write {
-            position: absolute;
-            top: 240px;
-            right: 430px;
-            background-color: #56BEC0;
-            color: white;
-            border: none;
-            width: 100px;
-            height: 30px;
-        }
-
-        .search {
-            position: relative;
-            width: 500px;
-            height: 25px;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 14px;
-        }
-
-        .searchimg {
-            position: absolute;
-            width: 17px;
-            top: 300px;
-            right: 880px;
-            margin: 0;
-        }
-
-        .select {
-            width: 100px;
-            height: 46px;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 14px;
-        }
-
-        table {
-            border-collapse: collapse;
-            border-left: none;
-            border-right: none;
-            width: 1040px;
-            height: 500px;
-        }
-    </style>
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/free.css">
 </head>
 <body>
 	<%@ include file="include/header.jspf" %>
 	<div class="body">
-	    <h2>QnA</h2>
+	    <h1>QnA</h1>
+	<div class="innerbox">
+	<div class="content">
 	    <form  action="qnaWrite.jsp" method="get">
 	    	<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
 	    </form>
-		<hr>
+
+		<hr class="color">
+		<div class="box">
 	    <form action="qnaController?search=qnaList" method="get">
 	        <select class="select" name="idx">
 				<option value="0">내용</option>
@@ -153,7 +106,9 @@ session.setAttribute("list", list);
 			<input class="searchbtn" type="submit" value="검색"> 
 	        <input type="hidden" name="search" value="qnaList">
 	    </form>
-	    
+	    </div>
+	    </div>
+	    </div>
 	<div id="qna">
 	<table border frame=void>
 		<tr>
@@ -165,10 +120,12 @@ session.setAttribute("list", list);
 		</tr>
 		<c:forEach var="vo" items="${list }">
 		<tr>
-		<td>${vo.qaNo }</td>
-		<td>${vo.qaCategory }</td> 
-		<td>${vo.id }</td>
-		<td>${vo.qaDate }</td>
+
+		<td width="5%">${vo.qaNo }</td>
+    <td>${vo.qaCategory }</td>
+		<td width="15%">${vo.id }</td>
+		<td width="15%">${vo.qaDate }</td>
+
 		<td>
 		<a href="qnaView.jsp?qaNo=${vo.qaNo }&cPage=${pvo.nowPage}">
 		${vo.qaContent }

@@ -37,19 +37,20 @@ background-color: #56BEC0;
 	top: 0px;
 	right: 0px;
 	background-color:#56BEC0;
+	border-radius: 5px;
 	color: white;
 	border: none;
 	 width: 100px;
-  	height: 40px;
+  	height: 38px;
 }
 .write:hover {
 	background-color:#4EA8AA;
 }
 .select {
 width: 100px;
-height: 46px;
+height: 42px;
  border: 1px solid #bbb;
-/*   border-radius: 8px; */
+border-radius: 5px;
   padding: 10px 12px;
   font-size: 14px;
 }
@@ -57,22 +58,30 @@ height: 46px;
 position: relative;
 	margin-top: 16px;
   width: 500px;
-  height: 25px;
+  height: 22px;
   border: 1px solid #bbb;
-/*   border-radius: 8px; */
+border-radius: 5px;
   padding: 10px 12px;
   font-size: 14px;
+}
+.listbtn {
+	position: relative;
+border: 1px solid #bbb;
+border-radius: 5px;
+	 width: 100px;
+  height: 42px;
+  background-color: white;
 }
 
 .searchbtn {
 position: relative;
-
+border: 1px solid #bbb;
 	background-color: #888888;
 	border:  none;
-/* 	border-radius: 8px; */
+border-radius: 5px;
 	color: white;
 	 width: 100px;
-  height: 46px;
+  height: 42px;
 }
 .searchbtn:hover {
 	background-color: #7C7C7C;
@@ -90,6 +99,7 @@ table {
 td {
 	padding: 15px;
 }
+
 a {
 /* 	font-weight: bold; */
 }
@@ -100,3 +110,8 @@ a:hover {
 .disable {
 	color: gray;
 }
+table.td:nth-last-child(1)  {
+	text-align:center;
+}
+
+

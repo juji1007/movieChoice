@@ -50,8 +50,9 @@
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
-    <div>
-        <img src="img/${vo.mvPoster }" alt="${vo.mvTitle } Poster">
+<div class="body">
+    <div class="container">
+        <img src="img/${vo.mvPoster }"  width="400" height="400" style="width: 100%; height: auto;">
     </div>
     <input type="button" value="리뷰 작성" onclick="location.href='writeReview.jsp?movie=${vo.mvTitle }'">
 	<div>	
@@ -73,9 +74,10 @@
 		<p>${mvo.rvDate }</p>
 		<hr>
 	</c:forEach>
+
+</div>
 </body>
 </html>
-
 
 
 

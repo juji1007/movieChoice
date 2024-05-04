@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.dao.warnDAO"%>
 <%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.project.vo.AccountVO"%>
 <%@page import="com.sun.nio.sctp.PeerAddressChangeNotification"%>
@@ -12,11 +13,27 @@
 
 	int psNo = Integer.parseInt(request.getParameter("psNo"));
 //  	int pcNo = Integer.parseInt(request.getParameter("pcNo"));
-//	int no = Integer.parseInt(request.getParameter("no"));
+// 	int no = (int)session.getAttribute("no");
+	
 	String cPage = request.getParameter("cPage");
 	
 	postVO pvo = postDAO.selectOne(psNo);
 	System.out.println("게시글 pvo : " + pvo);
+	
+	//신고수 sum 보여주기 계산
+	int psWarn = warnDAO.warnSumBypsNo(psNo);
+	System.out.println("psWarn : " + psWarn);
+	
+	pvo.setPsWarn(psWarn);
+	System.out.println("<신고 계산> pvo : " + pvo);
+	
+	//로그인 회원NO, psNo의 신고 여부 확인
+	int no = (Integer)session.getAttribute("no");
+	pageContext.setAttribute("no", no);
+	int warnNum = warnDAO.warnSearchPost(no, psNo);
+	System.out.println("warnNum : " + warnNum);
+	pageContext.setAttribute("warnNum", warnNum);
+	
 	session.setAttribute("pvo", pvo);
 	session.setAttribute("cPage", cPage);
 	
@@ -28,7 +45,6 @@
 	session.setAttribute("c_list", commList);//댓글목록
 // 	System.out.println("댓글작성자번호 : " + commList.get(0).getNo());
 	
-
 	session.getAttribute("coo");
 
 
@@ -88,6 +104,8 @@ function ps_update(frm) {
 	function list_go() {
 		location.href = "free.jsp";
 	}
+	
+	
 	//로그인 후 작성가능
 	function login_confirm(frm) {
 <% 
@@ -101,13 +119,29 @@ function ps_update(frm) {
 %>
    frm.submit();
 }
-
-	//게시물 신고버튼
 	
-	function warn_push() {
-	let isWarn = alert("신고하시겠습니까?")
-
+	//신고 버튼(toggle 기능 - 한번 클릭 추천, 한번 더 클릭 해제)
+	//게시물 신고버튼
+	function warn_push(frm, warnNum) {
+		//본인 리뷰가 아닌지 확인
+		if (${no} != ${pvo.no}) {
+			//신고 클릭시, rvWarn.jsp에서 신고 추가(+1)
+			if (warnNum == 0) {
+// 				alert("-" + warnNum + "-");
+				alert("신고했습니다.");
+			//해제(-1) 처리
+			} else {
+// 				alert("-" + warnNum + "-");
+				alert("신고를 취소합니다.");
+			}
+			location.href= "psWarn.jsp?psNo=${pvo.psNo}";
+		} else if (${no} == 13) {
+			alert("관리자 계정입니다.");
+		} else {
+			alert("본인 리뷰는 신고할 수 없습니다.");
+		}
 	}
+
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
@@ -115,14 +149,27 @@ function ps_update(frm) {
 <body>
 <%@ include file="include/header.jspf" %>
 <div class="body">
-<table  border frame=void>
+<table frame=void>
+<!-- <table border> -->
 	<tr>
-	<td colspan=7><h1>${pvo.psTitle }</h1></td>
+	<td colspan=7 ><h1>${pvo.psTitle }</h1></td>
 	</tr>
 	<tr>
-	<td>${pvo.psNick }</td>
-	<td>${pvo.no }</td>
-	<td>${pvo.psDate }</td>
+	<td width="10%">${pvo.psNick }</td>
+<%-- 	<td>${pvo.no }</td> --%>
+	<td width="90%">${pvo.psDate }</td>
+	<td>
+	<input class="up_button" type="button" value="신고"
+		data-warn-num="${warnNum}" 
+		onclick="warn_push(this.form, this.dataset.warnNum)">${pvo.psWarn }
+	</td>
+	<td>
+	<form action="postUpdate.jsp" method="get">
+	<input class="up_button"  type="button" value="수정" onclick="ps_update(this.form)">
+	<input type="hidden" name="psNo" value="${pvo.psNo }">
+	<input type="hidden" name="no" value="${vo.no }">
+	</form>
+	</td>
 	<td>
 	<form action="postDelete.jsp" method="get">
 		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
@@ -131,29 +178,20 @@ function ps_update(frm) {
 	</form>
 	</td>
 	<td>
-	<form action="postUpdate.jsp" method="get">
-	<input type="button" value="수정" onclick="ps_update(this.form)">
-	<input type="hidden" name="psNo" value="${pvo.psNo }">
-	<input type="hidden" name="no" value="${vo.no }">
-	</form>
+	<input class="li_button"  type="button" value="목록" onclick="list_go()">
 	</td>
-	<td>
-	<input type="button" value="목록보기" onclick="list_go()">
-	</td>
-	<td>
-	<input type="button" value="신고" onclick="warn_push()">
-	</td>
+	
 	</tr>
 
 </table>
 
-
-<tr>
-
-	<td colspan=7>${pvo.psContent }</td>
+<hr>
+<table >
+<tr  height="200">
+	<td >${pvo.psContent }</td>
 </tr>
 <tr>
-<td colspan=7>
+<td >
 
 	<c:if test="${empty pvo.psFile }">
 		첨부파일없음
@@ -164,54 +202,52 @@ function ps_update(frm) {
 		</c:if>
 	</td>
 </tr>
-
-
-
+</table>
+<hr>
 <!-- 댓글작성 -->
 <div class="comment">
-
-<form action="postComment_write_ok.jsp" method="post">
-
-<tr>
-	<td colspan=7>
-		<input type="hidden" name="no" value="${no }">
-		<textarea name="pcContent" rows="2" cols="55"></textarea>
-		<input type="button" value="댓글작성" onclick="login_confirm(this.form)">
-		<input type="hidden" name="psNo" value="${pvo.psNo }">
-		<input type="hidden" name="cPage" value="${cPage }">
-		</td>
+<table>
+	<form action="postComment_write_ok.jsp" method="post">
+	
+	<tr>
+		<td colspan=7>
+			<input type="hidden" name="no" value="${no }">
+			<textarea name="pcContent" rows="2" cols="55"></textarea>
+			<input class="writeBtn" type="button" value="댓글작성" onclick="login_confirm(this.form);">
+			<input type="hidden" name="psNo" value="${pvo.psNo }">
+			<input type="hidden" name="cPage" value="${cPage }">
+			</td>
 		</tr>
 	</form>
-
-
+</table>
+<hr class="color">
 
 <!-- 댓글표시 및 삭제-->
+<table class="comment" border frame=void>
 <c:forEach var="commVO" items="${c_list }">
 		<form action="postComment_del_ok.jsp" method="get">
 		<tr>
-			<td colspan=7>
-				${commVO.pcNick } ${commVO.no } ${commVO.pcDate }
+			<td width="10%">
+				${commVO.pcNick }
 			</td>
-		</tr>
-		<tr>
-			<td colspan=6>
+			<td width="15%">
+			 ${commVO.pcDate }
+			</td>
+			<td >
 			${commVO.pcContent }
 			</td>
-			<td>
-				<input type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
+			<td class="deleteComment">
+				<input class="deleteBtn" type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
 				<input type="hidden" name="pcNo" value="${commVO.pcNo }">
 				<input type="hidden" name="no" value="${commVO.no }">
 			</td>
 		</tr>
 		</form>
-
-	</div>
-
 	</c:forEach>
-
+</table>
 	</div>
-	</table>
-</div>
+	</div>
+
 
 </body>
 </html>

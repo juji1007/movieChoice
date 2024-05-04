@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mystudy.model.dao.listTotDAO;
 import com.mystudy.model.dao.recDAO;
 import com.mystudy.model.dao.reviewDAO;
+import com.mystudy.model.dao.warnDAO;
 import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.reviewVO;
 
@@ -35,7 +36,7 @@ public class RewardController extends HttpServlet {
 		if("rwMain".equals(category)) {
 			System.out.println(">> rwMain 요청 처리~~");
 			
-//		 	rvDate(월별) 추천 수가 많은 rvNo를 select
+//		 	rvDate(월별) 추천 수가 많은 vo를 선택하여 [reward]에 해당 월의 리뷰vo insert 
 //		 	화면에 보이는 페이지/관리자가 업로드 할 수 있는 페이지 따로 구현
 			//rvDate 초기값은 시스템 날짜로 추출
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
@@ -119,12 +120,30 @@ public class RewardController extends HttpServlet {
 			listTotVO vo = listTotDAO.selectOne(rvNoLarge);
 			System.out.println("추천수 높은 vo : " +  vo);
 			
-			//rvRec, rvWarn 계산 처리 필요!!!
+			//rvRec, rvWarn 계산 처리 필요!!!=>request로 rvRec, rvWarn 넘겨주기 
+			//추천수 sum 보여주기 계산
+			int selRvNo = vo.getRvNo();
+			System.out.println("> 이달의 리뷰 selRvNo : " + selRvNo);
 			
+			int rvRec = recDAO.recSum(selRvNo);
+			System.out.println("::recDAO.recSum rvRec : " + rvRec);
+			if (rvRec == -1) {
+				rvRec = 0;
+			}
+			vo.setRvRec(rvRec);
+			
+			//신고수 sum 보여주기 계산
+			int rvWarn = warnDAO.warnSum(rvNo);
+			System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+			if (rvWarn == -1) {
+				rvWarn = 0;
+			}
+			vo.setRvWarn(rvWarn);
+			System.out.println("<추천/신고 계산>추천수 높은 vo : " + vo);
 			
 			request.setAttribute("rwVo", vo);
 			
-			request.getRequestDispatcher("rewardMain.jsp").forward(request, response);
+			request.getRequestDispatcher("rwMain.jsp").forward(request, response);
 		}
 		
 		if("search".equals(category)) {
@@ -167,13 +186,30 @@ public class RewardController extends HttpServlet {
 			listTotVO vo = listTotDAO.selectOne(rvNoLarge);
 			System.out.println("추천수 높은 vo : " +  vo);
 			
-			//rvRec, rvWarn 계산 처리 필요!!!
+			//rvRec, rvWarn 계산 처리 필요!!!=>request로 rvRec, rvWarn 넘겨주기 
+			//추천수 sum 보여주기 계산
+			int selRvNo = vo.getRvNo();
+			System.out.println("> 이달의 리뷰 selRvNo : " + selRvNo);
 			
+			int rvRec = recDAO.recSum(selRvNo);
+			System.out.println("::recDAO.recSum rvRec : " + rvRec);
+			if (rvRec == -1) {
+				rvRec = 0;
+			}
+			vo.setRvRec(rvRec);
+			
+			//신고수 sum 보여주기 계산
+			int rvWarn = warnDAO.warnSum(rvNo);
+			System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+			if (rvWarn == -1) {
+				rvWarn = 0;
+			}
+			vo.setRvWarn(rvWarn);
+			System.out.println("<추천/신고 계산>추천수 높은 vo : " + vo);
 			
 			request.setAttribute("rwVo", vo);
 			
-//			request.getRequestDispatcher("rewardSearch.jsp").forward(request, response);
-			request.getRequestDispatcher("rewardMain.jsp").forward(request, response);
+			request.getRequestDispatcher("rwMain.jsp").forward(request, response);
 		}
 	}
 

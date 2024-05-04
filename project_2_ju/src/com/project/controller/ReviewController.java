@@ -84,6 +84,7 @@ public class ReviewController extends HttpServlet {
 			//페이징 + 리뷰 전체(영화,회원) 목록
 			List<listTotVO> listAll = listTotDAO.listTot(p.getBegin(), p.getEnd());
 			System.out.println(">> 리뷰 메인 listAll : " + listAll);
+			System.out.println(">> 리뷰 메인 rvDate : " + listAll.get(1).getRvDate());
 			
 			//추천수 sum 보여주기 계산
 			int i = 0;
@@ -260,28 +261,30 @@ public class ReviewController extends HttpServlet {
 			request.setAttribute("sort", sort);
 			request.setAttribute("listOne", listOne);
 			
-      if (listOne.size() == 0) {
-				//idx-keyword 내용 일치하지 않을 때
-				request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-			} else {
-				request.getRequestDispatcher("selectOne.jsp").forward(request, response);
-			}
-
 			String location = request.getParameter("location"); 
 			if ("reviewMainAdmin".equals(location)) {
 				if (idx.equals("null") || keyword.trim().length() == 0) {
 			  	request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
-		  	} else if (listOne.size() == 0) {
-		  		//idx-keyword 내용 일치하지 않을 때
-	  			request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
-	  		} else {
+				} else if (listOne.size() == 0) {
+					//idx-keyword 내용 일치하지 않을 때
+					request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
+				} else {
 	  			request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
-	  		}
+				}
+			} else {
+				if (idx.equals("null") || keyword.trim().length() == 0) {
+					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+				} else if (listOne.size() == 0) {
+					//idx-keyword 내용 일치하지 않을 때
+					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+				} else {
+					request.getRequestDispatcher("selectOne.jsp").forward(request, response);
+				}
+			}
+			
+			
 		}
 		
-
-			
-	  }
 		
 	}
 

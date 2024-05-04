@@ -96,11 +96,22 @@
 	    } else {
 	    }
 	}
+	function deleteQna(frm) {
+		console.log("qna정보삭제실행");
+		console.log(frm);
+		let check = confirm("QnA를 삭제하시겠습니까?");
+	    if (check) {
+	    	frm.action="qnaDeleteOk.jsp";
+			frm.submit();
+	    } else {
+	    }
+	}
 	window.onload = function() {
 		getAccountInfo();
 		getReviewInfo();
 		getPostInfo();
 		getPostCommentInfo();
+		getQnaInfo();
 	};
 	
 	function getAccountInfo() {
@@ -334,6 +345,72 @@
 
 		});
 	}
+	
+	function getQnaInfo() {
+		
+		$.ajax({
+			type: "POST",
+			url: "ajaxManageController",
+			data: {
+				action: "qnaMypage"
+			},
+			dataType: "json",
+			 success: function(respData) {
+				console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
+	            let htmltag = "";
+	       	    // 데이터 처리
+	            if (respData.length === 0) {
+	                // 검색 결과가 없을 때
+	                 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	            } else {
+	                // 검색 결과가 있을 때
+	                console.log("qnahtml");
+	                htmltag += "<tr><th>QnA 번호</th><th>QnA 내용</th><th>QnA 작성일</th><th>QnA 카테고리</th><th>QnA 답변 유무</th><th>관리</th></tr>";
+	                for (let member of respData.listSearch) {
+	                    if (member.table === "qna") {
+	                        if (member.no === "null" || member.no.length === 0) {
+	                            console.log("qna없음html");
+	                            htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+	                            break;
+	                        }
+	                        htmltag += "<tr>";
+	                        htmltag += "<td><a href='qnaView.jsp?qaNo=" + member.qaNo + "'>" + member.qaNo + "</a></td>";
+	                        htmltag += "<td>" + member.qaContent + "</a></td>";
+	                        htmltag += "<td>" + member.qaDate + "</td>";
+	                        htmltag += "<td>";
+	                        if (member.qaCategory !== "null") {
+	                            htmltag += member.qaCategory;
+	                        }
+	                        htmltag += "</td>";
+	                        htmltag += "<td id ='inquiryCheck'>";
+	                        if (member.inquiryCheck === "true") {
+	                            htmltag += "<span style='color: red;'>답변이 있습니다.</span>";
+	                        } else {
+	                            htmltag += "<span>답변이 없습니다.</span>";
+	                        }
+	                        htmltag += "</td>";
+
+	                        htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteQna(this.form)'></td>";
+	                        htmltag += "<input type='hidden' name='qaNo' value='" + member.qaNo + "'>";
+	                        htmltag += "<input type='hidden' name='location' value='myPage'>";
+	                        htmltag += "</tr>";
+	                    }
+	                }
+
+	            }
+	       	    
+	            $('#qnaThead').html(htmltag);
+		            
+			 },
+		        error: function(jqXHR, textStatus, errorThrown) {
+		            alert("Ajax 처리 실패:\n" +
+		                "jqXHR.readyState: " + jqXHR.readyState + "\n" +
+		                "textStatus: " + textStatus + "\n" +
+		                "errorThrown: " + errorThrown);
+		        }
+
+		});
+	}
 </script>
 <body>
 	<!-- header.jspf -->
@@ -415,6 +492,17 @@
 		<table id="postComment">
 			<caption>나의 댓글정보</caption>
 			<thead id="postCommentThead">
+				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
+			</thead>
+		</table>
+	</form>
+</div>
+<hr>
+<div id="frame">
+	<form method="post">
+		<table id="qna">
+			<caption>나의 댓글정보</caption>
+			<thead id="qnaThead">
 				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
 			</thead>
 		</table>
