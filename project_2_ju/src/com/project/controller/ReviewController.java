@@ -78,7 +78,7 @@ public class ReviewController extends HttpServlet {
 			// 끝페이지를 전체페이지 수로 변경 처리
 			if (p.getEndPage() > p.getTotalPage()) {
 				p.setEndPage(p.getTotalPage());
-				System.out.println(">>정정 후 endPage : " + p.getEndPage());
+				//System.out.println(">>정정 후 endPage : " + p.getEndPage());
 			}
 			
 			//페이징 + 리뷰 전체(영화,회원) 목록
@@ -90,9 +90,9 @@ public class ReviewController extends HttpServlet {
 			int i = 0;
 			for (i = 0; i < listAll.size(); i++) {
 				int rvNo = listAll.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvRec = recDAO.recSum(rvNo);
-				System.out.println("::recDAO.recSum rvRec : " + rvRec);
+//				System.out.println("::recDAO.recSum rvRec : " + rvRec);
 			
 				if (rvRec == -1) {
 					rvRec = 0;
@@ -102,9 +102,9 @@ public class ReviewController extends HttpServlet {
 			//신고수 sum 보여주기 계산
 			for (i = 0; i < listAll.size(); i++) {
 				int rvNo = listAll.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvWarn = warnDAO.warnSum(rvNo);
-				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+//				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
 			
 				if (rvWarn == -1) {
 					rvWarn = 0;
@@ -211,7 +211,7 @@ public class ReviewController extends HttpServlet {
 			// 끝페이지를 전체페이지 수로 변경 처리
 			if (p.getEndPage() > p.getTotalPage()) {
 				p.setEndPage(p.getTotalPage());
-				System.out.println(">>정정 후 endPage : " + p.getEndPage());
+				//System.out.println(">>정정 후 endPage : " + p.getEndPage());
 			}
 			
 			//동적 검색 및 페이징 처리
@@ -234,9 +234,9 @@ public class ReviewController extends HttpServlet {
 			int i = 0;
 			for (i = 0; i < listOne.size(); i++) {
 				int rvNo = listOne.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvRec = recDAO.recSum(rvNo);
-				System.out.println("::recDAO.recSum rvRec : " + rvRec);
+//				System.out.println("::recDAO.recSum rvRec : " + rvRec);
 			
 				if (rvRec == -1) {
 					rvRec = 0;
@@ -246,9 +246,9 @@ public class ReviewController extends HttpServlet {
 			//신고수 sum 보여주기 계산
 			for (i = 0; i < listOne.size(); i++) {
 				int rvNo = listOne.get(i).getRvNo();
-				System.out.println("rvNo : " + rvNo);
+//				System.out.println("rvNo : " + rvNo);
 				int rvWarn = warnDAO.warnSum(rvNo);
-				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
+//				System.out.println("::warnDAO.warnSum rvWarn : " + rvWarn);
 			
 				if (rvWarn == -1) {
 					rvWarn = 0;
@@ -264,14 +264,13 @@ public class ReviewController extends HttpServlet {
 			String location = request.getParameter("location"); 
 			if ("reviewMainAdmin".equals(location)) {
 				if (idx.equals("null") || keyword.trim().length() == 0) {
-					request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
+			  	request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
 				} else if (listOne.size() == 0) {
 					//idx-keyword 내용 일치하지 않을 때
 					request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
 				} else {
 	  			request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
 				}
-				
 			} else {
 				if (idx.equals("null") || keyword.trim().length() == 0) {
 					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
@@ -282,7 +281,10 @@ public class ReviewController extends HttpServlet {
 					request.getRequestDispatcher("selectOne.jsp").forward(request, response);
 				}
 			}
+			
+			
 		}
+		
 		
 	}
 
