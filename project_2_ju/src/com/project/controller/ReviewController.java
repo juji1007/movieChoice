@@ -277,6 +277,7 @@ public class ReviewController extends HttpServlet {
 	  		} else {
 	  			request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
 	  		}
+		}
 		
 
 			
