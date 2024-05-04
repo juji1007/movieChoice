@@ -78,7 +78,7 @@ public class ReviewController extends HttpServlet {
 			// 끝페이지를 전체페이지 수로 변경 처리
 			if (p.getEndPage() > p.getTotalPage()) {
 				p.setEndPage(p.getTotalPage());
-				System.out.println(">>정정 후 endPage : " + p.getEndPage());
+				//System.out.println(">>정정 후 endPage : " + p.getEndPage());
 			}
 			
 			//페이징 + 리뷰 전체(영화,회원) 목록
@@ -210,7 +210,7 @@ public class ReviewController extends HttpServlet {
 			// 끝페이지를 전체페이지 수로 변경 처리
 			if (p.getEndPage() > p.getTotalPage()) {
 				p.setEndPage(p.getTotalPage());
-				System.out.println(">>정정 후 endPage : " + p.getEndPage());
+				//System.out.println(">>정정 후 endPage : " + p.getEndPage());
 			}
 			
 			//동적 검색 및 페이징 처리
@@ -269,7 +269,7 @@ public class ReviewController extends HttpServlet {
 
 			String location = request.getParameter("location"); 
 			if ("reviewMainAdmin".equals(location)) {
-        if (idx.equals("null") || keyword.trim().length() == 0) {
+				if (idx.equals("null") || keyword.trim().length() == 0) {
 			  	request.getRequestDispatcher("reviewController?category=rvMain&location=reviewMainAdmin").forward(request, response);
 		  	} else if (listOne.size() == 0) {
 		  		//idx-keyword 내용 일치하지 않을 때
@@ -281,7 +281,7 @@ public class ReviewController extends HttpServlet {
 		
 
 			
-		}
+	  }
 		
 	}
 
