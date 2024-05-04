@@ -84,6 +84,7 @@ public class ReviewController extends HttpServlet {
 			//페이징 + 리뷰 전체(영화,회원) 목록
 			List<listTotVO> listAll = listTotDAO.listTot(p.getBegin(), p.getEnd());
 			System.out.println(">> 리뷰 메인 listAll : " + listAll);
+			System.out.println(">> 리뷰 메인 rvDate : " + listAll.get(1).getRvDate());
 			
 			//추천수 sum 보여주기 계산
 			int i = 0;

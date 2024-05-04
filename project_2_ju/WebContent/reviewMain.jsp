@@ -47,7 +47,6 @@
 
 		<input type="button" value="전체조회"
 			onclick="javascript:location.href='reviewController?category=rvMain'">
-	</h2>
 
 	</form>
 	<hr class="color">
