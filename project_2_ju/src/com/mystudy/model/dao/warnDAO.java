@@ -53,8 +53,7 @@ public class warnDAO {
 		return -1;
 	}
 	
-	
-	//신고 클릭 선택(INSERT)
+	//리뷰 신고 클릭 선택(INSERT)
 	public static int clickOn(int no, int rvNo) {
 		try (SqlSession ss = DBService.getFactory().openSession(true)){
 			Map<String, Integer> map = new HashMap<>();
@@ -68,7 +67,7 @@ public class warnDAO {
 		return -1;
 	}
 	
-	//신고 클릭 해제(DELETE)
+	//리뷰 신고 클릭 해제(DELETE)
 	public static int clickOff(int no, int rvNo) {
 		try (SqlSession ss = DBService.getFactory().openSession(true)){
 			Map<String, Integer> map = new HashMap<>();
@@ -82,7 +81,46 @@ public class warnDAO {
 		return -1;
 	}
 	
-	//게시물
-	
+	//회원no, 게시물psNo에 맞는 신고수 확인(select)
+		public static int warnSearchPost(int no, int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession()){
+				Map<String, Integer> map = new HashMap<>();
+				map.put("no", no);
+				map.put("psNo", psNo);
+				
+				return ss.selectOne("warn.searchPost", map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//게시물 신고 클릭 선택(INSERT)
+		public static int clickOnPost(int no, int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)){
+				Map<String, Integer> map = new HashMap<>();
+				map.put("no", no);
+				map.put("psNo", psNo);
+				
+				return ss.insert("warn.insertPost", map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
+		
+		//게시물 신고 클릭 해제(DELETE)
+		public static int clickOffPost(int no, int psNo) {
+			try (SqlSession ss = DBService.getFactory().openSession(true)){
+				Map<String, Integer> map = new HashMap<>();
+				map.put("no", no);
+				map.put("psNo", psNo);
+				
+				return ss.delete("warn.deletePost", map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return -1;
+		}
 	
 }

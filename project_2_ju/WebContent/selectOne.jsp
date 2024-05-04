@@ -18,9 +18,10 @@
 	function login_confirm(frm) {
 		<%if (session.getAttribute("no") == null) {%>
 			alert("로그인 후 작성 가능합니다.");
-			frm.location.href = "reviewController?category=rvMain";
-		<%} else%>
+			location.href = "login_page.jsp";
+		<%} else {%>
 			frm.submit();
+		<%}%>
 	}
 	
 // 	function checkSearchCondition(frm) {
@@ -38,13 +39,15 @@
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
-	<h2>
-		리뷰모음
-		<input type="button" value="등록하기" 
+	<h2>리뷰모음</h2>
+	<form action="reviewController?category=rvWrite" method="post">
+		<input class="write" type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
-		<input type="button" value="전체조회" 
+
+		<input type="button" value="전체조회"
 			onclick="javascript:location.href='reviewController?category=rvMain'">
-	</h2>
+
+	</form>
 	
 	<h3>[${sort} - ${keyword }] 조회</h3>
 	<!-- 리뷰 목록 검색 -->	

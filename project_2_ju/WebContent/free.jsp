@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.dao.warnDAO"%>
 <%@page import="com.project.dao.AccountDAO"%>
 <%@page import="com.mystudy.model.vo.postCommentVO"%>
 <%@page import="com.project.vo.AccountVO"%>
@@ -57,6 +58,21 @@ List<postVO> list = postDAO.getList(p.getBegin(), p.getEnd());
 System.out.println(">> 현재페이지 글목록 : " + list);
 %>
 <%
+//신고수 sum 보여주기 계산
+int i;
+for (i = 0; i < list.size(); i++) {
+	int psNo = list.get(i).getPsNo();
+	System.out.println("psNo : " + psNo);
+	int psWarn = warnDAO.warnSumBypsNo(psNo);
+	System.out.println("::warnDAO.warnSumBypsNo psWarn : " + psWarn);
+
+	if (psWarn == -1) {
+		psWarn = 0;
+	}
+	list.get(i).setPsWarn(psWarn);
+}
+System.out.println("<신고 계산처리> list : " + list);
+
 //EL, JSTL 사용을 위해 scope에 데이터 등록(page영역)
 // 페이징처리객체 page 영역에 저장
 
@@ -83,9 +99,10 @@ session.getAttribute("c_list");
    function login_confirm(frm) {
 <%if (session.getAttribute("no") == null) {%>
    alert("로그인 후 작성 가능합니다.");
-   frm.location.href = "free.jsp";
-<%} else%>
+   location.href = "login_page.jsp";
+<%} else {%>
    frm.submit();
+   <% } %>
 }
 
 </script>
@@ -136,6 +153,9 @@ session.getAttribute("c_list");
 <a href="freeView.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
 ${vo.psTitle }
 </a>
+</td>
+<td width="5%">
+<input class="up_button" type="button" value="신고">${vo.psWarn }
 </td>
 </tr>
 </c:forEach>

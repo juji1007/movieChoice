@@ -74,10 +74,10 @@
 		<p>${mvo.rvDate }</p>
 		<hr>
 	</c:forEach>
-	</div>
+
+</div>
 </body>
 </html>
-
 
 
 

@@ -28,9 +28,10 @@
 	function login_confirm(frm) {
 		<%if (session.getAttribute("no") == null) {%>
 			alert("로그인 후 작성 가능합니다.");
-			frm.location.href = "reviewController?category=rvMain";
-		<%} else%>
+			location.href = "login_page.jsp";
+		<%} else {%>
 			frm.submit();
+        <% } %>	
 	}
 	
 </script>
