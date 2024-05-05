@@ -24,12 +24,14 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 function selectCategory(frm) {
-	alert("클릭");
+	var checkCategory = frm.date.value;
+	alert("checkCategory date : " + checkCategory);
+	
 	$.ajax({
 		type : "POST",
 		url : "ajaxRewardController",
 		data : {
-			action: "rwMain",
+			action: "rwMain_ajax",
 			date : date
 		},
 		dataType: "json",
