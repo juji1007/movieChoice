@@ -82,6 +82,7 @@ session.setAttribute("list", list);
 
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/free.css">
+
 </head>
 <body>
 	<%@ include file="include/header.jspf" %>
@@ -94,7 +95,10 @@ session.setAttribute("list", list);
 	    </form>
 
 		<hr class="color">
-		<div class="box">
+      	<div class="box">
+     	<div class="innerbox">
+    	<div class="content">
+
 	    <form action="qnaController?search=qnaList" method="get">
 	        <select class="select" name="idx">
 				<option value="0">내용</option>
@@ -107,25 +111,23 @@ session.setAttribute("list", list);
 	        <input type="hidden" name="search" value="qnaList">
 	    </form>
 	    </div>
-	    </div>
-	    </div>
+      	</div>
+     	</div>
 	<div id="qna">
 	<table border frame=void>
 		<tr>
 			<th>번호</th>
 			<th>분류</th>
-			<th>아이디</th>
+			<th>닉네임</th>
 			<th>작성일</th>
 			<th>내용</th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
 		<tr>
-
-		<td width="5%">${vo.qaNo }</td>
-    <td>${vo.qaCategory }</td>
-		<td width="15%">${vo.id }</td>
-		<td width="15%">${vo.qaDate }</td>
-
+		<td>${vo.qaNo }</td>
+		<td>${vo.qaCategory }</td> 
+		<td>${vo.nick }</td>
+		<td>${vo.qaDate }</td>
 		<td>
 		<a href="qnaView.jsp?qaNo=${vo.qaNo }&cPage=${pvo.nowPage}">
 		${vo.qaContent }
