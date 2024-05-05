@@ -27,87 +27,88 @@ import com.mystudy.model.vo.reviewVO;
 @WebServlet("/ajaxRewardController")
 public class AjaxRewardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println(":: AjaxReviewController doGet 시작~~");
+		System.out.println(":: AjaxRewardController doGet 시작~~");
 		
 		String action = request.getParameter("action");
 		System.out.println("action : " + action);
 		
 		//이달의 리뷰
-		if ("rwMain_ajax".equals(action)) {
-			System.out.println(">> rwMain 요청 처리~~");
+		if ("rwMain".equals(action)) {
+			System.out.println(">> action: rwMain 요청 처리~~");
 			
 			//검색 종류 확인
-//			String date = request.getParameter("date");
-//			System.out.println("검색 받은 date : " + date);
-//			String year = date.substring(0, 4);
-//			String month = date.substring(5);
-//			String rwDate = year + month;
+			String date = request.getParameter("date");
+			System.out.println("검색 받은 date : " + date);
+			String year = date.substring(0, 4);
+			String month = date.substring(5);
+			String rwDate = year + month;
 			
 			//DB 데이터 조회 후 JSON 형식 문자열 생성해서 응답하기
 	//	 	rvDate(월별) 추천 수가 많은 vo를 선택하여 [reward]에 해당 월의 리뷰vo insert 
 	//	 	화면에 보이는 페이지/관리자가 업로드 할 수 있는 페이지 따로 구현
 			
 		
-			//rvDate 초기값은 시스템 날짜로 추출
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-			Date now = new Date();
-			
-			String rvDate = sdf.format(now);
-			System.out.println("rvDate : " + rvDate);
-			// DB 데이터 가져오기(조회)
-			//listTotVO의 전체 목록 리뷰 작성된 rvDate만 추출
-			List<listTotVO> listAll = listTotDAO.getList();
-			System.out.println("전체 목록 listAll : " + listAll);
-			
-			//중복된 날짜 빼고 set에 yyyymm값 저장
-			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM");
-			String thisMonth = sdf2.format(now); //이번달 날짜
-			String valueThisMonth = sdf.format(now); //이번달 날짜
-			
-			request.setAttribute("thisMonth", thisMonth);
-			request.setAttribute("valueThisMonth", valueThisMonth);
-			
-			Set<String> set = new HashSet<>();
-			Set<String> setValue = new HashSet<>();
-			Map<String, Set<String>> map = new HashMap<>();
-			
-			for (int i = 0; i < listAll.size(); i++) {
-				//option태그 표시 값
-				String yearMonth = sdf2.format(listAll.get(i).getRvDate()); //yyyy-MM
-				set.add(yearMonth);
-				//option태그 value 값
-				String yyyyMM = sdf.format(listAll.get(i).getRvDate());
-				setValue.add(yyyyMM);
-				
-				//set-setValue를 묶어서 Map<String, Set<String>>에 저장
-				map.put("set", set);
-				map.put("setValue", setValue);
-			}
-			request.setAttribute("setValue", setValue);
-			
-			//set에서 이번달 날짜 제거
-			set.remove(thisMonth);
-			setValue.remove(valueThisMonth);
-			System.out.println("set : " + set);
-			request.setAttribute("set", set);
-			
-			System.out.println("map : " + map);
-			request.setAttribute("map", map);
-			
-			Set<String> s = map.get("set");
-			Set<String> sv = map.get("setValue");
-			request.setAttribute("s", s);
-			request.setAttribute("sv", sv);
+//			//rvDate 초기값은 시스템 날짜로 추출
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+//			Date now = new Date();
+//			
+//			String rvDate = sdf.format(now);
+//			System.out.println("rvDate : " + rvDate);
+//			// DB 데이터 가져오기(조회)
+//			//listTotVO의 전체 목록 리뷰 작성된 rvDate만 추출
+//			List<listTotVO> listAll = listTotDAO.getList();
+//			System.out.println("전체 목록 listAll : " + listAll);
+//			
+//			//중복된 날짜 빼고 set에 yyyymm값 저장
+//			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM");
+//			String thisMonth = sdf2.format(now); //이번달 날짜
+//			String valueThisMonth = sdf.format(now); //이번달 날짜
+//			
+//			request.setAttribute("thisMonth", thisMonth);
+//			request.setAttribute("valueThisMonth", valueThisMonth);
+//			
+//			Set<String> set = new HashSet<>();
+//			Set<String> setValue = new HashSet<>();
+//			Map<String, Set<String>> map = new HashMap<>();
+//			
+//			for (int i = 0; i < listAll.size(); i++) {
+//				//option태그 표시 값
+//				String yearMonth = sdf2.format(listAll.get(i).getRvDate()); //yyyy-MM
+//				set.add(yearMonth);
+//				//option태그 value 값
+//				String yyyyMM = sdf.format(listAll.get(i).getRvDate());
+//				setValue.add(yyyyMM);
+//				
+//				//set-setValue를 묶어서 Map<String, Set<String>>에 저장
+//				map.put("set", set);
+//				map.put("setValue", setValue);
+//			}
+//			request.setAttribute("setValue", setValue);
+//			
+//			//set에서 이번달 날짜 제거
+//			set.remove(thisMonth);
+//			setValue.remove(valueThisMonth);
+//			System.out.println("set : " + set);
+//			request.setAttribute("set", set);
+//			
+//			System.out.println("map : " + map);
+//			request.setAttribute("map", map);
+//			
+//			Set<String> s = map.get("set");
+//			Set<String> sv = map.get("setValue");
+//			request.setAttribute("s", s);
+//			request.setAttribute("sv", sv);
 		
 			//review 테이블에서 월별로 rvNo 번호 추출
-//			List<reviewVO> list = reviewDAO.selectVO(rwDate);
-			List<reviewVO> list = reviewDAO.selectVO(rvDate);
+			List<reviewVO> list = reviewDAO.selectVO(rwDate);
+//			List<reviewVO> list = reviewDAO.selectVO(rvDate);
 			System.out.println("시스템날짜 List : " + list);
 			
 			//해당 월의 rvNo에서 높은 추천수인 rvNo번호 추출

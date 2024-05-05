@@ -77,16 +77,15 @@ request.setAttribute("sv", sv);
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
-	
 function selectCategory(frm) {
+	//날짜 카테고리 클릭시 작동
 // 	var checkCategory = frm.date.value;
 // 	alert("var frm.date.value : " + checkCategory);
 // 	var search = frm.querySelector('input[type="button"]');
 	
 // 	var date = frm.date.value;
 	
-$(document).ready(function(){
-		console.log(">> reviewMain.jsp 접속 성공!!");
+
 	$.ajax({
 		type : "POST",
 		url : "ajaxRewardController",
@@ -132,8 +131,6 @@ $(document).ready(function(){
 // 			alert(":: complete 실행");
 // 		}   
 	});
-		
-}); 
 	
 }
 	
@@ -149,8 +146,8 @@ $(document).ready(function(){
 	<h3>월별 조회
 		<input type="button" value="이달의 리뷰" onclick="javascript:location.href='rewardController?category=rwMain'">
 	</h3>
-	<form method="post">
-<!-- 	<form action="rewardController?category=search" method="post"> -->
+<!-- 	<form method="post"> -->
+	<form action="ajaxRewardController?action=rwMain_ajax" method="post">
 		<table border>
 		<thead>
 			<tr>
@@ -161,7 +158,7 @@ $(document).ready(function(){
 							<option value="${date}">${date}</option>
 						</c:forEach>
 					</select>
-					<input type="button" value="검색" style="display:block;" onclick="selectCategory(this.form)"/>
+					<input type="button" value="검색" onclick="selectCategory(this.form)"/>
 <!-- 					<input type="submit" value="검색"> -->
 				</th>
 			</tr>
