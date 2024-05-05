@@ -19,6 +19,7 @@
 <meta charset="UTF-8">
 <title>리뷰 메인</title>
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/free.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -147,6 +148,8 @@
 	</table>
 </form>
 </div>
+
+	<%@ include file="include/footer.jspf" %>
 </body>
 </html>
 
