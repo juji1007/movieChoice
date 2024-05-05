@@ -149,7 +149,7 @@ function ps_update(frm) {
 <body>
 <%@ include file="include/header.jspf" %>
 <div class="body">
-<table frame=void>
+<table frame="void">
 <!-- <table border> -->
 	<tr>
 	<td colspan=7 ><h1>${pvo.psTitle }</h1></td>

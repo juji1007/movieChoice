@@ -154,8 +154,8 @@ session.getAttribute("c_list");
 ${vo.psTitle }
 </a>
 </td>
-<td width="5%">
-<input class="up_button" type="button" value="신고">${vo.psWarn }
+<td width="10%">
+<input class="up_button" type="button" value="신고"> ${vo.psWarn }
 </td>
 </tr>
 </c:forEach>

@@ -46,8 +46,8 @@
 		<input class="write" type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
 
-		<input type="button" value="전체조회"
-			onclick="javascript:location.href='reviewController?category=rvMain'">
+<!-- 		<input type="button" value="전체조회" -->
+<!-- 			onclick="javascript:location.href='reviewController?category=rvMain'"> -->
 
 	</form>
 	<hr class="color">
@@ -64,7 +64,8 @@
 		</select>
 		<input class="search" type="text" name="keyword" placeholder="작성일 ex: 20240507">
 		<input class="searchbtn" type="submit" value="검색">
-		
+		<input class="searchbtn2" type="button" value="전체조회"
+			onclick="javascript:location.href='reviewController?category=rvMain'">	
 		<input type="hidden" name="category" value="selectOne">
 	</form>
 	</div>
@@ -87,8 +88,8 @@
 	        </tr>
 	        <tr>
 	            <td rowspan="2" colspan="3">
-	            	<input type="button" value="추천">${vo.rvRec }
-	            	<input type="button" value="신고">${vo.rvWarn }
+	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec } 
+	            	<input class="up_button" type="button" value="신고"> ${vo.rvWarn }
 	            	<hr>
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
