@@ -179,80 +179,81 @@
 <div class="body">
 <table frame="void">	
 	<tr>
-	<td colspan=7 ><h1>${listOne.rvTitle }</h1></td>
+		<td colspan=7 ><h1>${listOne.rvTitle }</h1></td>
 	</tr>
 	<tr>
-	<td width="10%">${listOne.rvNick }</td>
-	<td width="90%">${listOne.rvDate }</td>
-	<td>
-	<input class="up_button" type="button" value="추천" data-rec-num="${recNum}" 
-		onclick="rec_toggle(this.form, this.dataset.recNum)"> ${listOne.rvRec}
+		<td width="20%">작성자 | ${listOne.rvNick }</td>
+		<td width="20%">작성일 | ${listOne.rvDate }</td>
+		<td>
+		<input class="up_button" type="button" value="추천" data-rec-num="${recNum}" 
+			onclick="rec_toggle(this.form, this.dataset.recNum)"> ${listOne.rvRec}
 	</td>
 	<td>
-	<input class="up_button" type="button" value="신고" data-warn-num="${warnNum}" 
-		onclick="warn_push(this.form, this.dataset.warnNum)"> ${listOne.rvWarn}
+		<input class="up_button" type="button" value="신고" data-warn-num="${warnNum}" 
+			onclick="warn_push(this.form, this.dataset.warnNum)"> ${listOne.rvWarn}
 	</td>
 	<td>
-	<form action="postUpdate.jsp" method="get">
-	<input class="up_button"  type="button" value="수정" onclick="update_go(this.form)">
-	</form>
+		<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post">
+			<input class="up_button"  type="button" value="수정" onclick="update_go(this.form)">
+		</form>
 	</td>
 	<td>
-	<form action="postDelete.jsp" method="get">
-		<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)">
-	</form>
+			<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)">
 	</td>
 	<td>
-	<input class="li_button"  type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
+		<input class="li_button"  type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
 	</td>
-	
 	</tr>
 
 </table>
-<hr>	
+<hr>
+<table>	
+	<tr  height="200">
+		<td rowspan="2" width="20%">
+			<img src="img/${listOne.mvPoster }" alt="포스터" width="300px">
+		</td>
+		<td id="rvContent" rowspan="2" colspan="3">${listOne.rvContent }</td>
+	</tr>
+</table>	
+
+<%-- 	<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post"> --%>
+<!-- 	<table frame="void"> -->
+<!-- 		<tbody> -->
+<!-- 			<tr> -->
+<%-- 				<td rowspan="3" width="20%"><img src="img/${listOne.mvPoster }" alt="포스터" width="300px"></td> --%>
+<%-- 				<td id="rvTitle" colspan="3" height="40px">${listOne.rvTitle }</td> --%>
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<%-- 				<td id="rvNick" width="10%" height="40px">${listOne.rvNick }</td> --%>
+<%-- 				<td id="rvDate" width="20%">${listOne.rvDate }</td> --%>
+<!-- 				<td class="right"> -->
+<%-- 					<input class="up_button" type="button" value="추천" data-rec-num="${recNum}"  --%>
+<!-- 					onclick="rec_toggle(this.form, this.dataset.recNum)"> -->
+<%-- 					${listOne.rvRec} --%>
+<%-- 					<input class="up_button" type="button" value="신고" data-warn-num="${warnNum}"  --%>
+<!-- 					onclick="warn_push(this.form, this.dataset.warnNum)"> -->
+<%-- 					${listOne.rvWarn} --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<%-- 				<td id="rvContent" colspan="3">${listOne.rvContent }</td> --%>
+<!-- 			</tr> -->
+<!-- 		</tbody> -->
 	
-	<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post">
-	<table frame="void">
-		<tbody>
-			<tr>
-				<td rowspan="3" width="20%"><img src="img/${listOne.mvPoster }" alt="포스터" width="300px"></td>
-				<td id="rvTitle" colspan="3" height="40px">${listOne.rvTitle }</td>
-			</tr>
-			<tr>
-				<td id="rvNick" width="10%" height="40px">${listOne.rvNick }</td>
-				<td id="rvDate" width="20%">${listOne.rvDate }</td>
-				<td class="right">
-<!-- 					<input type="button" value="추천 " onclick="rec_push(this.form)"> -->
-					<input class="up_button" type="button" value="추천" data-rec-num="${recNum}" 
-					onclick="rec_toggle(this.form, this.dataset.recNum)">
-					${listOne.rvRec}
-					<input class="up_button" type="button" value="신고" data-warn-num="${warnNum}" 
-					onclick="warn_push(this.form, this.dataset.warnNum)">
-					${listOne.rvWarn}
-				</td>
-			</tr>
-			<tr>
-				<td id="rvContent" colspan="3">${listOne.rvContent }</td>
-			</tr>
-		</tbody>
-	
-		<tfoot class="tfoot">
-			<tr>
-				<td colspan="4"  class="center">
-<!-- 					<input type="button" value="이전" onclick="prev_go()"> -->
-<!-- 					<input type="button" value="목록" onclick="javascript:history.go(-1)"> -->
-					<input class="li_button" type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
-<!-- 					<input type="button" value="다음" onclick="next_go()"> -->
-					<input class="up_button" type="button" value="수정" onclick="update_go(this.form)">
-					<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)">
+<!-- 		<tfoot class="tfoot"> -->
+<!-- 			<tr> -->
+<!-- 				<td colspan="4"  class="center"> -->
+<%-- 					<input class="li_button" type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'"> --%>
+<!-- 					<input class="up_button" type="button" value="수정" onclick="update_go(this.form)"> -->
+<!-- 					<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)"> -->
 					
-					<input type="hidden" name="listOne" value="${listOne}">
-					<input type="hidden" name="recNum" value="${recNum}">
-				</td>
-			</tr>
-		</tfoot>
-	</table>
-	</form>
+<%-- 					<input type="hidden" name="listOne" value="${listOne}"> --%>
+<%-- 					<input type="hidden" name="recNum" value="${recNum}"> --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 		</tfoot> -->
+<!-- 	</table> -->
+<!-- 	</form> -->
 	<hr class="color">
 	</div>
 </body>

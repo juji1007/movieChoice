@@ -17,7 +17,7 @@ function list_go() {
 <body>
 <%@ include file="include/header.jspf"%>
 	<div class="body">
-	<h1>QnA ${sort } 검색</h1>
+	<h2>QnA ${sort } 검색</h2>
 	    <form  action="qnaWrite.jsp" method="get">
 	    	<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
 	    </form>
@@ -30,7 +30,7 @@ function list_go() {
 				<option value="0">내용</option>
 				<option value="1">작성일</option>
 			</select> 
-			<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240501)"> 
+			<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)"> 
 			<input class="searchbtn" type="submit" value="검색"> 
 	        <input type="hidden" name="search" value="qnaList">
 	        <input class="listbtn"  type="button" value="전체목록" onclick="list_go()">

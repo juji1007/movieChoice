@@ -62,9 +62,9 @@
 			<option value="1">작성자</option>
 			<option value="2">작성일</option>
 		</select>
-		<input class="search" type="text" name="keyword" placeholder="작성일 ex: 20240507">
+		<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)">
 		<input class="searchbtn" type="submit" value="검색">
-		<input class="searchbtn2" type="button" value="전체조회"
+		<input class="listbtn" type="button" value="전체조회"
 			onclick="javascript:location.href='reviewController?category=rvMain'">	
 		<input type="hidden" name="category" value="selectOne">
 	</form>
