@@ -114,4 +114,14 @@ table.td:nth-last-child(1)  {
 	text-align:center;
 }
 
+.up_button {
+	border-radius: 5px;
+		width: 60px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: white;
+}
 
+.up_button:hover {
+	background-color:#E7E7E7;
+}

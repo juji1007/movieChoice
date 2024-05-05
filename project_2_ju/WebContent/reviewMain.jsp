@@ -41,12 +41,12 @@
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
 	<div class="body">
-	<h2>리뷰모음</h2>
+	<h2>전체조회</h2>
 	<form action="reviewController?category=rvWrite" method="post">
 		<input class="write" type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
 
-		<input type="button" value="전체조회"
+		<input class="write" type="button" value="전체조회"
 			onclick="javascript:location.href='reviewController?category=rvMain'">
 
 	</form>
@@ -90,8 +90,8 @@
 	        </tr>
 	        <tr>
 	            <td rowspan="2" colspan="3">
-	            	<input type="button" value="추천">${vo.rvRec}
-	            	<input type="button" value="신고">${vo.rvWarn}
+	            	<input class="up_button" type="button" value="추천">${vo.rvRec}
+	            	<input class="up_button" type="button" value="신고">${vo.rvWarn}
 	            	<hr>
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
@@ -100,7 +100,6 @@
 	            </td>
 	        </tr>
 	    </tbody>
-
 	</c:forEach>
 
 	

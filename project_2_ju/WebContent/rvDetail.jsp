@@ -194,7 +194,7 @@
 					onclick="rec_toggle(this.form, this.dataset.recNum)">
 					${listOne.rvRec}
 <!-- 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">  -->
-					<input type="button" value="신고" data-warn-num="${warnNum}" 
+					<input class="up_button" type="button" value="신고" data-warn-num="${warnNum}" 
 					onclick="warn_push(this.form, this.dataset.warnNum)">
 					${listOne.rvWarn}
 				</td>

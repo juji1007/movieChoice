@@ -1,4 +1,13 @@
 @charset "UTF-8";
+
+.up_button {
+	border-radius: 5px;
+		width: 60px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: white;
+}
+
 	table {
 		border-collapse: collapse;
 		border : 2px solid black;
