@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="listTotal">
-	   <!-- 리뷰 메인(전체목록 페이징) -->
+   <!-- 리뷰 메인(전체목록 페이징) -->
    <select id="tot" parameterType="map" resultType="listTotVO">
    <![CDATA[
       SELECT RV_NO, NO, MV_TITLE, MV_POSTER
@@ -12,12 +12,13 @@
       FROM (SELECT ROWNUM R_NUM, R.*, M.*
             FROM (SELECT *
                   FROM REVIEW
-                  ORDER BY RV_NO DESC
+                  ORDER BY RV_DATE DESC
                   ) R, MOVIE M
             WHERE R.MV_NO = M.MV_NO
             AND ROWNUM <= #{end}
       )
        WHERE R_NUM >= #{begin}
+       ORDER BY RV_DATE DESC
    ]]>
    </select>
 
@@ -65,6 +66,37 @@
             AND ROWNUM <= #{end}
       )
        WHERE R_NUM >= #{begin}
+       ORDER BY RV_DATE DESC
    ]]>
    </select>
+   
+   <!-- Reward : listTot에서 날짜로 조회 -->
+   <select id="dateOne" parameterType="map" resultType="listTotVO">
+   		SELECT A.*, M.*,  R.*
+		FROM ACCOUNT A, MOVIE M, REVIEW R
+		WHERE R.NO = A.NO
+		AND R.MV_NO = M.MV_NO
+		AND TO_CHAR(RV_DATE, 'YYYY') = #{year}
+		AND TO_CHAR(RV_DATE, 'MM') = #{month}
+   </select>
+   
+   <!-- Reward : 날짜 + 페이징 처리 -->
+<!--    <select id="reward" parameterType="map" resultType="listTotVO"> -->
+<!-- 	<![CDATA[ -->
+<!-- 		SELECT RV_NO, NO, MV_TITLE, MV_POSTER -->
+<!-- 		     , RV_NICK, RV_RATE, RV_TITLE, RV_CONTENT -->
+<!-- 		FROM (SELECT ROWNUM R_NUM, R.*, M.* -->
+<!-- 		      FROM (SELECT * -->
+<!-- 		            FROM REVIEW -->
+<!-- 		            ORDER BY RV_NO DESC -->
+<!-- 		            ) R, MOVIE M -->
+<!-- 		      WHERE R.MV_NO = M.MV_NO -->
+<!-- 			  AND TO_CHAR(RV_DATE, 'YYYY') = SUBSTR(#{rvDate}, 1, 4) -->
+<!--      		  AND TO_CHAR(RV_DATE, 'MM') = SUBSTR(#{rvDate}, 6) -->
+<!-- 		      AND ROWNUM <= #{end} -->
+<!-- 		      ) -->
+<!--     	WHERE R_NUM >= #{begin} -->
+<!-- 	]]> -->
+<!--     </select> -->
+   
 </mapper>

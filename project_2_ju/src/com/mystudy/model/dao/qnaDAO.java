@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.model.vo.criticVO;
+import com.mystudy.model.vo.inquiryVO;
 import com.mystudy.model.vo.postVO;
 import com.mystudy.model.vo.qnaVO;
 import com.project.mybatis.DBService;
@@ -42,6 +43,29 @@ public class qnaDAO {
     public static qnaVO selectOne(int qaNo) {
         try (SqlSession ss = DBService.getFactory().openSession(true)) {
             return ss.selectOne("qna.one", qaNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    // 나의 QA 조회
+    public static List<qnaVO> getMyQa(int no) {
+        try (SqlSession ss = DBService.getFactory().openSession()) {
+        	List<qnaVO> qnaList = ss.selectList("qna.getMyQa", no);
+        	boolean checkInquiry = false;
+        	for (qnaVO qvo : qnaList) {
+        		int qaNo = qvo.getQaNo();
+        		inquiryVO ivo = inquiryDAO.ione(qaNo);
+        		System.out.println("ivo : " + ivo);
+        		if (ivo != null) {
+        			checkInquiry = true;
+        		}
+        		System.out.println("checkin : " + checkInquiry);
+        		qvo.setInquiryCheck(checkInquiry);
+        		System.out.println("qna : " + qvo);
+        	}
+            return qnaList;
         } catch (Exception e) {
             e.printStackTrace();
         }

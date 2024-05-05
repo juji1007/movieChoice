@@ -36,6 +36,7 @@ session.setAttribute("attr_list", list);
 <title>main2</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/main.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
@@ -64,17 +65,19 @@ session.setAttribute("attr_list", list);
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
- 
+ <div class="body">
 
 <!-- 영화검색 -->
 <form action="controller" method="get">
-	<input type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
-	<input type="submit" value="영화검색">
+<nav>
+	<input class="search" type="text" name="mvTitle" placeholder="영화제목을 입력하세요">
+	<input class="searchbtn" type="submit" value="영화검색">
 	<input type="hidden" name="type" value="mvTitleList">
+	</nav>
 </form>
 <div>
 
-<h3 class="top">현재 상영 영화 TOP10</h3>
+<h2 class="top">현재 상영 영화 TOP10</h2>
 
 
 <%-- select 해서 영화목록 상위 10개 가져오기 --%>
@@ -98,7 +101,7 @@ session.setAttribute("attr_list", list);
 	</div>
 </div>
 <a href="#" id="next">
-<button id="next">></button>
+<button id="next" class="button button--shikoba button--round-s button--border-thin"><i class="button__icon icon icon-next"></i><span>></span></button>
 </a>
 </div>
 <br>
@@ -106,12 +109,12 @@ session.setAttribute("attr_list", list);
 <div>
 <h2>영화목록</h2> 
 <form action="controller?type=movie" method="post">
-  <select name="idx">
+  <select class="select" name="idx">
   <option value="0" disabled selected>정렬</option>
     <option value="1" >최신순</option>
     <option value="2"  >평점순</option>
   </select>
-  <input type="submit" value="동적검색">
+  <input class="searchbtn" type="submit" value="동적검색">
 </form>
 <hr class="gray">
 <!-- 영화 정렬 후 목록 보기 -->
@@ -131,6 +134,7 @@ session.setAttribute("attr_list", list);
 </c:forEach>
 
 
+</div>
 </div>
 </body>
 </html>

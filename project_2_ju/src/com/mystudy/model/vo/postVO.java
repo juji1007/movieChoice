@@ -10,6 +10,7 @@ public class postVO {
 	private Date psDate;
 	private String psFile;
 	private String psOrifile;
+	private int rwWarn;
 
 	private int psWarn;
 	private String psNick;
@@ -68,16 +69,18 @@ public class postVO {
 	public void setPsWarn(int psWarn) {
 		this.psWarn = psWarn;
 	}
+	public int getRwWarn() {
+		return rwWarn;
+	}
+	public void setRwWarn(int rwWarn) {
+		this.rwWarn = rwWarn;
+	}
 	@Override
 	public String toString() {
 		return "postVO [psNo=" + psNo + ", no=" + no + ", psTitle=" + psTitle + ", psContent=" + psContent + ", psDate="
-				+ psDate + ", psFile=" + psFile + ", psOrifile=" + psOrifile + ", psNick=" + psNick + ", psWarn="
-				+ psWarn + "]";
+				+ psDate + ", psFile=" + psFile + ", psOrifile=" + psOrifile + ", rwWarn=" + rwWarn + ", psWarn="
+				+ psWarn + ", psNick=" + psNick + "]";
 	}
 	
-	
-	
-	
-
 
 }

@@ -11,6 +11,7 @@ request.getAttribute("keyword");
 <head>
 <meta charset="UTF-8">
 <title>QnA 검색</title>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
        //로그인 후 작성가능
@@ -22,18 +23,22 @@ request.getAttribute("keyword");
            frm.submit();
            <% } %>
        }
+
 </script>
 </head>
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/free.css">
 <body>
+
 	<%@ include file="include/header.jspf" %>
 	<div class="body">
 	    <h2>QnA</h2>
+
 	    <form  action="qnaWrite.jsp" method="get">
 	    	<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
 	    </form>
 		<hr class="color">
+
 			<div class="box">
       		<div class="innerbox">
       		<div class="content">

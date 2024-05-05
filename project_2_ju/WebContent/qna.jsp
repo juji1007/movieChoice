@@ -79,22 +79,26 @@ session.setAttribute("list", list);
             <% } %>
         }
     </script>
-    
+
     <link rel="stylesheet" href="css/header.css">
-	<link rel="stylesheet" href="css/free.css">
-	
+    <link rel="stylesheet" href="css/free.css">
+
 </head>
 <body>
 	<%@ include file="include/header.jspf" %>
 	<div class="body">
-	    <h2>QnA</h2>
+	    <h1>QnA</h1>
+	<div class="innerbox">
+	<div class="content">
 	    <form  action="qnaWrite.jsp" method="get">
 	    	<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
 	    </form>
+
 		<hr class="color">
       	<div class="box">
      	<div class="innerbox">
     	<div class="content">
+
 	    <form action="qnaController?search=qnaList" method="get">
 	        <select class="select" name="idx">
 				<option value="0">내용</option>
@@ -109,7 +113,6 @@ session.setAttribute("list", list);
 	    </div>
       	</div>
      	</div>
-	    
 	<div id="qna">
 	<table border frame=void>
 		<tr>

@@ -46,7 +46,7 @@
 		listOne.setRvWarn(rvWarn);
 		System.out.println("<신고수> listOne : " + listOne);
 		
-		//로그인 회원NO의 추천 여부 확인
+		//로그인 회원NO의 추천&신고 여부 확인
 		int recNum = recDAO.recSearch(no, rvNo);
 		System.out.println("recNum : " + recNum);
 		pageContext.setAttribute("recNum", recNum);
@@ -93,7 +93,7 @@
 			//해제(-1) 처리
 			} else if (recNum != 0) {
 // 				alert("-" + recNum + "-");
-				alert("추천을 해제합니다.");
+				alert("추천을 취소합니다.");
 			}
 			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
 		} else if (${no} == 13) {
@@ -113,7 +113,7 @@
 			//해제(-1) 처리
 			} else {
 // 				alert("-" + warnNum + "-");
-				alert("신고를 해제합니다.");
+				alert("신고를 취소합니다.");
 			}
 			location.href= "rvWarn.jsp?rvNo=${listOne.rvNo}";
 		} else if (${no} == 13) {
@@ -193,7 +193,7 @@
 					<input type="button" value="추천" data-rec-num="${recNum}" 
 					onclick="rec_toggle(this.form, this.dataset.recNum)">
 					${listOne.rvRec}
-					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px"> 
+<!-- 					<img src="img/iconRec.png" id="iconRec" alt="추천" width="25px">  -->
 					<input type="button" value="신고" data-warn-num="${warnNum}" 
 					onclick="warn_push(this.form, this.dataset.warnNum)">
 					${listOne.rvWarn}
@@ -206,13 +206,11 @@
 	
 		<tfoot class="tfoot">
 			<tr>
-				<td colspan="3">
-					<input type="button" value="이전" onclick="prev_go()">
+				<td colspan="4">
+<!-- 					<input type="button" value="이전" onclick="prev_go()"> -->
 <!-- 					<input type="button" value="목록" onclick="javascript:history.go(-1)"> -->
 					<input type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'">
-					<input type="button" value="다음" onclick="next_go()">
-				</td>
-				<td>
+<!-- 					<input type="button" value="다음" onclick="next_go()"> -->
 					<input type="button" value="수정" onclick="update_go(this.form)">
 					<input type="button" value="삭제" onclick="delete_go(this.form)">
 					

@@ -33,18 +33,40 @@
 		AND RV_NO = #{rvNo}
 	</select>
 	
-	<!-- 신고 클릭 선택(INSERT) -->
+	<!-- 리뷰 신고 클릭 선택(INSERT) -->
 	<insert id="insert" parameterType="map">
 		INSERT INTO WARN
 		    (IDX, WARN_NUM, NO, RV_NO)
 		VALUES (REC_SEQ.NEXTVAL, 1, #{no}, #{rvNo})
 	</insert>
 	
-	<!-- 신고 클릭 해제(DELETE) -->
+	<!-- 리뷰 신고 클릭 해제(DELETE) -->
 	<delete id="delete" parameterType="map">
 		DELETE FROM WARN
 		WHERE NO = #{no}
 		AND RV_NO = #{rvNo}
+	</delete>
+	
+	<!-- 회원no, 게시물psNo에 맞는 신고수 확인 -->
+	<select id="searchPost" parameterType="map" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM WARN
+		WHERE NO = #{no}
+		AND PS_NO = #{psNo}
+	</select>
+	
+	<!-- 게시물 신고 클릭 선택(INSERT) -->
+	<insert id="insertPost" parameterType="map">
+		INSERT INTO WARN
+		    (IDX, WARN_NUM, NO, PS_NO)
+		VALUES (REC_SEQ.NEXTVAL, 1, #{no}, #{psNo})
+	</insert>
+	
+	<!-- 게시물 신고 클릭 해제(DELETE) -->
+	<delete id="deletePost" parameterType="map">
+		DELETE FROM WARN
+		WHERE NO = #{no}
+		AND PS_NO = #{psNo}
 	</delete>
 	
 </mapper>

@@ -58,7 +58,10 @@
 
 </script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/freeView.css">
 <body>
+
 
 	<table>
 		<tr>
@@ -73,26 +76,43 @@
 		<tr>
 			<td>${qvo.qaDate }</td>
 		</tr>
+
+<%@ include file="include/header.jspf" %>
+<div class="body">
+ <h1>QnA ${qvo.qaNo }</h1>
+<table frame=void>
+<!-- <table border> -->
+
 		<tr>
-			<td>
-				<form action="qnaDeleteOk.jsp?qaNo=${qvo.qaNo }" method="post">
-						<input class="h_button" type="button" value="삭제" onclick="qa_delete(this.form)">
-						<input type="hidden" name="qaNo" value="${qvo.qaNo }">
-				</form>
-			</td>
+			<td width="10%">${qvo.id }</td>
+			<td width="90%">${qvo.qaDate }</td>
 			<td>
 				<form action="qnaUpdate.jsp" method="get">
-					<input type="button" value="수정" onclick="qa_update(this.form)">
+					<input class="up_button" type="button" value="수정" onclick="qa_update(this.form)">
 					<input type="hidden" name="qaNo" value="${qvo.qaNo }">
 				</form>
 			</td>
 			<td>
-				<input type="button" value="목록보기" onclick="location.href = 'qna.jsp'">
+				<form action="qnaDeleteOk.jsp?qaNo=${qvo.qaNo }" method="post">
+						<input class="h_button" class="h_button" type="button" value="삭제" onclick="qa_delete(this.form)">
+						<input type="hidden" name="qaNo" value="${qvo.qaNo }">
+				</form>
+			</td>
+			<td>
+				<input class="li_button" type="button" value="목록" onclick="location.href = 'qna.jsp'">
 			</td>
 		</tr>
 	</table>
-	<h2>QnA ${qvo.qaNo }번에 대한 관리자 답변</h2>
-  	<hr>
+	<hr>
+	<table>
+		<tr  height="200">
+			<td>${qvo.qaContent }</td>
+		</tr>
+	</table>
+	<hr>
+	<h2>QnA ${qvo.qaNo } 관리자 답변내용</h2>
+	<hr class="color">
   	<p>${ivo.iqContent }</p> 
+  	</div>
 </body>
 </html>

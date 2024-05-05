@@ -62,4 +62,15 @@ public class recDAO {
 		return -1;
 	}
 	
+	//[리뷰]월별 조회된 rvNo에 해당하는 [추천]추천수 count값 추출
+	public static int getRec(int rvNo) {
+		try (SqlSession ss = DBService.getFactory().openSession()){
+			return ss.selectOne("rec.recNum", rvNo);
+		} catch (Exception e) {
+			//검색 결과 없으면 0으로 변경
+			return 0;
+		}
+	}
+	
+	
 }

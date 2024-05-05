@@ -12,7 +12,7 @@
 		FROM (SELECT ROWNUM R_NUM, R.*, M.*
 		      FROM (SELECT *
 		            FROM REVIEW
-		            ORDER BY RV_NO DESC
+		            ORDER BY RV_DATE DESC
 		            ) R, MOVIE M
 		      WHERE R.MV_NO = M.MV_NO
 		<choose>
@@ -33,6 +33,7 @@
 		      AND ROWNUM <= #{end}
 		      )
     WHERE R_NUM >= #{begin}
+    ORDER BY RV_DATE DESC
 	]]>
     </select>
 
@@ -43,10 +44,10 @@
 		WHERE R.MV_NO = M.MV_NO
 		<choose>
      		<when test = "idx == 0">
-		     	AND M.MV_TITLE = #{keyword}
+		     	AND M.MV_TITLE LIKE '%'|| #{keyword} ||'%'
      		</when>
      		<when test = "idx == 1">
-		     	AND R.RV_NICK = #{keyword}
+		     	AND R.RV_NICK LIKE '%'|| #{keyword} ||'%'
      		</when>
      		<when test = "idx == 2">
 		     	AND TO_CHAR(R.RV_DATE, 'YYYYMMDD') = #{keyword}
@@ -55,6 +56,7 @@
 				AND 1 = 2
 			</otherwise>
      	</choose>
+     	ORDER BY RV_DATE DESC
 	</select>
 	
 	<!-- 영화번호로 리뷰vo 조회 -->
@@ -127,10 +129,13 @@
 		WHERE RV_NO = #{rvNo}
 	</select>
 	
-	<!-- 추천수 토글 선택 +1 -->
-	
-	<!-- 추천수 토글 해제 -1 -->
-	
+	<!-- [REVIEW]테이블에서 월별 선택하여 rvVO(rvNo) 추출 -->
+	<select id="yymm" parameterType="string" resultType="reviewVO">
+		SELECT *
+		FROM REVIEW
+		WHERE TO_CHAR(RV_DATE, 'YYYY') = SUBSTR(#{rvDate}, 1, 4)
+		AND TO_CHAR(RV_DATE, 'MM') = SUBSTR(#{rvDate}, 5)
+	</select>
 	
 	<!-- 추천수 무한정 클릭 -->
 <!--  	<update id="rec" parameterType="map"> -->
@@ -148,7 +153,6 @@
 	</select>
 	
 	<!-- 리뷰번호 받아서 리뷰 삭제 -->
-
 	<delete id="deleteMypage" parameterType="reviewVO">
 		DELETE FROM REVIEW
 		WHERE RV_NO = #{rvNo}

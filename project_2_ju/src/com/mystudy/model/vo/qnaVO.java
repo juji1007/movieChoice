@@ -10,12 +10,22 @@ public class qnaVO {
 	private String nick;
 	private String qaCategory;
 	private int criticCheck;
+	private boolean inquiryCheck;
 	
+
 	public String getNick() {
 		return nick;
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+
+	
+	public boolean getisInquiryCheck() {
+		return inquiryCheck;
+	}
+	public void setInquiryCheck(boolean inquiryCheck) {
+		this.inquiryCheck = inquiryCheck;
+
 	}
 	public int getCriticCheck() {
 		return criticCheck;
@@ -56,8 +66,12 @@ public class qnaVO {
 	
 	@Override
 	public String toString() {
+
 		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", nick="
 				+ nick + ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + "]";
+
 	}
+	
+	
 	
 }
