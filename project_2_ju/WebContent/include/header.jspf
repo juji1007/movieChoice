@@ -9,7 +9,8 @@
 	  <li><a href="reviewController?category=rvMain">리뷰모음</a></li>
 	  <li><a href="free.jsp">자유게시판</a></li>
 	  <li><a href="qna.jsp">Q & A</a></li>
-	  <li><a href="rewardController?category=rwMain">Review Of The Month</a></li> 
+	  <li><a href="ajaxRewardController?action=rwMain_ajax">Review Of The Month</a></li> 
+<!-- 	  <li><a href="rewardController?category=rwMain">Review Of The Month</a></li>  -->
 	  <li><a href="controller?type=critic">평론가</a></li>
 <% 
    request.setCharacterEncoding("UTF-8");

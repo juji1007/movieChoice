@@ -45,9 +45,8 @@
 		
 		<input type="hidden" name="category" value="search">
 	</form>
-	
 	<table border>
-		<tbody>
+		<tbody  id="reviewOne">
 			<tr>
 				<td id="mvTitle">${rwVo.mvTitle}</td>
 				<td id="rvTitle" colspan="3">${rwVo.rvTitle }</td>
