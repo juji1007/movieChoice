@@ -20,8 +20,12 @@
 	
 	//request.getRequestDispatcher("rvWrite_ok.jsp").forward(request, response);
 	
-	String mvTitle = request.getParameter("movie");
-	System.out.println("mvTitle : " + mvTitle);
+	int mvNo = Integer.parseInt(request.getParameter("movie"));
+	System.out.println("mvNo : " + mvNo);
+	
+	movieVO vo = movieDAO.searchOne(mvNo);
+	
+	System.out.println("writeReview,jsp vo : " + vo);
 	
 %>
 
@@ -39,7 +43,7 @@
 </style>
 <script>
 	function sendRv(frm) {
-		alert("sendData() 실행~~");
+		//alert("sendData() 실행~~");
 		console.log(document.forms[0]);
 		let firstForm = document.forms[0];
 		console.log(firstForm.elements);
@@ -64,44 +68,44 @@
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
 <div>
-    <form action="rvWrite_ok.jsp" method="get" enctype="multipart/form-data">
-	<table>
-		<caption><%= mvTitle %> 리뷰 작성하기</caption>
-		<tbody>
-			<tr>
-				<th>영화</th>
-				<td>
-					<input type="text" name="mvTitle" title="영화" value="<%= mvTitle %>" readonly="readonly">
-				</td>
-			</tr>
-			<tr>
-				<th>평점</th>
-				<td>
-					<input type="number" name="rate" min="0" max="10" title="평점">
-				</td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td>
-					<input type="text" name="subject" title="제목">
-				</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-					<textarea name="content" rows="8" cols="50" title="내용"></textarea>
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr id="btn">
-				<td colspan="2">
-					<input type="button" value="등록" onclick="sendRv()">
-			        <input type="reset" value="초기화">
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+    <form action="writeReview_ok.jsp?mvNo=<%=vo.getMvNo() %>" method="post">
+		<table>
+			<caption><%=vo.getMvTitle() %> 리뷰 작성하기</caption>
+			<tbody>
+				<tr>
+					<th>영화</th>
+					<td>
+						<input type="text" name="mvTitle" title="영화" value="<%=vo.getMvTitle() %>" readonly="readonly">
+					</td>
+				</tr>
+				<tr>
+					<th>평점</th>
+					<td>
+						<input type="number" name="rvRate" min="0" max="10" title="평점">
+					</td>
+				</tr>
+				<tr>
+					<th>제목</th>
+					<td>
+						<input type="text" name="rvTitle" title="제목">
+					</td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td>
+						<textarea name="rvContent" rows="8" cols="50" title="내용"></textarea>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr id="btn">
+					<td colspan="2">
+						<input type="button" value="등록" onclick="sendRv(this.form)">
+				        <input type="reset" value="초기화">
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 	</form>
 </div>
     

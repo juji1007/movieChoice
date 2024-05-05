@@ -10,15 +10,15 @@
     request.setCharacterEncoding("UTF-8");
 
     // 세션에서 필요한 값들 가져오기
-    String id = (String) session.getAttribute("id");
     int no = (Integer) session.getAttribute("no");
+    String nick = request.getParameter("nick");
     String qaContent = request.getParameter("qaContent");
     String qaCategory = request.getParameter("qaCategory");
 	
     // qnaVO 객체 생성 및 값 설정
     qnaVO qo = new qnaVO();
-    qo.setId(id);
     qo.setNo(no);
+    qo.setNick(nick);
     qo.setQaContent(qaContent);
     if (!qaCategory.equals("선택")) {
     	qo.setQaCategory(qaCategory);
