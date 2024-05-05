@@ -209,7 +209,9 @@ public class RewardController extends HttpServlet {
 			
 			request.setAttribute("rwVo", vo);
 			
-			request.getRequestDispatcher("rwMain.jsp").forward(request, response);
+			request.getRequestDispatcher("rwMain_ajax.jsp").forward(request, response);
+//			request.getRequestDispatcher("rwMain.jsp").forward(request, response);
+			
 		}
 	}
 

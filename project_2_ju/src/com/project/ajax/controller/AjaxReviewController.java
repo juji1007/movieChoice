@@ -14,7 +14,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.vo.listTotVO;
-import com.mystudy.model.vo.reviewVO;
 import com.project.mybatis.DBService;
 import com.project.review.paging.Paging;
 
