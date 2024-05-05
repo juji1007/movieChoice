@@ -444,7 +444,7 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"no\": \"" + qvo.getNo() + "\", ");
 		            result.append("\"qaContent\": \"" + qvo.getQaContent() + "\", ");
 		            result.append("\"qaDate\": \"" + qvo.getQaDate() + "\", ");
-		            result.append("\"id\": \"" + qvo.getId() + "\", ");
+		            result.append("\"nick\": \"" + qvo.getNick() + "\", ");
 		            result.append("\"qaCategory\": \"" + qvo.getQaCategory() + "\", ");
 		            result.append("\"criticCheck\": \"" + qvo.getCriticCheck() + "\", ");
 		            result.append("\"inquiryCheck\": \"" + qvo.getisInquiryCheck() + "\"");
