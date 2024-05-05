@@ -62,6 +62,9 @@
 <link rel="stylesheet" href="css/freeView.css">
 <body>
 
+<%@ include file="include/header.jspf" %>
+<div class="body">
+ <h1>QnA ${qvo.qaNo }</h1>
 
 	<table>
 		<tr>
@@ -76,15 +79,12 @@
 		<tr>
 			<td>${qvo.qaDate }</td>
 		</tr>
-
-<%@ include file="include/header.jspf" %>
-<div class="body">
- <h1>QnA ${qvo.qaNo }</h1>
+	</table>
 <table frame=void>
 <!-- <table border> -->
 
 		<tr>
-			<td width="10%">${qvo.id }</td>
+			<td width="10%">${qvo.nick }</td>
 			<td width="90%">${qvo.qaDate }</td>
 			<td>
 				<form action="qnaUpdate.jsp" method="get">
