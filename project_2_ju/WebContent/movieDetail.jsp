@@ -39,6 +39,18 @@
 <head>
 <meta charset="UTF-8">
 <title>${vo.mvTitle } 상세 정보</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        //로그인 후 작성가능
+        function login_confirm(frm) {
+            <% if (session.getAttribute("no") == null) { %>
+            alert("로그인 후 작성 가능합니다.");
+            location.href = "login_page.jsp";
+            <% } else { %>
+            frm.submit();
+            <% } %>
+        }
+    </script>
     <style>
         img {
             max-width: 200px;
@@ -53,7 +65,9 @@
     <div>
         <img src="img/${vo.mvPoster }" alt="${vo.mvTitle } Poster">
     </div>
-    <input type="button" value="리뷰 작성" onclick="location.href='writeReview.jsp?movie=${vo.mvTitle }'">
+    	<form  action="writeReview.jsp?movie=${vo.mvNo }" method="post">
+	    	<input class="write" type="button" value="리뷰 작성" onclick="login_confirm(this.form)">
+	    </form>
 	<div>	
 			<h2>${vo.mvTitle }</h2>
 			 <p><strong>감독:</strong> ${vo.mvDirect }</p>

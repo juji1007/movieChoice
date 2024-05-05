@@ -7,10 +7,16 @@ public class qnaVO {
 	private int no;
 	private String qaContent;
 	private Date qaDate;
-	private String id;
+	private String nick;
 	private String qaCategory;
 	private int criticCheck;
 	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public int getCriticCheck() {
 		return criticCheck;
 	}
@@ -22,12 +28,6 @@ public class qnaVO {
 	}
 	public void setQaCategory(String qaCategory) {
 		this.qaCategory = qaCategory;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public int getQaNo() {
 		return qaNo;
@@ -56,8 +56,8 @@ public class qnaVO {
 	
 	@Override
 	public String toString() {
-		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", id=" + id
-				+ ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + "]";
+		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", nick="
+				+ nick + ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + "]";
 	}
 	
 }

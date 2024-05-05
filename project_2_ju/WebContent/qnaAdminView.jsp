@@ -59,7 +59,7 @@
 			<td colspan=3><h2>QnA 번호 : ${qvo.qaNo }</h2></td>
 		</tr>
 		<tr>
-			<td>아이디 : ${qvo.id }</td>
+			<td>닉네임 : ${qvo.nick }</td>
 		</tr>
 		<tr>
 			<td>내용 : ${qvo.qaContent }</td>

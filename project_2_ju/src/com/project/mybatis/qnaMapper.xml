@@ -6,7 +6,7 @@
 	
 	<!-- QA 1개 조회 -->
 	<select id="one" resultType="com.mystudy.model.vo.qnaVO">
-		SELECT Q.*, A.ID, A.CRITIC_CHECK
+		SELECT Q.*, A.NICK, A.CRITIC_CHECK
 		FROM QA Q, ACCOUNT A
 		WHERE Q.NO = A.NO
 		AND QA_NO = #{qaNo}
@@ -20,7 +20,7 @@
 	<!-- 페이지에 해당하는 QA 조회 -->
 	<select id="list" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
 	    <![CDATA[
-		    SELECT Q.*, A.ID, A.CRITIC_CHECK
+		    SELECT Q.*, A.NICK, A.CRITIC_CHECK
 		    FROM (
 		        SELECT ROWNUM R_NUM, Q.*
 		        FROM (
@@ -38,8 +38,9 @@
 	
 	<!-- 	카테고리별 게시글 동적 검색 -->
 	<select id="search" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
-	    SELECT *
+	    SELECT QA.*, A.NICK
 	    FROM QA
+	    LEFT JOIN ACCOUNT A ON QA.NO = A.NO
 	    <choose>
 	        <when test="idx == null or idx == ''">
 	            WHERE 1 = 2 <!-- 어떤 결과도 반환되지 않도록 함 -->
