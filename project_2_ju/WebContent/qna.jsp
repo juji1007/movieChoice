@@ -87,7 +87,7 @@ session.setAttribute("list", list);
 <body>
 	<%@ include file="include/header.jspf" %>
 	<div class="body">
-	    <h1>QnA</h1>
+	    <h2>QnA</h2>
 	<div class="innerbox">
 	<div class="content">
 	    <form  action="qnaWrite.jsp" method="get">

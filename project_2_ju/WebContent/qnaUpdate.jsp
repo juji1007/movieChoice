@@ -37,7 +37,7 @@ function list_go() {
 	<tr>
 				<td class="button" colspan="2">
 					<input class="commitbtn" type="submit" value="수 정" >
-					<input class="reset" type="reset" value="취 소">
+					<input class="reset" type="reset" value="초기화">
 					<input type="hidden" name="qaNo" value="${qvo.qaNo }">
 					<input class="reset" type="button" value="전체목록" onclick="list_go()">
 				</td>

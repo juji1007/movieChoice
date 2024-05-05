@@ -211,20 +211,19 @@ function selectCategory(frm) {
 		<table>
 			<thead>
 				<tr>
-					<th colspan="4">
-						
-					</th>
+					<th>영화</th>
+					<th colspan="3">리뷰</th>
 				</tr>
 			</thead>
 			<tbody  id="reviewOne">
 				<tr>
-					<td id="mvTitle" width="20%">${rwVo.mvTitle}</td>
+					<td id="mvTitle" width="20%" height="60px">${rwVo.mvTitle}</td>
 					<td id="rvTitle" colspan="3">${rwVo.rvTitle }</td>
 				</tr>
 				<tr>
 					<td rowspan="2"><img src="img/${rwVo.mvPoster }" alt="포스터" width="300px"></td>
-					<td id="rvNick" height="20px">작성자 ${rwVo.rvNick }</td>
-					<td id="rvDate">작성일 ${rwVo.rvDate }</td>
+					<td id="rvNick" width="20%" height="30px">작성자 | ${rwVo.rvNick }</td>
+					<td id="rvDate" width="20%">작성일 | ${rwVo.rvDate }</td>
 					<td id="btn">
 						<input class="up_button" type="button" value="추천">
 						${rwVo.rvRec}

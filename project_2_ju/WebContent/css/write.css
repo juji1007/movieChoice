@@ -12,7 +12,26 @@
   display: block;
   padding-bottom: 100%;
 }
-
+.movie {
+	position: relative;
+	margin-top: 16px;
+/* 	width: 500px; */
+/*  	height: 30px; */
+ 	border: 1px solid #bbb;
+	border-radius: 5px;
+  	padding: 10px 12px;
+  	font-size: 14px;
+}
+.rvRate {
+position: relative;
+	margin-top: 16px;
+/*   width: 500px; */
+/*   height: 22px; */
+  border: 1px solid #bbb;
+border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
 .psTitle {
 position: relative;
 	margin-top: 16px;

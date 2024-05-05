@@ -38,7 +38,6 @@ request.getAttribute("keyword");
 	    	<input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)">
 	    </form>
 		<hr class="color">
-
 			<div class="box">
       		<div class="innerbox">
       		<div class="content">
@@ -54,9 +53,9 @@ request.getAttribute("keyword");
 			        <input type="hidden" name="search" value="qnaList">
 			        <input class="listbtn"  type="button" value="전체목록" onclick="location.href='qna.jsp'">
 			    </form>
-	    </div>
+	      </div>
      	</div>
-    	</div>
+  </div>
 	
 		<form action="qnaController?search=qnaList" method="get">   
 		   <table border>
