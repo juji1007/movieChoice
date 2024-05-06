@@ -350,6 +350,7 @@ public class AjaxManageController extends HttpServlet {
 		            result.append("\"qaNo\": \"" + null + "\", ");
 		            result.append("\"no\": \"" + null + "\", ");
 		            result.append("\"qaContent\": \"" + null + "\", ");
+		            result.append("\"qaTitle\": \"" + null + "\", ");
 		            result.append("\"qaDate\": \"" + null + "\", ");
 		            result.append("\"id\": \"" + null + "\", ");
 		            result.append("\"qaCategory\": \"" + null + "\", ");

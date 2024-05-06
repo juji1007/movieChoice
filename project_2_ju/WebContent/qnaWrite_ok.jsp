@@ -12,6 +12,7 @@
     // 세션에서 필요한 값들 가져오기
     int no = (Integer) session.getAttribute("no");
     String nick = request.getParameter("nick");
+    String qaTitle = request.getParameter("qaTitle");
     String qaContent = request.getParameter("qaContent");
     String qaCategory = request.getParameter("qaCategory");
 	
@@ -19,6 +20,7 @@
     qnaVO qo = new qnaVO();
     qo.setNo(no);
     qo.setNick(nick);
+    qo.setQaTitle(qaTitle);
     qo.setQaContent(qaContent);
     if (!qaCategory.equals("선택")) {
     	qo.setQaCategory(qaCategory);

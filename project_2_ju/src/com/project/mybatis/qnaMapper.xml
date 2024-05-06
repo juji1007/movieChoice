@@ -54,7 +54,7 @@
 	            WHERE 1 = 2 <!-- 어떤 결과도 반환되지 않도록 함 -->
 	        </when>
 	        <when test="idx == 0">
-	            WHERE QA_CONTENT LIKE '%' || #{keyword} || '%'
+	            WHERE QA_TITLE LIKE '%' || #{keyword} || '%'
 	        </when>
 	        <when test="idx == 1">
 	            WHERE TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
@@ -96,7 +96,7 @@
 	            WHERE 1 = 2 <!-- 어떤 결과도 반환되지 않도록 함 -->
 	        </when>
 	        <when test="idx == 0">
-	            WHERE QA_CONTENT LIKE '%' || #{keyword} || '%'
+	            WHERE QA_TITLE LIKE '%' || #{keyword} || '%'
 	        </when>
 	        <when test="idx == 1">
 	            WHERE TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
@@ -133,14 +133,15 @@
 	<!-- QA 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.qnaVO">
 		INSERT INTO QA
-			       (QA_NO, NO, QA_CONTENT, QA_DATE, QA_CATEGORY)
-			VALUES (QA_SEQ.NEXTVAL, #{no}, #{qaContent}, SYSDATE, #{qaCategory}) 
+			       (QA_NO, NO, QA_CONTENT, QA_DATE, QA_CATEGORY, QA_TITLE)
+			VALUES (QA_SEQ.NEXTVAL, #{no}, #{qaContent}, SYSDATE, #{qaCategory},#{qaTitle}) 
 	</insert>
 	
 	<!-- QA 수정 -->
 	<update id="update" parameterType="com.mystudy.model.vo.qnaVO">
 		UPDATE QA
-			SET QA_CONTENT = #{qaContent}
+			SET  QA_TITLE = #{qaTitle}
+			    , QA_CONTENT = #{qaContent}
 				, QA_DATE = SYSDATE
 			WHERE QA_NO = #{qaNo}
 	</update>

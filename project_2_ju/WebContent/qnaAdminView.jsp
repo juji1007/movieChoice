@@ -52,24 +52,23 @@
 
 </script>
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/freeView.css">
 <body>
-
-
-    <table>
+<%@ include file="include/header.jspf" %>
+<div class="body">
+<table frame="void">
         <tr>
-            <td colspan=3><h2>QnA 번호 : ${qvo.qaNo }</h2></td>
+            <td colspan=7><h2>${qvo.qaTitle }</h2></td>
         </tr>
         <tr>
-            <td>아이디 : ${qvo.id }</td>
+            <td>닉네임 : ${qvo.nick }</td>
         </tr>
         <tr>
-            <td>카테고리 : ${qvo.qaCategory }</td>
+            <td width="20%">카테고리 : ${qvo.qaCategory }</td>
         </tr>
         <tr>
-            <td>내용 : ${qvo.qaContent }</td>
-        </tr>
-        <tr>
-            <td>${qvo.qaDate }</td>
+            <td width="20%">${qvo.qaDate }</td>
         </tr>
         <tr>
             <td>
@@ -79,20 +78,40 @@
                 </form>
             </td>
             <td>
-                <input type="button" value="목록보기" onclick="location.href = 'qna.jsp'">
+                <input class="li_button" type="button" value="목록보기" onclick="location.href = 'qna.jsp'">
             </td>
         </tr>
     </table>
-    <h2>QnA ${qvo.qaNo }번에 대한 관리자 답변</h2>
-    <input class="write" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
     <hr>
-    <p>${ivo.iqContent }</p> 
-    <div>
-        <form action="inquiryAdminDeleteOk.jsp?iqNo=${ivo.iqNo }" method="post">
-                <input class="h_button" type="button" value="삭제" onclick="iq_delete(this.form)">
-                <input type="hidden" name="iqNo" value="${ivo.iqNo }">
-        </form>
+    <table>
+    	<tr height="200">
+    		<td>${qvo.qaContent }</td> 
+    	</tr>
+    </table>
+    <div class="comment">
+<table>
+	<tr>
+		<td colspan=7>
+			<textarea name="iqContent" rows="2" cols="55"></textarea>
+			<input class="writeBtn" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
+			</td>
+		</tr>
+</table>
+<hr class="color">
+    <h2>${qvo.qaTitle } | 관리자 답변</h2>
+    <table class="comment" border frame=void>
+    	<tr>
+		    <td width="20%">${ivo.iqContent }</td> 
+		    <td class="deleteComment">
+		        <form action="inquiryAdminDeleteOk.jsp?iqNo=${ivo.iqNo }" method="post">
+		                <input class="deleteBtn" type="button" value="삭제" onclick="iq_delete(this.form)">
+		                <input type="hidden" name="iqNo" value="${ivo.iqNo }">
+		        </form>
+		    </td>
+    	</tr>
+    </table>
     </div>
+   	</div>
 
     <% if ("평론가탈퇴".equals(qvo.getQaCategory())) { %>
         <input type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">

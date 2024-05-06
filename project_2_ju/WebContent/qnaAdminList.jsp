@@ -25,7 +25,7 @@ request.getAttribute("keyword");
       		<div class="content">
 			    <form action="qnaAdminController?search=qnaAdminList" method="get">
 			        <select class="select" name="idx">
-						<option value="0">내용</option>
+						<option value="0">제목</option>
 						<option value="1">작성일</option>
 						<option value="2">영화추가</option>
 						<option value="3">평론가탈퇴</option>
@@ -55,7 +55,7 @@ request.getAttribute("keyword");
 		      <td>${vo.nick }</td>
 		      <td>${vo.qaDate }</td>
 		      <td>
-			      <a href="qnaAdminView.jsp?qaNo=${vo.qaNo }"> ${vo.qaContent }
+			      <a href="qnaAdminView.jsp?qaNo=${vo.qaNo }"> ${vo.qaTitle }
 		      </a>
 		      </td>
 		   </tr>

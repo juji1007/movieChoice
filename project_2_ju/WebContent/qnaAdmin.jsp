@@ -83,7 +83,7 @@ session.setAttribute("list", list);
     	<div class="content">
 	    <form action="qnaAdminController?search=qnaAdminList" method="get">
 	        <select class="select" name="idx">
-				<option value="0">내용</option>
+				<option value="0">제목</option>
 				<option value="1">작성일</option>
 				<option value="2">영화추가</option>
 				<option value="3">평론가탈퇴</option>
@@ -101,9 +101,9 @@ session.setAttribute("list", list);
 		<tr>
 			<th>번호</th>
 			<th>분류</th> 
-			<th>닉네임</th>
+			<th>작성자</th>
 			<th>작성일</th>
-			<th>내용</th>
+			<th>제목</th>
 		</tr>
 		<c:forEach var="vo" items="${list }">
 			<tr>
@@ -112,7 +112,7 @@ session.setAttribute("list", list);
 				<td>${vo.nick }</td>
 				<td>${vo.qaDate }</td>
 				<td>
-					<a href="qnaAdminView.jsp?qaNo=${vo.qaNo }&cPage=${pvo.nowPage}">${vo.qaContent }</a>
+					<a href="qnaAdminView.jsp?qaNo=${vo.qaNo }&cPage=${pvo.nowPage}">${vo.qaTitle }</a>
 				</td>
 			</tr>
 		</c:forEach>

@@ -66,7 +66,7 @@
 	<table frame="void">
 	<!-- <table border> -->
 		<tr>
-			<td colspan=7 ><h1>QnA : ${qvo.qaNo }</h1></td>
+			<td colspan=7 ><h1>${qvo.qaTitle }</h1></td>
 		</tr>
 		<tr>
 			<td width="20%">작성자 | ${qvo.nick }</td>
@@ -95,7 +95,7 @@
 		</tr>
 	</table>
 	<hr class="color">
-<h2>QnA : ${qvo.qaNo } 관리자 답변내용</h2>
+<h2>${qvo.qaTitle } | 관리자 답변</h2>
 
 <table class="comment" border frame=void>
 	<tr>
