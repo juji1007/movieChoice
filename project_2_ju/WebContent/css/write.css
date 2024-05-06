@@ -52,6 +52,26 @@ border-radius: 5px;
   padding: 10px 12px;
   font-size: 14px;
 }
+.searchbtn {
+position: relative;
+border: 1px solid #bbb;
+	background-color: #888888;
+	border:  none;
+border-radius: 5px;
+	color: white;
+	 width: 100px;
+  height: 38px;
+}
+.searchbtn:hover {
+	background-color: #7C7C7C;
+}
+#file {
+	border: 1px solid #bbb;
+	background-color: #888888;
+	border:  none;
+	border-radius: 5px;
+	color: white;
+}
 .commitbtn {
 	border-radius: 5px;
 	 width: 100px;
@@ -85,5 +105,12 @@ background-color:#E7E7E7;
 	text-align: center;
 	padding: 40px;
 }
-
+.select {
+width: 130px;
+height: 42px;
+ border: 1px solid #bbb;
+border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
 

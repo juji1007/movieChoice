@@ -24,6 +24,7 @@
 <title>myPage</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/myPage.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <!-- style 태그 -->
@@ -151,9 +152,9 @@
 		            
 		            let footerHtml = "<tr>";
 		            footerHtml += "<td colspan='2'>";
-		            footerHtml += "<input type='button' value='회원탈퇴' onclick='deleteAccount(this.form)'>";
-		            footerHtml += "<input type='button' value='회원정보수정 및 평론가신청하기' onclick='updateAccount(this.form)'>";
-		            footerHtml += "<input type='button' value='평론가 탈퇴신청하기' onclick=\"location.href='criticCancelWrite.jsp'\">";
+		            footerHtml += "<input class='searchbtn' type='button' value='회원탈퇴' onclick='deleteAccount(this.form)'>";
+		            footerHtml += "<input class='commitbtn' type='button' value='회원정보 수정 및 평론가 신청' onclick='updateAccount(this.form)'>";
+		            footerHtml += "<input class='reset' type='button' value='평론가 탈퇴' onclick=\"location.href='criticCancelWrite.jsp'\">";
 		            footerHtml += "</td>";
 		            footerHtml += "</tr>";
 
@@ -209,9 +210,9 @@
 				            htmltag += "<td>" + member.rvDate + "</td>";
 				            htmltag += "<td>" + member.rvRec + "</td>";
 				            htmltag += "<td>" + member.warn + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteReview(this.form, \"" +  member.rvNo + "\")'>";
+ 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteReview(this.form, \"" +  member.rvNo + "\")'>";
 //  	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
- 	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form, \"" + member.rvNo + "\")'></td>";
+ 	 			            htmltag += "<input class='up_button' type='button' value='수정' onclick='updateReview(this.form, \"" + member.rvNo + "\")'></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -269,12 +270,12 @@
 				            htmltag += "<td>" + member.psDate + "</td>";
 				            htmltag += "<td>" + member.psFile + "</td>";
 				            htmltag += "<td>" + member.psWarn + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deletePost(this.form)'>";
+ 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePost(this.form)'>";
  	 			            htmltag += "<input type='hidden' name='psNo' value='" + member.psNo + "'>";
  	 			            htmltag += "<input type='hidden' name='no' value='" + member.no + "' >";
  	 			            htmltag += "<input type='hidden' name='psTitle' value='" + member.psTitle + "' >";
  	 			            htmltag += "<input type='hidden' name='psContent' value='" + member.psContent + "' >";
- 	 			            htmltag += "<input type='button' value='수정' onclick='updatePost(this.form)'></td>";
+ 	 			            htmltag += "<input class='up_button' type='button' value='수정' onclick='updatePost(this.form)'></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -326,7 +327,7 @@
 				            htmltag += "<td>" + member.pcNick + "</td>";
 				            htmltag += "<td>" + member.pcDate + "</td>";
 				            htmltag += "<td>" + member.pcContent + "</td>";
- 	 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
+ 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -389,7 +390,7 @@
 	                        }
 	                        htmltag += "</td>";
 
-	                        htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteQna(this.form)'></td>";
+	                        htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteQna(this.form)'></td>";
 	                        htmltag += "<input type='hidden' name='qaNo' value='" + member.qaNo + "'>";
 	                        htmltag += "<input type='hidden' name='location' value='myPage'>";
 	                        htmltag += "</tr>";
@@ -452,8 +453,8 @@
 			</thead>
 			<tbody id="accountTbody">
 				<tr>
-					<td><input type='button' value='회원정보삭제' onclick='delete(this.form, review)'></td>
-					<td><input type='button' value='회원정보수정' onclick='updateReview(this.form)'></td>
+					<td><input class="h_button" type="button" value='회원정보삭제' onclick='delete(this.form, review)'></td>
+					<td><input class="up_button" type="button" value='회원정보수정' onclick='updateReview(this.form)'></td>
 				</tr>
 			</tbody>
 		</table>

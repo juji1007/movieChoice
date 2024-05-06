@@ -5,6 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>비밀번호찾기</title>
+<link rel="stylesheet" href="css/write.css">
 <script>
 	function check_password(frm) {
 		var password = frm.password.value;
@@ -21,56 +22,68 @@
 	}
 </script>
 <style type="text/css">
-	table {
-		border: solid black 1px;
-	}
-	th, td {
-		border: solid black 1px;
-	}
+/* 	table { */
+/* 		border: solid black 1px; */
+/* 	} */
+/* 	th, td { */
+/* 		border: solid black 1px; */
+/* 	} */
 </style>
 </head>
 <body>
+
+<div class="body">
 	<div id="findPasswordArea">
 		<form method="post">
 			<table>
-				<caption><h2>비밀번호찾기</h2></caption>
+				<caption><h2>비밀번호 재설정</h2></caption>
 				<thead>
 					<tr>
-						<th>아이디입력</th>
+						<th>ID</th>
+<!-- 						<th>아이디입력</th> -->
 						<td colspan="3">
-							<input type="text" name="id" title="아이디"/>
+							<input class="psTitle" type="text" name="id" title="아이디"/>
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th>비밀번호재설정</th>
+						<th>NEW P/W</th>
+<!-- 						<th>비밀번호재설정</th> -->
 						<td colspan="3">
-							<input type="password" name="password" title="새로운비밀번호"/>
+							<input class="psTitle" type="password" name="password" title="새로운비밀번호"/>
 						</td>
 					</tr>
 					<tr>
-						<th>비밀번호재설정확인</th>
+						<th>CHECK P/W</th>
+<!-- 						<th>비밀번호재설정확인</th> -->
 						<td colspan="3">
-							<input type="password" name="passwordCheck" title="새로운비밀번호확인" onblur="check_password(this.form)"/>
+							<input class="psTitle" type="password" name="passwordCheck" title="새로운비밀번호확인" onblur="check_password(this.form)"/>
 						</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="2">
-							<input type="reset" value="초기화"/>
+						</td>
+						<td>
+							<input class="reset" type="button" value="메인가기" onclick="javascript:location.href='main.jsp'">
+							<input class="searchbtn" type="button" value="로그인가기" onclick="javascript:location.href='login_page.jsp'">
+							<input class="searchbtn" type="button" value="아이디찾기" onclick="javascript:location.href='loginController?type=findId'">
+							<input class="reset" type="reset" value="초기화"/>
+							<input class="commitbtn" type="button" value="P/W 재설정" onclick="findPassword_Ok(this.form)"/>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4">
 <!-- 							<input type="button" value="아이디찾기" onclick="location.href='loginController?type=findIdOk'"/> -->
-							<input type="button" value="비밀번호재설정" onclick="findPassword_Ok(this.form)"/>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
 		</form>
 	</div>
+</div>
+	
 </body>
 </html>

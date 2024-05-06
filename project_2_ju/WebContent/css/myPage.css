@@ -1,4 +1,62 @@
 @charset "UTF-8";
+.h_button {
+	border-radius: 5px;
+		width: 60px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: #888888;
+ color: white;
+}
+.h_button:hover {
+	background-color: #7C7C7C;
+}
+.up_button {
+	border-radius: 5px;
+		width: 60px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: white;
+}
+.up_button:hover {
+	background-color:#E7E7E7;
+}
+.commitbtn {
+	border-radius: 5px;
+		 width: 200px;
+  	height: 38px;
+ border: 1px solid #bbb;
+ background-color: #56BEC0;
+ color: white;
+}
+.commitbtn:hover {
+	background-color: #4EA8AA;
+}
+.searchbtn {
+position: relative;
+border: 1px solid #bbb;
+	background-color: #888888;
+	 width: 100px;
+  height: 38px;
+	border:  none;
+border-radius: 5px;
+	color: white;
+}
+.searchbtn:hover {
+	background-color: #7C7C7C;
+}
+.reset {
+	border-radius: 5px;
+		 width: 100px;
+  	height: 38px;
+ border: 1px solid #bbb;
+ background-color: white;
+}
+.reset:hover {
+background-color:#E7E7E7;
+}
+
+
+
 img.icon {
     position: absolute;
     left: 200px;
