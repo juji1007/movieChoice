@@ -36,6 +36,7 @@ session.setAttribute("attr_list", list);
 <title>main</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/main.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -160,5 +161,8 @@ session.setAttribute("attr_list", list);
 
 </div>
 </div>
+
+<!-- footer.jspf -->
+	<%@ include file="include/footer.jspf" %>
 </body>
 </html>

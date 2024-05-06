@@ -5,6 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>회원가입</title>
+<link rel="stylesheet" href="css/write.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var isCheckId = false;
@@ -88,75 +89,86 @@
 	}
 </script>
 <style type="text/css">
-	table {
-		border: solid black 1px;
+
+	th {
+		width : 30px;
 	}
-	th, td {
-		border: solid black 1px;
-	}
+/* 	table { */
+/* 		border: solid black 1px; */
+/* 	} */
+/* 	th, td { */
+/* 		border: solid black 1px; */
+/* 	} */
 </style>
 </head>
 <body>
+
+<div class="body">
 	<div id="loginArea">
 		<form method="post">
 			<table>
 				<caption><h2>회원가입</h2></caption>
 				<thead>
 					<tr>
-						<th>아이디</th>
-						<td colspan="3">
-							<input type="text" name="id" title="아이디" />
-							<input type="button" value="아이디중복체크" onclick="checkId(this.form)"/>
+						<th>ID </th>
+						<td colspan="2" width="40px">
+							<input class="psTitle" type="text" name="id" title="아이디" />
+						</td>
+						<td>
+							<input class="searchbtn" type="button" value="중복체크" onclick="checkId(this.form)"/>
 						</td>
 					</tr>
 					<tr>
-						<th>비밀번호</th>
-						<td colspan="3">
-							<input type="password" name="pwd" title="비밀번호" />
+						<th>P/W </th>
+						<td colspan="2">
+							<input class="psTitle" type="password" name="pwd" title="비밀번호" />
 						</td>
 					</tr>
 					<tr>
-						<th>비밀번호확인</th>
-						<td colspan="3">
-							<input type="password" name="pwdCheck" title="비밀번호확인" onblur="check_pwd(this.form)"/>
+						<th>CHECK P/W </th>
+						<td colspan="2">
+							<input class="psTitle" type="password" name="pwdCheck" title="비밀번호확인" onblur="check_pwd(this.form)"/>
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th>이름</th>
-						<td colspan="3">
-							<input type="text" name="name" title="이름" />
+						<th>NAME </th>
+						<td colspan="2">
+							<input class="psTitle" type="text" name="name" title="이름" />
 						</td>
 					</tr>
 					<tr>
-						<th>닉네임</th>
-						<td colspan="3">
-							<input type="text" name="nickName" title="닉네임" />
+						<th>NICK </th>
+						<td colspan="2">
+							<input class="psTitle" type="text" name="nickName" title="닉네임" />
 						</td>
 					</tr>
 					<tr>
-						<th>이메일</th>
-						<td colspan="3">
-							<input type="email" name="email" title="이메일" onblur="check_email(this.form)"/>
+						<th>EMAIL </th>
+						<td colspan="2">
+							<input class="psTitle" type="email" name="email" title="이메일" onblur="check_email(this.form)"/>
 						</td>
 					</tr>
 					<tr>
-						<th>평론가인증</th>
-						<td colspan="3">
-							<input type="radio" name="criticCheck" title="평론가" onclick="check_critic(this.form)"/>
+						<th>CRITIC </th>
+						<td colspan="2">
+							<input class="psTitle" type="radio" name="criticCheck" title="평론가" onclick="check_critic(this.form)">
 						</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="2">
-							<input type="reset" value="초기화"/>
+						<td>
 						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<input type="button" value="회원가입하기" onclick="memberJoin_ok(this.form)"/>
+						<td>
+						</td>
+						<td>
+							<input class="reset" type="button" value="메인가기" onclick="javascript:location.href='main.jsp'">
+							<input class="searchbtn" type="button" value="로그인가기" onclick="javascript:location.href='login_page.jsp'">
+							<input class="searchbtn" type="button" value="아이디찾기" onclick="javascript:location.href='loginController?type=findId'">
+							<input class="reset" type="reset" value="초기화">
+							<input class="commitbtn" type="button" value="회원가입" onclick="memberJoin_ok(this.form)">
 						</td>
 					</tr>
 				</tfoot>
@@ -164,5 +176,7 @@
 			</table>
 		</form>
 	</div>
+</div>
+	
 </body>
 </html>

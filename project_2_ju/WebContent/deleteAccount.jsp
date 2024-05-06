@@ -16,6 +16,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>회원정보삭제</title>
+<link rel="stylesheet" href="css/write.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var check = false;
@@ -70,15 +71,17 @@
 	}
 </script>
 <style type="text/css">
-	table {
-		border: solid black 1px;
-	}
-	th, td {
-		border: solid black 1px;
-	}
+/* 	table { */
+/* 		border: solid black 1px; */
+/* 	} */
+/* 	th, td { */
+/* 		border: solid black 1px; */
+/* 	} */
 </style>
 </head>
 <body>
+
+<div class="body">
 	<div id="deleteArea">
 		<form method="post">
 			<table>
@@ -87,31 +90,29 @@
 				    <tr>
 				        <th>아이디</th>
 				        <td colspan="3">
-				            <input type="text" name="id" title="아이디" />
+				            <input class="psTitle" type="text" name="id" title="아이디" />
 				        </td>
 				    </tr>
 				    <tr>
 				   		<th>비밀번호</th>
 					    <td colspan="3">
-					       <input type="password" name="pwd" title="비밀번호" disabled value="<%=avo.getPwd() %>"/>
+					       <input class="psTitle" type="password" name="pwd" title="비밀번호" disabled value="<%=avo.getPwd() %>"/>
 					    </td>
 					</tr>
 				    <tr>
 						<th>비밀번호인증</th>
 						<td colspan="3">
-							<input type="password" name="pwdCheck" title="비밀번호인증" onblur="check_pwd(this.form)"/>
+							<input class="psTitle" type="password" name="pwdCheck" title="비밀번호인증" onblur="check_pwd(this.form)"/>
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td colspan="2">
-							<input type="reset" value="초기화"/>
 						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<input type="button" value="삭제하기" onclick="deleteAccount(this.form)"/>
+						<td colspan="3" width="20%">
+							<input class="reset" type="reset" value="초기화"/>
+							<input class="commitbtn" type="button" value="삭제하기" onclick="deleteAccount(this.form)"/>
 							<input type="hidden" name="no" value="<%= avo.getNo()%>" />
 							<input type="hidden" name="checkId" value="<%= avo.getId()%>" />
 							<input type="hidden" name="criticCheck" value="<%= avo.getCriticCheck()%>" />
@@ -122,5 +123,8 @@
 			</table>
 		</form>
 	</div>
+</div>
+	
+	
 </body>
 </html>

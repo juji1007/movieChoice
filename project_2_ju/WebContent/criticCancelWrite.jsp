@@ -24,6 +24,7 @@
 <head>
 <meta charset="UTF-8">
 <title>평론가 취소 작성</title>
+<link rel="stylesheet" href="css/write.css">
 <script>
 function sendData() {
     let firstForm = document.forms[0];
@@ -37,6 +38,8 @@ function list_go() {
 </script>
 </head>
 <body>
+
+<div class="body">
 <div>
 <form action="qnaWrite_ok.jsp" method="post">
     <table>
@@ -48,7 +51,7 @@ function list_go() {
         <tr>
             <th>카테고리</th>
             <td>
-                <select name="qaCategory">
+                <select class="select" name="qaCategory">
                     <option value="평론가탈퇴">평론가탈퇴</option>
                 </select>
             </td>
@@ -60,14 +63,19 @@ function list_go() {
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <input type="button" value="저장" onclick="sendData()">
-                <input type="reset" value="초기화">
-                <input type="button" value="마이페이지" onclick="list_go()">
+        	<th>
+        	</th>
+            <td>
+                <input class="commitbtn" type="button" value="저 장" onclick="sendData()">
+                <input class="reset" type="reset" value="초기화">
+                <input class="searchbtn" type="button" value="마이페이지" onclick="list_go()">
             </td>
         </tr>
     </table>
 </form>
 </div>
+</div>
+
+
 </body>
 </html>
