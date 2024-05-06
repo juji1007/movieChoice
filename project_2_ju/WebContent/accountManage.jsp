@@ -138,6 +138,7 @@ tbody th tr td{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 function deleteAccount(memberId) {
+	console.log("memberId : " + memberId);
     if (confirm("정말 삭제하시겠습니까?")) {
         $.ajax({
             type: "POST",
@@ -158,6 +159,8 @@ function deleteAccount(memberId) {
                 alert("삭제 요청 실패: " + errorThrown);
             }
         });
+    } else {
+    	console.log("취소");
     }
 }
 function selectCategory(frm) {

@@ -38,6 +38,8 @@ function deleteAccount(memberId) {
                 alert("삭제 요청 실패: " + errorThrown);
             }
         });
+    } else {
+    	console.log("취소");
     }
 }
 
