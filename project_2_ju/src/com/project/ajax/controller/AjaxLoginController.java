@@ -1,5 +1,5 @@
 package com.project.ajax.controller;
-
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
@@ -21,8 +21,8 @@ import com.project.dao.AdminDAO;
 @WebServlet("/ajaxLoginController")
 public class AjaxLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
+	private Gson gson = new Gson();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -56,6 +56,24 @@ public class AjaxLoginController extends HttpServlet {
 			System.out.println(idFiredCheck);
 			resp.setContentType("text/html; charset=UTF-8");
 			resp.getWriter().write(String.valueOf(idFiredCheck));
+			
+//		     int idFired = AccountDAO.delete(no);
+//		     boolean isDeleted = false; 
+//		     if (idFired != -1) isDeleted = true;
+//			 String message = isDeleted ? "삭제." : " 병슨.";
+//			 resp.setContentType("application/json");
+//			         resp.setCharacterEncoding("UTF-8");
+//			         resp.getWriter().write(gson.toJson(new ResponseStatus(isDeleted, message))); }
+//			  private class StatusResponse  {
+//			         boolean success;
+//			         String message;
+//
+//			         public ResponseStatus(boolean success, String message) {
+//			             this.success = success;
+//			             this.message = message;
+//			         }
+//			     }
+
 		}
 		
 	}
