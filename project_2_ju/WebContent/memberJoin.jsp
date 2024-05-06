@@ -28,11 +28,10 @@
 				if(response == "true") {
 					alert("이미 사용중인 아이디 입니다.");
 					frm.id.value = "";
-					return false;
+					isCheckId = false;
 				} else {
 					alert("사용 가능한 아이디 입니다.");
 					isCheckId = true;
-					return true;
 				}
 			},
 			error : function(jqXHR, textStatus, errorThrown){
@@ -40,7 +39,7 @@
 						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
 						+ "textStatus : " + textStatus + "\n"
 						+ "errorThrown : " + errorThrown);
-				return false;
+				isCheckId = false;
 			}
 		});
 	}
