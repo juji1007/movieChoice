@@ -146,8 +146,7 @@
   <h2>${vo.mvTitle } 리뷰</h2>
   <hr class="color">
   <c:forEach var="mvo" items="${mvoList}">
-		<p>${mvo.rvNick }</p>
-		<p><a href="rvDetail.jsp?rvNo=${mvo.rvNo }&cPage=1">${mvo.rvTitle }</a></p>
+		<p><strong>${mvo.rvNick }</strong> | <a href="rvDetail.jsp?rvNo=${mvo.rvNo }&cPage=1">${mvo.rvTitle }</a></p>
 <%-- 		<p>${mvo.rvTitle }</p> --%>
 		<p>${mvo.rvContent }</p>
 		<p>${mvo.rvDate }</p>
