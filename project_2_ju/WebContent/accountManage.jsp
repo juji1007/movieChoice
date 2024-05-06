@@ -77,6 +77,11 @@ function selectCategory(frm) {
                 // 검색 결과가 있을 때
                 for (let member of respData.listSearch) {
                 	console.log("유저html");
+                	 if (member.no === "null" || member.no.length === 0) {
+                         console.log("유저없음html");
+                         htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+                         break;
+                     }
                 	if (checkAccount > 0) {
 		                htmltag += "<tr><th>관리</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>테이블</th></tr>";
 		            }
