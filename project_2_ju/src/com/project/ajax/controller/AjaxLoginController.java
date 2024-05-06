@@ -58,11 +58,11 @@ public class AjaxLoginController extends HttpServlet {
 			resp.getWriter().write(String.valueOf(idFiredCheck));
 		}
 		
-		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		doGet(req, resp);
 	}
 

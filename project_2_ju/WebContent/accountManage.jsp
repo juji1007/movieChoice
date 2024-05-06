@@ -137,30 +137,61 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+// function deleteAccount(memberId) {
+// 	console.log("memberId : " + memberId);
+//     if (confirm("정말 삭제하시겠습니까?")) {
+//         $.ajax({
+//             type: "POST",
+//             url: "ajaxLoginController",
+//             data: {
+//             	action: "fireAccount",
+//                 id: memberId
+//             },
+//             success: function(response) {
+//                 if (response === "true") {
+//                     // 삭제가 성공한 경우 해당 행을 화면에서 제거
+//                     $("#" + memberId).remove();
+//                 } else {
+//                     alert("삭제 실패!");
+//                 }
+//             },
+//             error: function(jqXHR, textStatus, errorThrown) {
+//                 alert("삭제 요청 실패: " + errorThrown);
+//             }
+//         });
+//     } else {
+//     	console.log("취소");
+//     }
+// }
+
 function deleteAccount(memberId) {
-	console.log("memberId : " + memberId);
+    console.log("memberId : " + memberId);
     if (confirm("정말 삭제하시겠습니까?")) {
-        $.ajax({
-            type: "POST",
-            url: "ajaxLoginController",
-            data: {
-            	action: "fireAccount",
-                id: memberId
+        fetch('ajaxLoginController', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            success: function(response) {
-                if (response === "true") {
-                    // 삭제가 성공한 경우 해당 행을 화면에서 제거
-                    $("#" + memberId).remove();
-                } else {
-                    alert("삭제 실패!");
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("삭제 요청 실패: " + errorThrown);
+            body: new URLSearchParams({
+                'action': 'fireAccount',
+                'id': memberId
+            })
+        })
+        .then(response => response.text())         
+
+.then(data => {
+            if (data === "true") {
+                document.getElementById(memberId).remove();
+            } else {
+                alert("삭제 실패!");
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("삭제 요청 실패: " + error);
         });
     } else {
-    	console.log("취소");
+        console.log("취소");
     }
 }
 function selectCategory(frm) {
