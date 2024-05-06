@@ -109,6 +109,12 @@
 		SELECT COUNT(*) AS CNT FROM ACCOUNT
 	</select>
 	
+	<!-- 계정 전체 건수 -->
+	<select id="findCriticCheck" parameterType="int" resultType="int">
+		SELECT CRITIC_CHECK FROM ACCOUNT
+		WHERE NO = #{no}
+	</select>
+	
 </mapper>
 
 

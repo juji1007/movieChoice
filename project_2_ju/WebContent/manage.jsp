@@ -140,6 +140,79 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function deleteAccount(memberId) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "ajaxLoginController",
+            data: {
+            	action: "fireAccount",
+                id: memberId
+            },
+            success: function(response) {
+                if (response === "true") {
+                    // 삭제가 성공한 경우 해당 행을 화면에서 제거
+                    $("#" + memberId).remove();
+                } else {
+                    alert("삭제 실패!");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("삭제 요청 실패: " + errorThrown);
+            }
+        });
+    }
+}
+
+function deleteMovie(mvNo) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "ajaxMovieController",
+            data: {
+            	action: "deleteMovie",
+            	mvNo: mvNo
+            },
+            success: function(response) {
+                if (response === "true") {
+                    // 삭제가 성공한 경우 해당 행을 화면에서 제거
+                    $("#" + mvNo).remove();
+                } else {
+                    alert("삭제 실패!");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("삭제 요청 실패: " + errorThrown);
+            }
+        });
+    }
+}
+
+function deleteReview(rvNo) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "ajaxReviewController",
+            data: {
+            	action: "deleteReview",
+            	rvNo: rvNo
+            },
+            success: function(response) {
+                if (response === "true") {
+                    // 삭제가 성공한 경우 해당 행을 화면에서 제거
+                    $("#" + rvNo).remove();
+                } else {
+                    alert("삭제 실패!");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("삭제 요청 실패: " + errorThrown);
+            }
+        });
+    }
+}
+
+
 
 function selectCategory(frm) {
 	var checkCategory = frm.idx.value;
@@ -200,7 +273,7 @@ function selectCategory(frm) {
 						if (checkReview > 0) {
 							htmltag += "<tr><th>테이블</th><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
 						}
-						htmltag += "<tr class='" + member.table + "'>";
+						htmltag += "<tr id='" + member.rvNo + "'>";
 						htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.rvNo + "</td>";
 			            htmltag += "<td>" + member.mvNo + "</td>";
@@ -211,7 +284,8 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.rvDate + "</td>";
 			            htmltag += "<td>" + member.rvRec + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>";
-			            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='rvDelete.jsp?location=admin&rvNo=" + member.rvNo + "'\">";
+// 			            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='rvDelete.jsp?location=admin&rvNo=" + member.rvNo + "'\">";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteReview(" + member.rvNo + ")'></td>";
 			            htmltag += "</tr>";
 			            
 			            checkReview--;
@@ -224,7 +298,7 @@ function selectCategory(frm) {
 						if (checkMovie > 0) {
 							htmltag += "<tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th><th>관리</th></tr>";
 						}
-			        	htmltag += "<tr class='" + member.table + "'>";
+			        	htmltag += "<tr id='" + member.mvNo + "'>";
 			            htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.mvNo + "</td>";
 			            htmltag += "<td>" + member.mvTitle + "</td>";
@@ -236,7 +310,8 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvGrade + "</td>";
 			            htmltag += "<td>" + member.mvDate + "</td>";
 			            htmltag += "<td><img src='img/" + member.mvPoster + "' width='200'></td>";
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='controller?type=movieDelete&mvNo=" + member.mvNo + "'\">";
+// 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='controller?type=movieDelete&mvNo=" + member.mvNo + "'\">";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteMovie(" + member.mvNo + ")'>";
 			            htmltag += "<input type='button' value='수정' onclick=\"location.href='controller?type=movieFix&mvNo=" + member.mvNo + "'\"></td>";
 			            htmltag += "</tr>";
 			            
@@ -250,7 +325,7 @@ function selectCategory(frm) {
 			            if (checkAccount > 0) {
 			                htmltag += "<tr><th>테이블</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>관리</th></tr>";
 			            }
-			            htmltag += "<tr class='" + member.table + "'>";
+			            htmltag += "<tr id='" + member.id + "'>";
 			            htmltag += "<td>" + member.table + "</td>";
 			            htmltag += "<td>" + member.no + "</td>";
 			            htmltag += "<td>" + member.name + "</td>";
@@ -259,7 +334,8 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.criticCheck + "</td>";
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=admin&id="+ member.id + "'\">";
+// 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=admin&id="+ member.id + "'\">";
+					    htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
