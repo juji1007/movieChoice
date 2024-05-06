@@ -130,7 +130,9 @@ session.setAttribute("attr_list", list);
 			</tr>
 			<tr>
 			<td>
-			<input class="searchbtn" type="button" value="삭제" onclick="location.href='controller?type=movieDelete&location=mainAdmin&mvNo=${vo.mvNo }'">
+
+			<input class="h_button" type="button" value="삭제" onclick="location.href='controller?type=movieDelete&location=mainAdmin&mvNo=${vo.mvNo }'">
+
 			<input class="up_button" type="button" value="수정" onclick="location.href='controller?type=movieFix&location=mainAdmin&mvNo=${vo.mvNo }'">
 			<input type="hidden" name="mvNo" value="${vo.mvNo }">
 			</td>
