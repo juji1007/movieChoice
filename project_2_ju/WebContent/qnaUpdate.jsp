@@ -29,6 +29,12 @@ function list_go() {
 		</td>
 	</tr>
 	<tr>
+        	<th>제목</th>
+			<td>
+				<input  class="psTitle" type="text" name="qaTitle" value="${qvo.qaTitle }">
+			</td>
+		</tr>
+	<tr>
 		<th>내용</th>
 		<td>
 			<textarea name="qaContent" rows="8" cols="50" >${qvo.qaContent }</textarea>

@@ -43,7 +43,7 @@ request.getAttribute("keyword");
       		<div class="content">
 			    <form action="qnaController?search=qnaList" method="get">
 			        <select class="select" name="idx">
-						<option value="0">내용</option>
+						<option value="0">제목</option>
 						<option value="1">작성일</option>
 						<option value="2">영화추가</option>
 						<option value="3">평론가탈퇴</option>
@@ -64,7 +64,7 @@ request.getAttribute("keyword");
 				<th>분류</th> 
 				<th>닉네임</th>
 				<th>작성일</th>
-				<th>내용</th>
+				<th>제목</th>
 			</tr>
 		   <c:forEach var="vo" items="${listOne }">
 		   <tr>
@@ -73,7 +73,7 @@ request.getAttribute("keyword");
 		      <td>${vo.nick }</td>
 		      <td>${vo.qaDate }</td>
 		      <td>
-			      <a href="qnaView.jsp?qaNo=${vo.qaNo }"> ${vo.qaContent }
+			      <a href="qnaView.jsp?qaNo=${vo.qaNo }"> ${vo.qaTitle }
 		      </a>
 		      </td>
 		   </tr>

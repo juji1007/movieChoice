@@ -240,7 +240,7 @@ function ps_update(frm) {
 				<input class="deleteBtn" type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
 				<input type="hidden" name="pcNo" value="${commVO.pcNo }">
 				<input type="hidden" name="no" value="${commVO.no }">
-			</td>
+			
 		</tr>
 		</form>
 	</c:forEach>

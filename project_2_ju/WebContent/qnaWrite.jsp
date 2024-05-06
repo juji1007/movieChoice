@@ -58,7 +58,7 @@ function list_go() {
 
             <th>카테고리</th>
             <td>
-                <select name="qaCategory">
+                <select class="movie" name="qaCategory">
                 	<option value="선택" selected="selected">선택</option>
                     <option value="영화추가">영화추가</option>
                     <option value="평론가탈퇴">평론가탈퇴</option>
@@ -66,10 +66,16 @@ function list_go() {
             </td>
         </tr>
         <tr>
+        	<th>제목</th>
+			<td>
+				<input  class="psTitle" type="text" name="qaTitle" placeholder="제목을 입력하세요.">
+			</td>
+		</tr>
+        <tr>
             <th>내용</th>
 
             <td>
-                <textarea name="qaContent" rows="8" cols="50" title="내용" placeholder="문의사항을 입력하세요."></textarea>
+                <textarea class="psContent" name="qaContent" rows="8" cols="50" title="내용" placeholder="문의사항을 입력하세요."></textarea>
             </td>
         </tr>
         <tr>

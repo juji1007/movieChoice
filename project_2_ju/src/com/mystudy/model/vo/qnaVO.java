@@ -11,8 +11,14 @@ public class qnaVO {
 	private String qaCategory;
 	private int criticCheck;
 	private boolean inquiryCheck;
+	private String qaTitle;
 	
-
+	public String getQaTitle() {
+		return qaTitle;
+	}
+	public void setQaTitle(String qaTitle) {
+		this.qaTitle = qaTitle;
+	}
 	public String getNick() {
 		return nick;
 	}
@@ -65,12 +71,9 @@ public class qnaVO {
 	
 	@Override
 	public String toString() {
-
 		return "qnaVO [qaNo=" + qaNo + ", no=" + no + ", qaContent=" + qaContent + ", qaDate=" + qaDate + ", nick="
-				+ nick + ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + "]";
-
+				+ nick + ", qaCategory=" + qaCategory + ", criticCheck=" + criticCheck + ", inquiryCheck="
+				+ inquiryCheck + ", qaTitle=" + qaTitle + "]";
 	}
-	
-	
 	
 }
