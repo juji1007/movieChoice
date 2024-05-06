@@ -150,7 +150,13 @@ function selectCategory(frm) {
 		    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
 		    
 		    //Json데이터 처리
-		    let str = null;
+		    let str = "";
+		    if (respData.vo.length === 0) {
+                // 검색 결과가 없을 때
+                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+            } else {
+                // 검색 결과가 있을 때
+                });
 		    for (let member of respData.vo) {
 		        console.log(">> 리뷰 내용 실행");
 		        str += "<tr>";
@@ -170,7 +176,8 @@ function selectCategory(frm) {
 		        str += "<td id=\"rvContent\" colspan=\"3\">" + member.rvContent + "</td>";
 		        str += "</tr>";
 		    }
-		    $("#reviewOne").html(str);	
+		    	$("#reviewOne").html(str);	
+			}
 		}, 
 		error : function(jqXHR, textStatus, errorThrown){
 			alert("Ajax 처리 실패 : \n"

@@ -194,6 +194,16 @@ public class AccountDAO {
       return -1;
    }
    
+   //아이디로 회원번호 조회
+   public static int findCriticCheck(int no) {
+      try (SqlSession ss = DBService.getFactory().openSession()) {
+         return ss.selectOne("project2.findCriticCheck", no);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return -1;
+   }
+   
    public static int updateCriticCheck(int no) {
       try (SqlSession ss = DBService.getFactory().openSession(true)) {
          System.out.print("updateCriticCheck실행");

@@ -7,10 +7,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	
-    session.getAttribute("no");
-	int no = (int) session.getAttribute("no");    
-
+    int no = (int) session.getAttribute("no");    
+    int criticCheck = AccountDAO.findCriticCheck(no);
+    
+    if (criticCheck == 0) {
+%>
+        <script>
+            alert("평론가가 아닙니다.");
+            location.href = "myPage.jsp";
+        </script>
+<%
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -25,8 +32,8 @@ function sendData() {
 }
 
 function list_go() {
-        location.href = "myPage.jsp";
-    }
+    location.href = "myPage.jsp";
+}
 </script>
 </head>
 <body>
@@ -42,8 +49,8 @@ function list_go() {
             <th>카테고리</th>
             <td>
                 <select name="qaCategory">
-   			   		<option value="평론가탈퇴">평론가탈퇴</option>
-				</select>
+                    <option value="평론가탈퇴">평론가탈퇴</option>
+                </select>
             </td>
         </tr>
         <tr>
