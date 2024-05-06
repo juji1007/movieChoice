@@ -157,7 +157,7 @@ function selectCategory(frm) {
                 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
             } else {
                 // 검색 결과가 있을 때
-                });
+                }
 		    for (let member of respData.vo) {
 		        console.log(">> 리뷰 내용 실행");
 		        str += "<tr>";
@@ -185,11 +185,10 @@ function selectCategory(frm) {
 					+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
 					+ "textStatus : " + textStatus + "\n"
 					+ "errorThrown : " + errorThrown);
-		}
-// 		},
-// 		complete : function(){
-// 			alert(":: complete 실행");
-// 		}   
+		},
+		complete : function(){
+			alert(":: complete 실행");
+		}   
 	});
 	
 }
@@ -215,7 +214,8 @@ function selectCategory(frm) {
 				<option value="${date}">${date}</option>
 			</c:forEach>
 		</select>
-		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)"/>
+		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)">
+	</form>
 		<table border frame=void>
 			<thead>
 				<tr>
@@ -246,7 +246,6 @@ function selectCategory(frm) {
 				</tr>
 			</tbody>
 		</table>
-	</form>
 	</div>
 	</div>
 	</div>

@@ -152,7 +152,7 @@ function ps_update(frm) {
 <table frame="void">
 <!-- <table border> -->
 	<tr>
-	<td colspan=7 ><h1>${pvo.psTitle }</h1></td>
+	<td colspan=7><h1>${pvo.psTitle }</h1></td>
 	</tr>
 	<tr>
 	<td width="20%">작성자 | ${pvo.psNick }</td>
@@ -165,9 +165,9 @@ function ps_update(frm) {
 	</td>
 	<td>
 	<form action="postUpdate.jsp" method="get">
-	<input class="up_button"  type="button" value="수정" onclick="ps_update(this.form)">
-	<input type="hidden" name="psNo" value="${pvo.psNo }">
-	<input type="hidden" name="no" value="${vo.no }">
+		<input class="up_button"  type="button" value="수정" onclick="ps_update(this.form)">
+		<input type="hidden" name="psNo" value="${pvo.psNo }">
+		<input type="hidden" name="no" value="${vo.no }">
 	</form>
 	</td>
 	<td>
@@ -187,28 +187,25 @@ function ps_update(frm) {
 
 <hr>
 <table >
-<tr  height="200">
-	<td >${pvo.psContent }</td>
-</tr>
-<tr>
-<td >
-
-	<c:if test="${empty pvo.psFile }">
-		첨부파일없음
+	<tr height="200">
+		<td >${pvo.psContent }</td>
+	</tr>
+	<tr>
+	<td>
+		<c:if test="${empty pvo.psFile }">
+			첨부파일없음
 		</c:if>
 		<c:if test="${not empty pvo.psFile }">
-						
-		<img src="img/${pvo. psOrifile }" width="200">
+			<img src="img/${pvo.psOrifile }" width="200">
 		</c:if>
-	</td>
-</tr>
+		</td>
+	</tr>
 </table>
 <hr>
 <!-- 댓글작성 -->
 <div class="comment">
-<table>
 	<form action="postComment_write_ok.jsp" method="post">
-	
+<table>
 	<tr>
 		<td colspan=7>
 			<input type="hidden" name="no" value="${no }">
@@ -218,13 +215,13 @@ function ps_update(frm) {
 			<input type="hidden" name="cPage" value="${cPage }">
 			</td>
 		</tr>
-	</form>
 </table>
+	</form>
 <hr class="color">
 
 <!-- 댓글표시 및 삭제-->
 <table class="comment" border frame=void>
-<c:forEach var="commVO" items="${c_list }">
+	<c:forEach var="commVO" items="${c_list }">
 		<form action="postComment_del_ok.jsp" method="get">
 		<tr>
 			<td width="20%">
@@ -237,10 +234,11 @@ function ps_update(frm) {
 			${commVO.pcContent }
 			</td>
 			<td class="deleteComment">
-				<input class="deleteBtn" type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
+				<input class="deleteBtn" type="button" value="댓글삭제"  
+					data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)">
 				<input type="hidden" name="pcNo" value="${commVO.pcNo }">
 				<input type="hidden" name="no" value="${commVO.no }">
-			
+			</td>
 		</tr>
 		</form>
 	</c:forEach>

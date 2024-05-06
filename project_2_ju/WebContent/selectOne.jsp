@@ -97,7 +97,7 @@
 		
 		<tfoot id="page">
 	        <tr>
-	        	<td colspan="3">
+	        	<td colspan="7">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${selPvo.nowPage == 1 }">
