@@ -130,6 +130,7 @@
 <meta charset="UTF-8">
 <title>이달의 리뷰</title>
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/rwMain.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -252,6 +253,8 @@ function selectCategory(frm) {
 	<hr class="color">
 </div>
 	
+	<!-- footer.jspf -->
+	<%@ include file="include/footer.jspf" %>
 	<!-- 	<form action="rewardController?category=search" method="post"> -->
 <!-- 		<select id="search" name="search"> -->
 <%-- 				<option value="${thisMonth}">${thisMonth}</option> --%>
