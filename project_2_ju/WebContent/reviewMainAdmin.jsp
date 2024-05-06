@@ -17,9 +17,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 메인</title>
+<title>리뷰 메인 관리</title>
 <link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/rvMain.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/free.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	
@@ -28,43 +29,49 @@
 	function login_confirm(frm) {
 		<%if (session.getAttribute("no") == null) {%>
 			alert("로그인 후 작성 가능합니다.");
-			frm.location.href = "reviewController?category=rvMain&location=reviewMainAdmin";
-		<%} else%>
+			location.href = "login_page.jsp";
+		<%} else {%>
 			frm.submit();
+        <% } %>	
 	}
 	
 </script>
 
 </head>
 <body>
-	<!-- header.jspf -->
+	<!-- headerAdmin.jspf -->
 	<%@ include file="include/headerAdmin.jspf" %>
-<!-- 	<form action="reviewController?category=rvWrite" method="post"> -->
-	<h2>
-		리뷰모음 관리
-<!-- 		<input type="button" value="등록하기"  -->
-<!-- 			onclick="login_confirm(this.form)"> -->
-	</h2>
-<!-- 	</form> -->
-	
-	<h3>전체조회</h3>
+	<div class="body">
+	<h2>전체조회</h2>
+	<hr class="color">
+	<div class="box">
+		<div class="innerbox">
+		<div class="content">
+<!-- 	<h3>전체조회</h3> -->
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne&location=reviewMainAdmin" method="post">
-		<select name="idx">
+		<select class="select"  name="idx">
 			<option selected disabled>::선택</option>
 			<option value="0">영화명</option>
 			<option value="1">작성자</option>
 			<option value="2">작성일</option>
 		</select>
-		<input type="text" name="keyword">
-		<input type="submit" value="검색">
+
+		<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)">
+		<input class="searchbtn" type="submit" value="검색">
+<!-- 		<input class="listbtn" type="button" value="전체조회" -->
+<!-- 			onclick="javascript:location.href='reviewController?category=rvMain'"> -->
+
 		
 		<input type="hidden" name="category" value="selectOne">
 	</form>
+	</div>
+		</div>
+		</div>
 	 
 <!-- 리뷰 (전체)목록 -->
 <form>
-	<table>
+	<table class="rv">
 	<c:forEach var="vo" items="${listAll}">
 		<tbody id="reviewOne">
 	        <tr>
@@ -78,9 +85,9 @@
 	        </tr>
 	        <tr>
 	            <td rowspan="2" colspan="3">
-	            	<input type="button" value="추천" >${vo.rvRec}
-	            	<input type="button" value="신고" >${vo.rvWarn}
-	            	
+	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec} 
+	            	<input class="up_button" type="button" value="신고"> ${vo.rvWarn}
+	            	<hr>
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
 	            	<input type="hidden" name ="vo" value="${vo }">
@@ -89,6 +96,7 @@
 	        </tr>
 	    </tbody>
 	</c:forEach>
+
 	
 	    <tfoot id="page">
 	        <tr>
@@ -131,7 +139,9 @@
 	    </tfoot>
 	</table>
 </form>
+</div>
 
+	<%@ include file="include/footer.jspf" %>
 </body>
 </html>
 

@@ -38,6 +38,8 @@ function deleteAccount(memberId) {
                 alert("삭제 요청 실패: " + errorThrown);
             }
         });
+    } else {
+    	console.log("취소");
     }
 }
 
@@ -162,7 +164,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.rvRec + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>";
 // 			            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='rvDelete.jsp?location=admin&rvNo=" + member.rvNo + "'\">";
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteReview(" + member.rvNo + ")'></td>";
+			            htmltag += "<td colspan='2'><input class='searchbtn' type='button' value='삭제' onclick='deleteReview(" + member.rvNo + ")'></td>";
 			            htmltag += "</tr>";
 			            
 			            checkReview--;
@@ -188,8 +190,8 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvDate + "</td>";
 			            htmltag += "<td><img src='img/" + member.mvPoster + "' width='200'></td>";
 // 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='controller?type=movieDelete&mvNo=" + member.mvNo + "'\">";
-			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteMovie(" + member.mvNo + ")'>";
-			            htmltag += "<input type='button' value='수정' onclick=\"location.href='controller?type=movieFix&mvNo=" + member.mvNo + "'\"></td>";
+			            htmltag += "<td colspan='2'><input class='searchbtn' type='button' value='삭제' onclick='deleteMovie(" + member.mvNo + ")'>";
+			            htmltag += "<input class='searchbtn' type='button' value='수정' onclick=\"location.href='controller?type=movieFix&mvNo=" + member.mvNo + "'\"></td>";
 			            htmltag += "</tr>";
 			            
 			            checkMovie--;
@@ -212,7 +214,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
 // 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=admin&id="+ member.id + "'\">";
-					    htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
+					    htmltag += "<td colspan='2'><input class='searchbtn' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
@@ -236,30 +238,32 @@ function selectCategory(frm) {
 }
 </script>
 <body>
-    <!-- header.jspf -->
 	<%@ include file="include/headerAdmin.jspf" %>
-	<div class="head">
-		<h2>관리자페이지에서는 모두 강제 삭제됩니다.</h2>
-	</div>
     <div class="body">
-        <form method="post"> 
-        <hr class="color">
-            <table>
-                <caption><h2>관리자 검색</h2></caption>
-                <thead> 
-                    <tr>
-                        <td>
-                            <select class="select" name="idx">
+    <h2>관리자페이지에서는 모두 강제 삭제됩니다.</h2>
+    <hr class="color">
+    <h2>관리자 검색</h2>
+
+		<div class="box">
+		<div class="innerbox">
+		<div class="content">
+		 <form method="post"> 
+		 <select class="select" name="idx">
                                 <option value="0">전체</option>
                                 <option value="1">리뷰</option>
                                 <option value="2">영화</option>
                                 <option value="3">유저</option>
-                            </select>
-                        </td>
-                        <td><input class="search" type="text" name="keyword" placeholder="." style="display:none;"/></td>
-                        <td><input class="searchbtn" type="button" value="검색" style="display:block;" onclick="selectCategory(this.form)"/></td>
-                    </tr>
-                </thead>
+         </select>
+              <input class="search" type="text" name="keyword" placeholder="." style="display:none;"/>
+              <input class="searchbtn" type="button" value="검색" style="display:block;" onclick="selectCategory(this.form)"/>
+		</form>
+		</div>
+		</div>
+		</div>
+    </div>
+    <div id="post">
+        <form method="post"> 
+            <table>
                 <tbody id="jsonData">
                 	<tr>
                 		<td>검색 결과가 없습니다.</td>

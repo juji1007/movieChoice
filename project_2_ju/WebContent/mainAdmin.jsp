@@ -28,7 +28,7 @@ try (SqlSession ss = DBService.getFactory().openSession()) {
 System.out.println("list : " + list);
 System.out.println("list.size : " + list.size());
 session.setAttribute("attr_list", list);
-%>   
+%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +36,7 @@ session.setAttribute("attr_list", list);
 <title>mainAdmin</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/main.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
@@ -62,19 +63,19 @@ session.setAttribute("attr_list", list);
 	});
 </script>
 <body>
-	<!-- headerAdmin.jspf -->
 	<%@ include file="include/headerAdmin.jspf" %>
-
-
-<%--영화추가 --%>
-<div id="movieInsertArea">
-    <input type="button" value="영화추가" onclick="location.href='movieInsert.jsp'">
-</div>
-
-
+<div class="body">
+ 
+		<nav>
+			<%--영화추가 --%>
+			<div id="movieInsertArea">
+				<input class="searchbtn" type="button" value="영화추가"
+					onclick="location.href='movieInsert.jsp'">
+			</div>
+		</nav>
 <div>
 
-<h3 class="top">현재 상영 영화 TOP10</h3>
+<h2 class="top">현재 상영 영화 TOP10</h2>
 
 
 <%-- select 해서 영화목록 상위 10개 가져오기 --%>
@@ -96,20 +97,24 @@ session.setAttribute("attr_list", list);
 	</div>
 </div>
 <a href="#" id="next">
-<button id="next">></button>
+<button id="next" class="button button--shikoba button--round-s button--border-thin"><i class="button__icon icon icon-next"></i><span>></span></button>
 </a>
 </div>
 <br>
 
 <div>
-<h2>영화목록 관리</h2> 
+<h2>영화목록</h2> 
 <form action="controller?type=movieAdmin" method="post">
-  <select name="idx">
+<!-- <form action="main2.jsp" method="get"> -->
+
+  <select class="select" name="idx">
   <option value="0" disabled selected>정렬</option>
     <option value="1" >최신순</option>
     <option value="2"  >평점순</option>
   </select>
-  <input type="submit" value="동적검색">
+  <input class="searchbtn" type="submit" value="동적검색">
+<input type="hidden" name="type" value="movie">
+
 </form>
 <hr class="gray">
 <!-- 영화 목록 보기 -->
@@ -125,14 +130,15 @@ session.setAttribute("attr_list", list);
 			</tr>
 			<tr>
 			<td>
-			<input type="button" value="삭제" onclick="location.href='controller?type=movieDelete&location=mainAdmin&mvNo=${vo.mvNo }'">
-			<input type="button" value="수정" onclick="location.href='controller?type=movieFix&location=mainAdmin&mvNo=${vo.mvNo }'">
+			<input class="searchbtn" type="button" value="삭제" onclick="location.href='controller?type=movieDelete&location=mainAdmin&mvNo=${vo.mvNo }'">
+			<input class="searchbtn" type="button" value="수정" onclick="location.href='controller?type=movieFix&location=mainAdmin&mvNo=${vo.mvNo }'">
 			<input type="hidden" name="mvNo" value="${vo.mvNo }">
 			</td>
 			</tr>
 	</table>
 	</c:forEach>
 
+</div>
 </div>
 </body>
 </html>
