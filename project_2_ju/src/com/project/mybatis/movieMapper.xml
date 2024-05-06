@@ -47,7 +47,7 @@
 		VALUES (MOVIE_SEQ.NEXTVAL, #{mvTitle}, #{mvDirect}, #{mvActor}, #{mvGenre}, #{mvRate}, #{mvAudience}, #{mvGrade}, #{mvDate}, #{mvPoster}) 
 	</insert>
 	
-	<select id="rone" resultType="com.mystudy.model.vo.movieVO">
+	<select id="rone" parameterType="int" resultType="com.mystudy.model.vo.listTotVO">
 		SELECT * 
 		FROM MOVIE M, REVIEW R
 		WHERE M.MV_NO = R.MV_NO

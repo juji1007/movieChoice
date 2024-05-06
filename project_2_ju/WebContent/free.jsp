@@ -145,6 +145,13 @@ session.getAttribute("c_list");
 <div id="post">
 
 <table border frame=void>
+<tr>
+	<th>번호</th>
+	<th>작성자</th>
+	<th>작성일</th>
+	<th>제목</th>
+	<th>신고</th>
+</tr>
 <c:forEach var="vo" items="${list }">
 <tr>
 <td width="5%">${vo.psNo }</td>

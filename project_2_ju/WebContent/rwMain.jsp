@@ -216,31 +216,33 @@ function selectCategory(frm) {
 			</c:forEach>
 		</select>
 		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)"/>
-		<table>
+		<table border frame=void>
 			<thead>
 				<tr>
 					<th>영화</th>
-					<th colspan="3">리뷰</th>
+					<th colspan="4">리뷰</th>
 				</tr>
 			</thead>
 			<tbody  id="reviewOne">
 				<tr>
 					<td id="mvTitle" width="20%" height="60px">${rwVo.mvTitle}</td>
-					<td id="rvTitle" colspan="3">${rwVo.rvTitle }</td>
+					<td id="rvTitle" colspan="4">${rwVo.rvTitle }</td>
 				</tr>
 				<tr>
 					<td rowspan="2"><img src="img/${rwVo.mvPoster }" alt="포스터" width="300px"></td>
-					<td id="rvNick" width="20%" height="30px">작성자 | ${rwVo.rvNick }</td>
-					<td id="rvDate" width="20%">작성일 | ${rwVo.rvDate }</td>
-					<td id="btn">
+					<td id="rvNick" width="30%" height="30px">작성자 | ${rwVo.rvNick }</td>
+					<td id="rvDate" width="30%">작성일 | ${rwVo.rvDate }</td>
+					<td id="btn" width="10%">
 						<input class="up_button" type="button" value="추천">
 						${rwVo.rvRec}
+					</td>
+					<td width="10%">
 						<input class="up_button" type="button" value="신고">
 						${rwVo.rvWarn}
 					</td>
 				</tr>
 				<tr>
-					<td id="rvContent" colspan="3">${rwVo.rvContent }</td>
+					<td id="rvContent" colspan="4">${rwVo.rvContent }</td>
 				</tr>
 			</tbody>
 		</table>

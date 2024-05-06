@@ -118,7 +118,7 @@ session.setAttribute("list", list);
 		<tr>
 			<th>번호</th>
 			<th>분류</th>
-			<th>닉네임</th>
+			<th>작성자</th>
 			<th>작성일</th>
 			<th>내용</th>
 		</tr>
