@@ -500,7 +500,7 @@
 <div id="frame">
 	<form method="post">
 		<table id="qna">
-			<caption>나의 댓글정보</caption>
+			<caption>나의 QnA정보</caption>
 			<thead id="qnaThead">
 				<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>
 			</thead>
