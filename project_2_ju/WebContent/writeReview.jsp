@@ -36,6 +36,7 @@
 <title>리뷰 작성</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
 <style>
 	#btn {
 		align-content: ceter;
@@ -67,6 +68,7 @@
 <body>
 	<!-- header.jspf -->
 	<%@ include file="include/header.jspf" %>
+<div class="body">
 <div>
     <form action="writeReview_ok.jsp?mvNo=<%=vo.getMvNo() %>" method="post">
 		<table>
@@ -75,40 +77,40 @@
 				<tr>
 					<th>영화</th>
 					<td>
-						<input type="text" name="mvTitle" title="영화" value="<%=vo.getMvTitle() %>" readonly="readonly">
+						<input class="movie" type="text" name="mvTitle" title="영화" value="<%=vo.getMvTitle() %>" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
 					<th>평점</th>
 					<td>
-						<input type="number" name="rvRate" min="0" max="10" title="평점">
+						<input class="rvRate" type="number" name="rvRate" min="0" max="10" title="평점">
 					</td>
 				</tr>
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" name="rvTitle" title="제목">
+						<input class="psTitle" type="text" name="rvTitle" title="제목">
 					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="rvContent" rows="8" cols="50" title="내용"></textarea>
+						<textarea class="psContent"  name="rvContent" rows="8" cols="50" title="내용"></textarea>
 					</td>
 				</tr>
 			</tbody>
 			<tfoot>
-				<tr id="btn">
-					<td colspan="2">
-						<input type="button" value="등록" onclick="sendRv(this.form)">
-				        <input type="reset" value="초기화">
+				<tr>
+					<td class="button" colspan="2">
+						<input class="commitbtn" type="button" value="등록" onclick="sendRv(this.form)">
+				        <input class="reset" type="reset" value="초기화">
 					</td>
 				</tr>
 			</tfoot>
 		</table>
 	</form>
 </div>
-    
+</div>
 </body>
 </html>
 

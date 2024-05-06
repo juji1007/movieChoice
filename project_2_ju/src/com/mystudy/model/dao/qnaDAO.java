@@ -89,7 +89,23 @@ public class qnaDAO {
 		}
 		return null;
 	}
-
+    
+  //카테고리별 게시글 건수 조회
+    public static int getCount(String idx, String keyword, String checkQaCategory, String qaCategory) {
+       try (SqlSession ss = DBService.getFactory().openSession()) {
+          Map<String, String> map = new HashMap<String, String>();
+          map.put("idx", idx);
+          map.put("keyword", keyword);
+          map.put("checkQaCategory", checkQaCategory);
+          map.put("qaCategory", qaCategory);
+          
+          return ss.selectOne("qna.cnt", map);
+       } catch (Exception e) {
+          e.printStackTrace();
+       }
+       return -1;
+    }
+    
     // QA 입력(INSERT) 
     public static int insert(qnaVO qvo) {
         try (SqlSession ss = DBService.getFactory().openSession(true)) {

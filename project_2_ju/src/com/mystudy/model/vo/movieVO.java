@@ -20,7 +20,14 @@ public class movieVO  implements Serializable {
 	private String rvTitle;
 	private String rvContent;
 	private Date rvDate;
+	private int rvNo;
 	
+	public int getRvNo() {
+		return rvNo;
+	}
+	public void setRvNo(int rvNo) {
+		this.rvNo = rvNo;
+	}
 	public String getRvNick() {
 		return rvNick;
 	}
@@ -111,7 +118,7 @@ public class movieVO  implements Serializable {
 		return "movieVO [mvNo=" + mvNo + ", mvTitle=" + mvTitle + ", mvDirect=" + mvDirect + ", mvActor=" + mvActor
 				+ ", mvGenre=" + mvGenre + ", mvRate=" + mvRate + ", mvAudience=" + mvAudience + ", mvGrade=" + mvGrade
 				+ ", mvDate=" + mvDate + ", mvPoster=" + mvPoster + ", rvNick=" + rvNick + ", rvTitle=" + rvTitle
-				+ ", rvContent=" + rvContent + ", rvDate=" + rvDate + "]";
-	}	
+				+ ", rvContent=" + rvContent + ", rvDate=" + rvDate + ", rvNo=" + rvNo + "]";
+	}
 	
 }

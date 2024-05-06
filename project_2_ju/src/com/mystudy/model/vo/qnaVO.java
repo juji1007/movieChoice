@@ -18,7 +18,7 @@ public class qnaVO {
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
-
+	}
 	
 	public boolean getisInquiryCheck() {
 		return inquiryCheck;

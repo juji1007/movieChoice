@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mystudy.model.dao.postDAO;
 import com.mystudy.model.dao.qnaDAO;
 import com.mystudy.model.vo.qnaVO;
 import com.mystudy.post.common.Paging;
@@ -64,7 +63,7 @@ public class QnaController extends HttpServlet {
 //	         p.setPagePerBlock(5);
 ////	         
 	         //1. 전체 게시물 수량 구하기
-	         p.setTotalRecord(postDAO.getCount(idx, keyword));
+	         p.setTotalRecord(qnaDAO.getCount(idx, keyword, checkQaCategory, qaCategory));
 	         p.setTotalPage();
 
 	         System.out.println(">전체 게시글 수 : " + p.getTotalRecord());
