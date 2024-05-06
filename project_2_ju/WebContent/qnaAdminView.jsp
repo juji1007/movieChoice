@@ -78,25 +78,10 @@
                 </form>
             </td>
             <td>
-                <input class="li_button" type="button" value="목록보기" onclick="location.href = 'qna.jsp'">
+                <input class="li_button" type="button" value="목록보기" onclick="location.href = 'qnaAdmin.jsp'">
             </td>
         </tr>
     </table>
-    <hr>
-    <table>
-    	<tr height="200">
-    		<td>${qvo.qaContent }</td> 
-    	</tr>
-    </table>
-    <div class="comment">
-<table>
-	<tr>
-		<td colspan=7>
-			<textarea name="iqContent" rows="2" cols="55"></textarea>
-			<input class="writeBtn" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
-			</td>
-		</tr>
-</table>
 <hr class="color">
     <h2>${qvo.qaTitle } | 관리자 답변</h2>
     <table class="comment" border frame=void>
@@ -104,6 +89,7 @@
 		    <td width="20%">${ivo.iqContent }</td> 
 		    <td class="deleteComment">
 		        <form action="inquiryAdminDeleteOk.jsp?iqNo=${ivo.iqNo }" method="post">
+		        		<input class="writeBtn" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
 		                <input class="deleteBtn" type="button" value="삭제" onclick="iq_delete(this.form)">
 		                <input type="hidden" name="iqNo" value="${ivo.iqNo }">
 		        </form>
@@ -111,8 +97,6 @@
     	</tr>
     </table>
     </div>
-   	</div>
-
     <% if ("평론가탈퇴".equals(qvo.getQaCategory())) { %>
         <input type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">
     <% } %>

@@ -14,6 +14,13 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 답변 작성</title>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
+<style>
+	#btn {
+		align-content: ceter;
+	}
+</style>
 <script>
 function sendData() {
     let firstForm = document.forms[0];
@@ -27,25 +34,28 @@ function list_go() {
 </script>
 </head>
 <body>
-<div>
-<form action="inquiryWrite_ok.jsp" method="post">
-    <table>
-        <tr>
-            <th>답변</th>
-            <td>
-                <textarea name="iqContent" rows="8" cols="50" title="내용"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="button" value="저장" onclick="sendData()">
-                <input type="reset" value="초기화">
-                <input type="button" value="목록보기" onclick="location.href = 'qnaAdmin.jsp'">
-                <input type="hidden" name="qaNo" value="<%=qaNo %>">
-            </td>
-        </tr>
-    </table>
-</form>
+<%@ include file="include/header.jspf" %>
+<div class="body">
+	<form action="inquiryWrite_ok.jsp" method="post">
+	    <table>
+	    	<caption>답변 작성하기</caption>
+	    	<tbody>
+		        <tr>
+		            <td>
+		                <textarea name="iqContent" rows="8" cols="50" title="답변" placeholder="답변을 입력하세요."></textarea>
+		            </td>
+		        </tr>
+	        </tbody>
+	        <tr>
+	            <td class="button" colspan="2">
+	                <input class="commitbtn" type="button" value="저장" onclick="sendData()">
+	                <input class="reset" type="reset" value="초기화">
+	                <input class="reset" type="button" value="목록보기" onclick="location.href = 'qnaAdmin.jsp'">
+	                <input type="hidden" name="qaNo" value="<%=qaNo %>">
+	            </td>
+	        </tr>
+	    </table>
+	</form>
 </div>
 </body>
 </html>
