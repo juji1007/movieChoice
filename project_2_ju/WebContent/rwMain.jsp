@@ -130,6 +130,7 @@
 <meta charset="UTF-8">
 <title>이달의 리뷰</title>
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/rwMain.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -150,7 +151,13 @@ function selectCategory(frm) {
 		    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
 		    
 		    //Json데이터 처리
-		    let str = null;
+		    let str = "";
+		    if (respData.vo.length === 0) {
+                // 검색 결과가 없을 때
+                htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+            } else {
+                // 검색 결과가 있을 때
+                });
 		    for (let member of respData.vo) {
 		        console.log(">> 리뷰 내용 실행");
 		        str += "<tr>";
@@ -170,7 +177,8 @@ function selectCategory(frm) {
 		        str += "<td id=\"rvContent\" colspan=\"3\">" + member.rvContent + "</td>";
 		        str += "</tr>";
 		    }
-		    $("#reviewOne").html(str);	
+		    	$("#reviewOne").html(str);	
+			}
 		}, 
 		error : function(jqXHR, textStatus, errorThrown){
 			alert("Ajax 처리 실패 : \n"
@@ -208,31 +216,33 @@ function selectCategory(frm) {
 			</c:forEach>
 		</select>
 		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)"/>
-		<table>
+		<table border frame=void>
 			<thead>
 				<tr>
 					<th>영화</th>
-					<th colspan="3">리뷰</th>
+					<th colspan="4">리뷰</th>
 				</tr>
 			</thead>
 			<tbody  id="reviewOne">
 				<tr>
 					<td id="mvTitle" width="20%" height="60px">${rwVo.mvTitle}</td>
-					<td id="rvTitle" colspan="3">${rwVo.rvTitle }</td>
+					<td id="rvTitle" colspan="4">${rwVo.rvTitle }</td>
 				</tr>
 				<tr>
 					<td rowspan="2"><img src="img/${rwVo.mvPoster }" alt="포스터" width="300px"></td>
-					<td id="rvNick" width="20%" height="30px">작성자 | ${rwVo.rvNick }</td>
-					<td id="rvDate" width="20%">작성일 | ${rwVo.rvDate }</td>
-					<td id="btn">
+					<td id="rvNick" width="30%" height="30px">작성자 | ${rwVo.rvNick }</td>
+					<td id="rvDate" width="30%">작성일 | ${rwVo.rvDate }</td>
+					<td id="btn" width="10%">
 						<input class="up_button" type="button" value="추천">
 						${rwVo.rvRec}
+					</td>
+					<td width="10%">
 						<input class="up_button" type="button" value="신고">
 						${rwVo.rvWarn}
 					</td>
 				</tr>
 				<tr>
-					<td id="rvContent" colspan="3">${rwVo.rvContent }</td>
+					<td id="rvContent" colspan="4">${rwVo.rvContent }</td>
 				</tr>
 			</tbody>
 		</table>
@@ -245,6 +255,8 @@ function selectCategory(frm) {
 	<hr class="color">
 </div>
 	
+	<!-- footer.jspf -->
+	<%@ include file="include/footer.jspf" %>
 	<!-- 	<form action="rewardController?category=search" method="post"> -->
 <!-- 		<select id="search" name="search"> -->
 <%-- 				<option value="${thisMonth}">${thisMonth}</option> --%>

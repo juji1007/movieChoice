@@ -29,9 +29,9 @@ public class AjaxMovieController extends HttpServlet {
 		
 		String action = req.getParameter("action");
 		System.out.println("action :" + action);
-		//아이디중복체크
+		//영화중복체크
 		if ("checkDoubleMovie".equals(action)) {
-			//아이디가져오기
+			//영화정보가져오기
 			String mvTitle = req.getParameter("mvTitle");
 			String mvDirect = req.getParameter("mvDirect");
 			System.out.println("checkmvTitle : " + mvTitle);
@@ -42,6 +42,19 @@ public class AjaxMovieController extends HttpServlet {
 			System.out.println(idDoubleCheck);
 			resp.setContentType("text/html; charset=UTF-8");
 			resp.getWriter().write(String.valueOf(idDoubleCheck));
+		}
+		//영화 삭제
+		if ("deleteMovie".equals(action)) {
+			int mvNo = Integer.parseInt(req.getParameter("mvNo"));
+			System.out.println("delete mvNo : " + mvNo);
+			//DB에서 영화삭제
+			int result = movieDAO.delete(mvNo);
+			//응답
+			boolean movieDeleteCheck = false;
+			if (result != -1) movieDeleteCheck = true;
+			System.out.println(movieDeleteCheck);
+			resp.setContentType("text/html; charset=UTF-8");
+			resp.getWriter().write(String.valueOf(movieDeleteCheck));
 		}
 		
 		

@@ -41,6 +41,22 @@ public class AjaxLoginController extends HttpServlet {
 			resp.getWriter().write(String.valueOf(idDoubleCheck));
 		}
 		
+		//회원탈퇴
+		if ("fireAccount".equals(action)) {
+			//아이디가져오기
+			String id = req.getParameter("id");
+			System.out.println("checkFireid : " + id);
+			int no = AccountDAO.getAccountNo(id);
+			//DB에서 아이디 체크
+			int idFired = AccountDAO.delete(no);
+			boolean idFiredCheck = false;
+			if (idFired != -1) idFiredCheck = true;
+			//응답
+			System.out.println(idFiredCheck);
+			resp.setContentType("text/html; charset=UTF-8");
+			resp.getWriter().write(String.valueOf(idFiredCheck));
+		}
+		
 		
 	}
 	

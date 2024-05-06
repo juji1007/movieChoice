@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.mystudy.model.dao.movieDAO;
 import com.mystudy.model.dao.reviewDAO;
 import com.mystudy.model.vo.listTotVO;
 import com.project.mybatis.DBService;
@@ -112,6 +113,20 @@ public class AjaxReviewController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(resultRv);
 			
+		}
+		
+		//리뷰 삭제
+		if ("deleteReview".equals(action)) {
+			int rvNo = Integer.parseInt(request.getParameter("rvNo"));
+			System.out.println("delete rvNo : " + rvNo);
+			//DB에서 리뷰삭제
+			int result = reviewDAO.delete(rvNo);
+			//응답
+			boolean reviewDeleteCheck = false;
+			if (result != -1) reviewDeleteCheck = true;
+			System.out.println(reviewDeleteCheck);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(String.valueOf(reviewDeleteCheck));
 		}
 
 	

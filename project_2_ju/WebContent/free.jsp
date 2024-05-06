@@ -115,6 +115,7 @@ session.getAttribute("c_list");
    <!-- header.jspf -->
    <%@ include file="include/header.jspf"%>
 
+
 <div class="body">
 <h2>자유게시판</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
@@ -144,6 +145,13 @@ session.getAttribute("c_list");
 <div id="post">
 
 <table border frame=void>
+<tr>
+	<th>번호</th>
+	<th>작성자</th>
+	<th>작성일</th>
+	<th>제목</th>
+	<th>신고</th>
+</tr>
 <c:forEach var="vo" items="${list }">
 <tr>
 <td width="5%">${vo.psNo }</td>

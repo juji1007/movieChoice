@@ -37,6 +37,8 @@ public class deleteAccountOkCommand implements Command{
 	    	if ("admin".equals(location)) {
 	    		//인증안됬으므로 manage로
 			    return "manage.jsp";
+		    } else if ("accountAdmin".equals(location)) {
+		    	return "accountManage.jsp";
 		    } else {
 		    	//인증안됬으므로 myPage로
 		    	return "myPage.jsp";

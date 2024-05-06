@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
 <%@page import="com.mystudy.model.vo.movieVO"%>
@@ -30,7 +31,7 @@
 // 		session.setAttribute("mvDetail", vo); 
 		
 	//영화 번호로 리뷰 검색-건희
-	List<movieVO> mvoList = null; 
+	List<listTotVO> mvoList = null; 
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			mvoList = ss.selectList("movie.rone", mvNo);
 		} catch (Exception e) {
@@ -57,16 +58,17 @@
             <% } %>
         }
     </script>
+
 <style>
 
 	.genre-orange, .genre-blue, .genre-green, .genre-red {
         display: inline-block;
-        padding: 5px 5px; /* 사각형 내부의 여백 조절 */
-        margin-right: 1px; /* 각 사각형 사이의 간격 조절 */
+        padding: 5px 5px; 
+        margin-right: 1px; 
         width: fit-content;
         height: 50px;
-        line-height: 20px; /* 텍스트를 수직으로 가운데 정렬 */
-        border-radius: 10px; /* 사각형을 둥글게 만듭니다. */
+        line-height: 20px; 
+        border-radius: 10px; 
         color: white;
     }
 	
@@ -86,9 +88,20 @@
 	    background-color: red;
 	}
 </style>
+
+    <style>
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+        a:hover {
+			color:#56BEC0;
+		} 
+    </style>
+<link rel="stylesheet" href="css/free.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/rvMain.css">
-<link rel="stylesheet" href="css/free.css">
+
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
@@ -137,7 +150,10 @@
   <h2>${vo.mvTitle } 리뷰</h2>
   <hr class="color">
   <c:forEach var="mvo" items="${mvoList}">
-		<p><strong>${mvo.rvNick }</strong> | ${mvo.rvTitle }</p> 
+		<p>${mvo.rvNick }</p>
+		<p><a href="rvDetail.jsp?rvNo=${mvo.rvNo }&cPage=1">${mvo.rvTitle }</a></p>
+<%-- 		<p>${mvo.rvTitle }</p> --%>
+		<p>${mvo.rvContent }</p>
 		<p>${mvo.rvDate }</p>
 		<br>
 	</c:forEach>

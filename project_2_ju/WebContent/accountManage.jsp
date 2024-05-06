@@ -137,6 +137,29 @@ tbody th tr td{
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+function deleteAccount(memberId) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "ajaxLoginController",
+            data: {
+            	action: "fireAccount",
+                id: memberId
+            },
+            success: function(response) {
+                if (response === "true") {
+                    // 삭제가 성공한 경우 해당 행을 화면에서 제거
+                    $("#" + memberId).remove();
+                } else {
+                    alert("삭제 실패!");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("삭제 요청 실패: " + errorThrown);
+            }
+        });
+    }
+}
 function selectCategory(frm) {
 
 	var checkCategory = frm.idx.value;
@@ -173,8 +196,10 @@ function selectCategory(frm) {
                 	if (checkAccount > 0) {
 		                htmltag += "<tr><th>관리</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>테이블</th></tr>";
 		            }
-		            htmltag += "<tr class='" + member.table + "'>";
-		            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
+		            htmltag += "<tr id='" + member.id + "'>";
+// 		            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
+		            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
+// 		            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
 		            htmltag += "<td>" + member.no + "</td>";
 		            htmltag += "<td>" + member.name + "</td>";
 		            htmltag += "<td>" + member.id + "</td>";
@@ -182,7 +207,7 @@ function selectCategory(frm) {
 		            htmltag += "<td>" + member.criticCheck + "</td>";
 		            htmltag += "<td>" + member.email + "</td>";
 		            htmltag += "<td>" + member.warn + "</td>"; 
-		            htmltag += "<td colspan='2'>" + member.table + "</td>";
+		            htmltag += "<td>" + member.table + "</td>";
 		            htmltag += "</tr>";
 		            
 		            checkAccount--;
