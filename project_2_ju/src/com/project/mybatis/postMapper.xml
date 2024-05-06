@@ -38,7 +38,7 @@
       FROM POST
       <choose>
          <when test="idx == 0">
-            WHERE PS_TITLE = #{keyword}
+            WHERE PS_TITLE LIKE '%'|| #{keyword} ||'%'
          </when>
          <when test="idx == 1">
             WHERE TO_CHAR(PS_DATE, 'YYYYMMDD') = #{keyword}

@@ -61,13 +61,30 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/freeView.css">
 <body>
+
 <%@ include file="include/header.jspf" %>
 <div class="body">
  <h1>QnA ${qvo.qaNo }</h1>
+
+	<table>
+		<tr>
+			<td colspan=3><h2>QnA 번호 : ${qvo.qaNo }</h2></td>
+		</tr>
+		<tr>
+			<td>닉네임 : ${qvo.nick }</td>
+		</tr>
+		<tr>
+			<td>내용 : ${qvo.qaContent }</td>
+		</tr>
+		<tr>
+			<td>${qvo.qaDate }</td>
+		</tr>
+	</table>
 <table frame=void>
 <!-- <table border> -->
+
 		<tr>
-			<td width="10%">${qvo.id }</td>
+			<td width="10%">${qvo.nick }</td>
 			<td width="90%">${qvo.qaDate }</td>
 			<td>
 				<form action="qnaUpdate.jsp" method="get">

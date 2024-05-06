@@ -98,5 +98,17 @@ height: 30px;
  background-color: #888888;
  color: white;
 }
-
+.tfoot {
+	align-content: center;
+}
 	
+#rvContent{
+	text-align: center;
+}
+.right {
+	align-content : center;
+	
+}
+.center {
+	align-content: center;
+}

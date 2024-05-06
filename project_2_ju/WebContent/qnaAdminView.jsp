@@ -54,6 +54,7 @@
 </head>
 <body>
 
+
     <table>
         <tr>
             <td colspan=3><h2>QnA 번호 : ${qvo.qaNo }</h2></td>
@@ -96,5 +97,6 @@
     <% if ("평론가탈퇴".equals(qvo.getQaCategory())) { %>
         <input type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">
     <% } %>
+
 </body>
 </html>

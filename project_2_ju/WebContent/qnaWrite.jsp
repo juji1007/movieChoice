@@ -74,9 +74,9 @@ function list_go() {
         </tr>
         <tr>
             <td class="button" colspan="2">
-                <input class="commitbtn" type="button" value="저장" onclick="sendData()">
+                <input class="commitbtn" type="button" value="작성완료" onclick="sendData()">
                 <input class="reset"  type="reset" value="초기화">
-                <input class="reset"  type="button" value="목록보기" onclick="list_go()">
+                <input class="reset"  type="button" value="전체목록" onclick="list_go()">
             </td>
         </tr>
     </table>

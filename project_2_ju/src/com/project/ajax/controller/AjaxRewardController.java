@@ -35,36 +35,36 @@ public class AjaxRewardController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		System.out.println(":: AjaxRewardController doGet 시작~~");
-		
+			
 		String action = request.getParameter("action");
 		System.out.println("action : " + action);
 		
-		//이달의 리뷰
+		//날짜 조회한 이달의 리뷰
 		if ("rwMain_ajax".equals(action)) {
 			System.out.println(">> action: rwMain_ajax 요청 처리~~");
-			
+		
+			//검색 클릭해서 다른날짜 조회
 			//검색 종류 확인
-			String date = request.getParameter("date");
-			System.out.println("검색 받은 date : " + date);
-			String year = date.substring(0, 4);
-			String month = date.substring(5);
-			String rwDate = year + month;
-			System.out.println("rwDate : " + rwDate);
+			String rwDate = request.getParameter("rwDate");
+			System.out.println("검색 받은 rwDate : " + rwDate);
+			String year = rwDate.substring(0, 4);
+			String month = rwDate.substring(5);
+			String date = year + month;
+			System.out.println("date : " + date);
 			
 			//DB 데이터 조회 후 JSON 형식 문자열 생성해서 응답하기
-	//	 	rvDate(월별) 추천 수가 많은 vo를 선택하여 [reward]에 해당 월의 리뷰vo insert 
-	//	 	화면에 보이는 페이지/관리자가 업로드 할 수 있는 페이지 따로 구현
-		
+			//	 	rvDate(월별) 추천 수가 많은 vo를 선택하여 [reward]에 해당 월의 리뷰vo insert 
+			//	 	화면에 보이는 페이지/관리자가 업로드 할 수 있는 페이지 따로 구현
+			
 			//review 테이블에서 월별로 rvNo 번호 추출
-			List<reviewVO> list = reviewDAO.selectVO(rwDate);
+			List<reviewVO> list = reviewDAO.selectVO(date);
 			System.out.println("넘겨 받은 날짜 List : " + list);
 			
 			//해당 월의 rvNo에서 높은 추천수인 rvNo번호 추출
 			int rvNo = 0;
 			int recNum = 0;
-			int i;
 			List<Integer> rwRvNo = new ArrayList<>();
-			
+			int i;
 			for(i=0; i < list.size(); i++) {
 				rvNo = list.get(i).getRvNo();
 				recNum = recDAO.getRec(rvNo);
@@ -112,7 +112,7 @@ public class AjaxRewardController extends HttpServlet {
 			
 			//JSON 형식 문자열 만들기
 			// { "list" : [ {},{},{}, ..., {}] }
-			String result= makeJson(vo);
+			String result = makeJson(vo);
 			System.out.println("result : \n" + result);
 			
 			//응답하기
@@ -120,6 +120,7 @@ public class AjaxRewardController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.print(result);
 			
+
 		}
 	}
 

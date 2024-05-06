@@ -131,7 +131,7 @@ session.getAttribute("c_list");
 				<option value="1">작성일</option>
 			</select> 
 			
-			<input class="search" type="text" name="keyword" placeholder="검색어를 입력하세요."> 
+			<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)"> 
 			<input class="searchbtn" type="submit" value="검색"> 
 			<input type="hidden" name="search" value="freeList">
 			
@@ -155,8 +155,8 @@ session.getAttribute("c_list");
 ${vo.psTitle }
 </a>
 </td>
-<td width="5%">
-<input class="up_button" type="button" value="신고">${vo.psWarn }
+<td width="10%">
+<input class="up_button" type="button" value="신고"> ${vo.psWarn }
 </td>
 </tr>
 </c:forEach>

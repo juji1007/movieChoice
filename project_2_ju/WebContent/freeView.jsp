@@ -149,19 +149,19 @@ function ps_update(frm) {
 <body>
 <%@ include file="include/header.jspf" %>
 <div class="body">
-<table frame=void>
+<table frame="void">
 <!-- <table border> -->
 	<tr>
 	<td colspan=7 ><h1>${pvo.psTitle }</h1></td>
 	</tr>
 	<tr>
-	<td width="10%">${pvo.psNick }</td>
+	<td width="20%">작성자 | ${pvo.psNick }</td>
 <%-- 	<td>${pvo.no }</td> --%>
-	<td width="90%">${pvo.psDate }</td>
+	<td width="20%">작성일 | ${pvo.psDate }</td>
 	<td>
 	<input class="up_button" type="button" value="신고"
 		data-warn-num="${warnNum}" 
-		onclick="warn_push(this.form, this.dataset.warnNum)">${pvo.psWarn }
+		onclick="warn_push(this.form, this.dataset.warnNum)"> ${pvo.psWarn }
 	</td>
 	<td>
 	<form action="postUpdate.jsp" method="get">
@@ -227,11 +227,11 @@ function ps_update(frm) {
 <c:forEach var="commVO" items="${c_list }">
 		<form action="postComment_del_ok.jsp" method="get">
 		<tr>
-			<td width="10%">
-				${commVO.pcNick }
+			<td width="20%">
+				작성자 | ${commVO.pcNick }
 			</td>
-			<td width="15%">
-			 ${commVO.pcDate }
+			<td width="20%">
+			 작성일 | ${commVO.pcDate }
 			</td>
 			<td >
 			${commVO.pcContent }
