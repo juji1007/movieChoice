@@ -40,13 +40,13 @@ request.getAttribute("keyword");
     	</div>
 	
 		<form action="qnaAdminController?search=qnaAdminList" method="get">   
-		   <table border>
+		   <table border frame=void>
 		   <tr>
 				<th>번호</th>
 				<th>분류</th> 
-				<th>닉네임</th>
+				<th>작성자</th>
 				<th>작성일</th>
-				<th>내용</th>
+				<th>제목</th>
 			</tr>
 		   <c:forEach var="vo" items="${listOne }">
 		   <tr>

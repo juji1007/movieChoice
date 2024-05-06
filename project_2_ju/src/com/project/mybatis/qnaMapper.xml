@@ -89,7 +89,7 @@
 	</select>
 
 	<!-- 	(동적검색)카테고리별 게시글 동적 검색 -->
-	<select id="cnt" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
+	<select id="cnt" parameterType="map" resultType="int">
 	    SELECT COUNT(*) AS CNT FROM QA
 	    <choose>
 	        <when test="idx == null or idx == ''">
