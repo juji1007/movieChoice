@@ -170,7 +170,9 @@ ${vo.psTitle }
 
       
       <tfoot>
+
          <tr >
+
             <td colspan="5">
                <ol class="paging">
                <%--[이전]에 대한 사용여부 처리 --%>

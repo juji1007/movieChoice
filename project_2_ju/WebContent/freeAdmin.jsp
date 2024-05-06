@@ -76,6 +76,7 @@ session.getAttribute("c_list");
 <title>freeAdmin</title>
 <!-- style 태그 -->
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/free.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 
@@ -110,7 +111,7 @@ session.getAttribute("c_list");
 				<option value="1">작성일</option>
 			</select> 
 			
-			<input class="search" type="text" name="keyword" placeholder="검색어를 입력하세요."> 
+			<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)"> 
 			<input class="searchbtn" type="submit" value="검색"> 
 			<input type="hidden" name="search" value="freeList">
 			<input type="hidden" name="location" value="freeAdmin">
@@ -124,15 +125,25 @@ session.getAttribute("c_list");
 <div id="post">
 
 <table border frame=void>
+<tr>
+	<th>번호</th>
+	<th>작성자</th>
+	<th>작성일</th>
+	<th>제목</th>
+	<th>신고</th>
+</tr>
 <c:forEach var="vo" items="${list }">
 <tr>
 <td width="5%">${vo.psNo }</td>
-<td width="20%">${vo.psNick }</td>
-<td width="20%">${vo.psDate }</td>
+<td width="15%">${vo.psNick }</td>
+<td width="15%">${vo.psDate }</td>
 <td>
 <a href="freeViewAdmin.jsp?psNo=${vo.psNo }&cPage=${pvo.nowPage}">
 ${vo.psTitle }
 </a>
+</td>
+<td width="10%">
+<input class="up_button" type="button" value="신고"> ${vo.psWarn }
 </td>
 </tr>
 </c:forEach>
@@ -140,7 +151,7 @@ ${vo.psTitle }
 		<div>
 		<tfoot>
 			<tr>
-				<td colspan="4">
+				<td colspan="5">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${pvo.beginPage == 1 }">

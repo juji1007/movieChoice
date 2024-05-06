@@ -63,21 +63,21 @@ function ps_delete(frm) {
 
 // 댓글 삭제 확인
 
-// 	function pc_delete(frm, commNo) {
-// 		let isDelete = confirm("삭제하시겠습니까?");
-// // 		alert(commNo);
-// 		if(isDelete) {
-// 			if(${no} == commNo) {
-// 			frm.submit();
-// 			alert("삭제가 완료되었습니다.")
-// 			}
-// 			else {
-// 			alert("삭제권한이 없습니다");
-// // 			history.back();
-// 			}
+	function pc_delete(frm, commNo) {
+		let isDelete = confirm("삭제하시겠습니까?");
+// 		alert(commNo);
+		if(isDelete) {
+			if(${no} == commNo) {
+			frm.submit();
+			alert("삭제가 완료되었습니다.")
+			}
+			else {
+			alert("삭제권한이 없습니다");
+// 			history.back();
+			}
 	
-// 		}
-// 	}
+		}
+	}
 
 	//목록보기
 	function list_go() {
@@ -110,14 +110,20 @@ function ps_delete(frm) {
 <body>
 <%@ include file="include/headerAdmin.jspf" %>
 <div class="body">
-<table  border frame=void>
+<table frame=void>
 	<tr>
 	<td colspan=7><h1>${pvo.psTitle }</h1></td>
 	</tr>
 	<tr>
-	<td>${pvo.psNick }</td>
-	<td>${pvo.no }</td>
-	<td>${pvo.psDate }</td>
+	<td width="20%">작성자 | ${pvo.psNick }</td>
+<%-- 	<td>${pvo.no }</td> --%>
+	<td  width="20%">작성일 | ${pvo.psDate }</td>
+	<td>
+	<td>
+	<input class="up_button" type="button" value="신고"
+		data-warn-num="${warnNum}" 
+		onclick="warn_push(this.form, this.dataset.warnNum)"> ${pvo.psWarn }
+	</td>
 	<td>
 	<form action="postDeleteOk.jsp" method="get">
 		<input class="h_button" type="button" value="삭제" onclick="ps_delete(this.form)">
@@ -128,84 +134,97 @@ function ps_delete(frm) {
 	<td>
 	<form action="postUpdate.jsp" method="get">
 <!-- 	<input type="button" value="수정" onclick="ps_update(this.form)"> -->
-	<input type="hidden" name="psNo" value="${pvo.psNo }">
-	<input type="hidden" name="no" value="${vo.no }">
+		<input type="hidden" name="psNo" value="${pvo.psNo }">
+		<input type="hidden" name="no" value="${vo.no }">
 	</form>
 	</td>
 	<td>
-	<input type="button" value="목록보기" onclick="list_go()">
+	<input class="li_button" type="button" value="목록" onclick="list_go()">
 	</td>
-	<td>
-	</td>
+	
 	</tr>
 
 </table>
 
-
-<tr>
-
-	<td colspan=7>${pvo.psContent }</td>
-</tr>
-<tr>
-<td colspan=7>
-
-	<c:if test="${empty pvo.psFile }">
-		첨부파일없음
+<hr>
+<table>
+	<tr height="200">
+		<td >${pvo.psContent }</td>
+	</tr>
+	<tr>
+	<td>
+		<c:if test="${empty pvo.psFile }">
+			첨부파일없음
 		</c:if>
 		<c:if test="${not empty pvo.psFile }">
-						
-		<img src="img/${pvo. psOrifile }" width="200">
+			<img src="img/${pvo.psOrifile }" width="200">
 		</c:if>
-	</td>
-</tr>
-
-
+		</td>
+	</tr>
+</table>
+<hr>
 
 <!-- 댓글작성 -->
 <div class="comment">
+	<form action="postComment_write_ok.jsp" method="post">
+<table>
 
-<form action="postComment_write_ok.jsp" method="post">
-
-<tr>
-	<td colspan=7>
-		<input type="hidden" name="no" value="${no }">
-		<textarea name="pcContent" rows="2" cols="55"></textarea>
-<!-- 		<input type="button" value="댓글작성" onclick="login_confirm(this.form)"> -->
-		<input type="hidden" name="psNo" value="${pvo.psNo }">
-		<input type="hidden" name="cPage" value="${cPage }">
+	<tr>
+		<td colspan=7>
+			<input type="hidden" name="no" value="${no }">
+			<textarea name="pcContent" rows="2" cols="55"></textarea>
+	<!-- 		<input type="button" value="댓글작성" onclick="login_confirm(this.form)"> -->
+			<input type="hidden" name="psNo" value="${pvo.psNo }">
+			<input type="hidden" name="cPage" value="${cPage }">
 		</td>
-		</tr>
+	</tr>
+</table>
 	</form>
-
+<hr class="color">
 
 
 <!-- 댓글표시 및 삭제-->
-<c:forEach var="commVO" items="${c_list }">
+<table class="comment" border frame=void>
+	<c:forEach var="commVO" items="${c_list }">
 		<form action="postComment_del_ok.jsp" method="get">
 		<tr>
-			<td colspan=7>
-				${commVO.pcNick } ${commVO.no } ${commVO.pcDate }
+			<td width="20%">
+				작성자 | ${commVO.pcNick }
 			</td>
-		</tr>
-		<tr>
-			<td colspan=6>
+			<td width="20%">
+			 	작성일 | ${commVO.pcDate }
+			</td>
+			<td >
 			${commVO.pcContent }
 			</td>
-			<td>
-<%-- 				<input type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)"> --%>
-				<input type="hidden" name="pcNo" value="${commVO.pcNo }">
+			<td class="deleteComment">
+				<input class="deleteBtn" type="button" value="댓글삭제" 
+					data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)""
+				 onclick="pc_delete(this.form, this.dataset.commNo)">
+				<input type="hidden" name="pcNo" value="${commVO.pcNo}">
+				<input type="hidden" name="no" value="${commVO.no}">
 				<input type="hidden" name="no" value="${commVO.no }">
 			</td>
+			
+<!-- 			<td colspan=7> -->
+<%-- 				${commVO.pcNick } ${commVO.no } ${commVO.pcDate } --%>
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 		<tr> -->
+<!-- 			<td colspan=6> -->
+<%-- 			${commVO.pcContent } --%>
+<!-- 			</td> -->
+<!-- 			<td> -->
+<%-- 				<input type="button" value="댓글삭제"  data-comm-no="${commVO.no}" onclick="pc_delete(this.form, this.dataset.commNo)"> --%>
+<%-- 				<input type="hidden" name="pcNo" value="${commVO.pcNo }"> --%>
+<%-- 				<input type="hidden" name="no" value="${commVO.no }"> --%>
+<!-- 			</td> -->
 		</tr>
 		</form>
-
-	</div>
-
 	</c:forEach>
-
+</table>
 	</div>
-	</table>
-</div>
+	</div>
 
 </body>
 </html>

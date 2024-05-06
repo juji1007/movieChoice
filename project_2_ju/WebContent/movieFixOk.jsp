@@ -20,6 +20,9 @@
 <head>
 <meta charset="UTF-8">
 <title>영화정보수정</title>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/write.css">
 <script>
 	function update(frm) {
 		frm.action="controller?type=movieFixOk&location=${location}";
@@ -27,15 +30,19 @@
 	}
 </script>
 <style type="text/css">
-	table {
-		border: solid black 1px;
-	}
-	th, td {
-		border: solid black 1px;
-	}
+/* 	table { */
+/* 		border: solid black 1px; */
+/* 	} */
+/* 	th, td { */
+/* 		border: solid black 1px; */
+/* 	} */
 </style>
 </head>
 <body>
+	<!-- headerAdmin.jspf -->
+	<%@ include file="include/headerAdmin.jspf"%>
+
+<div class="body">
 	<div id="FixArea">
 		<form method="post">
 			<table>
@@ -44,67 +51,65 @@
 				    <tr>
 				        <th>영화이름</th>
 				        <td colspan="3">
-				            <input type="text" name="mvTitle" title="영화이름" value="<%= mvo.getMvTitle() %>" />
+				            <input class="rvRate" type="text" name="mvTitle" title="영화이름" value="<%= mvo.getMvTitle() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화감독</th>
 				        <td colspan="3">
-				            <input type="text" name="mvDirect" title="영화감독" value="<%= mvo.getMvDirect() %>" />
+				            <input class="rvRate" type="text" name="mvDirect" title="영화감독" value="<%= mvo.getMvDirect() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화출연진</th>
 				        <td colspan="3">
-				            <input type="text" name="mvActor" title="영화출연진" value="<%= mvo.getMvActor() %>" />
+				            <input class="rvRate" type="text" name="mvActor" title="영화출연진" value="<%= mvo.getMvActor() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화장르</th>
 				        <td colspan="3">
-				            <input type="text" name="mvGenre" title="영화장르" value="<%= mvo.getMvGenre() %>" />
+				            <input class="rvRate" type="text" name="mvGenre" title="영화장르" value="<%= mvo.getMvGenre() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화평점</th>
 				        <td colspan="3">
-				            <input type="number" name="mvRate" title="영화평점" value="<%= mvo.getMvRate() %>" />
+				            <input class="rvRate" type="number" name="mvRate" title="영화평점" value="<%= mvo.getMvRate() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화개봉년도</th>
 				        <td colspan="3">
-				            <input type="date" name="mvDate" title="영화개봉년도" value="<%= mvo.getMvDate() %>" />
+				            <input class="rvRate" type="date" name="mvDate" title="영화개봉년도" value="<%= mvo.getMvDate() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화누적관객</th>
 				        <td colspan="3">
-				            <input type="text" name="mvAudience" title="영화출연" value="<%= mvo.getMvAudience() %>" />
+				            <input class="rvRate" type="text" name="mvAudience" title="영화출연" value="<%= mvo.getMvAudience() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화등급</th>
 				        <td colspan="3">
-				            <input type="text" name="mvGrade" title="영화등급" value="<%= mvo.getMvGrade() %>" />
+				            <input class="rvRate" type="text" name="mvGrade" title="영화등급" value="<%= mvo.getMvGrade() %>" />
 				        </td>
 				    </tr>
 				    <tr>
 				        <th>영화포스터</th>
 				        <td colspan="3">
-				            <input type="file" name="mvPoster" title="영화포스터" value="<%= mvo.getMvPoster() %>" />
+				            <input class="rvRate" id="file2" type="file" name="mvPoster" title="영화포스터" value="<%= mvo.getMvPoster() %>" />
 				        </td>
 				    </tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2">
-							<input type="reset" value="초기화"/>
+						<td colspan="1">
 						</td>
-					</tr>
-					<tr>
 						<td colspan="4">
-							<input type="button" value="수정하기" onclick="update(this.form)"/>
+							<input class="reset" type="reset" value="초기화"/>
+							<input class="commitbtn" type="button" value="수정하기" onclick="update(this.form)"/>
 							<input type="hidden" name="mvNo" value="<%= mvo.getMvNo()%>" />
 						</td>
 					</tr>
@@ -113,5 +118,9 @@
 			</table>
 		</form>
 	</div>
+</div>
+
+	<!-- footer.jspf -->
+	<%@ include file="include/footer.jspf" %>
 </body>
 </html>

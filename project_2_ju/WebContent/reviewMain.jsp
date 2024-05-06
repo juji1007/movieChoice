@@ -58,7 +58,7 @@
 <!-- 	<h3>전체조회</h3> -->
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne" method="post">
-		<select class="select"  name="idx">
+		<select class="select" name="idx">
 			<option selected disabled>::선택</option>
 			<option value="0">영화명</option>
 			<option value="1">작성자</option>

@@ -132,20 +132,6 @@
 		}
 	}
 	
-// 	//무한정 추천 가능
-// 	function rec_push(frm) {
-// 		//본인 리뷰가 아닌 경우 추천 가능
-// 		if (${no} != ${listOne.no}) {
-// 			//추천 클릭 처리
-// 			alert("추천을 눌렀습니다.");
-// 			location.href= "rvRec.jsp?rvNo=${listOne.rvNo}";
-			
-// 		} else {
-// 			alert("본인 리뷰는 추천할 수 없습니다!!");
-// 			location.href= "rvDetail.jsp?rvNo=${listOne.rvNo}&cPage=${cPage}";
-// 		}
-// 	}
-
 	//시간 여유 시, 구현 예정
 	function prev_go() {
 		
@@ -205,9 +191,9 @@
 			onclick="warn_push(this.form, this.dataset.warnNum)"> ${listOne.rvWarn}
 	</td>
 	<td>
-		<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post">
-			<input class="up_button"  type="button" value="수정" onclick="update_go(this.form)">
-		</form>
+<%-- 		<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post"> --%>
+<!-- 			<input class="up_button"  type="button" value="수정" onclick="update_go(this.form)"> -->
+<!-- 		</form> -->
 	</td>
 	<td>
 			<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)">
@@ -228,44 +214,6 @@
 	</tr>
 </table>	
 
-<%-- 	<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post"> --%>
-<!-- 	<table frame="void"> -->
-<!-- 		<tbody> -->
-<!-- 			<tr> -->
-<%-- 				<td rowspan="3" width="20%"><img src="img/${listOne.mvPoster }" alt="포스터" width="300px"></td> --%>
-<%-- 				<td id="rvTitle" colspan="3" height="40px">${listOne.rvTitle }</td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<%-- 				<td id="rvNick" width="10%" height="40px">${listOne.rvNick }</td> --%>
-<%-- 				<td id="rvDate" width="20%">${listOne.rvDate }</td> --%>
-<!-- 				<td class="right"> -->
-<%-- 					<input class="up_button" type="button" value="추천" data-rec-num="${recNum}"  --%>
-<!-- 					onclick="rec_toggle(this.form, this.dataset.recNum)"> -->
-<%-- 					${listOne.rvRec} --%>
-<%-- 					<input class="up_button" type="button" value="신고" data-warn-num="${warnNum}"  --%>
-<!-- 					onclick="warn_push(this.form, this.dataset.warnNum)"> -->
-<%-- 					${listOne.rvWarn} --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<%-- 				<td id="rvContent" colspan="3">${listOne.rvContent }</td> --%>
-<!-- 			</tr> -->
-<!-- 		</tbody> -->
-	
-<!-- 		<tfoot class="tfoot"> -->
-<!-- 			<tr> -->
-<!-- 				<td colspan="4"  class="center"> -->
-<%-- 					<input class="li_button" type="button" value="목록" onclick="javascript:location.href='reviewController?category=rvMain&cPage=${cPage}'"> --%>
-<!-- 					<input class="up_button" type="button" value="수정" onclick="update_go(this.form)"> -->
-<!-- 					<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)"> -->
-					
-<%-- 					<input type="hidden" name="listOne" value="${listOne}"> --%>
-<%-- 					<input type="hidden" name="recNum" value="${recNum}"> --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 		</tfoot> -->
-<!-- 	</table> -->
-<!-- 	</form> -->
 	<hr class="color">
 	</div>
 </body>

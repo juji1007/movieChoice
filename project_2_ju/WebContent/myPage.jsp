@@ -96,6 +96,16 @@
 	    } else {
 	    }
 	}
+	function deletePsComment(frm) {
+		console.log("댓글정보삭제실행");
+		console.log(frm);
+		let check = confirm("댓글을 삭제하시겠습니까?");
+	    if (check) {
+	    	frm.action="postComment_del_ok.jsp";
+			frm.submit();
+	    } else {
+	    }
+	}
 	function deleteQna(frm) {
 		console.log("qna정보삭제실행");
 		console.log(frm);
@@ -327,7 +337,10 @@
 				            htmltag += "<td>" + member.pcNick + "</td>";
 				            htmltag += "<td>" + member.pcDate + "</td>";
 				            htmltag += "<td>" + member.pcContent + "</td>";
- 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
+//  	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
+ 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePsComment(this.form)'></td>";
+ 	 			          	htmltag += "<input type='hidden' name='location' value='myPage'>";
+	 			            htmltag += "<input type='hidden' name='pcNo' value='" + member.pcNo + "' >";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }

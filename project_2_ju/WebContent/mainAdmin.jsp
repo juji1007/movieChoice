@@ -69,7 +69,7 @@ session.setAttribute("attr_list", list);
 		<nav>
 			<%--영화추가 --%>
 			<div id="movieInsertArea">
-				<input class="searchbtn" type="button" value="영화추가"
+				<input class="commitbtn" type="button" value="영화추가"
 					onclick="location.href='movieInsert.jsp'">
 			</div>
 		</nav>
@@ -130,7 +130,9 @@ session.setAttribute("attr_list", list);
 			</tr>
 			<tr>
 			<td>
+
 			<input class="h_button" type="button" value="삭제" onclick="location.href='controller?type=movieDelete&location=mainAdmin&mvNo=${vo.mvNo }'">
+
 			<input class="up_button" type="button" value="수정" onclick="location.href='controller?type=movieFix&location=mainAdmin&mvNo=${vo.mvNo }'">
 			<input type="hidden" name="mvNo" value="${vo.mvNo }">
 			</td>

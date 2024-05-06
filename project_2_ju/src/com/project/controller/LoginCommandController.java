@@ -90,6 +90,7 @@ public class LoginCommandController extends HttpServlet {
 		command = commands.get(type);
 		System.out.println("이동 type : " + command);
 		String path = command.exec(request, response);
+		System.out.println("path : " + path);
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 	
