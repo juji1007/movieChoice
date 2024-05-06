@@ -145,5 +145,7 @@ height: 30px;
 .up_button:hover {
 	background-color:#E7E7E7;
 }
-
+.paging {
+margin-left : 340px;
+}
 

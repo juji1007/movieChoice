@@ -99,19 +99,19 @@ function selectCategory(frm) {
     var search = frm.querySelector('input[type="button"]');
 	if ("0" == checkCategory) {
 		keyword.style.display = "none";
-		search.style.display = "block";
+		search.style.display = "inline-block";
 	} else if ("1" == checkCategory) {
-		keyword.style.display = "block";
+		keyword.style.display = "inline-block";
 		keyword.placeholder = "리뷰 제목 검색";  //keyword 형식 지정해야함
-        search.style.display = "block";
+        search.style.display = "inline-block";
 	} else if ("2" == checkCategory) {
-		keyword.style.display = "block";
+		keyword.style.display = "inline-block";
 		keyword.placeholder = "영화 제목 검색";
-        search.style.display = "block";
+        search.style.display = "inline-block";
 	} else { 
-		keyword.style.display = "block";
+		keyword.style.display = "inline-block";
 		keyword.placeholder = "유저 이름 검색";
-        search.style.display = "block";
+        search.style.display = "inline-block";
     }
 	
 	var idx = frm.idx.value;
@@ -164,7 +164,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.rvRec + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>";
 // 			            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='rvDelete.jsp?location=admin&rvNo=" + member.rvNo + "'\">";
-			            htmltag += "<td colspan='2'><input class='searchbtn' type='button' value='삭제' onclick='deleteReview(" + member.rvNo + ")'></td>";
+			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteReview(" + member.rvNo + ")'></td>";
 			            htmltag += "</tr>";
 			            
 			            checkReview--;
@@ -190,8 +190,8 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.mvDate + "</td>";
 			            htmltag += "<td><img src='img/" + member.mvPoster + "' width='200'></td>";
 // 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='controller?type=movieDelete&mvNo=" + member.mvNo + "'\">";
-			            htmltag += "<td colspan='2'><input class='searchbtn' type='button' value='삭제' onclick='deleteMovie(" + member.mvNo + ")'>";
-			            htmltag += "<input class='searchbtn' type='button' value='수정' onclick=\"location.href='controller?type=movieFix&mvNo=" + member.mvNo + "'\"></td>";
+			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteMovie(" + member.mvNo + ")'>";
+			            htmltag += "<input class='up_button' type='button' value='수정' onclick=\"location.href='controller?type=movieFix&mvNo=" + member.mvNo + "'\"></td>";
 			            htmltag += "</tr>";
 			            
 			            checkMovie--;
@@ -214,7 +214,7 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
 // 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=admin&id="+ member.id + "'\">";
-					    htmltag += "<td colspan='2'><input class='searchbtn' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
+					    htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
@@ -255,7 +255,7 @@ function selectCategory(frm) {
                                 <option value="3">유저</option>
          </select>
               <input class="search" type="text" name="keyword" placeholder="." style="display:none;"/>
-              <input class="searchbtn" type="button" value="검색" style="display:block;" onclick="selectCategory(this.form)"/>
+              <input class="searchbtn" type="button" value="검색" style="display:inline-block;" onclick="selectCategory(this.form)"/>
 		</form>
 		</div>
 		</div>

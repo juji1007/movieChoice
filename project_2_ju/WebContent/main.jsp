@@ -116,6 +116,7 @@ session.setAttribute("attr_list", list);
 <h2>영화목록</h2> 
 <form action="controller?type=movie" method="post">
 <!-- <form action="main2.jsp" method="get"> -->
+<div class="right">
 
   <select class="select" name="idx">
   <option value="0" disabled selected>정렬</option>
@@ -124,7 +125,7 @@ session.setAttribute("attr_list", list);
   </select>
   <input class="searchbtn" type="submit" value="동적검색">
 <input type="hidden" name="type" value="movie">
-
+</div>
 </form>
 <hr class="gray">
 <!-- 영화 목록 보기 -->

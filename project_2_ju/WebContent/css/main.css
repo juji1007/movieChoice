@@ -111,16 +111,29 @@ border-radius: 5px;
   padding: 10px 12px;
   font-size: 14px;
 }
-.searchbtn {
-position: relative;
-border: 1px solid #bbb;
-	background-color: #888888;
-	border:  none;
-border-radius: 5px;
-	color: white;
-	 width: 90px;
-  height: 38px;
+
+.h_button {
+	border-radius: 5px;
+		width: 60px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: #888888;
+ color: white;
 }
-.searchbtn:hover {
+.h_button:hover {
 	background-color: #7C7C7C;
+}
+.up_button {
+	border-radius: 5px;
+		width: 60px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: white;
+}
+.up_button:hover {
+	background-color:#E7E7E7;
+}
+.right {
+	float: right;
+	margin-top: -55px;
 }

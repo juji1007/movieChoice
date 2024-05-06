@@ -82,7 +82,7 @@ function selectCategory(frm) {
 		            }
 		            htmltag += "<tr id='" + member.id + "'>";
 // 		            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='loginController?type=deleteAccountOk&location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
-		            htmltag += "<td><input type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
+		            htmltag += "<td><input class='h_button' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 // 		            htmltag += "<td><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=accountAdmin&id=" + member.id + "&pwdCheck=" + member.pwd + "'\">";
 		            htmltag += "<td>" + member.no + "</td>";
 		            htmltag += "<td>" + member.name + "</td>";
@@ -120,15 +120,15 @@ function selectCategory(frm) {
 			<div class="innerbox">
 				<div class="content">
 					<form method="post">
-						<select name="idx">
+						<select class="select" name="idx">
 							<option selected disabled>선택</option>
 							<option value="0">전체</option>
 							<option value="1">신고순</option>
 							<option value="2">이름순</option>
 							<option value="3">평론가</option>
 						</select> 
-						<input type="text" name="keyword" placeholder="이름검색" /> 
-						<input type="button" value="검색" onclick="selectCategory(this.form)" />
+						<input class="search" type="text" name="keyword" placeholder="이름검색" /> 
+						<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)" />
 					</form>
 				</div>
 			</div>
