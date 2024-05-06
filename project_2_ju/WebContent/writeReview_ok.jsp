@@ -14,7 +14,6 @@
     int no = (Integer) session.getAttribute("no");
     String rvNick = (String) session.getAttribute("nick"); 
     int mvNo = Integer.parseInt(request.getParameter("mvNo"));
-    String rvNick = (String) session.getAttribute("nick");
     int rvRate = Integer.parseInt(request.getParameter("rvRate"));
     String rvTitle = request.getParameter("rvTitle");
     String rvContent = request.getParameter("rvContent");
