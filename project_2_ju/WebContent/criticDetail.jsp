@@ -26,18 +26,21 @@
 <head>
 <meta charset="UTF-8">
 <title>상세정보</title> 
+<link rel="stylesheet" href="css/free.css">
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/rvMain.css">
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
+<div class="body">
 	<h2><%=vo.getName() %> 평론가 리뷰</h2> 
-	<hr>
+	<hr class="color">
 	<c:forEach var="cvo" items="${cvoList}">
-		<p>${cvo.rvNick }</p>
-		<p>${cvo.rvTitle }</p>
+		<p><strong>${cvo.rvNick }</strong> | ${cvo.rvTitle }</p>
 		<p>${cvo.rvContent }</p>
 		<p>${cvo.rvDate }</p>
-		<hr>
+		<br>
 	</c:forEach>
+</div>
 </body>
 </html>

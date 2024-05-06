@@ -58,11 +58,11 @@ request.getAttribute("keyword");
   </div>
 	
 		<form action="qnaController?search=qnaList" method="get">   
-		   <table border>
+		   <table border frame=void>
 		   <tr>
 				<th>번호</th>
 				<th>분류</th> 
-				<th>닉네임</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>제목</th>
 			</tr>

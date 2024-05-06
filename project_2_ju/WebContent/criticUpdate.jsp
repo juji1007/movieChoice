@@ -15,26 +15,41 @@
 <head>
 <meta charset="UTF-8">
 <title>전문가 정보 수정</title>
-<link rel="stylesheet" href="css/header.css">
 </head>
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/write.css">
 <body>
 <%@ include file="include/header.jspf" %>
-	<h1>전문가 정보 수정</h1>
-	<form action="criticUpdateOk.jsp" method="post">
-		<label for="company">소속</label><br>
-        <input type="text" id="company" name="company" value="<%=vo.getCompany()%>">
-        <br><br> 
-        <label for="career">경력</label><br>
-        <textarea id="career" name="career" rows="4" cols="50"><%=vo.getCareer()%></textarea> 
-        <br><br>
-        <label for="filename">파일</label><br>
-        <input type="file" name="filename">  
-        <br><br>
-		
-        <input type="submit" value="수정 완료">
-        <input type="hidden" name="no" value=<%=no%>> 
-    </form>
-    
+<div class="body">
+<div>
+<form action="criticUpdateOk.jsp" method="post">
+	<table>
+		<tr> 
+			<td>
+				<input  class="psTitle" type="text" name="company" title="소속" value="<%=vo.getCompany()%>">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea name="career" rows="8" cols="50" title="경력" ><%=vo.getCareer()%></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="file" name="filename"> 
+			</td>
+		</tr>
+		<tr>
+			<td class="button" colspan="2">
+				<input class="commitbtn" type="submit" value="수 정" >
+				<input type="hidden" name="no" value=<%=no%>>
+				<input class="reset" type="button" value="목록" onclick="location.href='criticAdmin.jsp'">
+			</td>
+		</tr>
+	</table>
+</form> 
+</div>
+</div>
 </body>
 </html>
 
