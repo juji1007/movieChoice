@@ -1,3 +1,4 @@
+<%@page import="com.mystudy.model.vo.listTotVO"%>
 <%@page import="com.project.mybatis.DBService"%>
 <%@page import="com.mystudy.model.dao.movieDAO"%>
 <%@page import="com.mystudy.model.vo.movieVO"%>
@@ -24,7 +25,7 @@
 // 		session.setAttribute("mvDetail", vo); 
 		
 	//영화 번호로 리뷰 검색-건희
-	List<movieVO> mvoList = null; 
+	List<listTotVO> mvoList = null; 
 		try (SqlSession ss = DBService.getFactory().openSession()) {
 			mvoList = ss.selectList("movie.rone", mvNo);
 		} catch (Exception e) {
@@ -56,9 +57,13 @@
             max-width: 200px;
             height: auto;
         }
+        a:hover {
+			color:#56BEC0;
+		} 
     </style>
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/rvMain.css">
+
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
@@ -83,7 +88,8 @@
   <hr>
   <c:forEach var="mvo" items="${mvoList}">
 		<p>${mvo.rvNick }</p>
-		<p>${mvo.rvTitle }</p>
+		<p><a href="rvDetail.jsp?rvNo=${mvo.rvNo }&cPage=1">${mvo.rvTitle }</a></p>
+<%-- 		<p>${mvo.rvTitle }</p> --%>
 		<p>${mvo.rvContent }</p>
 		<p>${mvo.rvDate }</p>
 		<hr>

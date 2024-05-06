@@ -39,7 +39,7 @@ public class ReviewController extends HttpServlet {
 			Paging p = new Paging();
 			
 			//numPerPage=5, pagePerBlock=5 설정 먼저
-			p.setNumPerPage(5);
+			p.setNumPerPage(10);
 			p.setPagePerBlock(5);
 			
 			//1. 전체 게시물 수량 구하기
@@ -155,6 +155,7 @@ public class ReviewController extends HttpServlet {
 		
 		//리뷰 카테고리별(영화명,작성자,작성일) 동적 검색 - 작성일 검색X
 		if ("selectOne".equals(category)) {
+			
 			System.out.println(">> selectOne 요청 처리~~");
 			
 			String idx = request.getParameter("idx");
@@ -172,7 +173,7 @@ public class ReviewController extends HttpServlet {
 			Paging p = new Paging();
 			
 			//numPerPage=5, pagePerBlock=5 설정 먼저
-			p.setNumPerPage(5);
+			p.setNumPerPage(10);
 			p.setPagePerBlock(5);
 			
 			//1. 전체 게시물 수량 구하기
@@ -272,14 +273,15 @@ public class ReviewController extends HttpServlet {
 	  			request.getRequestDispatcher("selectOneAdmin.jsp").forward(request, response);
 				}
 			} else {
-				if (idx.equals("null") || keyword.trim().length() == 0) {
-					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-				} else if (listOne.size() == 0) {
-					//idx-keyword 내용 일치하지 않을 때
-					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
-				} else {
-					request.getRequestDispatcher("selectOne.jsp").forward(request, response);
-				}
+				request.getRequestDispatcher("selectOne.jsp").forward(request, response);
+//				if (idx.equals("null") || keyword.trim().length() == 0) {
+//					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+//				} else if (listOne.size() == 0) {
+//					//idx-keyword 내용 일치하지 않을 때
+//					request.getRequestDispatcher("reviewController?category=rvMain").forward(request, response);
+//				} else {
+//					request.getRequestDispatcher("selectOne.jsp").forward(request, response);
+//				}
 			}
 			
 			

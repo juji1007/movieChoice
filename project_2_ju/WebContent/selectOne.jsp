@@ -23,16 +23,6 @@
 			frm.submit();
 		<%}%>
 	}
-	
-// 	function checkSearchCondition(frm) {
-// 		var selValue = form.elements["idx"].value;
-// 		var keyword = form.elements["keyword"].value.trim();
-// 		if (selValue === "" || keyword === "") {
-// 			alert("검색 조건과 키워드를 모두 선택해주세요.");
-// 			return false;
-// 		}
-// 		return true;
-// 	}
 
 </script>
 </head>
@@ -45,9 +35,6 @@
 	<form action="reviewController?category=rvWrite" method="post">
 		<input class="write" type="button" value="등록하기" 
 			onclick="login_confirm(this.form)">
-
-<!-- 		<input type="button" value="전체조회" -->
-<!-- 			onclick="javascript:location.href='reviewController?category=rvMain'"> -->
 
 	</form>
 	<hr class="color">
@@ -74,25 +61,35 @@
 		
 <!-- 리뷰 (조건)목록 -->
 <form action="reviewController?category=selectOne" method="post">
-	<table class="rv">
+	<table border frame=void>
+		<thead>
+			<tr>
+			<th width="5%">번호</th>
+			<th width="20%">영화명</th>
+			<th width="10%">작성자</th>
+			<th width="10%">작성일</th>
+			<th>제목</th>
+			<th colspan="2" width="20%">추천/신고</th>
+			</tr>
+		</thead>
 	<c:forEach var="vo" items="${listOne }">
 		<tbody id="reviewOne">
-	        <tr>
-	            <td rowspan="2">${vo.rvNo }</td>
+			<tr>
+	        	<td rowspan="2">${vo.rvNo }</td>
 	            <td>${vo.mvTitle }</td>
-	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${selPvo.nowPage}">${vo.rvTitle }</a></td>
-	        </tr>
-	        <tr>
 	            <td>${vo.rvNick }</td>
 	            <td>${vo.rvDate }</td>
-	        </tr>
-	        <tr>
-	            <td rowspan="2" colspan="3">
-	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec } 
-	            	<input class="up_button" type="button" value="신고"> ${vo.rvWarn }
-	            	<hr>
+	            <td id="rvTitle"><a href="rvDetail.jsp?rvNo=${vo.rvNo }&cPage=${selPvo.nowPage}">${vo.rvTitle }</a></td>
+	            <td>
+	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec}  
+	            </td>
+	            <td>
+	            	<input class="up_button" type="button" value="신고"> ${vo.rvWarn}
+	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
+	            	<input type="hidden" name ="vo" value="${vo }">
+	            	<input type="hidden" name ="recNo" value="${vo.no }">
 	            </td>
 	        </tr>
 	    </tbody>
