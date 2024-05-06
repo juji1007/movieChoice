@@ -88,7 +88,47 @@
 	    ORDER BY QA_NO DESC
 	</select>
 
-
+	<!-- 	(동적검색)카테고리별 게시글 동적 검색 -->
+	<select id="cnt" parameterType="map" resultType="com.mystudy.model.vo.qnaVO">
+	    SELECT COUNT(*) AS CNT FROM QA
+	    <choose>
+	        <when test="idx == null or idx == ''">
+	            WHERE 1 = 2 <!-- 어떤 결과도 반환되지 않도록 함 -->
+	        </when>
+	        <when test="idx == 0">
+	            WHERE QA_CONTENT LIKE '%' || #{keyword} || '%'
+	        </when>
+	        <when test="idx == 1">
+	            WHERE TO_CHAR(QA_DATE, 'YYYYMMDD') = #{keyword}
+	        </when>
+	        <when test="idx == 2">
+	            <!-- 수정된 부분: keyword가 없는 경우 해당 카테고리의 모든 데이터 반환 -->
+	            <choose>
+	                <when test="checkQaCategory == '1' ">
+	                    WHERE QA_CATEGORY = #{keyword}
+	                </when>
+	                <otherwise>
+	                    WHERE QA_CATEGORY = #{qaCategory} AND QA_CONTENT LIKE '%' || #{keyword} || '%'
+	                </otherwise>
+	            </choose>
+	        </when>
+	        <when test="idx == 3">
+	            <!-- 수정된 부분: keyword가 없는 경우 해당 카테고리의 모든 데이터 반환 -->
+	            <choose>
+	                <when test="checkQaCategory == '1' ">
+	                     WHERE QA_CATEGORY = #{keyword}
+	                </when>
+	                <otherwise>
+	                    WHERE QA_CATEGORY = #{qaCategory} AND QA_CONTENT LIKE '%' || #{keyword} || '%'
+	                </otherwise>
+	            </choose>
+	        </when>
+	        <otherwise>
+	            AND 1 = 2
+	        </otherwise>
+	    </choose>
+	    ORDER BY QA_NO DESC
+	</select>
 	
 	<!-- QA 입력 -->
 	<insert id="insert" parameterType="com.mystudy.model.vo.qnaVO">

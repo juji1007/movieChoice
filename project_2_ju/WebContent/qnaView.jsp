@@ -61,31 +61,16 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/freeView.css">
 <body>
-
 <%@ include file="include/header.jspf" %>
 <div class="body">
- <h1>QnA ${qvo.qaNo }</h1>
-
-	<table>
+	<table frame="void">
+	<!-- <table border> -->
 		<tr>
-			<td colspan=3><h2>QnA 번호 : ${qvo.qaNo }</h2></td>
+			<td colspan=7 ><h1>QnA : ${qvo.qaNo }</h1></td>
 		</tr>
 		<tr>
-			<td>닉네임 : ${qvo.nick }</td>
-		</tr>
-		<tr>
-			<td>내용 : ${qvo.qaContent }</td>
-		</tr>
-		<tr>
-			<td>${qvo.qaDate }</td>
-		</tr>
-	</table>
-<table frame=void>
-<!-- <table border> -->
-
-		<tr>
-			<td width="10%">${qvo.nick }</td>
-			<td width="90%">${qvo.qaDate }</td>
+			<td width="20%">작성자 | ${qvo.nick }</td>
+			<td width="20%">작성일 | ${qvo.qaDate }</td>
 			<td>
 				<form action="qnaUpdate.jsp" method="get">
 					<input class="up_button" type="button" value="수정" onclick="qa_update(this.form)">
@@ -106,13 +91,17 @@
 	<hr>
 	<table>
 		<tr  height="200">
-			<td>${qvo.qaContent }</td>
+			<td>내용 : ${qvo.qaContent }</td>
 		</tr>
 	</table>
-	<hr>
-	<h2>QnA ${qvo.qaNo } 관리자 답변내용</h2>
 	<hr class="color">
-  	<p>${ivo.iqContent }</p> 
+<h2>QnA : ${qvo.qaNo } 관리자 답변내용</h2>
+
+<table class="comment" border frame=void>
+	<tr>
+	  	<td>${ivo.iqContent }</td> 
+  	</tr>
+</table>
   	</div>
 </body>
 </html>

@@ -12,6 +12,7 @@
 
     // 세션에서 필요한 값들 가져오기
     int no = (Integer) session.getAttribute("no");
+    String rvNick = (String) session.getAttribute("nick"); 
     int mvNo = Integer.parseInt(request.getParameter("mvNo"));
     String rvNick = (String) session.getAttribute("nick");
     int rvRate = Integer.parseInt(request.getParameter("rvRate"));
@@ -21,6 +22,7 @@
     // reviewVO 객체 생성 및 값 설정
    reviewVO rvo = new reviewVO();
     rvo.setNo(no);
+    rvo.setRvNick(rvNick);
     rvo.setMvNo(mvNo);
     rvo.setRvNick(rvNick);
     rvo.setRvRate(rvRate);

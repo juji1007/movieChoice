@@ -6,6 +6,12 @@
 <%@page import="org.apache.ibatis.javassist.bytecode.stackmap.BasicBlock.Catch"%>
 <%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@page import="java.util.List"%>
+<%@page import="com.mystudy.model.dao.recDAO"%>
+<%@page import="com.mystudy.model.dao.listTotDAO"%>
+<%@page import="com.mystudy.model.vo.listTotVO"%>
+<%@page import="com.project.review.paging.Paging"%>
+<%@page import="com.mystudy.model.dao.reviewDAO"%>
+<%@page import="com.mystudy.model.vo.reviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -52,6 +58,37 @@
             <% } %>
         }
     </script>
+
+<style>
+
+	.genre-orange, .genre-blue, .genre-green, .genre-red {
+        display: inline-block;
+        padding: 5px 5px; 
+        margin-right: 1px; 
+        width: fit-content;
+        height: 50px;
+        line-height: 20px; 
+        border-radius: 10px; 
+        color: white;
+    }
+	
+    .genre-orange {
+	    background-color: orange;
+	}
+	
+	.genre-blue {
+	    background-color: blue;
+	}
+	
+	.genre-green {
+	    background-color: green;
+	}
+	
+	.genre-red {
+	    background-color: red;
+	}
+</style>
+
     <style>
         img {
             max-width: 200px;
@@ -61,6 +98,7 @@
 			color:#56BEC0;
 		} 
     </style>
+<link rel="stylesheet" href="css/free.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/rvMain.css">
 
@@ -68,31 +106,56 @@
 <body>
 <%@ include file="include/header.jspf" %>
 <div class="body">
-    <div class="container">
-        <img src="img/${vo.mvPoster }"  width="400" height="400" style="width: 100%; height: auto;">
-    </div>
-    	<form  action="writeReview.jsp?movie=${vo.mvNo }" method="post">
-	    	<input class="write" type="button" value="리뷰 작성" onclick="login_confirm(this.form)">
-	    </form>
-	<div>	
-			<h2>${vo.mvTitle }</h2>
-			 <p><strong>감독:</strong> ${vo.mvDirect }</p>
-			 <p><strong>등급:</strong> ${vo.mvGrade }</p> 
-			 <p><strong>장르:</strong> ${vo.mvGenre }</p>
-			 <p><strong>평점:</strong> ${vo.mvRate }</p>
-			 <p><strong>개봉년도:</strong> ${vo.mvDate }</p>
-			 <p><strong>출연:</strong> ${vo.mvActor }</p>
-			 <p><strong>누적관객:</strong> ${vo.mvAudience }</p> 
-  </div>
+<h2>${vo.mvTitle } 정보</h2>
+<hr class="color">
+    <div style="display: flex;">
+	    <img src="img/${vo.mvPoster}" width="400" height="300" style="width: 30%; height: auto;">
+	    <div style="width: 70%; margin-left: 20px;">
+	        <form action="writeReview.jsp?movie=${vo.mvNo}" method="post">
+	            <input class="write" type="button" value="리뷰 작성" onclick="login_confirm(this.form)">
+	        </form>
+	        <div>
+	            <h2>${vo.mvTitle}</h2>
+	            <p><strong>감독:</strong> ${vo.mvDirect}</p>
+	            <c:choose>
+	                <c:when test="${vo.mvGrade eq '15세이상관람가'}">
+	                    <div class="genre-orange">
+	                        <p>${vo.mvGrade}</p>
+	                    </div>
+	                </c:when>
+	                <c:when test="${vo.mvGrade eq '12세이상관람가'}">
+	                    <div class="genre-blue">
+	                        <p>${vo.mvGrade}</p>
+	                    </div>
+	                </c:when>
+	                <c:when test="${vo.mvGrade eq '전체관람가'}">
+	                    <div class="genre-green">
+	                        <p>${vo.mvGrade}</p>
+	                    </div>
+	                </c:when>
+	                <c:when test="${vo.mvGrade eq '청소년관람불가'}">
+	                    <div class="genre-red">
+	                        <p>${vo.mvGrade}</p>
+	                    </div>
+	                </c:when>
+	            </c:choose>
+	            <p><strong>장르:</strong> ${vo.mvGenre}</p>
+	            <p><strong>평점:</strong> ${vo.mvRate}</p>
+	            <p><strong>개봉년도:</strong> ${vo.mvDate}</p>
+	            <p><strong>출연:</strong> ${vo.mvActor}</p>
+	            <p><strong>누적관객:</strong> ${vo.mvAudience}</p>
+	        </div>
+	    </div>
+	</div>
   <h2>${vo.mvTitle } 리뷰</h2>
-  <hr>
+  <hr class="color">
   <c:forEach var="mvo" items="${mvoList}">
 		<p>${mvo.rvNick }</p>
 		<p><a href="rvDetail.jsp?rvNo=${mvo.rvNo }&cPage=1">${mvo.rvTitle }</a></p>
 <%-- 		<p>${mvo.rvTitle }</p> --%>
 		<p>${mvo.rvContent }</p>
 		<p>${mvo.rvDate }</p>
-		<hr>
+		<br>
 	</c:forEach>
 
 </div>
