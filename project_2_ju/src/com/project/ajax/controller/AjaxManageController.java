@@ -290,6 +290,20 @@ public class AjaxManageController extends HttpServlet {
 		    // 리스트의 각 요소 Json넣기
 		    
 		    if (value == null || value.isEmpty()) {
+		    	if ("account".equals(key)) {
+		    		System.out.println("review value null");
+		            result.append("{");
+		            result.append("\"table\": \"" + key + "\", ");
+		            result.append("\"no\": \"" + null + "\", ");
+		            result.append("\"name\": \"" + null + "\", ");
+		            result.append("\"id\": \"" + null + "\", ");
+		            result.append("\"pwd\": \"" + null + "\", ");
+		            result.append("\"nick\": \"" + null + "\", ");
+		            result.append("\"criticCheck\": \"" + null + "\", ");
+		            result.append("\"email\": \"" + null + "\", ");
+		            result.append("\"warn\": \"" + null + "\"");
+		            result.append("},");
+		    	}
 		    	if ("review".equals(key)) {
 		    		System.out.println("review value null");
 		            result.append("{");

@@ -135,7 +135,7 @@ function selectCategory(frm) {
             var checkReview = 1;
             var checkAccount = 1;
             // 데이터 반복 처리
-            if (respData.listSearch.length === 0) {
+            if (respData.length === 0) {
                 // 검색 결과가 없을 때
                 htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
             } else {
@@ -149,6 +149,11 @@ function selectCategory(frm) {
                 	console.log("sort : ", respData);
 					if (member.table === "review") {
 						console.log("리뷰html");
+						if (member.no === "null" || member.no.length === 0) {
+                            console.log("리뷰없음html");
+                            htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+                            break;
+                        }
 						if (checkReview > 0) {
 							htmltag += "<tr><th>테이블</th><th>리뷰 번호</th><th>영화 번호</th><th>유저 번호</th><th>유저 닉네임</th><th>리뷰 제목</th><th>리뷰 내용</th><th>리뷰 작성일</th><th>리뷰 추천수</th><th>신고 수</th><th>관리</th></tr>";
 						}
@@ -174,6 +179,11 @@ function selectCategory(frm) {
 			        
 			        if (member.table === "movie") {
 			        	console.log("영화html");
+			        	if (member.mvNo === "null" || member.mvNo.length === 0) {
+                            console.log("영화없음html");
+                            htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+                            break;
+                        }
 						if (checkMovie > 0) {
 							htmltag += "<tr><th>테이블</th><th>영화 번호</th><th>제목</th><th>감독</th><th>배우</th><th>장르</th><th>평점</th><th>관람객 수</th><th>등급</th><th>개봉일</th><th>포스터</th><th>관리</th></tr>";
 						}
@@ -201,6 +211,11 @@ function selectCategory(frm) {
 			        
 			        if (member.table === "account") {
 			            console.log("유저html");
+			            if (member.no === "null" || member.no.length === 0) {
+                            console.log("유저없음html");
+                            htmltag += "<tr><td colspan='11'>검색 결과가 없습니다.</td></tr>";
+                            break;
+                        }
 			            if (checkAccount > 0) {
 			                htmltag += "<tr><th>테이블</th><th>유저 번호</th><th>유저 이름</th><th>유저 아이디</th><th>유저 닉네임</th><th>평론가 구분</th><th>이메일</th><th>신고 수</th><th>관리</th></tr>";
 			            }
