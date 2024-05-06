@@ -89,13 +89,13 @@
 				<tr>
 					<th>제목</th>
 					<td>
-						<input class="psTitle" type="text" name="rvTitle" title="제목">
+						<input class="psTitle" type="text" name="rvTitle" title="제목" placeholder="제목을 입력하세요.">
 					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea class="psContent"  name="rvContent" rows="8" cols="50" title="내용"></textarea>
+						<textarea class="psContent"  name="rvContent" rows="8" cols="50" title="내용" placeholder="내용을 입력하세요."></textarea>
 					</td>
 				</tr>
 			</tbody>
