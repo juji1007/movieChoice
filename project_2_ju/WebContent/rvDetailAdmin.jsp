@@ -191,9 +191,9 @@
 			onclick="warn_push(this.form, this.dataset.warnNum)"> ${listOne.rvWarn}
 	</td>
 	<td>
-		<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post">
-			<input class="up_button"  type="button" value="수정" onclick="update_go(this.form)">
-		</form>
+<%-- 		<form action="rvUpdate.jsp?rvNo=${listOne.rvNo }" method="post"> --%>
+<!-- 			<input class="up_button"  type="button" value="수정" onclick="update_go(this.form)"> -->
+<!-- 		</form> -->
 	</td>
 	<td>
 			<input class="h_button" type="button" value="삭제" onclick="delete_go(this.form)">
