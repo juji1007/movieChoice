@@ -31,6 +31,7 @@ function list_go() {
 	<h2>자유게시판 [${keyword}]검색</h2>
 <form  action="postWrite.jsp" method="get"><input class="write" type="button" value="작성하기" onclick="login_confirm(this.form)"></form>
 <hr class="color">
+
 		<div class="box">
 		<div class="innerbox">
 		<div class="content">
@@ -43,15 +44,22 @@ function list_go() {
 			<input class="search" type="text" name="keyword" placeholder="검색어 입력 (작성일 검색 ex: 20240507)"> 
 			<input class="searchbtn" type="submit" value="검색"> 
 			<input type="hidden" name="search" value="freeList">
-	<input class="listbtn"  type="button" value="전체목록" onclick="list_go()">
+			<input class="listbtn"  type="button" value="전체목록" onclick="list_go()">
 			
 		</form>
 		</div>
 		</div>
 		</div>
 	
-	<form action="postController?search=freeList" method="get">	
-	<table border>
+<!-- 	<form action="postController?search=freeList" method="get">	 -->
+	<table border frame=void>
+	<tr>
+		<th>번호</th>
+		<th>작성자</th>
+		<th>작성일</th>
+		<th>제목</th>
+		<th>신고</th>
+	</tr>
 	<c:forEach var="vo" items="${listOne }">
 	<tr>
 		<td width="5%">${vo.psNo }</td>
@@ -62,12 +70,15 @@ function list_go() {
 		${vo.psTitle }
 		</a>
 		</td>
+		<td width="10%">
+		<input class="up_button" type="button" value="신고"> ${vo.psWarn }
+		</td>
 	</tr>
 
 	</c:forEach>
 	<tfoot id="page">
 	        <tr>
-	        	<td colspan="4">
+	        	<td colspan="5">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${selPvo.beginPage == 1 }">
@@ -106,7 +117,7 @@ function list_go() {
 	    </tfoot>
 
 	</table>
-	</form>
+<!-- 	</form> -->
 	</div>
 
 </body>

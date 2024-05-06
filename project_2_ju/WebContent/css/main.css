@@ -38,6 +38,29 @@ border-radius: 5px;
 .searchbtn:hover {
 	background-color: #7C7C7C;
 }
+.up_button {
+	border-radius: 5px;
+		width: 95px;
+	height: 37px;
+	 border: 1px solid #bbb;
+	 background-color: white;
+}
+.up_button:hover {
+	background-color:#E7E7E7;
+}
+.commitbtn {
+	border-radius: 5px;
+		 width: 100px;
+  	height: 38px;
+ border: 1px solid #bbb;
+ background-color: #56BEC0;
+ color: white;
+}
+.commitbtn:hover {
+	background-color: #4EA8AA;
+}
+
+
 nav{
  float: right;
 }

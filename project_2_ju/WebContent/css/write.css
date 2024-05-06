@@ -72,6 +72,13 @@ border-radius: 5px;
 	border-radius: 5px;
 	color: white;
 }
+#file2 {
+	border: 1px solid #bbb;
+	background-color: white;
+	border:  none;
+	border-radius: 5px;
+
+}
 .commitbtn {
 	border-radius: 5px;
 	 width: 100px;
@@ -100,6 +107,17 @@ background-color:#E7E7E7;
 }
 .commitbtn:hover {
 	background-color: #4EA8AA;
+}
+.h_button {
+	border-radius: 5px;
+		width: 70px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: #888888;
+ color: white;
+}
+.h_button:hover {
+	background-color: #7C7C7C;
 }
 .button {
 	text-align: center;

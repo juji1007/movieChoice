@@ -43,6 +43,11 @@
 	<%@ include file="include/headerAdmin.jspf" %>
 	<div class="body">
 	<h2>전체조회</h2>
+	<form action="reviewController?category=rvWrite" method="post">
+		<input class="write" type="button" value="작성하기" 
+			onclick="login_confirm(this.form)">
+	</form>
+	
 	<hr class="color">
 	<div class="box">
 		<div class="innerbox">
@@ -50,7 +55,7 @@
 <!-- 	<h3>전체조회</h3> -->
 	<!-- 리뷰 목록 검색 -->	
 	<form action="reviewController?category=selectOne&location=reviewMainAdmin" method="post">
-		<select class="select"  name="idx">
+		<select class="select" name="idx">
 			<option selected disabled>::선택</option>
 			<option value="0">영화명</option>
 			<option value="1">작성자</option>
@@ -71,23 +76,31 @@
 	 
 <!-- 리뷰 (전체)목록 -->
 <form>
-	<table class="rv">
+	<table border frame=void>
+		<thead>
+			<tr>
+			<th width="5%">번호</th>
+			<th width="20%">영화명</th>
+			<th width="10%">작성자</th>
+			<th width="10%">작성일</th>
+			<th>제목</th>
+			<th colspan="2" width="20%">추천/신고</th>
+			</tr>
+		</thead>
 	<c:forEach var="vo" items="${listAll}">
 		<tbody id="reviewOne">
-	        <tr>
+			<tr>
 	        	<td rowspan="2">${vo.rvNo }</td>
 	            <td>${vo.mvTitle }</td>
-	            <td id="rvTitle"><a href="rvDetailAdmin.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
-	        </tr>
-	        <tr>
 	            <td>${vo.rvNick }</td>
 	            <td>${vo.rvDate }</td>
-	        </tr>
-	        <tr>
-	            <td rowspan="2" colspan="3">
-	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec} 
+	            <td id="rvTitle"><a href="rvDetailAdmin.jsp?rvNo=${vo.rvNo }&cPage=${rvPvo.nowPage}">${vo.rvTitle }</a></td>
+	            <td>
+	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec}  
+	            </td>
+	            <td>
 	            	<input class="up_button" type="button" value="신고"> ${vo.rvWarn}
-	            	<hr>
+	            	
 	            	<input type="hidden" name ="rvNo" value="${vo.rvNo }">
 	            	<input type="hidden" name ="mvNo" value="${vo.mvNo }">
 	            	<input type="hidden" name ="vo" value="${vo }">
@@ -100,7 +113,7 @@
 	
 	    <tfoot id="page">
 	        <tr>
-	        	<td colspan="3">
+	        	<td colspan="7">
 					<ol class="paging">
 					<%--[이전]에 대한 사용여부 처리 --%>
 					<c:if test="${rvPvo.nowPage == 1 }">

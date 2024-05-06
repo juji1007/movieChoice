@@ -171,7 +171,7 @@ ${vo.psTitle }
       <div>
       <tfoot>
          <tr>
-            <td colspan="4">
+            <td colspan="5">
                <ol class="paging">
                <%--[이전]에 대한 사용여부 처리 --%>
                <c:if test="${pvo.beginPage == 1 }">

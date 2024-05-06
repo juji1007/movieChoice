@@ -17,7 +17,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>회원정보수정</title>
-<link rel="stylesheet" href="css/myPage.css">
+<link rel="stylesheet" href="css/write.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var check = false;
@@ -86,31 +86,40 @@
 				<caption><h2>회원정보수정</h2></caption>
 				<thead border>
 				    <tr>
-				        <th>이름</th>
+				        <th>NAME</th>
+<!-- 				        <th>이름</th> -->
 				        <td colspan="3">
 				            <input class="psTitle" type="text" name="name" title="이름" value="<%= avo.getName() %>" />
 				        </td>
 				    </tr>
 				    <tr>
-				        <th>비밀번호</th>
+				        <th>P/W</th>
+<!-- 				        <th>비밀번호</th> -->
 				        <td colspan="3">
 				            <input class="psTitle" type="password" name="pwd" title="비밀번호" value="<%= avo.getPwd() %>"/>
 				        </td>
 				    </tr>
 				    <tr>
-						<th>비밀번호확인</th>
+						<th>CHECK P/W </th>
+<!-- 						<th>비밀번호확인</th> -->
 						<td colspan="3">
 							<input class="psTitle" type="password" name="pwdCheck" title="비밀번호확인" onblur="check_pwd(this.form)"/>
 						</td>
 					</tr>
 				    <tr>
-				        <th>닉네임</th>
+				        <th>NICK</th>
 				        <td colspan="3">
 				            <input class="psTitle" type="text" name="nick" title="닉네임" value="<%= avo.getNick() %>" />
 				        </td>
 				    </tr>
 				    <tr>
-					    <th>평론가 구분</th>
+				        <th>EMAIL</th>
+				        <td colspan="3">
+				            <input class="psTitle" type="text" name="email" title="이메일" value="<%= avo.getEmail() %>" />
+				        </td>
+				    </tr>
+				    <tr>
+					    <th>CRITIC</th>
 					    <td colspan="3">
 					        <input class="psTitle" type="radio" name="criticCheck" title="평론가" value="1"
 					            <c:if test="${avo.getCriticCheck() == 1}">
@@ -122,12 +131,6 @@
 					        />
 					    </td>
 					</tr>
-				    <tr>
-				        <th>이메일</th>
-				        <td colspan="3">
-				            <input class="psTitle" type="text" name="email" title="이메일" value="<%= avo.getEmail() %>" />
-				        </td>
-				    </tr>
 				</thead>
 				<tbody>
 					<tr>

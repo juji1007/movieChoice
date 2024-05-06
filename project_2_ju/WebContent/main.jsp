@@ -162,7 +162,7 @@ session.setAttribute("attr_list", list);
 </div>
 </div>
 
-<!-- footer.jspf -->
+	<!-- footer.jspf -->
 	<%@ include file="include/footer.jspf" %>
 </body>
 </html>
