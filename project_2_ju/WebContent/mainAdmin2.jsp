@@ -106,12 +106,14 @@ session.setAttribute("attr_list", list);
 <div>
 <h2>영화목록</h2> 
 <form action="controller?type=movieAdmin" method="post">
+  <div class="right">
   <select class="select" name="idx">
   <option value="0" disabled selected>정렬</option>
     <option value="1" >최신순</option>
     <option value="2"  >평점순</option>
   </select>
   <input class="searchbtn" type="submit" value="동적검색">
+</div>
 </form>
 <hr class="gray">
 <!-- 영화 정렬 후 목록 보기 -->
