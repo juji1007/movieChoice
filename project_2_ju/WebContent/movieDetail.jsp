@@ -90,10 +90,6 @@
 </style>
 
     <style>
-        img {
-            max-width: 200px;
-            height: auto;
-        }
         a:hover {
 			color:#56BEC0;
 		} 
