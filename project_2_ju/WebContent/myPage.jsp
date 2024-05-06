@@ -76,42 +76,42 @@
 	    } else {
 	    }
 	}
-	function updatePost(frm) {
+	function updatePost(frm, psNo) {
 		console.log("자유게시판정보수정실행");
 		console.log(frm);
 		let check = confirm("자유게시판 정보를 수정하시겠습니까?");
 	    if (check) {
-	    	frm.action="freeView.jsp?";
+	    	frm.action="freeView.jsp?psNo="+psNo;
 			frm.submit();
 	    } else {
 	    }
  	}
-	function deletePost(frm) {
+	function deletePost(frm, psNo) {
 		console.log("자유게시판정보삭제실행");
 		console.log(frm);
 		let cDelete = confirm("해당 댓글내역도 모두 삭제됩니다.\n 정말로 삭제하시겠습니까?");
 	    if (cDelete) {
-	    	frm.action="postDelete.jsp?location=myPage";
+	    	frm.action="postDelete.jsp?location=myPage&psNo="+psNo;
 			frm.submit();
 	    } else {
 	    }
 	}
-	function deletePsComment(frm) {
+	function deletePsComment(frm, pcNo) {
 		console.log("댓글정보삭제실행");
 		console.log(frm);
 		let check = confirm("댓글을 삭제하시겠습니까?");
 	    if (check) {
-	    	frm.action="postComment_del_ok.jsp";
+	    	frm.action="postComment_del_ok.jsp?location=myPage&pcNo="+pcNo;
 			frm.submit();
 	    } else {
 	    }
 	}
-	function deleteQna(frm) {
+	function deleteQna(frm, qaNo) {
 		console.log("qna정보삭제실행");
 		console.log(frm);
 		let check = confirm("QnA를 삭제하시겠습니까?");
 	    if (check) {
-	    	frm.action="qnaDeleteOk.jsp";
+	    	frm.action="qnaDeleteOk.jsp?location=myPage&qaNo="+qaNo;
 			frm.submit();
 	    } else {
 	    }
@@ -221,7 +221,6 @@
 				            htmltag += "<td>" + member.rvRec + "</td>";
 				            htmltag += "<td>" + member.warn + "</td>";
  	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteReview(this.form, \"" +  member.rvNo + "\")'>";
-//  	 			            htmltag += "<input type='button' value='수정' onclick='updateReview(this.form)'></td>";
  	 			            htmltag += "<input class='up_button' type='button' value='수정' onclick='updateReview(this.form, \"" + member.rvNo + "\")'></td>";
  	 			            htmltag += "</tr>";
 	 			        }
@@ -280,12 +279,8 @@
 				            htmltag += "<td>" + member.psDate + "</td>";
 				            htmltag += "<td>" + member.psFile + "</td>";
 				            htmltag += "<td>" + member.psWarn + "</td>";
- 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePost(this.form)'>";
- 	 			            htmltag += "<input type='hidden' name='psNo' value='" + member.psNo + "'>";
- 	 			            htmltag += "<input type='hidden' name='no' value='" + member.no + "' >";
- 	 			            htmltag += "<input type='hidden' name='psTitle' value='" + member.psTitle + "' >";
- 	 			            htmltag += "<input type='hidden' name='psContent' value='" + member.psContent + "' >";
- 	 			            htmltag += "<input class='up_button' type='button' value='수정' onclick='updatePost(this.form)'></td>";
+ 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePost(this.form, \"" + member.psNo + "\")'>";
+ 	 			            htmltag += "<input class='up_button' type='button' value='수정' onclick='updatePost(this.form, \"" + member.psNo + "\")'></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -338,9 +333,8 @@
 				            htmltag += "<td>" + member.pcDate + "</td>";
 				            htmltag += "<td>" + member.pcContent + "</td>";
 //  	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick=\"location.href='postComment_del_ok.jsp?location=myPage&pcNo=" + member.pcNo + "'\"></td>";
- 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePsComment(this.form)'></td>";
- 	 			          	htmltag += "<input type='hidden' name='location' value='myPage'>";
-	 			            htmltag += "<input type='hidden' name='pcNo' value='" + member.pcNo + "' >";
+//  	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePsComment(this.form)'></td>";
+ 	 			            htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deletePsComment(this.form, \"" + member.pcNo + "\")'></td>";
  	 			            htmltag += "</tr>";
 	 			        }
 	                }
@@ -403,9 +397,9 @@
 	                        }
 	                        htmltag += "</td>";
 
-	                        htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteQna(this.form)'></td>";
-	                        htmltag += "<input type='hidden' name='qaNo' value='" + member.qaNo + "'>";
-	                        htmltag += "<input type='hidden' name='location' value='myPage'>";
+// 	                        htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteQna(this.form)'></td>";
+	                        htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteQna(this.form, \"" + member.qaNo + "\")'></td>";
+// 	                        htmltag += "<input type='hidden' name='location' value='myPage'>";
 	                        htmltag += "</tr>";
 	                    }
 	                }

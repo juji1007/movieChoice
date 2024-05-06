@@ -29,7 +29,12 @@ public class deleteAccountOkCommand implements Command{
 		    pwd = avoAdmin.getPwd();
 	    	System.out.println("delpw11 : " + avoAdmin);
 	    }
-	    
+	    if ("accountAdmin".equals(location)) {
+	    	// 아이디 DB에서 조회
+		    AccountVO avoAdmin = AccountDAO.getAccount(id);
+		    pwd = avoAdmin.getPwd();
+	    	System.out.println("delpw11 : " + avoAdmin);
+	    }
 	    // 아이디 DB에서 조회
 	    AccountVO avo = AccountDAO.getAccountLogin(id, pwd);
 	    if (avo == null) {

@@ -17,32 +17,42 @@
 <link rel="stylesheet" href="css/manage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function deleteAccount(memberId) {
-    if (confirm("정말 삭제하시겠습니까?")) {
-        $.ajax({
-            type: "POST",
-            url: "ajaxLoginController",
-            data: {
-            	action: "fireAccount",
-                id: memberId
-            },
-            success: function(response) {
-                if (response === "true") {
-                    // 삭제가 성공한 경우 해당 행을 화면에서 제거
-                    $("#" + memberId).remove();
-                } else {
-                    alert("삭제 실패!");
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert("삭제 요청 실패: " + errorThrown);
-            }
-        });
-    } else {
-    	console.log("취소");
-    }
-}
-
+// function deleteAccount(memberId) {
+//     if (confirm("정말 삭제하시겠습니까?")) {
+//         $.ajax({
+//             type: "POST",
+//             url: "ajaxLoginController",
+//             data: {
+//             	action: "fireAccount",
+//                 id: memberId
+//             },
+//             success: function(response) {
+//                 if (response === "true") {
+//                     // 삭제가 성공한 경우 해당 행을 화면에서 제거
+//                     $("#" + memberId).remove();
+//                 } else {
+//                     alert("삭제 실패!");
+//                 }
+//             },
+//             error: function(jqXHR, textStatus, errorThrown) {
+//                 alert("삭제 요청 실패: " + errorThrown);
+//             }
+//         });
+//     } else {
+//     	console.log("취소");
+//     }
+// }
+// function deleteAccount(frm, memberId) {
+// 	console.log("memberId : " + memberId);
+// 	console.log("회원삭제실행");
+// 	console.log(frm);
+// 	let check = confirm("회원 탈퇴시키시겠습니까?");
+//     if (check) {
+//     	frm.action="loginController?type=deleteAccountOk&location=accountAdmin&id="+memberId;
+// 		frm.submit();
+//     } else {
+//     }
+// }
 function deleteMovie(mvNo) {
     if (confirm("정말 삭제하시겠습니까?")) {
         $.ajax({
@@ -228,8 +238,8 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.criticCheck + "</td>";
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
-// 			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=admin&id="+ member.id + "'\">";
-					    htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
+			            htmltag += "<td colspan='2'><input type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=admin&id="+ member.id + "'\">";
+// 					    htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
