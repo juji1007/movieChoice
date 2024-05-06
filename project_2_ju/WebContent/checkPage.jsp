@@ -26,10 +26,10 @@
                 var url = "";
 
                 // 삭제 요청 URL 설정
-                if (location === "accountAdmin") {
+                if (location === "admin") {
                     url = "loginController?type=deleteAccountOk&location=" + location + "&id=" + id + "&pwdCheck=" + pwd;
                 } else {
-                    url = "accountManage.jsp";
+                    url = "manage.jsp";
                 }
 
                 window.location.href = url;
