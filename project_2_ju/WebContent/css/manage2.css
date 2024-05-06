@@ -1,0 +1,160 @@
+@charset "UTF-8";
+img.icon {
+	position: absolute;
+	left: 200px;
+	top: 60px;
+}
+
+li {
+	float: left;
+	display: block;
+	padding: 10px 26px;
+	font-size: 18px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+ul.menu {
+	position: absolute;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	top: 60px;
+	left: 530px;
+}
+
+li a:hover {
+	color: #56BEC0;
+	font-weight: bold;
+}
+
+hr.mint {
+	background-color: #56BEC0;
+	height: 3px;
+	margin-top: 120px;
+}
+
+ul.login {
+	position: absolute;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	top: 60px;
+	right: 200px;
+}
+
+ul.login li {
+	padding: 12px 5px;
+	font-size: 14px;
+}
+
+hr.gray {
+	background-color: D9D9D9;
+	height: 1px;
+}
+
+#banner {
+	width: 5000px;
+}
+
+#frame {
+	width: 1130px;
+	position: relative;
+	overflow: hidden;
+}
+.color {
+	border: 0;
+	height: 2px;
+background-color: #56BEC0;
+}
+table {
+/* 	position: absolute; */
+	top: 50%;
+	left: 50%;
+  	transform: translate(200px, -10px);  
+  	margin-top: -10%;
+  	margin-right: 15px;
+	width: 80%;
+	max-height: 400px;
+	overflow-y: auto;
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+.body {
+	position: relative;
+	padding-top: 200px;
+	background-color: #F1F1F1;
+}
+
+caption {
+	margin-bottom: 50px;
+}
+
+th, td {
+    border: 1px solid black; /* 테이블 경계선 설정 */
+    padding: 8px; /* 셀 안의 여백 설정 */
+    text-align: center; /* 가운데 정렬 */
+}
+
+
+
+
+thead {
+/* 	position: absolute; */
+/* 	top: 50%; */
+/* 	left: 50%; */
+/* 	transform: translate(-50%, -50%); */
+/* 	width: 70%; */
+ 	border: 1px solid black;  
+}
+
+thead tr, thead td{
+	display: flex;
+	align-items: center;
+	border: none; 
+}
+
+thead select, thead input[type="text"], thead input[type="submit"] {
+	margin-right: 10px;
+}
+
+tbody th tr td{
+	border: 1px solid black; 
+	
+}
+
+.select {
+width: 100px;
+height: 42px;
+ border: 1px solid #bbb;
+border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.search {
+position: relative;
+	margin-top: 16px;
+  width: 500px;
+  height: 22px;
+  border: 1px solid #bbb;
+border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.searchbtn {
+position: relative;
+border: 1px solid #bbb;
+	background-color: #888888;
+	border:  none;
+border-radius: 5px;
+	color: white;
+	 width: 100px;
+  height: 42px;
+}
+.searchbtn:hover {
+	background-color: #7C7C7C;
+}

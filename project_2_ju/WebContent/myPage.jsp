@@ -11,7 +11,6 @@
 
 	//account
 	
-	
 	//movie 추천이네 이런거
 	
 	//review 추천 + 내가쓴거
