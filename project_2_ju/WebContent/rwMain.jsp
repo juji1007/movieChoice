@@ -161,20 +161,22 @@ function selectCategory(frm) {
 		    for (let member of respData.vo) {
 		        console.log(">> 리뷰 내용 실행");
 		        str += "<tr>";
-		        str += "<td id=\"mvTitle\">" + member.mvTitle + "</td>";
-		        str += "<td id=\"rvTitle\" colspan=\"3\">" + member.rvTitle + "</td>";
+		        str += "<td id=\"mvTitle\"  width='20%' height='60px'>" + member.mvTitle + "</td>";
+		        str += "<td id=\"rvTitle\" colspan=\"4\">" + member.rvTitle + "</td>";
 		        str += "</tr>";
 		        str += "<tr>";
 		        str += "<td rowspan=\"2\"><img src=\"img/" + member.mvPoster + "\" alt=\"포스터\" width=\"300px\"></td>";
-		        str += "<td id=\"rvNick\">" + member.rvNick + "</td>";
-		        str += "<td id=\"rvDate\">" + member.rvDate + "</td>";
-		        str += "<td id=\"btn\">";
+		        str += "<td id=\"rvNick\" width='30%' height='30px'>" + member.rvNick + "</td>";
+		        str += "<td id=\"rvDate\" width='30%'>" + member.rvDate + "</td>";
+		        str += "<td id=\"btn\" width='10%'>";
 		        str += "<input class='up_button' type=\"button\" value=\"추천\">" + member.rvRec;
+		        str += "</td>";
+		        str += "<td id=\"btn\" width='10%'>";
 		        str += "<input class='up_button' type=\"button\" value=\"신고\">" + member.rvWarn;
 	        	str += "</td>";
 		        str += "</tr>";
 		        str += "<tr>";
-		        str += "<td id=\"rvContent\" colspan=\"3\">" + member.rvContent + "</td>";
+		        str += "<td id=\"rvContent\" colspan=\"4\">" + member.rvContent + "</td>";
 		        str += "</tr>";
 		    }
 		    	$("#reviewOne").html(str);	
