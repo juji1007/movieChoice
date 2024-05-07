@@ -18,6 +18,7 @@
             AND ROWNUM <= #{end}
       )
        WHERE R_NUM >= #{begin}
+       ORDER BY RV_DATE DESC
    ]]>
    </select>
 
@@ -27,7 +28,7 @@
       FROM ACCOUNT A, MOVIE M, REVIEW R
       WHERE R.NO = A.NO
       AND R.MV_NO = M.MV_NO
-      ORDER BY R.RV_DATE DESC
+      ORDER BY R.RV_NO DESC
    </select>
    
    <select id="listOne" parameterType="int" resultType="listTotVO">
@@ -36,7 +37,7 @@
       WHERE R.NO = A.NO
       AND R.MV_NO = M.MV_NO
       AND R.RV_NO = #{rvNo}
-      ORDER BY R.RV_DATE DESC
+      ORDER BY R.RV_NO DESC
    </select>
 
       

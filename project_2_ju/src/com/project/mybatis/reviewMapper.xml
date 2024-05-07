@@ -66,7 +66,7 @@
 		WHERE R.MV_NO = M.MV_NO
 		AND R.MV_NO = #{mvNO}
 		AND R.RV_NO = #{rvNo}
-		ORDER BY R.RV_DATE DESC
+		ORDER BY R.RV_NO DESC
 	</select>
 	
 	<!-- 리뷰 전체 건수 -->
@@ -79,7 +79,7 @@
 		SELECT M.*, R.*
 		FROM REVIEW R, MOVIE M
 		WHERE R.MV_NO = M.MV_NO
-		ORDER BY R.RV_DATE DESC
+		ORDER BY R.RV_NO DESC
 	</select>
 
  	<!-- 페이지에 해당하는 리뷰 조회 -->
