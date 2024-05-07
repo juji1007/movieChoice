@@ -182,16 +182,16 @@ function selectCategory(frm) {
 		}, 
 		error: function(jqXHR, textStatus, errorThrown) {
             alert("삭제 요청 실패: " + errorThrown);
-        },
+        }
 // 		error : function(jqXHR, textStatus, errorThrown){
 // 			alert("Ajax 처리 실패 : \n"
 // 					+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
 // 					+ "textStatus : " + textStatus + "\n"
 // 					+ "errorThrown : " + errorThrown);
 // 		},
-		complete : function(){
-			alert(":: complete 실행");
-		}   
+// 		complete : function(){
+// 			alert(":: complete 실행");
+// 		}   
 	});
 	
 }

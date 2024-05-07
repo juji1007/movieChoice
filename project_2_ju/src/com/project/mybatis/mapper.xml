@@ -25,7 +25,7 @@
 	</select>
 	
 	<!-- 영화제목으로 검색 -->
-	<select id="mvTitleDetail"  parameterType="string" resultType="com.mystudy.model.vo.movieVO">
+	<select id="mvTitleDetail" parameterType="string" resultType="com.mystudy.model.vo.movieVO">
 		SELECT *
 		FROM MOVIE
 		WHERE MV_TITLE LIKE '%'||#{mvTitle}||'%'
