@@ -2,14 +2,8 @@ package com.project.ajax.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +33,12 @@ public class AjaxRewardController extends HttpServlet {
 		String action = request.getParameter("action");
 		System.out.println("action : " + action);
 		
+//		String rwDate = (String)request.getAttribute("rwDate");
+//		System.out.println("rwDate : " + rwDate);
+		
 		//날짜 조회한 이달의 리뷰
-		if ("rwMain_ajax".equals(action)) {
-			System.out.println(">> action: rwMain_ajax 요청 처리~~");
+		if ("rwMainAjax".equals(action)) {
+			System.out.println(">> action: rwMainAjax 요청 처리~~");
 		
 			//검색 클릭해서 다른날짜 조회
 			//검색 종류 확인
@@ -119,8 +116,12 @@ public class AjaxRewardController extends HttpServlet {
 			response.setContentType("application/json; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.print(result);
+		}
+		
+	
+		if ("rwDate".equals(action)) {
+			System.out.println(">> action : rwDate 요청 처리~~");
 			
-
 		}
 	}
 
@@ -157,10 +158,11 @@ public class AjaxRewardController extends HttpServlet {
         result.append("\"rvDate\": \"" + vo.getRvDate() + "\", ");
         result.append("\"rvRate\": \"" + vo.getRvRate() + "\", ");
         
-        result.deleteCharAt(result.length() - 1);
+        result.deleteCharAt(result.length() - 2);
 		result.append("]}");
-        
+		
 		return result.toString();
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
