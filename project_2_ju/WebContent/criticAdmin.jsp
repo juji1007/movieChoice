@@ -47,6 +47,61 @@
 <title>평론가 관리자</title>
 <link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/free.css">
+<style>
+  body {
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: left;
+    color: #333;
+  }
+  
+  .table-container {
+    text-align: center; 
+  }
+  
+  table {
+    width: 50%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    table-layout: fixed;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+    max-width: 150px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  img {
+    max-width: 180px;
+    max-height: 150px;
+  }
+  
+  td {
+    text-align: center;
+  }
+</style>
 <script>
 	function criticDelete(frm) {
 	    let cDelete = confirm("정말로 삭제하시겠습니까?");
