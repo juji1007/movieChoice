@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mystudy.model.dao.postDAO;
 import com.mystudy.model.dao.reviewDAO;
@@ -18,15 +19,18 @@ public class UpdateAccountOkCommand implements Command{
 		request.setCharacterEncoding("UTF-8");
 
 		// 유저정보 받기
-//	    AccountVO avo = (AccountVO) request.getAttribute("avo");
-//	    System.out.println("avo ok : " + avo);
-	    
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+	    String id = (String) session.getAttribute("id");
+	    System.out.println("upid : " + id);
+		String crticCheck = request.getParameter("criticCheck"); 
+		
 		int no = Integer.parseInt(request.getParameter("no"));
 	    String name = request.getParameter("name");
 		String pwd = request.getParameter("pwd");
 		String nickName = request.getParameter("nick");
 		String email = request.getParameter("email");
-		String crticCheck = request.getParameter("criticCheck"); // 관리자페이지랑연결
+//		String crticCheck = request.getParameter("criticCheck");
 		System.out.println("crticCheck : " + crticCheck);
 
 		int criticCheckInt = 0;
@@ -57,6 +61,11 @@ public class UpdateAccountOkCommand implements Command{
 	    }
 	    System.out.println("성공");
 		
-		return "myPage.jsp";
+	    if ("1".equals(crticCheck)) {
+	    	System.out.println("실행싱행실행");
+	    	return "criticApply.jsp?location=myPage&id=" + id;
+	    } else {
+	    	return "myPage.jsp";
+	    }
 	}
 }

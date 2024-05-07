@@ -40,11 +40,22 @@
 	var checkCritic = frm.elements["criticCheck"];
 		if (checkCritic.checked) {
 		    checkCritic.value = "1";
-		    location.href="criticApply.jsp?location=myPage&id=<%=avo.getId() %>";
+<%-- 		    location.href="criticApply.jsp?location=myPage&id=<%=avo.getId() %>"; --%>
 		} else {
 		    checkCritic.value = "0";
 		}
 	}
+	
+	function check_critic(frm) {
+	    if (confirm("평론가 신청하시겠습니까?")) {
+	        var checkCritic = frm.elements["criticCheck"];
+	        checkCritic.value = "1";
+	    } else {
+	        var checkCritic = frm.elements["criticCheck"];
+	        checkCritic.value = "0";
+	    }
+	}
+
 	
 	function update(frm) {
 		
