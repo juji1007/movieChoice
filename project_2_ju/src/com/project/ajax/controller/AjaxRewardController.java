@@ -42,8 +42,8 @@ public class AjaxRewardController extends HttpServlet {
 		
 			//검색 클릭해서 다른날짜 조회
 			//검색 종류 확인
-			String rwDate = request.getParameter("rwDate");
-			System.out.println("검색 받은 rwDate : " + rwDate);
+			String rwDate = request.getParameter("date");
+			System.out.println("검색 받은 date : " + rwDate);
 			String year = rwDate.substring(0, 4);
 			String month = rwDate.substring(5);
 			String date = year + month;
@@ -131,35 +131,34 @@ public class AjaxRewardController extends HttpServlet {
 		result.append("{ \"vo\" : [");
 		
 		result.append("{");
-		result.append("\"no\": \"" + vo.getNo() + "\", ");
-		result.append("\"name\": \"" + vo.getName() + "\", ");
-		result.append("\"id\": \"" + vo.getId() + "\", ");
-		result.append("\"pwd\": \"" + vo.getPwd() + "\", ");
-		result.append("\"nick\": \"" + vo.getNick() + "\", ");
-		result.append("\"critic_check\": \"" + vo.getCritic_check() + "\", ");
-        result.append("\"email\": \"" + vo.getEmail() + "\", ");
-        result.append("\"warn\": \"" + vo.getWarn() + "\", ");
-        
-        result.append("\"mvNo\": \"" + vo.getMvNo() + "\", ");
-        result.append("\"mvTitle\": \"" + vo.getMvTitle() + "\", ");
-        result.append("\"mvDirect\": \"" + vo.getMvDirect() + "\", ");
-        result.append("\"mvActor\": \"" + vo.getMvActor() + "\", ");
-        result.append("\"mvGenre\": \"" + vo.getMvGenre() + "\", ");
-        result.append("\"mvRate\": \"" + vo.getMvRate() + "\", ");
-        result.append("\"mvAudience\": \"" + vo.getMvAudience() + "\", ");
-        result.append("\"mvGrade\": \"" + vo.getMvGrade() + "\", ");
-        result.append("\"mvDate\": \"" + vo.getMvDate() + "\", ");
-        result.append("\"mvPoster\": \"" + vo.getMvPoster() + "\", ");
-        
-        result.append("\"rvNo\": \"" + vo.getRvNo() + "\", ");
-        result.append("\"rvNick\": \"" + vo.getRvNick() + "\", ");
-        result.append("\"rvTitle\": \"" + vo.getRvTitle() + "\", ");
-        result.append("\"rvContent\": \"" + vo.getRvContent() + "\", ");
-        result.append("\"rvDate\": \"" + vo.getRvDate() + "\", ");
-        result.append("\"rvRate\": \"" + vo.getRvRate() + "\", ");
-        
-        result.deleteCharAt(result.length() - 2);
-		result.append("]}");
+	    result.append("\"no\": \"" + vo.getNo() + "\", ");
+	    result.append("\"name\": \"" + vo.getName() + "\", ");
+	    result.append("\"id\": \"" + vo.getId() + "\", ");
+	    result.append("\"pwd\": \"" + vo.getPwd() + "\", ");
+	    result.append("\"nick\": \"" + vo.getNick() + "\", ");
+	    result.append("\"critic_check\": \"" + vo.getCritic_check() + "\", ");
+	    result.append("\"email\": \"" + vo.getEmail() + "\", ");
+	    result.append("\"warn\": \"" + vo.getWarn() + "\", ");
+
+	    result.append("\"mvNo\": \"" + vo.getMvNo() + "\", ");
+	    result.append("\"mvTitle\": \"" + vo.getMvTitle() + "\", ");
+	    result.append("\"mvDirect\": \"" + vo.getMvDirect() + "\", ");
+	    result.append("\"mvActor\": \"" + vo.getMvActor() + "\", ");
+	    result.append("\"mvGenre\": \"" + vo.getMvGenre() + "\", ");
+	    result.append("\"mvRate\": \"" + vo.getMvRate() + "\", ");
+	    result.append("\"mvAudience\": \"" + vo.getMvAudience() + "\", ");
+	    result.append("\"mvGrade\": \"" + vo.getMvGrade() + "\", ");
+	    result.append("\"mvDate\": \"" + vo.getMvDate() + "\", ");
+	    result.append("\"mvPoster\": \"" + vo.getMvPoster() + "\", ");
+
+	    result.append("\"rvNo\": \"" + vo.getRvNo() + "\", ");
+	    result.append("\"rvNick\": \"" + vo.getRvNick() + "\", ");
+	    result.append("\"rvTitle\": \"" + vo.getRvTitle() + "\", ");
+	    result.append("\"rvContent\": \"" + vo.getRvContent() + "\", ");
+	    result.append("\"rvDate\": \"" + vo.getRvDate() + "\", ");
+	    result.append("\"rvRate\": \"" + vo.getRvRate() + "\"");
+	    result.append("}");
+	    result.append("]}");
 		
 		return result.toString();
 		
