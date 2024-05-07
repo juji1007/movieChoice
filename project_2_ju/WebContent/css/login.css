@@ -1,0 +1,92 @@
+@charset "UTF-8";
+.body {
+	margin-left : auto;
+	margin-top : 100px;
+	margin-right : auto;
+ 	position: relative;
+  	width: 35%;
+  	height: 35%;
+}
+.body:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+.loginArea {
+	margin-top : 100px;
+}
+.psTitle {
+	position: relative;
+	margin-top: 16px;
+  width: 400px;
+  height: 20px;
+  border: 1px solid #bbb;
+border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.hbutton {
+
+	border-radius: 5px;
+		width: 70px;
+height: 30px;
+ border: 1px solid #bbb;
+ background-color: #888888;
+ color: white;
+}
+.loginbtn {
+	position: relative;
+border: 1px solid #bbb;
+	background-color: #56BEC0;
+	border:  none;
+border-radius: 5px;
+	color: white;
+	 width: 427px;
+  height: 42px;
+  margin-top: 5px;
+}
+.loginbtn:hover {
+	background-color: #4EA8AA;
+}
+.joinbtn {
+	position: relative;
+border: 1px solid #bbb;
+	background-color:  white;
+	border: 2px solid #888888;
+border-radius: 5px;
+
+	 width: 427px;
+  height: 42px;
+  margin-top: 14px;
+}
+.joinbtn:hover {
+background-color:#E7E7E7;
+}
+.searchbtn {
+	border: 0px;
+	background-color: transparent;
+	color: #56BEC0;
+	
+}
+.searchbtn:hover {
+	color: #3F8E8F;
+}
+.tb {
+	width: 400px;
+}
+.table {
+	margin-left: 100px;
+}
+.box {
+	margin-top: 10px;
+	border: 1px solid #bbb;
+	background-color: white;
+	height: 42px;
+	border-radius: 5px;
+}
+.radio {
+	margin-left: 10px;
+/* 	vertical-align: left; */
+	width:20px;height:20px;
+}

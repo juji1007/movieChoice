@@ -65,9 +65,9 @@
 		<thead>
 			<tr>
 			<th width="5%">번호</th>
-			<th width="20%">영화명</th>
-			<th width="10%">작성자</th>
-			<th width="10%">작성일</th>
+			<th width="15%">영화명</th>
+			<th width="15%">작성자</th>
+			<th width="15%">작성일</th>
 			<th>제목</th>
 			<th colspan="2" width="20%">추천/신고</th>
 			</tr>
@@ -75,11 +75,11 @@
 	<c:forEach var="vo" items="${listOne }">
 		<tbody id="reviewOne">
 			<tr>
-	        	<td rowspan="2">${vo.rvNo }</td>
+	        	<td  rowspan="2">${vo.rvNo }</td>
 	            <td>${vo.mvTitle }</td>
 	            <td>${vo.rvNick }</td>
 	            <td>${vo.rvDate }</td>
-	            <td id="rvTitle"><a href="rvDetailAdmin.jsp?rvNo=${vo.rvNo }&cPage=${selPvo.nowPage}">${vo.rvTitle }</a></td>
+	            <td><a href="rvDetailAdmin.jsp?rvNo=${vo.rvNo }&cPage=${selPvo.nowPage}">${vo.rvTitle }</a></td>
 	            <td>
 	            	<input class="up_button" type="button" value="추천"> ${vo.rvRec}  
 	            </td>

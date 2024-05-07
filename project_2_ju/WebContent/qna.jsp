@@ -124,10 +124,10 @@ session.setAttribute("list", list);
 		</tr>
 		<c:forEach var="vo" items="${list }">
 		<tr>
-		<td>${vo.qaNo }</td>
-		<td>${vo.qaCategory }</td> 
-		<td>${vo.nick }</td>
-		<td>${vo.qaDate }</td>
+		<td width="5%">${vo.qaNo }</td>
+		<td width="15%">${vo.qaCategory }</td> 
+		<td width="15%">${vo.nick }</td>
+		<td width="15%">${vo.qaDate }</td>
 		<td>
 		<a href="qnaView.jsp?qaNo=${vo.qaNo }&cPage=${pvo.nowPage}">
 		${vo.qaTitle }

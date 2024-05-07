@@ -50,10 +50,10 @@ request.getAttribute("keyword");
 			</tr>
 		   <c:forEach var="vo" items="${listOne }">
 		   <tr>
-		      <td>${vo.qaNo }</td>
-		      <td>${vo.qaCategory }</td> 
-		      <td>${vo.nick }</td>
-		      <td>${vo.qaDate }</td>
+		      <td width="5%">${vo.qaNo }</td>
+		      <td width="15%">${vo.qaCategory }</td> 
+		      <td width="15%">${vo.nick }</td>
+		      <td width="15%">${vo.qaDate }</td>
 		      <td>
 			      <a href="qnaAdminView.jsp?qaNo=${vo.qaNo }"> ${vo.qaTitle }
 		      </a>
@@ -63,7 +63,7 @@ request.getAttribute("keyword");
 		   </c:forEach>
 		   <tfoot id="page">
 		           <tr>
-		              <td colspan="4">
+		              <td colspan="5">
 		               <ol class="paging">
 		               <%--[이전]에 대한 사용여부 처리 --%>
 		               <c:if test="${selPvo.beginPage == 1 }">
