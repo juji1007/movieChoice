@@ -114,6 +114,17 @@
   .btn:hover {
     background-color: #495057; 
   }
+  
+  .up_button {
+     border-radius: 5px;
+	 width: 65px;
+	 height: 35px;
+	 border: 1px solid #bbb;
+	 background-color: white;
+	}
+  .up_button:hover {
+	 background-color:#E7E7E7;
+	}
 </style>
 <link rel="stylesheet" href="css/header.css">
 <script>
@@ -197,9 +208,9 @@
 			    	<td colspan="2">${vo.career }</td>
 			    </tr>
 			    <tr>
-			    	<td colspan="5">리뷰건수 : <a href="criticDetail.jsp?critic=${vo.no }">${numa[loop.index]}</a>
+			    	<td colspan="5">리뷰건수 : <a href="criticDetailAdmin.jsp?critic=${vo.no }">${numa[loop.index]}</a>
 			    	<input type="button" class="btn" value="삭제"  onclick="criticDelete(this.form)">
-			    	<input type="button" class="btn" value="수정" onclick="location.href='criticUpdate.jsp?critic=${vo.no }'"> 
+			    	<input type="button" class="up_button" value="수정" onclick="location.href='criticUpdate.jsp?critic=${vo.no }'"> 
 			    	</td>
 			    </tr>
 			</table>

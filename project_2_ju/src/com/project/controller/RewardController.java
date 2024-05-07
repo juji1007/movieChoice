@@ -23,7 +23,7 @@ import com.mystudy.model.dao.warnDAO;
 import com.mystudy.model.vo.listTotVO;
 import com.mystudy.model.vo.reviewVO;
 
-@WebServlet("/rewardController")
+//@WebServlet("/rewardController")
 public class RewardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
