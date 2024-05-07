@@ -104,6 +104,7 @@ session.setAttribute("attr_list", list);
 	</a>
 	</c:forEach>
 	
+	
 	</div>
 </div>
 <a href="#" id="next">
