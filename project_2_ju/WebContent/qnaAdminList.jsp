@@ -13,10 +13,10 @@ request.getAttribute("keyword");
 <title>QnA 관리자 검색</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/free.css">
 <body>
-	<%@ include file="include/header.jspf" %>
+	<%@ include file="include/headerAdmin.jspf" %>
 	<div class="body">
 	    <h2>QnA 관리자</h2>
 		<hr class="color">

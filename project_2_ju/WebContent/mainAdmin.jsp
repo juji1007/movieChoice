@@ -35,7 +35,7 @@ session.setAttribute("attr_list", list);
 <meta charset="UTF-8">
 <title>mainAdmin</title>
 <!-- style 태그 -->
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/main.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>

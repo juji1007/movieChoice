@@ -52,10 +52,10 @@
 
 </script>
 </head>
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/freeView.css">
 <body>
-<%@ include file="include/header.jspf" %>
+<%@ include file="include/headerAdmin.jspf" %>
 <div class="body">
 <table frame="void">
         <tr>

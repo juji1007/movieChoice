@@ -69,7 +69,7 @@ session.setAttribute("list", list);
     <title>문의사항 관리자 페이지</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     
-    <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/mheader.css">
     <link rel="stylesheet" href="css/free.css">
     
 </head>
