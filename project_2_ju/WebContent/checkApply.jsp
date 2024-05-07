@@ -37,8 +37,10 @@
 				System.out.println("myPage 회원정보수정");
 %>	
 		<script>
-			alert("평론가 신청이 완료되었습니다!");
-			location.href="loginController?type=updateAccount&location=checkApply&criticCheck=1";
+			alert("평론가 신청과 수정이 완료되었습니다!");
+// 			location.href="loginController?type=updateAccount&location=checkApply&criticCheck=1";
+// 			location.href="loginController?type=updateAccountOk&criticCheck=2";
+			location.href="myPage.jsp";
 		</script>		
 <%
 			} else {

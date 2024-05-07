@@ -153,7 +153,7 @@ public class FrontController extends HttpServlet {
 		    java.sql.Date sqlDate = null;
 		    try {
 		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		        utilDate = sdf.parse(mvDateStr);
+		        utilDate = sdf.parse(mvDateStr);	
 		        sqlDate = new java.sql.Date(utilDate.getTime());
 		    } catch (ParseException e) {
 		        e.printStackTrace();

@@ -83,9 +83,6 @@ public class LoginCommandController extends HttpServlet {
 			
 		}
 		
-		if ("updateAccountOk".equals(type)) {
-		}
-		
 		Command command = null;
 		command = commands.get(type);
 		System.out.println("이동 type : " + command);

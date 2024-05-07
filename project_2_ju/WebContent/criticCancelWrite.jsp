@@ -57,9 +57,16 @@ function list_go() {
             </td>
         </tr>
         <tr>
+        	<th>제목</th>
+			<td>
+				<input  class="psTitle" type="text" name="qaTitle" placeholder="제목을 입력하세요.">
+			</td>
+		</tr>
+        <tr>
             <th>내용</th>
+
             <td>
-                <textarea name="qaContent" rows="8" cols="50" title="내용"></textarea>
+                <textarea class="psContent" name="qaContent" rows="8" cols="50" title="내용" placeholder="문의사항을 입력하세요."></textarea>
             </td>
         </tr>
         <tr>
