@@ -13,7 +13,7 @@
 <title>관리자페이지</title>
 </head>
 <!-- style 태그 -->
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/manage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

@@ -20,7 +20,7 @@ function list_go() {
 }
 </script>
 </head>
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/free.css">
 <body>
    <%@ include file="include/headerAdmin.jspf"%>

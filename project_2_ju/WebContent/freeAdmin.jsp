@@ -75,7 +75,7 @@ session.getAttribute("c_list");
 <meta charset="UTF-8">
 <title>freeAdmin</title>
 <!-- style 태그 -->
-<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/mheader.css">
 <link rel="stylesheet" href="css/free.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -92,8 +92,6 @@ session.getAttribute("c_list");
 </script>
 </head>
 
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/free.css">
 
 <body>
 	<!-- headerAdmin.jspf -->
@@ -148,8 +146,6 @@ ${vo.psTitle }
 </tr>
 </c:forEach>
 
-		<div>
-		<tfoot>
 			<tr>
 				<td colspan="5">
 					<ol class="paging">
@@ -188,11 +184,10 @@ ${vo.psTitle }
 				</td>
 				
 			</tr>
-		</tfoot>
+
 
 		</table>
 
-</div>
 </div>
 
 </body>
