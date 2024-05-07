@@ -77,7 +77,10 @@ function deleteMovie(mvNo) {
     }
 }
 
-function deleteReview(rvNo) {
+
+
+
+  function deleteReview(rvNo) {
     if (confirm("정말 삭제하시겠습니까?")) {
         $.ajax({
             type: "POST",
@@ -230,6 +233,7 @@ function selectCategory(frm) {
 			            }
 			            htmltag += "<tr id='" + member.id + "'>";
 			            htmltag += "<td><input class='h_button' type='button' value='삭제' onclick=\"location.href='checkPage.jsp?location=admin&id="+ member.id + "'\">";
+// 			            htmltag += "<td><input class='h_button' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 			            htmltag += "<td>" + member.no + "</td>";
 			            htmltag += "<td>" + member.name + "</td>";
 			            htmltag += "<td>" + member.id + "</td>";
@@ -238,7 +242,6 @@ function selectCategory(frm) {
 			            htmltag += "<td>" + member.email + "</td>";
 			            htmltag += "<td>" + member.warn + "</td>"; 
 			            htmltag += "<td>" + member.table + "</td>";
-// 					    htmltag += "<td colspan='2'><input class='h_button' type='button' value='삭제' onclick='deleteAccount(" + member.id + ")'></td>";
 			            htmltag += "</tr>";
 
 			            checkAccount--;
