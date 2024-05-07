@@ -79,7 +79,7 @@ request.setAttribute("sv", sv);
 <script>
 function selectCategory(frm) {
 	//날짜 카테고리 클릭시 작동
-// 	var checkCategory = frm.date.value;
+	var checkCategory = frm.date.value;
 // 	alert("var frm.date.value : " + checkCategory);
 // 	var search = frm.querySelector('input[type="button"]');
 	
@@ -90,15 +90,15 @@ function selectCategory(frm) {
 		type : "POST",
 		url : "ajaxRewardController",
 		data : {
-			action: "rwMain_ajax",
-			date : date
+			action: "rwMainAjax",
+			date : checkCategory
 		},
 		dataType: "json",
 		success : function(respData){
 		    console.log("Ajax 처리 성공 - 응답받은데이터:", respData);
 		    
 		    //Json데이터 처리
-		    let str = null;
+		    let str = "";
 		    for (let member of respData.vo) {
 		        console.log(">> 리뷰 내용 실행");
 		        str += "<tr>";
@@ -147,7 +147,8 @@ function selectCategory(frm) {
 		<input type="button" value="이달의 리뷰" onclick="javascript:location.href='rewardController?category=rwMain'">
 	</h3>
 <!-- 	<form method="post"> -->
-	<form action="ajaxRewardController?action=rwMain_ajax" method="post">
+<!-- 	<form action="ajaxRewardController?action=rwMain_ajax" method="post"> -->
+	<form method="post">
 		<table border>
 		<thead>
 			<tr>
