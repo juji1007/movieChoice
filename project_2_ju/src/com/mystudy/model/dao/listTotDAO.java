@@ -46,8 +46,13 @@ public class listTotDAO {
 		}
 	// 리뷰 번호로 조회
 	public static listTotVO selectOne(int rvNo) {
-		try (SqlSession ss = DBService.getFactory().openSession()) {			
-			return ss.selectOne("listTotal.one", rvNo);
+		try (SqlSession ss = DBService.getFactory().openSession()) {
+			listTotVO ltvo = ss.selectOne("listTotal.one", rvNo);
+			int warn = warnDAO.warnSum(rvNo);
+			ltvo.setRvWarn(warn);
+			int rec = recDAO.getRec(rvNo);
+			ltvo.setRvRec(rec);
+			return ltvo;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
