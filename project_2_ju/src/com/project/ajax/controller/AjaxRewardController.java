@@ -156,7 +156,9 @@ public class AjaxRewardController extends HttpServlet {
 	    result.append("\"rvTitle\": \"" + vo.getRvTitle() + "\", ");
 	    result.append("\"rvContent\": \"" + vo.getRvContent() + "\", ");
 	    result.append("\"rvDate\": \"" + vo.getRvDate() + "\", ");
-	    result.append("\"rvRate\": \"" + vo.getRvRate() + "\"");
+	    result.append("\"rvRate\": \"" + vo.getRvDate() + "\", ");
+	    result.append("\"rvWarn\": \"" + vo.getRvWarn() + "\", ");
+	    result.append("\"rvRec\": \"" + vo.getRvRec() + "\"");
 	    result.append("}");
 	    result.append("]}");
 		

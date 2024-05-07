@@ -165,12 +165,12 @@ function selectCategory(frm) {
 		        str += "<td id=\"rvTitle\" colspan=\"3\">" + member.rvTitle + "</td>";
 		        str += "</tr>";
 		        str += "<tr>";
-		        str += "<td rowspan=\"2\"><img src=\"img/${rwVo.mvPoster }\" alt=\"포스터\" width=\"300px\"></td>";
+		        str += "<td rowspan=\"2\"><img src=\"img/" + member.mvPoster + "\" alt=\"포스터\" width=\"300px\"></td>";
 		        str += "<td id=\"rvNick\">" + member.rvNick + "</td>";
 		        str += "<td id=\"rvDate\">" + member.rvDate + "</td>";
 		        str += "<td id=\"btn\">";
-		        str += "<input type=\"rec\" value=\"추천\">" + member.rvRec;
-		        str += "<input type=\"warn\" value=\"신고\">" + member.rvWarn;
+		        str += "<input class='up_button' type=\"button\" value=\"추천\">" + member.rvRec;
+		        str += "<input class='up_button' type=\"button\" value=\"신고\">" + member.rvWarn;
 	        	str += "</td>";
 		        str += "</tr>";
 		        str += "<tr>";

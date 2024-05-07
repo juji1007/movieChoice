@@ -12,13 +12,13 @@
       FROM (SELECT ROWNUM R_NUM, R.*, M.*
             FROM (SELECT *
                   FROM REVIEW
-                  ORDER BY RV_DATE DESC
+                  ORDER BY RV_NO DESC
                   ) R, MOVIE M
             WHERE R.MV_NO = M.MV_NO
             AND ROWNUM <= #{end}
       )
        WHERE R_NUM >= #{begin}
-       ORDER BY RV_DATE DESC
+       ORDER BY RV_NO DESC
    ]]>
    </select>
 
