@@ -5,8 +5,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>영화추가</title>
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/mheader.css">
+<!-- <link rel="stylesheet" href="css/footer.css"> -->
 <link rel="stylesheet" href="css/write.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -105,7 +105,7 @@
 					<tr>
 						<th>영화감독</th>
 						<td colspan="3">
-							<input class="rvRate" type="text" name="mvDirect" title="영화감독" placeholder="쉼표와 공백 한글로만 써주세요"/>
+							<input class="rvRate" type="text" name="mvDirect" title="영화감독" placeholder="쉼표와 공백 한글로만 작성"/>
 						</td>
 					</tr>
 <!-- 					<tr> -->
