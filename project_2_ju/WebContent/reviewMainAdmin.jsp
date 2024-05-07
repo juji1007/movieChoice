@@ -42,10 +42,10 @@
 	<%@ include file="include/headerAdmin.jspf" %>
 	<div class="body">
 	<h2>전체조회</h2>
-	<form action="reviewController?category=rvWrite" method="post">
-		<input class="write" type="button" value="작성하기" 
-			onclick="login_confirm(this.form)">
-	</form>
+<!-- 	<form action="reviewController?category=rvWrite" method="post"> -->
+<!-- 		<input class="write" type="button" value="작성하기"  -->
+<!-- 			onclick="login_confirm(this.form)"> -->
+<!-- 	</form> -->
 	
 	<hr class="color">
 	<div class="box">
