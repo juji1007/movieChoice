@@ -92,14 +92,14 @@
 		        		<input class="writeBtn" type="button" value="답변달기" onclick="location.href = 'inquiryWrite.jsp?qaNo=${qvo.qaNo }'">
 		                <input class="deleteBtn" type="button" value="삭제" onclick="iq_delete(this.form)">
 		                <input type="hidden" name="iqNo" value="${ivo.iqNo }">
+					    <% if ("평론가탈퇴".equals(qvo.getQaCategory())) { %>
+					        <input type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">
+					    <% } %>
 		        </form>
 		    </td>
     	</tr>
     </table>
     </div>
-    <% if ("평론가탈퇴".equals(qvo.getQaCategory())) { %>
-        <input type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">
-    <% } %>
 
 </body>
 </html>
