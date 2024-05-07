@@ -28,6 +28,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.del_button {
+	border-radius: 5px;
+	width: 200px;
+	height: 30px;
+	border: 1px solid #bbb;
+	background-color: white;
+}
+
+.del_button:hover {
+	background-color: #E7E7E7;
+}
+</style>
 <meta charset="UTF-8">
 <title>QnA 관리자 상세</title>
 <script>
@@ -55,7 +68,7 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/freeView.css">
 <body>
-<%@ include file="include/header.jspf" %>
+<%@ include file="include/headerAdmin.jspf" %>
 <div class="body">
 <table frame="void">
         <tr>
@@ -78,7 +91,7 @@
                 </form>
             </td>
             <td>
-                <input class="li_button" type="button" value="목록보기" onclick="location.href = 'qnaAdmin.jsp'">
+                <input class="li_button" type="button" value="목록" onclick="location.href = 'qnaAdmin.jsp'">
             </td>
         </tr>
     </table>
@@ -93,7 +106,7 @@
 		                <input class="deleteBtn" type="button" value="삭제" onclick="iq_delete(this.form)">
 		                <input type="hidden" name="iqNo" value="${ivo.iqNo }">
 					    <% if ("평론가탈퇴".equals(qvo.getQaCategory())) { %>
-					        <input type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">
+					        <input class="del_button" type="button" value="평론가 관리 페이지로 이동" onclick="location.href = 'criticAdmin.jsp'">
 					    <% } %>
 		        </form>
 		    </td>
