@@ -29,11 +29,23 @@
 <link rel="stylesheet" href="css/free.css">
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/rvMain.css">
+<style>
+	.li_button {
+        background-color: #6c757d; 
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-right: 20px; 
+        border-radius: 10px;
+    }
+</style>
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
 <div class="body">
 	<h2><%=vo.getName() %> 평론가 리뷰</h2> 
+	<input class="li_button" type="button" value="목록" onclick="location.href = 'critic.jsp'">
 	<hr class="color">
 	<c:forEach var="cvo" items="${cvoList}">
 		<p><strong>${cvo.rvNick }</strong> | ${cvo.rvTitle }</p>
