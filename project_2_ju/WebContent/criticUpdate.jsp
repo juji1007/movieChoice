@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/write.css">
 <body>
-<%@ include file="include/header.jspf" %>
+<%@ include file="include/headerAdmin.jspf" %>
 <div class="body">
 <div>
 <form action="criticUpdateOk.jsp" method="post">
