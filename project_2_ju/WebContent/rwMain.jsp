@@ -137,7 +137,7 @@
 
 function selectCategory(frm) {
 	var checkCategory = frm.rwDate.value;
-	alert("checkCategory rwDate : " + checkCategory);
+	console.log("checkCategory rwDate : " + checkCategory);
 	
 	$.ajax({
 		type : "POST",
@@ -180,12 +180,15 @@ function selectCategory(frm) {
 		    	$("#reviewOne").html(str);	
 			}
 		}, 
-		error : function(jqXHR, textStatus, errorThrown){
-			alert("Ajax 처리 실패 : \n"
-					+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-					+ "textStatus : " + textStatus + "\n"
-					+ "errorThrown : " + errorThrown);
-		},
+		error: function(jqXHR, textStatus, errorThrown) {
+            alert("삭제 요청 실패: " + errorThrown);
+        },
+// 		error : function(jqXHR, textStatus, errorThrown){
+// 			alert("Ajax 처리 실패 : \n"
+// 					+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+// 					+ "textStatus : " + textStatus + "\n"
+// 					+ "errorThrown : " + errorThrown);
+// 		},
 		complete : function(){
 			alert(":: complete 실행");
 		}   
@@ -200,21 +203,26 @@ function selectCategory(frm) {
 	<%@ include file="include/header.jspf" %>
 <div class="body">
 	<h2>월별 조회
-		<input class="write" type="button" value="이달의 리뷰" onclick="javascript:location.href='rewardController?category=rwMain'">
+		<input class="write" type="button" value="이달의 리뷰"
+		 onclick="javascript:location.href='rwMain.jsp'">
 	</h2>
 	<hr class="color">
 	
 	<div class="box">
 	<div class="innerbox">
 	<div class="content">
-	<form action="rewardController?action=rwMain_ajax" method="post">
+<!-- 	<form> -->
+<!-- 	<form method="post"> -->
+	<form action="ajaxRewardController?action=rwMainAjax" method="post">
 		<select class="select" id="rwDate" name="rwDate">
 				<option value="${thisMonth}">${thisMonth}</option>
 			<c:forEach var="date" items="${set}"><!--높은 추천수,월별로 조회한 배열vo-->
 				<option value="${date}">${date}</option>
 			</c:forEach>
 		</select>
-		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)">
+		<input class="searchbtn" type="submit" value="검색"/>
+<!-- 		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)"/> -->
+		<input type="hidden" name="action" value="rwMainAjax">
 	</form>
 		<table border frame=void>
 			<thead>
