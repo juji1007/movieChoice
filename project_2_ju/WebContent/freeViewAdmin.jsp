@@ -100,7 +100,7 @@ function ps_delete(frm) {
 	//게시물 신고버튼
 	
 	function warn_push() {
-	let isWarn = alert("신고하시겠습니까?")
+	let isWarn = alert("관리자계정입니다.")
 
 	}
 </script>
