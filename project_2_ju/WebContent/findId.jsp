@@ -5,7 +5,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>아이디찾기</title>
-<link rel="stylesheet" href="css/write.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/login.css">
 <script>
 	function findId_Ok(frm) {
 		frm.action="loginController?type=findIdOk";
@@ -24,26 +25,29 @@
 <body>
 
 <div class="body">
-	<div id="findIdArea">
+
+	<div class="text">
+		<h2>아이디찾기</h2>
+	</div>
+	<br>
+	<div id="loginArea">
 		<form method="post">
-			<table >
-				<caption><h2>아이디찾기</h2></caption>
-				<thead>
+		<hr>
+		<div class="table">
+			<table class="tb" >
 					<tr>
-						<th rowspan="2">EMAIL</th>
-						<td colspan="5" rowspan="2">
-							<input class="psTitle" type="text" name="email" title="이메일"/>
+						<td colspan="2" >
+							<input class="psTitle" type="text" name="email" title="이메일"  placeholder="이메일을 입력하세요"/>
 						</td>
+						</tr>
+						<tr>
 						<td>
-<!-- 							<input class="reset" type="reset" value="초기화"> -->
-						</td>
-						<td>
-							<input class="commitbtn" type="button" value="아이디찾기" onclick="findId_Ok(this.form)"/>
+							<input class="loginbtn" type="button" value="아이디찾기" onclick="findId_Ok(this.form)"/>
 <!-- 							<input type="button" value="아이디찾기" onclick="location.href='loginController?type=findIdOk'"/> -->
 						</td>
 					</tr>
-				</thead>
 			</table>
+			</div>
 		</form>
 	</div>
 	

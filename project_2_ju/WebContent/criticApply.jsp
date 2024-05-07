@@ -13,13 +13,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전문가 신청서</title>
+<title>평론가 신청서</title>
 <link rel="stylesheet" href="css/write.css">
 </head>
 <body>
 
 <div class="body">
-	<h1>전문가 신청서</h1>
+	<h1>평론가 신청서</h1>
 	<form action="checkApply.jsp" method="post">
 		<label for="company">소속</label><br>
         <input class="psTitle" type="text" id="company" name="company">

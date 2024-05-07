@@ -71,8 +71,6 @@
 						<input class="loginbtn" type="button" value="로그인" onclick="login(this.form)">
 						</td>
 					</tr>
-					
-			
 						<tr>
 						<td>
 							<input class="joinbtn" type="button" value="회원가입" onclick="member_join(this.form)">

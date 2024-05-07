@@ -17,7 +17,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>회원정보수정</title>
-<link rel="stylesheet" href="css/write.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/login.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var check = false;
@@ -91,48 +92,52 @@
 <body>
 
 <div class="body">
-	<div id="FixArea">
+<div class="text">
+<h2>회원정보수정</h2>
+</div>
+<br>
+	<div id="loginArea">
 		<form method="post">
-			<table>
-				<caption><h2>회원정보수정</h2></caption>
-				<thead border>
+		<hr>
+		<div class="table">
+			<table class="tb">
 				    <tr>
-				        <th>NAME</th>
-<!-- 				        <th>이름</th> -->
-				        <td colspan="3">
+				    	<td width="17%">아이디</td>
+				        <td colspan="2">
+				        
 				            <input class="psTitle" type="text" name="name" title="이름" value="<%= avo.getName() %>" />
 				        </td>
 				    </tr>
 				    <tr>
-				        <th>P/W</th>
-<!-- 				        <th>비밀번호</th> -->
-				        <td colspan="3">
+				        <td>비밀번호</td>
+				        <td colspan="2">
 				            <input class="psTitle" type="password" name="pwd" title="비밀번호" value="<%= avo.getPwd() %>"/>
 				        </td>
 				    </tr>
 				    <tr>
-						<th>CHECK P/W </th>
+						<td>비밀번호 확인 </td>
 <!-- 						<th>비밀번호확인</th> -->
-						<td colspan="3">
+						<td colspan="2">
 							<input class="psTitle" type="password" name="pwdCheck" title="비밀번호확인" onblur="check_pwd(this.form)"/>
 						</td>
 					</tr>
 				    <tr>
-				        <th>NICK</th>
-				        <td colspan="3">
+				        <td>닉네임</td>
+				        <td colspan="2">
 				            <input class="psTitle" type="text" name="nick" title="닉네임" value="<%= avo.getNick() %>" />
 				        </td>
 				    </tr>
 				    <tr>
-				        <th>EMAIL</th>
-				        <td colspan="3">
+				        <td>이메일</td>
+				        <td colspan="2">
 				            <input class="psTitle" type="text" name="email" title="이메일" value="<%= avo.getEmail() %>" />
 				        </td>
 				    </tr>
+				    
 				    <tr>
-					    <th>CRITIC</th>
-					    <td colspan="3">
-					        <input class="psTitle" type="radio" name="criticCheck" title="평론가" value="1"
+					    <td>평론가</td>
+					    <td colspan="2">
+					        <input class="radio" type="radio" name="criticCheck" title="평론가" value="1"
 					            <c:if test="${avo.getCriticCheck() == 1}">
 					                checked
 					            </c:if>
@@ -142,21 +147,23 @@
 					        />
 					    </td>
 					</tr>
-				</thead>
-				<tbody>
 					<tr>
-						<td colspan="2">
+						<td>
 							<input type="hidden" name="no" value="<%= avo.getNo()%>" />
 						</td>
-						<td colspan="3" width="20%">
-							<input class="reset" type="reset" value="초기화"/>
-							<input class="commitbtn" type="button" value="수정하기" onclick="update(this.form)"/>
+						<td colspan="2"  align="right">
+							<input class="searchbtn" type="reset" value="초기화"/>
+						</td>
+						</tr>
+						<tr>
+						<td colspan="2" align="right" >
+							<input class="loginbtn" type="button" value="수정하기" onclick="update(this.form)"/>
 <!-- 							 <input class="searchbtn" type="button" value="마이페이지" onclick="list_go()"> -->
 						</td>
 					</tr>
-				</tbody>
 				
 			</table>
+			</div>
 		</form>
 	</div>
 </div>

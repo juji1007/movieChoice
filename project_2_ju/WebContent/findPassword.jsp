@@ -5,7 +5,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>비밀번호찾기</title>
-<link rel="stylesheet" href="css/write.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/login.css">
 <script>
 	function check_password(frm) {
 		var password = frm.password.value;
@@ -33,54 +34,57 @@
 <body>
 
 <div class="body">
-	<div id="findPasswordArea">
+	
+		<div class="text">
+				<h2>비밀번호 재설정</h2>
+				</div>
+				<br>
+				<div id="findPasswordArea">
 		<form method="post">
-			<table>
-				<caption><h2>비밀번호 재설정</h2></caption>
-				<thead>
+				<hr>
+			<div class="table">
+			<table class="tb">
 					<tr>
-						<th>ID</th>
 <!-- 						<th>아이디입력</th> -->
-						<td colspan="3">
-							<input class="psTitle" type="text" name="id" title="아이디"/>
+						<td colspan="2">
+							<input class="psTitle" type="text" name="id" title="아이디" placeholder="아이디"/>
 						</td>
 					</tr>
-				</thead>
 				<tbody>
 					<tr>
-						<th>NEW P/W</th>
 <!-- 						<th>비밀번호재설정</th> -->
-						<td colspan="3">
-							<input class="psTitle" type="password" name="password" title="새로운비밀번호"/>
-						</td>
-					</tr>
-					<tr>
-						<th>CHECK P/W</th>
-<!-- 						<th>비밀번호재설정확인</th> -->
-						<td colspan="3">
-							<input class="psTitle" type="password" name="passwordCheck" title="새로운비밀번호확인" onblur="check_password(this.form)"/>
-						</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
 						<td colspan="2">
-						</td>
-						<td>
-							<input class="reset" type="button" value="메인가기" onclick="javascript:location.href='main.jsp'">
-							<input class="searchbtn" type="button" value="로그인가기" onclick="javascript:location.href='login_page.jsp'">
-							<input class="searchbtn" type="button" value="아이디찾기" onclick="javascript:location.href='loginController?type=findId'">
-							<input class="reset" type="reset" value="초기화"/>
-							<input class="commitbtn" type="button" value="P/W 재설정" onclick="findPassword_Ok(this.form)"/>
+							<input class="psTitle" type="password" name="password" title="새로운비밀번호" placeholder="새 비밀번호"/>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="4">
-<!-- 							<input type="button" value="아이디찾기" onclick="location.href='loginController?type=findIdOk'"/> -->
+<!-- 						<th>비밀번호재설정확인</th> -->
+						<td colspan="2">
+							<input class="psTitle" type="password" name="passwordCheck" title="새로운비밀번호확인"  placeholder="비밀번호 확인"onblur="check_password(this.form)"/>
 						</td>
 					</tr>
-				</tfoot>
+					<tr>
+						
+						<td align="right">
+							<input class="searchbtn" type="button" value="메인가기" onclick="javascript:location.href='main.jsp'">
+							
+							<input class="searchbtn" type="button" value="아이디찾기" onclick="javascript:location.href='loginController?type=findId'">
+							
+							<input class="loginbtn" type="button" value="비밀번호 변경" onclick="findPassword_Ok(this.form)"/>
+						</td>
+					</tr>
+					<tr>
+					<td>
+					<input class="joinbtn" type="button" value="로그인 가기" onclick="javascript:location.href='login_page.jsp'">
+					</td>
+					</tr>
+					<tr>
+						<td align="right">
+						<input class="searchbtn" type="reset" value="초기화"/>
+						</td>
+					</tr>
 			</table>
+			</div>
 		</form>
 	</div>
 </div>
