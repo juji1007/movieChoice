@@ -161,16 +161,18 @@
 			   	<td colspan="2">${vo.company }</td>
 			  	<td colspan="2">${vo.career }</td>
 		    </tr>
-			   <tr>
-		    	<td colspan="5">
-			    	<form action="criticApplyOk.jsp?critic=${vo.no }"  method="post">
-				    	<input type="button" class="btn" value="승인"  onclick="criticApply(this.form)">
-				    </form>
-				    <form action="criticApplyDelete.jsp?critic=${vo.no }" method="post">
-				    	<input type="button" class="btn" value="거절" onclick="criticApplyDelete(this.form)"> 
-				    </form>
-		    	</td>
-		    </tr>
+			<tr>
+				<td colspan="5">
+				    <div style="display: flex; justify-content: center; gap: 10px;">
+				        <form action="criticApplyOk.jsp?critic=${vo.no }" method="post">
+				            <input type="button" class="btn" value="승인" onclick="criticApply(this.form)">
+				        </form>
+				        <form action="criticApplyDelete.jsp?critic=${vo.no }" method="post">
+				            <input type="button" class="btn" value="거절" onclick="criticApplyDelete(this.form)"> 
+				        </form>
+				    </div>
+				</td>
+			</tr>
 		</table>
 	</c:forEach>
 	</div>

@@ -59,7 +59,7 @@ function list_go() {
         <tr>
         	<th>제목</th>
 			<td>
-				<input  class="psTitle" type="text" name="qaTitle" placeholder="제목을 입력하세요.">
+				<input  class="psTitle" type="text" name="qaTitle" placeholder="제목을 입력하세요." required>
 			</td>
 		</tr>
         <tr>
