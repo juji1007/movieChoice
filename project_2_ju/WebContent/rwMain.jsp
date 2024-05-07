@@ -143,8 +143,8 @@ function selectCategory(frm) {
 		type : "POST",
 		url : "ajaxRewardController",
 		data : {
-			action: "rwMain_ajax",
-			date : rwDate
+			action: "rwMainAjax",
+			date : checkCategory
 		},
 		dataType: "json",
 		success : function(respData){
@@ -178,7 +178,7 @@ function selectCategory(frm) {
 		        str += "</tr>";
 		    }
 		    	$("#reviewOne").html(str);	
-			}
+			
 		}, 
 		error: function(jqXHR, textStatus, errorThrown) {
             alert("삭제 요청 실패: " + errorThrown);
@@ -213,15 +213,16 @@ function selectCategory(frm) {
 	<div class="content">
 <!-- 	<form> -->
 <!-- 	<form method="post"> -->
-	<form action="ajaxRewardController?action=rwMainAjax" method="post">
+<!-- 	<form action="ajaxRewardController?action=rwMainAjax" method="post"> -->
+	<form method="post">
 		<select class="select" id="rwDate" name="rwDate">
 				<option value="${thisMonth}">${thisMonth}</option>
 			<c:forEach var="date" items="${set}"><!--높은 추천수,월별로 조회한 배열vo-->
 				<option value="${date}">${date}</option>
 			</c:forEach>
 		</select>
-		<input class="searchbtn" type="submit" value="검색"/>
-<!-- 		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)"/> -->
+<!-- 		<input class="searchbtn" type="submit" value="검색"/> -->
+		<input class="searchbtn" type="button" value="검색" onclick="selectCategory(this.form)"/>
 		<input type="hidden" name="action" value="rwMainAjax">
 	</form>
 		<table border frame=void>
