@@ -5,7 +5,8 @@
 <head>
 <meta charset="EUC-KR">
 <title>회원가입</title>
-<link rel="stylesheet" href="css/write.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/login.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	var isCheckId = false;
@@ -103,76 +104,75 @@
 <body>
 
 <div class="body">
-	<div id="loginArea">
+<img class= "icon" src="img/moviechoice.png">
+	<br>
+	<div class="loginArea">
 		<form method="post">
-			<table>
-				<caption><h2>회원가입</h2></caption>
-				<thead>
+		<hr>
+		<div class="table">
+			<table  class="tb">
 					<tr>
-						<th>ID </th>
 						<td colspan="2" width="40px">
-							<input class="psTitle" type="text" name="id" title="아이디" />
+							<input class="psTitle" type="text" name="id" title="아이디"  placeholder="아이디"/>
 						</td>
-						<td>
-							<input class="searchbtn" type="button" value="중복체크" onclick="checkId(this.form)"/>
+						<td class="hh">
+							<input class="hbutton" type="button" value="중복체크" onclick="checkId(this.form)"/>
 						</td>
 					</tr>
 					<tr>
-						<th>P/W </th>
 						<td colspan="2">
-							<input class="psTitle" type="password" name="pwd" title="비밀번호" />
+							<input class="psTitle" type="password" name="pwd" title="비밀번호"  placeholder="비밀번호" />
 						</td>
 					</tr>
 					<tr>
-						<th>CHECK P/W </th>
 						<td colspan="2">
-							<input class="psTitle" type="password" name="pwdCheck" title="비밀번호확인" onblur="check_pwd(this.form)"/>
+							<input class="psTitle" type="password" name="pwdCheck" title="비밀번호확인"   placeholder="비밀번호 확인" onblur="check_pwd(this.form)"/>
 						</td>
 					</tr>
-				</thead>
-				<tbody>
+					
 					<tr>
-						<th>NAME </th>
 						<td colspan="2">
-							<input class="psTitle" type="text" name="name" title="이름" />
+							<input class="psTitle" type="text" name="name" title="이름"  placeholder="이름"/>
 						</td>
 					</tr>
 					<tr>
-						<th>NICK </th>
 						<td colspan="2">
-							<input class="psTitle" type="text" name="nickName" title="닉네임" />
+							<input class="psTitle" type="text" name="nickName" title="닉네임" placeholder="닉네임" />
 						</td>
 					</tr>
 					<tr>
-						<th>EMAIL </th>
 						<td colspan="2">
-							<input class="psTitle" type="email" name="email" title="이메일" onblur="check_email(this.form)"/>
+							<input class="psTitle" type="email" name="email" title="이메일"  placeholder="이메일" onblur="check_email(this.form)"/>
+						</td>
+					</tr>
+					</table>
+					<table>
+					<tr>
+						<td class="box" colspan="2">
+						
+							<input class="radio" type="radio" name="criticCheck" title="평론가" onclick="check_critic(this.form)">
+						평론가
 						</td>
 					</tr>
 					<tr>
-						<th>CRITIC </th>
-						<td colspan="2">
-							<input class="psTitle" type="radio" name="criticCheck" title="평론가" onclick="check_critic(this.form)">
-						</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<input class="reset" type="button" value="메인가기" onclick="javascript:location.href='main.jsp'">
+						
+						<td align="right">
+							<input class="searchbtn" type="button" value="메인가기" onclick="javascript:location.href='main.jsp'">
 							<input class="searchbtn" type="button" value="로그인가기" onclick="javascript:location.href='login_page.jsp'">
-							<input class="searchbtn" type="button" value="아이디찾기" onclick="javascript:location.href='loginController?type=findId'">
-							<input class="reset" type="reset" value="초기화">
-							<input class="commitbtn" type="button" value="회원가입" onclick="memberJoin_ok(this.form)">
+<!-- 							<input class="searchbtn" type="button" value="아이디찾기" onclick="javascript:location.href='loginController?type=findId'"> -->
+							<input class="searchbtn" type="reset" value="초기화">
+						</td>
+						</tr>
+					
+						<tr>
+						<td>
+							<input class="loginbtn" type="button" value="회원가입" onclick="memberJoin_ok(this.form)">
 						</td>
 					</tr>
-				</tfoot>
+					
 				
 			</table>
+			</div>
 		</form>
 	</div>
 </div>

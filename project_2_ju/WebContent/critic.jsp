@@ -90,10 +90,13 @@
   }
 </style>
 <link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/free.css">
 </head>
 <body>
 <%@ include file="include/header.jspf" %>
-<h1>평론가</h1>
+<div class="body">
+<h2>평론가</h2>
+<hr class="color">
 <div class="table-container">
 <c:forEach var="vo" items="${listc }" varStatus="loop">
   <table>
@@ -115,6 +118,7 @@
     </tr>
   </table>
 </c:forEach>
+</div>
 </div>
 </body>
 </html>
